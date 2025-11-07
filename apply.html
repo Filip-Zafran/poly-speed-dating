@@ -10,8 +10,21 @@
 </head>
 <body>
   <custom-header></custom-header>
+
+<!-- calendar -->
+<script>
+  window.PSD_EVENTS = [
+    { title: "Poly Fest Berlin @ LoveLite", date: "2025-11-22", color: "#FF7A00" }
+  ];
+</script>
+
+<div id="calendar-root"></div>
+<script type="module" src="assets/calendar-widget.js"></script>
+
+
   <main class="container">
     <h1>Apply for PSD</h1>
+
     
     <a href="ADD_GOOGLE_FORM_LINK_HERE" class="btn btn-primary" target="_blank">Apply via Google Form</a>
 
@@ -51,9 +64,14 @@
         <li><strong>[Add your next IRL date]</strong> → <a href="ADD_GOOGLE_FORM_LINK_HERE" target="_blank">Apply</a></li>
         <li><strong>[Add your next Online date]</strong> → <a href="ADD_GOOGLE_FORM_LINK_HERE" target="_blank">Apply</a></li>
       </ul>
+
       <p>Note: You can embed Google Calendar here later.</p>
     </section>
   </main>
 <custom-footer></custom-footer>
+
+<script src="script.js"></script>
+
+
 </body>
 </html>

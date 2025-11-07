@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart – PSD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="components/header.js"></script>
+  <script src="components/footer.js"></script>
+</head>
+<body>
+  <custom-header></custom-header>
+
+  <main class="container">
+    <h1>Your Cart</h1>
+
+    <div id="cart-empty" style="display:none;">
+      <p>Your cart is empty.</p>
+      <p><a href="merch.html" class="btn btn-primary">Browse merch</a></p>
+    </div>
+
+    <table id="cart-table" class="cart-table" style="width:100%; display:none;">
+      <thead>
+        <tr>
+          <th align="left">Item</th>
+          <th align="right">Price (€)</th>
+          <th align="center">Qty</th>
+          <th align="right">Subtotal (€)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="cart-body"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" align="right"><strong>Total</strong></td>
+          <td align="right"><strong id="cart-total">0</strong></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <hr>
+
+    <h2>Checkout</h2>
+    <p>Submit your order request. We’ll confirm details & payment via email.</p>
+
+    <!-- Formspree submit -->
+    <form action="https://formspree.io/f/mpwkazln" method="POST" id="checkout-form">
+      <div class="form-group">
+        <label>Name</label>
+        <input name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input name="email" type="email" required>
+      </div>
+
+      <div class="form-group">
+        <label>Notes (size, color, special requests)</label>
+        <textarea name="notes" rows="3"></textarea>
+      </div>
+
+      <!-- Hidden fields populated by JS -->
+      <textarea name="cart_json" id="cart-json" style="display:none"></textarea>
+      <input type="hidden" name="_subject" value="PSD Merch Order Request">
+      <!-- (optional) redirect after submit -->
+      <!-- <input type="hidden" name="_redirect" value="https://filip-zafran.github.io/psd-website/thanks.html"> -->
+
+      <button type="submit" class="btn btn-primary">Send Order Request</button>
+      <p class="small">Please be patient, this is a hobby, not Amazon Prime </p>
+    </form>
+  </main>
+
+  <p><button id="clear-cart" class="btn">Clear Cart</button></p>
+
+
+  <custom-footer></custom-footer>
+
+  <script src="shop.js"></script>
+</body>
+</html>

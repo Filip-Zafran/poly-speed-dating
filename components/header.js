@@ -85,7 +85,10 @@ class CustomHeader extends HTMLElement {
         <nav class="nav-links">
           <a href="index.html" class="nav-link">Home</a>
           <a href="apply.html" class="nav-link">Apply</a>
-          <a href="merch.html" class="nav-link">Poly Merch</a>
+         <a href="/merch.html" class="nav-link">
+  Poly Merch <span id="cart-count"></span>
+</a>
+
           <a href="polyfest.html" class="nav-link">Poly Fest</a>
           <a href="qna.html" class="nav-link">Q&A</a>
           <a href="contact.html" class="nav-link">Contact</a>

@@ -52,6 +52,7 @@ body {
 }
 
 
+
 /* Merch gallery grid */
 .merch-gallery {
   display: grid;
@@ -132,6 +133,28 @@ body {
   }
 }
 
+/* --- Mini Calendar --- */
+.mini-cal__wrap{
+  --event-orange:#FF7A00;
+  border:1px solid #eee; border-radius:12px; background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.04);
+  padding:12px; max-width:640px;
+}
+.mini-cal__header{ font-weight:800; color:#2B004D; text-align:center; margin-bottom:6px; }
+.mini-cal__dow{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; font-size:12px; color:#777; text-align:center; }
+.mini-cal__grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top:6px; }
+.mini-cal__cell{
+  min-height:56px; background:#F8F5FF; border-radius:10px; padding:6px;
+  display:flex; align-items:flex-start; justify-content:flex-start; position:relative; font-size:14px;
+}
+.mini-cal__cell--muted{ background:#F2F3F7; color:#999; }
+.mini-cal__day{ font-weight:700; font-size:13px; opacity:.9; }
+.mini-cal__cell--event::after{
+  content:""; position:absolute; left:8px; right:8px; bottom:6px; height:4px;
+  background:var(--event-orange); border-radius:2px;
+}
+.mini-cal__legend{ margin-top:8px; font-size:13px; color:#444; display:flex; align-items:center; gap:8px; }
+.mini-cal__dot{ width:10px; height:10px; border-radius:50%; background:var(--event-orange); display:inline-block; }
 
 
 
@@ -285,4 +308,91 @@ details summary {
   .hero {
     padding: 4rem 1rem;
   }
+}
+
+// merch 
+
+.add-to-cart {
+  background: var(--poly-magenta, #E50051);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s ease;
+}
+.add-to-cart:hover {
+  background: var(--poly-blue, #0077ff);
+}
+
+.btn-primary {
+  background: var(--poly-blue, #0077ff);
+  color: #fff;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+#cart-count {
+  color: var(--poly-magenta, #E50051);
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+
+// image enlarged
+/* --- Lightbox (image enlarger) --- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  cursor: zoom-out;
+}
+
+.merch-item img {
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.merch-item img:hover {
+  transform: scale(1.03);
+}
+
+.lightbox-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; visibility: hidden; opacity: 0; transition: opacity .3s ease;
+}
+.lightbox-overlay.active { visibility: visible; opacity: 1; }
+.lightbox-overlay img {
+  max-width: 90vw; max-height: 90vh; border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5); cursor: zoom-out;
+}
+.merch-item img { cursor: zoom-in; transition: transform .2s ease; }
+.merch-item img:hover { transform: scale(1.03); }
+
+.linklike {
+  background: transparent; border: 0; color: #E50051; cursor: pointer; font-weight: 700;
 }

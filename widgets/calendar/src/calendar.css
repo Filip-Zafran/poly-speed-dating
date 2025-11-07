@@ -1,0 +1,9 @@
+
+.mini-cal__wrap{--event-orange:#FF7A00;border:1px solid #eee;border-radius:12px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.04);padding:12px;max-width:640px;margin:0 0 1rem 0}
+.mini-cal__header{font-weight:800;color:#2B004D;text-align:center;margin-bottom:6px}
+.mini-cal__dow{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;font-size:12px;color:#777;text-align:center}
+.mini-cal__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:6px}
+.mini-cal__cell{min-height:56px;background:#F8F5FF;border-radius:10px;padding:6px;display:flex;align-items:flex-start;justify-content:flex-start;position:relative;font-size:14px}
+.mini-cal__cell--muted{background:#F2F3F7;color:#999}
+.mini-cal__day{font-weight:700;font-size:13px;opacity:.9}
+.mini-cal__cell--event::after{content:"";position:absolute;left:8px;right:8px;bottom:6px;height:4px;background:var(--event-orange);border-radius:2px}
