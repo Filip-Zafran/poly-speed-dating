@@ -674,3 +674,145 @@ details summary {
     height: 45px;
   }
 }
+
+/* ===== Poly Fest – Schedule (namespaced) ===== */
+.pf-schedule {
+  --poly-blue: #0057B7;   /* flag blue */
+  --poly-red:  #D52B1E;   /* flag red */
+  --poly-black:#111111;   /* flag black */
+  --poly-gold: #F5C542;   /* accent */
+  --ink: #1f1f1f;
+  --muted: #f7f7f9;
+  --row-alt: #fff;
+  --row-lunch: #fffce6;
+  --row-chill: #f3f8ff;
+  --row-coffee: #fff6f2;
+
+  margin: 2rem 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0,0,0,.06);
+  background: #fff;
+}
+
+/* Header band (rooms) */
+.pf-schedule__heading {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr 1fr; /* Time + 3 rooms */
+  align-items: stretch;
+  color: #fff;
+  text-transform: none;
+  font-weight: 800;
+}
+.pf-schedule__heading > div {
+  padding: .9rem .8rem;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,.22);
+}
+.pf-schedule__heading > div:last-child { border-right: 0; }
+.pf-schedule__heading--time { background: var(--poly-black); }
+.pf-schedule__heading--room1 { background: var(--poly-red); }
+.pf-schedule__heading--room2 { background: var(--poly-blue); }
+.pf-schedule__heading--room3 { background: linear-gradient(90deg, var(--poly-blue) 0%, var(--poly-red) 100%); }
+
+/* Body rows */
+.pf-schedule__row {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr 1fr;
+  border-top: 1px solid #eee;
+}
+.pf-schedule__time {
+  font-weight: 700;
+  padding: .8rem;
+  background: #fff;
+  border-right: 1px solid #eee;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+}
+.pf-schedule__cell {
+  padding: .85rem .9rem;
+  min-height: 56px;
+  display:flex; align-items:center;
+  border-right: 1px solid #eee;
+  background: var(--row-alt);
+}
+.pf-schedule__cell:last-child { border-right: 0; }
+
+/* Labels / tags inside cells */
+.pf-tag {
+  display: inline-block;
+  font-size: .82rem;
+  font-weight: 800;
+  padding: .2rem .5rem;
+  border-radius: .5rem;
+  margin-right: .5rem;
+  color: #fff;
+}
+.pf-tag--chill  { background: var(--poly-blue); }
+.pf-tag--entry  { background: var(--poly-black); }
+.pf-tag--coffee { background: var(--poly-red); }
+.pf-tag--talk   { background: var(--poly-gold); color:#1d1600; }
+
+/* Special row backgrounds */
+.pf-row--lunch  .pf-schedule__cell,
+.pf-row--lunch  .pf-schedule__time { background: var(--row-lunch); }
+.pf-row--chill  .pf-schedule__cell { background: var(--row-chill); }
+.pf-row--coffee .pf-schedule__cell { background: var(--row-coffee); }
+
+/* Titles & meta inside cells */
+.pf-title { font-weight: 700; }
+.pf-meta  { color:#555; font-size:.92rem; }
+
+/* Responsive: stack as cards on small screens */
+@media (max-width: 900px) {
+  .pf-schedule__heading { display: none; }
+  .pf-schedule__row {
+    grid-template-columns: 1fr;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    margin: .75rem 1px;
+    overflow: hidden;
+  }
+  .pf-schedule__time {
+    justify-content:flex-start;
+    background: var(--poly-black);
+    color:#fff; border-right: 0;
+  }
+  .pf-schedule__cell { border-right: 0; border-top: 1px solid #eee; }
+  .pf-schedule__cell::before {
+    content: attr(data-room);
+    display: inline-block;
+    font-weight: 800;
+    font-size: .8rem;
+    letter-spacing: .02em;
+    color: #333;
+    background: #f2f2f6;
+    padding: .18rem .5rem;
+    border-radius: .4rem;
+    margin-right: .6rem;
+  }
+}
+
+/* Small helper for spaced lines in a cell */
+.pf-lines > div + div { margin-top: .25rem; }
+
+/* ===== LUNCH special styling ===== */
+.pf-row--lunch .pf-title {
+  display: inline-block;
+  background: #5A189A;      /* rich purple */
+  color: #fff;               /* white font */
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  padding: 0.4rem 1.2rem;
+  border-radius: 9999px;     /* pill/bubble */
+  text-align: center;
+  margin: 0 auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Center the bubble nicely */
+.pf-row--lunch .pf-schedule__cell {
+  justify-content: center;
+}
