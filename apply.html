@@ -12,14 +12,70 @@
   <custom-header></custom-header>
 
 <!-- calendar -->
-<script>
+
+<section class="nov-cal" aria-label="Calendar for November 2025">
+  <h2>November 2025</h2>
+
+  <!-- Day of week header -->
+  <div class="cal-grid cal-head" aria-hidden="true">
+    <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+  </div>
+
+  <!-- Month grid (Mon-first). Nov 1, 2025 is a Saturday, so 5 blanks first. -->
+  <div class="cal-grid cal-body">
+    <!-- leading blanks: Mon..Fri -->
+    <div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div><div class="blank"></div>
+
+    <!-- days -->
+    <div class="day"><span>1</span></div>
+    <div class="day"><span>2</span></div>
+
+    <div class="day"><span>3</span></div>
+    <div class="day"><span>4</span></div>
+    <div class="day"><span>5</span></div>
+    <div class="day"><span>6</span></div>
+    <div class="day"><span>7</span></div>
+    <div class="day"><span>8</span></div>
+    <div class="day"><span>9</span></div>
+
+    <div class="day"><span>10</span></div>
+    <div class="day"><span>11</span></div>
+    <div class="day"><span>12</span></div>
+    <div class="day"><span>13</span></div>
+    <div class="day"><span>14</span></div>
+    <div class="day"><span>15</span></div>
+    <div class="day"><span>16</span></div>
+
+    <div class="day"><span>17</span></div>
+    <div class="day"><span>18</span></div>
+    <div class="day"><span>19</span></div>
+    <div class="day"><span>20</span></div>
+    <div class="day"><span>21</span></div>
+    <!-- Poly Fest highlight on Sat 22 -->
+    <div class="day event" title="Poly Fest Berlin"><span>22</span><i>Poly Fest</i></div>
+    <div class="day"><span>23</span></div>
+
+    <div class="day"><span>24</span></div>
+    <div class="day"><span>25</span></div>
+    <div class="day"><span>26</span></div>
+    <div class="day"><span>27</span></div>
+    <div class="day"><span>28</span></div>
+    <div class="day"><span>29</span></div>
+    <div class="day"><span>30</span></div>
+    <!-- (No 31 in Nov; trailing blanks not required but okay to add) -->
+  </div>
+
+  <p class="cal-legend"><span class="dot"></span> Poly Fest (22 Nov 2025)</p>
+</section>
+
+<!-- <script>
   window.PSD_EVENTS = [
     { title: "Poly Fest Berlin @ LoveLite", date: "2025-11-22", color: "#FF7A00" }
   ];
 </script>
 
 <div id="calendar-root"></div>
-<script type="module" src="assets/calendar-widget.js"></script>
+<script type="module" src="assets/calendar-widget.js"></script> -->
 
 
   <main class="container">
@@ -61,11 +117,9 @@
             <li>Tickets: <a href="https://www.eventbrite.com/e/poly-fest-berlin-tickets-1915914875969?lang=en-us&status=30&locale=en_US&view=listing&amp=&amp%3Blang=en-us&amp%3Blocale=en_US&amp%3Bstatus=30&amp%3Bview=listing" target="_blank">Eventbrite – Poly Fest Berlin</a></li>
           </ul>
         </li>
-        <li><strong>[Add your next IRL date]</strong> → <a href="ADD_GOOGLE_FORM_LINK_HERE" target="_blank">Apply</a></li>
-        <li><strong>[Add your next Online date]</strong> → <a href="ADD_GOOGLE_FORM_LINK_HERE" target="_blank">Apply</a></li>
+        <li><strong>Next Poly Speed Dating Berlin </strong> → <a href="ADD_GOOGLE_FORM_LINK_HERE" target="_blank">Info will be live soon</a></li>
       </ul>
 
-      <p>Note: You can embed Google Calendar here later.</p>
     </section>
   </main>
 <custom-footer></custom-footer>

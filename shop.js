@@ -12,7 +12,7 @@
   };
   const saveCart = (cart) => localStorage.setItem(CART_KEY, JSON.stringify(cart));
   const cartTotal = (cart) => cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const format€ = (n) => (Math.round(n * 100) / 100).toFixed(2);
+  const formatEur = (n) => (Math.round(n * 100) / 100).toFixed(2);
 
   // ---------- UI helpers ----------
   function flashAdded(name) {
@@ -91,16 +91,16 @@
     body.innerHTML = cart.map(item => `
       <tr>
         <td>${item.name}</td>
-        <td align="right">${format€(item.price)}</td>
+        <td align="right">${formatEUR(item.price)}</td>
         <td align="center">
           <input type="number" min="1" value="${item.qty}" data-qty="${item.sku}" style="width:64px">
         </td>
-        <td align="right">${format€(item.price * item.qty)}</td>
+        <td align="right">${formatEUR(item.price * item.qty)}</td>
         <td align="center"><button class="linklike" data-remove="${item.sku}">✕</button></td>
       </tr>
     `).join('');
 
-    if (totalEl) totalEl.textContent = format€(cartTotal(cart));
+    if (totalEl) totalEl.textContent = formatEUR(cartTotal(cart));
     if (jsonEl) {
       jsonEl.value = JSON.stringify({
         items: cart,

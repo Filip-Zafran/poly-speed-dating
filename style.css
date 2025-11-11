@@ -396,3 +396,88 @@ details summary {
 .linklike {
   background: transparent; border: 0; color: #E50051; cursor: pointer; font-weight: 700;
 }
+
+
+/* Calendar container */
+.nov-cal { 
+  --event: #FF7A00;           /* orange for Poly Fest */
+  --ink: #2B004D;             /* deep poly purple text */
+  --grid-bg: #F8F5FF;         /* soft lilac cells */
+  --muted: #F2F3F7;           /* blanks */
+  max-width: 700px; margin: 1rem 0 2rem; 
+    margin: 2rem auto;     /* centers horizontally */
+  text-align: center;    /* centers the text like the month title */
+  
+}
+.nov-cal h2 { 
+  margin: 0 0 .5rem; 
+  font-weight: 800; 
+  color: var(--ink);
+}
+
+/* Grid base */
+.cal-grid {
+  display: grid; 
+  grid-template-columns: repeat(7, minmax(40px, 1fr)); 
+  gap: 6px;
+}
+
+/* Day-of-week header */
+.cal-head > div {
+  text-align: center; 
+  font-size: .85rem; 
+  color: #777; 
+  font-weight: 600;
+}
+
+/* Month body */
+.cal-body .day, .cal-body .blank {
+  min-height: 72px; 
+  border-radius: 12px; 
+  background: var(--grid-bg); 
+  padding: 8px; 
+  position: relative; 
+  display: flex; 
+  align-items: flex-start; 
+  justify-content: flex-start;
+}
+.cal-body .blank { background: var(--muted); }
+
+/* Day number */
+.cal-body .day > span {
+  font-weight: 800; 
+  font-size: .95rem; 
+  opacity: .9;
+}
+
+/* Event highlight: colored bar + label */
+.cal-body .day.event { cursor: pointer; }
+.cal-body .day.event::after {
+  content: ""; 
+  position: absolute; 
+  left: 10px; right: 10px; bottom: 8px; height: 5px; 
+  background: var(--event); 
+  border-radius: 3px;
+}
+.cal-body .day.event i {
+  position: absolute; 
+  left: 8px; right: 8px; bottom: 14px;
+  font-size: .75rem; 
+  color: #333; 
+  opacity: .9; 
+  font-style: normal;
+}
+
+/* Legend */
+.cal-legend { 
+  display: flex; align-items: center; gap: 8px; 
+  font-size: .9rem; color: #444; margin-top: .5rem;
+}
+.cal-legend .dot { 
+  width: 10px; height: 10px; border-radius: 50%; background: var(--event); display: inline-block;
+}
+
+/* Responsive tweak */
+@media (max-width: 480px) {
+  .cal-body .day, .cal-body .blank { min-height: 56px; }
+}
