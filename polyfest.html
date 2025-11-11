@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Poly Fest Berlin - Poly Speed Dating (PSD)</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="components/header.js"></script>
-  <script src="components/footer.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Load web components early but non-blocking -->
+  <script src="components/header.js" defer></script>
+  <script src="components/footer.js" defer></script>
 </head>
 <body>
   <custom-header></custom-header>
@@ -14,32 +17,97 @@
   <main class="container">
     <div class="date-badge">22 NOV 2025</div>
     <h1>Poly Fest Berlin</h1>
-    <p class="subheading">Call for Workshops & Ticket Release</p>
-    
-    <img src="images/polyfest.png" alt="Poly Fest Berlin promo banner" class="polyfest-image-banner">
+
+    <img src="images/polyfest.png" alt="Poly Fest Berlin promo banner" class="polyfest-image-banner" />
 
     <section class="fest-intro">
-      <p>Do you have a poly-themed workshop or activity you'd like to share?</p>
       <p>Join the first edition of Poly Fest Berlin ♾️🤍</p>
-      <p>This event welcomes everyone interested in (C)ENM and open relationship practices. 
-      It's a safe space for sharing, learning, and curiosity — meet 50+ like-minded people and experience diverse perspectives on love and connection.</p>
+      <p>
+        This event welcomes everyone interested in (C)ENM and open relationship practices.
+        It's a safe space for sharing, learning, and curiosity — meet 50+ like-minded people and
+        experience diverse perspectives on love and connection.
+      </p>
     </section>
 
     <div class="action-buttons">
-      <a href="https://docs.google.com/forms/d/18loSXuF7EKkuNCUYmxqX6-bpNfB8_RLoEPemeAjivFU/edit" class="btn btn-primary" target="_blank">Workshop Application Form & Info</a>
-      <a href="https://www.eventbrite.com/e/poly-fest-berlin-tickets-1915914875969?lang=en-us&status=30&locale=en_US&view=listing&amp=&amp%3Blang=en-us&amp%3Blocale=en_US&amp%3Bstatus=30&amp%3Bview=listing" class="btn btn-gold" target="_blank">Eventbrite – Poly Fest Berlin (Early Bird Tickets)</a>
+      <a
+        href="https://www.eventbrite.com/e/poly-fest-berlin-tickets-1915914875969?lang=en-us&status=30&locale=en_US&view=listing&amp=&amp%3Blang=en-us&amp%3Blocale=en_US&amp%3Bstatus=30&amp%3Bview=listing"
+        class="btn btn-gold"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Eventbrite – Poly Fest Berlin Tickets</a>
+    </div>
+
+    <!-- Workshops sidebar + detail -->
+    <section id="workshops-browser" class="workshops-wrap">
+      <aside class="workshops-sidebar" aria-label="Workshops list">
+        <h2>Workshops &amp; Schedule</h2>
+        <ul id="ws-list" class="ws-list" role="list">
+          <!-- Filled by JS -->
+        </ul>
+        <p class="ws-tip">Tip: Click a workshop to see details.</p>
+      </aside>
+
+      <article id="ws-detail" class="ws-detail" aria-live="polite">
+        <div class="ws-detail-inner">
+          <div class="ws-detail-header">
+            <img
+              id="ws-image"
+              class="ws-image"
+              src="images/placeholders/workshop-placeholder.jpg"
+              alt="Workshop image placeholder"
+            />
+            <div>
+              <h3 id="ws-title">Select a workshop</h3>
+              <p id="ws-meta" class="ws-meta">Room — Time — Type</p>
+            </div>
+          </div>
+
+          <div class="ws-presenter">
+            <h4>Presenter</h4>
+            <!-- Presenter image (small, text wraps via CSS) -->
+            <img
+              id="ws-presenter-img"
+              class="ws-presenter-img"
+              src="images/placeholders/presenter-placeholder.jpg"
+              alt="Presenter portrait"
+            />
+            <p id="ws-presenter">—</p>
+            <p id="ws-presenter-bio" class="ws-presenter-bio">
+              [Presenter bio placeholder. Add a short paragraph about the presenter here.]
+            </p>
+          </div>
+
+          <div class="ws-description">
+            <h4>About the Workshop</h4>
+            <p id="ws-desc">
+              [Description placeholder. Add 3–6 sentences describing the session focus, activities, and takeaways.]
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Schedule image with CSS-only lightbox -->
+    <a href="#schedule-modal" class="img-zoom-link" aria-label="Open schedule full screen">
+      <img src="images/schedule.png" alt="Poly Fest Berlin schedule" class="polyfest-image" />
+    </a>
+
+    <div id="schedule-modal" class="lightbox" aria-modal="true" role="dialog">
+      <a href="#!" class="lightbox-close" aria-label="Close"></a>
+      <img src="images/schedule.png" alt="Poly Fest Berlin schedule (full view)" class="lightbox-img" />
     </div>
 
     <section class="deadlines">
-      <p><strong>Deadline (Early Bird & Workshops application):</strong> 10 November 2025</p>
-      <p><strong>» Limited spots «</strong></p>
       <p>Questions? <a href="mailto:polyfestberlin@gmail.com">polyfestberlin@gmail.com</a></p>
     </section>
 
-    <img src="images/pf-promo-plakat.jpg" alt="Poly Fest Berlin promo" class="polyfest-image">
-
+    <img src="images/pf-promo-plakat.jpg" alt="Poly Fest Berlin promo" class="polyfest-image" />
   </main>
 
   <custom-footer></custom-footer>
+
+  <!-- Bust cache when you update workshops.js -->
+  <script src="workshops.js?v=pf2"></script>
 </body>
 </html>
