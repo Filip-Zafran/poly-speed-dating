@@ -818,6 +818,7 @@ details summary {
 }
 
 /* ===== Opening speech special style ===== */
+/* ===== Opening speech special style ===== */
 .pf-opening {
   text-align: center;
   font-weight: 900;
@@ -828,20 +829,20 @@ details summary {
   background: linear-gradient(90deg, #4B0082, #6a1b9a);
   border-radius: 10px;
   padding: 0.6rem 1rem;
-  box-shadow: 0 3px 10px rgba(0,0,
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
 
-  /* ===== Responsive Poly Fest banner ===== */
+/* ===== Responsive Poly Fest banner ===== */
 .polyfest-image-banner {
   display: block;
-  width: 100%;              /* fills container width */
-  height: auto;             /* keeps correct proportions */
-  max-width: 1000px;        /* prevents it from stretching too large on desktop */
-  margin: 0 auto 2rem;      /* centers it and adds bottom spacing */
-  border-radius: 12px;      /* soft corners like other images */
+  width: 100%;
+  height: auto;
+  max-width: 1000px;        /* desktop cap */
+  margin: 0 auto 2rem;
+  border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
-/* On smaller screens */
 @media (max-width: 768px) {
   .polyfest-image-banner {
     max-width: 95%;
@@ -856,4 +857,20 @@ details summary {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
+}
+
+
+@media (max-width: 480px) {
+  .polyfest-image-banner {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+}
+
+/* Make lunch row text visible on light background */
+.pf-row--lunch .pf-schedule__time,
+.pf-row--lunch .pf-schedule__cell {
+  color: #2B004D; /* deep poly purple, readable on light yellow */
+  font-weight: 700;
 }
