@@ -816,3 +816,16 @@ details summary {
 .pf-row--lunch .pf-schedule__cell {
   justify-content: center;
 }
+
+/* ===== Opening speech special style ===== */
+.pf-opening {
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.35rem;
+  color: #fff8dc;                 /* warm yellow-white */
+  text-shadow: 0 0 6px #ffea00, 0 0 12px #ffd000, 0 0 18px #ffc800;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #4B0082, #6a1b9a);
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  box-shadow: 0 3px 10px rgba(0,0,
