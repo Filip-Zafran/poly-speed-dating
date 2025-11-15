@@ -39,13 +39,13 @@ Inspired by the principles of relationship anarchy, they encourage those involve
     slug: "community-mapping-lab",
     presenter: "Margherita",
     type: "Workshop (interactive)",
-    title: "Community Mapping Lab for Berlin's Poly Community",
+    title: "Community Mapping Lab",
     room: "Kitchen",
     time: "11:00h",
     image: "images/workshops/community-mapping.jpg",
-    presenterImage: "",
-    presenterBio: `[Placeholder bio for Margherita.]`,
-    description: `[Placeholder description for this session.]`
+   presenterImage: "images/presenters/margherita.jpg",
+    presenterBio: `Margherita has six years of experience as a volunteer trainer for various student associations and she's recently started working as a professional consultant trainer for the Council of Europe, alongside her full time job as a Robotics Software Engineer. She is passionate about educating young people about topics at the intersection of technological development, human rights and democracy, and helping them become agents of change in their own local communities. Since she's moved to Berlin a year ago, she's still looking for her own local community.`,
+    description: `Community mapping is a tool that analyses the resources, environment and needs of a community. It is normally used by policymakers and community organisers to identify the priorities, strengths and pressing issues of a community. Together, we can learn to use community mapping to explore the resources , environment and needs of Berlin's poly community!`
   },
   {
     slug: "polyamorie-und-sicherheit",
@@ -55,20 +55,43 @@ Inspired by the principles of relationship anarchy, they encourage those involve
     room: "Ball Room",
     time: "13:00h",
     image: "images/workshops/poly-sicherheit.jpg",
-    presenterImage: "",
-    presenterBio: `[Placeholder bio for Katharina Egger.]`,
-    description: `[Placeholder description for this session.]`
+    presenterImage: "images/presenters/katharina.jpg",
+    presenterBio: ` `,
+    description: `Wenn wir uns in unseren Beziehungen unsicher oder überfordert fühlen, scheint es manchmal unmöglich, wirklich präsent zu sein – mit uns selbst oder unseren Partnermenschen.
+Doch was, wenn es Wege gibt, auf sichere Weise in Verbindung zu bleiben?
+
+
+In meinem  Workshop lade ich dich ein, diese Wege neugierig zu erforschen und Sicherheit und Verbundenheit zu erfahren – durch Reflexion, Körperwahrnehmung und achtsame (Selbst-)Begegnung.
+
+
+Was dich erwartet:
+Meditationen
+Journaling & Austausch
+Achtsame Körperübungen
+Kurzinput zum Nervensystem
+Partnerübungen: Achtsamer Kontakt & Wahrnehmung von Grenzen
+
+
+Ich freue mich auf dich!
+www.wholeypoly.de
+IG: wholeypoly
+
+
+** workshop will be held in german **`
   },
   {
     slug: "gutes-an-schlechtem-sex",
-    presenter: "Dr. Stephanie Kossow",
+    presenter: "Stephanie Kossow & Tobi",
     type: "Workshop (interactive)",
     title: "„Das Gute an (schl)echtem Sex“ — Reading & Sharing",
     room: "Living Room",
-    time: "13:00h",
+    time: "15:150h",
     image: "images/workshops/gutes-an-schlechtem-sex.jpg",
-    presenterImage: "",
-    presenterBio: `[Placeholder bio for Dr. Stephanie Kossow.]`,
+       presenterImage: "images/presenters/steph.jpg",
+      presenterImage2: "images/presenters/tobi.jpg",
+    presenterBio: ` Dr. Stephanie Kossow (sie/ihr) is a medical doctor and psychotherapist, specialized in sexual medicine. As an author, she writes from a feminist perspective on sexuality, relationships and kink/BDSM. <br> <br> Tobi is a cinematographer, editor, director and communication enthusiast. 
+ENM and Kink are intertwined with almost all aspects of his live, professionally and privately.
+`,
     description: `
 Stephanie will be reading from her book “Das Gute an (schl)echtem Sex – wie Bindung, Kink und Konsens uns den Arsch retten können”,
 sharing thoughts on consent and on sexual and non-monogamous relationships. Afterwards, she and her partner Tobias will host
@@ -80,7 +103,7 @@ for consent negotiations in sexual and/or non-monogamous relationships. No prior
     slug: "new-to-enm",
     presenter: "Ficho (he/him)",
     type: "Workshop (interactive)",
-    title: "New to (C/E)NM",
+    title: "(C/E)NM & Jelousy",
     room: "Kitchen",
     time: "13:00h",
     image: "images/workshops/new-to-enm.png",
@@ -101,18 +124,11 @@ Join us for an open and supportive circle where we’ll explore the many facets 
 We’ll dive into topics such as:<br>
 
  - The differences between ENM (Ethical Non-Monogamy) and CNM (Consensual Non-Monogamy)
+
 <br>
- - Common terminology and what these words mean in practice
+ - Dealing with metamours
 <br>
- - Book recommendations and other resources to deepen your understanding
-<br>
- - Events and communities in Berlin where you can connect and learn more
-<br>
- - Behaviour and expectations within non-monogamous spaces
-<br>
- - Dealing with metamours — navigating relationships with your partners’ partners
-<br>
- - Can one get rid of jealousy, or is it something to embrace and understand?
+ - Jealousy or Envy or...?
 <br><br>
 Rather than a lecture, this is a knowledge-sharing circle — an open space for reflection, curiosity, and honest conversation among those exploring or already living non-monogamous lives.`
   },
@@ -124,9 +140,19 @@ Rather than a lecture, this is a knowledge-sharing circle — an open space for 
     room: "Living Room",
     time: "17:00h",
     image: "images/workshops/erotic-brain.jpg",
-    presenterImage: "",
-    presenterBio: `[Placeholder bio for Maria Botan.]`,
-    description: `[Placeholder description for this session.]`
+      presenterImage: "images/presenters/maria.jpg",
+    presenterBio: `
+...is an ENM and Relationship Coach based in Berlin. She creates safe spaces where couples and individuals feel fully supported to explore, grow, and connect from a place of trust and hope. Maria believes that the way we build families and long-term relationships in the 21st century needs an update. Her coaching helps people unlearn outdated patterns, practise emotional intelligence, and build conscious, fulfilling relationships rooted in authenticity and choice. 
+<br><br>Connect via: www.enmcoaching.de
+<br>IG: @enmcoaching
+<br><br> Looking forward to it!
+<br>Love,
+<br><br>Maria
+`,
+    description: `Igniting the Erotic Brain and Communicating Desire <br>
+Join this fun and empowering 90-minute workshop to explore how your brain shapes desire, pleasure, and connection. You’ll learn how to balance arousal and inhibition, understand your unique desire style, and practise communication tools that help you express what you want with clarity and confidence.
+It’s a safe, light-hearted space to learn, laugh, and dive deeper into understanding your sensuality. You’ll leave feeling more confident, more connected, and ready to communicate your needs with ease.
+`
   },
   {
     slug: "love-is-political",
@@ -136,9 +162,13 @@ Rather than a lecture, this is a knowledge-sharing circle — an open space for 
     room: "Ball Room",
     time: "17:00h",
     image: "images/workshops/love-political.jpg",
-    presenterImage: "",
-    presenterBio: `[Placeholder bio for Sarah.]`,
-    description: `[Placeholder description for this panel.]`
+      presenterImage: "images/presenters/sarah.jpeg",
+    presenterBio: `Sarah (she/they) started exploring non-monogamy 10 years ago when she lived in Brooklyn and stumbled upong polyamorous Burners at a festival outside of NYC. She immediately felt like this was the answer to all of her relationship problems. Of course it wasn't. But it also kind of was.
+
+Since then she has made a lot of mistakes and has been talking about them in her newsletter: monogamish as well as on Instagram under the account monogamish_me. She is also a systemic coach for individuals and couples, helping them relate more honestly and in a way that truly serves them, their values, and their goals.
+
+In her free time, she dances, does yoga, and most recently took a stab at comedy improv and loves it!`,
+    description: `This session features a concise keynote talk followed by a curated panel discussion with diverse voices from within the community. Together, we will explore how relationship structures intersect with culture, autonomy, identity, and society at large, offering a multifaceted look at why the ways we love are inherently political.`
   },
   {
     slug: "poly-speed-dating",
@@ -148,7 +178,8 @@ Rather than a lecture, this is a knowledge-sharing circle — an open space for 
     room: "Ball Room",
     time: "11:00h",
     image: "images/workshops/speed-dating.png", // you said your file is .png
-    presenterImage: "images/presenters/jay-akela.jpg", // optional
+      presenterImage: "images/presenters/ficho.jpg",
+      presenterImage2: "images/presenters/ficho.jpg",
     presenterBio: `
 Jay and Akela are community facilitators passionate about authentic connection, consent culture,
 and helping people meet face-to-face in playful, pressure-free ways.
@@ -171,8 +202,8 @@ Afterwards, the after-party offers space to continue conversations and explore a
     time: "21:30h",
     image: "images/workshops/pub-quiz.jpg",
     presenterImage: "",
-    presenterBio: `[Placeholder bio for Sara.]`,
-    description: `[Placeholder description for this session.]`
+    presenterBio: `After 11 years of polyamory, Sara (she/her) is trying out new ways of emotional and physical relating to people. She is primarily interested in exploring alternatives to families-by-blood, and wants to work towards building communities of mutual accountability and aid. For her dayjob she is writing a phd in linguistics.`,
+    description: `Join the Poly Pub Quiz and expand your knowledge about polyamory! While the quiz follows the traditional, competitive format of pub quizzes, the aim of this one is to learn a good deal about polyamory, see new resources and get to know curious tid-bits about poly in media and history. Everybody comes out as a winner, but only one team gets a (symbolic) prize. ;-)`
   },
   {
     slug: "attachment-style",
@@ -184,20 +215,9 @@ Afterwards, the after-party offers space to continue conversations and explore a
     image: "images/workshops/attachment-style.jpg",
     presenterImage: "",
     presenterBio: `[Placeholder bio for Noly.]`,
-    description: `[Placeholder description for this lecture.]`
+    description: `Attachment: How it shapes your relationships and what you can do to navigate it`
   },
-  {
-    slug: "constellations-card-game",
-    presenter: "Noly",
-    type: "Product",
-    title: "Constellations Card Game",
-    room: "Chill Room",
-    time: "All day",
-    image: "images/workshops/constellations-card-game.jpg",
-    presenterImage: "",
-    presenterBio: `[Placeholder bio for Noly.]`,
-    description: `[Available all day — description placeholder.]`
-  },
+
   {
     slug: "open-mic-poly-stories",
     presenter: "Ficho (he/him)",
@@ -236,7 +256,7 @@ how others navigate love, growth, and curiosity in their own ways.
     image: "images/workshops/non-monogamy-possibilities.jpg",
     presenterImage: "",
     presenterBio: `[Placeholder bio for Noly.]`,
-    description: `[Placeholder description for this session.]`
+    description: `An interactive talk where we shine light over the different kinds of non-monogamy and help attendees contemplate all the possibilities it offers, making sure they are chosing their practice consciously`
   },
   {
     slug: "relationship-smorgasbord",
@@ -244,11 +264,11 @@ how others navigate love, growth, and curiosity in their own ways.
     type: "Workshop (interactive)",
     title: "Relationship Smorgasbord",
     room: "Living Room",
-    time: "15:15h",
+    time: "13:00h",
     image: "images/workshops/relationship-smorgasbord.jpg",
-    presenterImage: "",
-    presenterBio: `[Placeholder bio for Fraeya Whiffin.]`,
-    description: `[Placeholder description for this session.]`
+        presenterImage: "images/presenters/freya.jpg", // optional
+    presenterBio: `Fraeya Whiffin, IFS therapist `,
+    description: `In the monosphere and polysphere alike, new partners often make assumptions about what their relationship should be like, with little intentionality, often ending up just doing what society expects. This workshop presents a worksheet to help you co-create your poly relationships. Even if you are unpartnered, you can benefit from thinking about, for example, how often you wish to communicate or to what extent you would wish to combine finances.`
   }
 ];
 
