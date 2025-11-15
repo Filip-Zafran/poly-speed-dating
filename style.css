@@ -891,7 +891,8 @@ details summary {
 }
 
 .ws-presenter-img {
-  width: 120px;
-  height: auto;
+  width: 150px !important;
+  min-height: 150px;
+  object-fit: cover;
   border-radius: 10px;
 }

@@ -15,12 +15,12 @@ const WORKSHOPS = [
 
   {
     slug: "rethinking-relationships",
-    presenter: "Mariana Cerejo",
+    presenter: "Mariana Cerejo & António",
     type: "Workshop (interactive)",
     title: "Rethinking Relationships — The Relationship Design Games",
     room: "Ball Room",
     time: "15:15h",
-    image: "images/workshops/rethinking-relationships.jpg",
+    image: "images/workshops/relationship-game.png",
     presenterImage: "images/presenters/mariana.jpeg",
       presenterImage2: "images/presenters/antonio.jpeg",
     presenterBio: `The workshop will be led by Mariana Cerejo, the creator and designer of the cards, and António, co-facilitator of the activity and a strong supporter of The Relationship Design Games project.
