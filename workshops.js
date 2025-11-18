@@ -18,7 +18,7 @@ const WORKSHOPS = [
     presenter: "Mariana Cerejo & António",
     type: "Workshop (interactive)",
     title: "Rethinking Relationships — The Relationship Design Games",
-    room: "Ball Room",
+    room: "Workshop Room",
     time: "15:15h",
     image: "images/workshops/relationship-game.png",
     presenterImage: "images/presenters/mariana.jpeg",
@@ -52,7 +52,7 @@ Inspired by the principles of relationship anarchy, they encourage those involve
     presenter: "Katharina (she/her)",
     type: "Workshop (interactive)",
     title: "Polyamorie & Sicherheit",
-    room: "Workshop room",
+    room: "Ball room",
     time: "13:30h",
     image: "images/workshops/poly-sicherheit.jpg",
     presenterImage: "images/presenters/katharina.png",
@@ -85,7 +85,7 @@ IG: wholeypoly
     type: "Workshop (interactive)",
     title: "„Das Gute an (schl)echtem Sex“ — Reading & Sharing",
     room: "Living Room",
-    time: "15:150h",
+    time: "15:15h",
     image: "images/workshops/gutes-an-schlechtem-sex.jpg",
        presenterImage: "images/presenters/steph.jpg",
       presenterImage2: "images/presenters/tobi.jpg",
@@ -123,7 +123,7 @@ inspiring others to explore non-monogamy grounded in transparency, authenticity,
     presenter: "Maria Botan",
     type: "Workshop (interactive)",
     title: "Igniting The Erotic Brain & Communicating Desire",
-    room: "Living Room",
+    room: "Kitchen",
     time: "17:00h",
     image: "images/workshops/erotic-brain.jpg",
       presenterImage: "images/presenters/maria.jpg",
@@ -145,7 +145,7 @@ It’s a safe, light-hearted space to learn, laugh, and dive deeper into underst
     presenter: "Sarah",
     type: "Panel Discussion",
     title: "Why the way we love is political",
-    room: "Ball Room",
+    room: "Theater Room",
     time: "17:00h",
     image: "images/workshops/love-political.jpg",
       presenterImage: "images/presenters/sarah.jpeg",
@@ -162,7 +162,7 @@ In her free time, she dances, does yoga, and most recently took a stab at comedy
     type: "Speed Dating / Social Activity",
     title: "Poly Speed Dating",
     room: "Ball Room",
-    time: "13:30h",
+    time: "15:15h",
     image: "images/workshops/speed-dating.png", // you said your file is .png
       presenterImage: "images/presenters/jay.jpg",
       presenterImage2: "images/presenters/akela.png",
@@ -175,7 +175,8 @@ Step into a lively round of Poly Speed Dating — a playful, in-person antidote 
 Around twenty participants will be randomly chosen from those who sign up. We’ll start with quick
 introductions and lighthearted ice-breakers before moving through several five-minute rounds with
 different partners. This format lets you meet people face-to-face and feel real chemistry.
-Afterwards, the after-party offers space to continue conversations and explore any spark that appears.
+Afterwards, the after-party offers space to continue conversations and explore any spark that appears.<br><br>
+Duration: cca 2,5h <br><br>
 #FuckOnlineDating
 `.trim()
   },
@@ -184,7 +185,7 @@ Afterwards, the after-party offers space to continue conversations and explore a
     presenter: "Sara ohne H ;)",
     type: "Pub Quiz",
     title: "Poly Pub Quiz",
-    room: "Living Room",
+    room: "Theater Room",
     time: "21:30h",
     image: "images/workshops/pub.jpg",
     presenterImage: "images/presenters/sara.jpg", // optional,
@@ -196,7 +197,7 @@ Afterwards, the after-party offers space to continue conversations and explore a
     presenter: "Noly",
     type: "Talk / Lecture",
     title: "Attachment Style Workshop",
-    room: "Living Room",
+    room: "Kitchen",
     time: "11:00h",
     image: "images/workshops/attachment.png",
     presenterImage: "images/presenters/noly.jpg", // optional,
@@ -267,7 +268,7 @@ how others navigate love, growth, and curiosity in their own ways.
     presenter: "Fraeya Whiffin",
     type: "Workshop (interactive)",
     title: "Relationship Smorgasbord",
-    room: "Living Room",
+    room: "Kithchen",
     time: "13:30h",
     image: "images/workshops/smorgasbord.jpg",
         presenterImage: "images/presenters/freya.jpg", // optional
@@ -278,12 +279,27 @@ how others navigate love, growth, and curiosity in their own ways.
 
 /* ========== Helpers ========== */
 
-function normalizeTime(t) {
-  if (!t) return "99:99";
+function timeToMinutes(t) {
+  if (!t) return 9999;
   const s = String(t).trim().toLowerCase();
-  if (s === "all day" || s === "allday") return "99:99"; // push to end
-  return s.replace("h", "");
+
+  // "all day" goes to the end
+  if (s.startsWith("all")) return 9999;
+
+  // If it's a range like "10:00–11:30" → take the first part
+  const firstPart = s.split(/[–-]/)[0];
+
+  // Remove anything that's not digit or colon (e.g. "h")
+  const cleaned = firstPart.replace(/[^\d:]/g, "");
+
+  const match = cleaned.match(/(\d{1,2}):(\d{2})/);
+  if (!match) return 9999;
+
+  const hours = parseInt(match[1], 10);
+  const minutes = parseInt(match[2], 10);
+  return hours * 60 + minutes;
 }
+
 
 function renderList(items) {
   const elList = document.getElementById("ws-list");
@@ -291,9 +307,16 @@ function renderList(items) {
 
   elList.innerHTML = "";
 
-  const sorted = items.slice().sort((a, b) =>
-    normalizeTime(a.time).localeCompare(normalizeTime(b.time))
-  );
+  const sorted = items.slice().sort((a, b) => {
+    const ta = timeToMinutes(a.time);
+    const tb = timeToMinutes(b.time);
+
+    if (ta === tb) {
+      // tie-breaker: sort alphabetically by title
+      return a.title.localeCompare(b.title);
+    }
+    return ta - tb;
+  });
 
   for (const ws of sorted) {
     const li = document.createElement("li");
@@ -307,6 +330,7 @@ function renderList(items) {
     elList.appendChild(li);
   }
 }
+
 
 /* ========== Show details ========== */
 
