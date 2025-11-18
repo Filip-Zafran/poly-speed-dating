@@ -49,14 +49,14 @@ Inspired by the principles of relationship anarchy, they encourage those involve
   },
   {
     slug: "polyamorie-und-sicherheit",
-    presenter: "Katharina Egger",
+    presenter: "Katharina (she/her)",
     type: "Workshop (interactive)",
     title: "Polyamorie & Sicherheit",
     room: "Ball Room",
     time: "13:00h",
     image: "images/workshops/poly-sicherheit.jpg",
-    presenterImage: "images/presenters/katharina.jpg",
-    presenterBio: ` `,
+    presenterImage: "images/presenters/katharina.png",
+    presenterBio: `Katharina (she/her) ist Spezialistin für Gesundheitsförderung (B.A.), Polyamorie Coach und Yogalehrerin. Ihre persönliche Reise mit Polyamorie begann vor 8 Jahren, angetrieben vom Wunsch nach sexueller Freiheit und emotionaler Bindung. Ihre Überzeugung: Der Schlüssel zur erfüllten Polyamorie ist eine gesunde Beziehung mit mir selbst. Mit Achtsamkeit und Embodiment-Methoden unterstützt sie polyamore Menschen dabei, die Beziehung zu sich selbst zu nähren und starke Wurzeln für sichere und verbundene Polybeziehungen zu entwickeln. `,
     description: `Wenn wir uns in unseren Beziehungen unsicher oder überfordert fühlen, scheint es manchmal unmöglich, wirklich präsent zu sein – mit uns selbst oder unseren Partnermenschen.
 Doch was, wenn es Wege gibt, auf sichere Weise in Verbindung zu bleiben?
 
@@ -103,7 +103,7 @@ for consent negotiations in sexual and/or non-monogamous relationships. No prior
     slug: "new-to-enm",
     presenter: "Ficho (he/him)",
     type: "Workshop (interactive)",
-    title: "(C/E)NM & Jelousy",
+    title: "Embracing Jealousy: A Path to Growth",
     room: "Kitchen",
     time: "13:00h",
     image: "images/workshops/new-to-enm.png",
@@ -116,21 +116,7 @@ celebrate connection, communication, and openness — from events like Poly Spee
 workshops and other community projects. In his free time, he designs poly-themed art and merch, driven by a love for breaking social norms and 
 inspiring others to explore non-monogamy grounded in transparency, authenticity, and healthy communication — the essence of Kitchen Table Poly. He firmly believes that love, like tea; best when shared… and frequently refilled.
 `,
-    description: `New to Non-Monogamy? A Community Discussion Circle
-
-Curious about ethical or consensual non-monogamy but not sure where to start?
-Join us for an open and supportive circle where we’ll explore the many facets of non-monogamous life — from understanding key concepts to sharing real experiences within our Berlin community.
-<br><br>
-We’ll dive into topics such as:<br>
-
- - The differences between ENM (Ethical Non-Monogamy) and CNM (Consensual Non-Monogamy)
-
-<br>
- - Dealing with metamours
-<br>
- - Jealousy or Envy or...?
-<br><br>
-Rather than a lecture, this is a knowledge-sharing circle — an open space for reflection, curiosity, and honest conversation among those exploring or already living non-monogamous lives.`
+    description: `This workshop offers a supportive space to explore jealousy as a natural and insightful emotion within polyamorous and ethical non-monogamous relationships. Participants will learn practical tools for understanding jealousy triggers, communicating openly with partners, and transforming jealousy into personal growth and deeper connection. Through reflection, discussion, and mindfulness techniques, attendees will embrace jealousy as a pathway to emotional resilience and stronger relationships.`
   },
   {
     slug: "erotic-brain",
@@ -178,8 +164,8 @@ In her free time, she dances, does yoga, and most recently took a stab at comedy
     room: "Ball Room",
     time: "11:00h",
     image: "images/workshops/speed-dating.png", // you said your file is .png
-      presenterImage: "images/presenters/ficho.jpg",
-      presenterImage2: "images/presenters/ficho.jpg",
+      presenterImage: "images/presenters/jay.jpg",
+      presenterImage2: "images/presenters/akela.png",
     presenterBio: `
 Jay and Akela are community facilitators passionate about authentic connection, consent culture,
 and helping people meet face-to-face in playful, pressure-free ways.
@@ -201,7 +187,7 @@ Afterwards, the after-party offers space to continue conversations and explore a
     room: "Living Room",
     time: "21:30h",
     image: "images/workshops/pub-quiz.jpg",
-    presenterImage: "",
+    presenterImage: "images/presenters/sara.jpg", // optional,
     presenterBio: `After 11 years of polyamory, Sara (she/her) is trying out new ways of emotional and physical relating to people. She is primarily interested in exploring alternatives to families-by-blood, and wants to work towards building communities of mutual accountability and aid. For her dayjob she is writing a phd in linguistics.`,
     description: `Join the Poly Pub Quiz and expand your knowledge about polyamory! While the quiz follows the traditional, competitive format of pub quizzes, the aim of this one is to learn a good deal about polyamory, see new resources and get to know curious tid-bits about poly in media and history. Everybody comes out as a winner, but only one team gets a (symbolic) prize. ;-)`
   },
@@ -213,8 +199,8 @@ Afterwards, the after-party offers space to continue conversations and explore a
     room: "Living Room",
     time: "11:00h",
     image: "images/workshops/attachment-style.jpg",
-    presenterImage: "",
-    presenterBio: `[Placeholder bio for Noly.]`,
+    presenterImage: "images/presenters/noly.jpg", // optional,
+    presenterBio: `Hello, I'm Noly: solo-polyamorous, relationship anarchist with a thing for Kitchen Table (KTP). I'm a tattoo artist and the founder of the Polyamory Berlin Community, an online space for non-monogamous folk to find support and meet other people who share similar values. I regularly host meet ups for the community, often with educational goals in mind. I currently offer peer-support for NM people as well.`,
     description: `Attachment: How it shapes your relationships and what you can do to navigate it`
   },
 
@@ -254,8 +240,8 @@ how others navigate love, growth, and curiosity in their own ways.
     room: "Kitchen",
     time: "15:15h",
     image: "images/workshops/non-monogamy-possibilities.jpg",
-    presenterImage: "",
-    presenterBio: `[Placeholder bio for Noly.]`,
+    presenterImage: "images/presenters/noly.jpg", // optional,
+    presenterBio: `Hello, I'm Noly: solo-polyamorous, relationship anarchist with a thing for Kitchen Table (KTP). I'm a tattoo artist and the founder of the Polyamory Berlin Community, an online space for non-monogamous folk to find support and meet other people who share similar values. I regularly host meet ups for the community, often with educational goals in mind. I currently offer peer-support for NM people as well.`,
     description: `An interactive talk where we shine light over the different kinds of non-monogamy and help attendees contemplate all the possibilities it offers, making sure they are chosing their practice consciously`
   },
   {
@@ -265,7 +251,7 @@ how others navigate love, growth, and curiosity in their own ways.
     title: "Relationship Smorgasbord",
     room: "Living Room",
     time: "13:00h",
-    image: "images/workshops/relationship-smorgasbord.jpg",
+    image: "images/workshops/smorgasbord.jpg",
         presenterImage: "images/presenters/freya.jpg", // optional
     presenterBio: `Fraeya Whiffin, IFS therapist `,
     description: `In the monosphere and polysphere alike, new partners often make assumptions about what their relationship should be like, with little intentionality, often ending up just doing what society expects. This workshop presents a worksheet to help you co-create your poly relationships. Even if you are unpartnered, you can benefit from thinking about, for example, how often you wish to communicate or to what extent you would wish to combine finances.`
