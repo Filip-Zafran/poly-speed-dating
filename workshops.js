@@ -221,10 +221,10 @@ Come check out this new card game made by polyamorous creators, for polyamorous 
       {
     slug: "constallation-game",
     presenter: "Noly",
-    type: "Game",
-    title: "Constellations - The Card Game",
+    type: "Activity",
+    title: "Poly Crafting: Craft and Chat!",
     room: "Theater Room",
-    time: "All day",
+    time: "13:30h",
     image: "images/workshops/crafting.png",
     presenterImage: "images/presenters/noly.jpg", // optional,
     presenterBio: `Hello, I'm Noly: solo-polyamorous, relationship anarchist with a thing for Kitchen Table (KTP). I'm a tattoo artist and the founder of the Polyamory Berlin Community, an online space for non-monogamous folk to find support and meet other people who share similar values. I regularly host meet ups for the community, often with educational goals in mind. I currently offer peer-support for NM people as well.`,
