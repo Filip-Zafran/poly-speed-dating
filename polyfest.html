@@ -26,6 +26,9 @@
         This event welcomes everyone interested in (C)ENM and open relationship practices.
         It's a safe space for sharing, learning, and curiosity — meet 50+ like-minded people and
         experience diverse perspectives on love and connection.
+     <br>
+     <br>
+     All workshops are generously offered on a pro-bono basis, inspired by a genuine love for raising awareness around ethical non-monogamy. Each session is dedicated to sharing knowledge, best practices, and fostering a culture of growth, inclusivity, and community support.
       </p>
     </section>
 
@@ -205,9 +208,34 @@
 </section>
 
 
+  <!-- chill room -->
+
+<div class="pf-title">THEATHER > Chill/mingling room</div>
+<div class="pf-title">Noly game / Merch....</div>
+
+  <!-- Venue map -->
  <img src="images/map.png" alt="venue-map" class="polyfest-image-banner" />
 
- <div class="pf-opening"> EVENING EVENT</div>
+ 
+ <div class="pf-opening"> POLY PARTY</div>
+ <br>
+<div class="pf-title">An inclusive celebration for everyone embracing consensual non-monogamy, open relationships, and the vibrant polyamorous community spirit.  The focus is on connection, fun, and fostering relationships. While our values are rooted in respect and mutual support within the ENM/poly world, we encourage expressive dressing (poly flag colours especially!), and warmly welcome everyone—no judgment on race, beliefs, sexuality, gender; we trust our guests to respect each other’s boundaries.​
+<br>
+<br>
+Party Entry & House Rules<br>
+Entry is reserved strictly for ticketed/wristband holders who joined the day events and workshops—the party is a safe, closed space dedicated to our community.
+<br><br>
+Dress-code <br> 
+Dress in poly flag colours and let your style shine! 
+Express yourself as you feel comfortable.
+<br><br>
+ 
+BYOB<br>
+The party is BYOB—bring your favourite beverages and snacks to share or enjoy.
+<br><br>
+The Vibe<br>
+This is a celebration of polyamory and chosen family: expect background music, mingling, games, laughs, and a community built on curiosity, kindness, and mutual respect. Whether you’re newly exploring ENM or seasoned in poly practices, the party is designed for connecting, discovering new perspectives, and supporting each other.</div>
+
 <section class="pf-schedule" aria-label="Poly Fest schedule">
   <!-- PARTY Header -->
   <div class="pf-schedule__heading">
@@ -250,10 +278,7 @@
       </div>
     </div>
     <div class="pf-schedule__cell" data-room="Living Room">
-      <div class="pf-lines">
-        <div class="pf-title">Workshops presentation</div>
-        
-      </div>
+       <div class="pf-schedule__cell" data-room="Living Room"><span class="pf-tag pf-tag--chill">WORKSHOPS PRESENTATION</span></div>
     </div>
     <div class="pf-schedule__cell" data-room="Kitchen">
       <div class="pf-lines">
@@ -278,26 +303,29 @@
 
   <!-- Party time 00:00h -->
   <div class="pf-schedule__row">
-    <div class="pf-schedule__time">00:00–00:40</div>
+    <div class="pf-schedule__time">00:05–04:00</div>
     <div class="pf-schedule__cell" data-room="Ball Room">
       <div class="pf-lines">
-        <div class="pf-title">Party</div>
+                <span class="pf-tag pf-tag--coffee">PARTY</span>
              </div>
     </div>
     <div class="pf-schedule__cell" data-room="Living Room">
       <div class="pf-lines">
-                  <div class="pf-title">Party</div>
+                       <span class="pf-tag pf-tag--coffee">PARTY</span>       
       </div>
     </div>
     <div class="pf-schedule__cell" data-room="Kitchen">
       <div class="pf-lines">
-          <div class="pf-title">Party</div>
+         
+             <span class="pf-tag pf-tag--coffee">FINALLY !!  :)</span>
             </div>
     </div>
   </div>
 </section>
 
+
 <br>
+    <!-- WORKSHOP & PRESENETRS INFO -->
 
  <div class="pf-opening"> WORKSHOP & PRESENETRS INFO</div>
     <!-- Workshops sidebar + detail -->
@@ -365,6 +393,60 @@
       </article>
     </section>
 
+    
+<br>
+    <!-- ABOUT US -->
+
+ <div class="pf-opening"> ABOUT US...</div>
+    <!-- Workshops sidebar + detail -->
+    <section id="workshops-browser" class="workshops-wrap">
+      <aside class="workshops-sidebar" aria-label="Workshops list">
+        <h2 >We are...</h2>
+        
+        <ul id="ws-list" class="ws-list" role="list">
+          <!-- Filled by JS -->
+        </ul>
+        <p class="ws-tip">Tip: Click a see details.</p>
+      </aside>
+
+      <article id="ws-detail" class="ws-detail" aria-live="polite">
+        <div class="ws-detail-inner">
+          <div class="ws-detail-header">
+           
+            <div>
+              <h3 id="ws-title">Select a workshop</h3>
+                         </div>
+          </div>
+
+          <div class="ws-presenter">
+ 
+  <!-- Presenter images container -->
+  <p id="ws-presenter">—</p>
+  <p id="ws-presenter-bio" class="ws-presenter-bio">
+    [Presenter bio placeholder. Add a short paragraph about the presenter here.]
+  </p>
+
+    <div class="ws-presenter-images">
+    <img
+      id="ws-presenter-img-1"
+      class="ws-presenter-img"
+      src="images/placeholders/presenter-placeholder.jpg"
+      alt="Presenter portrait"
+    />
+    <img
+      id="ws-presenter-img-2"
+      class="ws-presenter-img"
+      src="images/placeholders/presenter-placeholder.jpg"
+      alt="Second presenter portrait"
+      style="display: none;"
+    />
+  </div>
+</div>
+         
+        </div>
+      </article>
+    </section>
+
  
     <section class="deadlines">
       <p>Questions? <a href="mailto:polyfestberlin@gmail.com">polyfestberlin@gmail.com</a></p>
@@ -376,5 +458,6 @@
 
   <!-- Bust cache when you update workshops.js -->
   <script src="workshops.js?v=pf2"></script>
+   <script src="about-polyfest.js"></script>
 </body>
 </html>
