@@ -186,10 +186,10 @@ Afterwards, the after-party offers space to continue conversations and explore a
     title: "Poly Pub Quiz",
     room: "Living Room",
     time: "21:30h",
-    image: "images/workshops/pub-quiz.jpg",
+    image: "images/workshops/pub.jpg",
     presenterImage: "images/presenters/sara.jpg", // optional,
     presenterBio: `After 11 years of polyamory, Sara (she/her) is trying out new ways of emotional and physical relating to people. She is primarily interested in exploring alternatives to families-by-blood, and wants to work towards building communities of mutual accountability and aid. For her dayjob she is writing a phd in linguistics.`,
-    description: `Join the Poly Pub Quiz and expand your knowledge about polyamory! While the quiz follows the traditional, competitive format of pub quizzes, the aim of this one is to learn a good deal about polyamory, see new resources and get to know curious tid-bits about poly in media and history. Everybody comes out as a winner, but only one team gets a (symbolic) prize. ;-)`
+    description: `Join the Poly Pub Quiz and expand your knowledge about polyamory! While the quiz follows the traditional, competitive format of pub quizzes, the aim of this one is to learn a good deal about polyamory, see new resources and get to know curious tid-bits about poly in media and history. Everybody comes out as a winner, but only one team gets a (symbolic) prize. ;-) <br>In her free time, Sara is a trashdruid-seamstress who can make a trendy raincoat out of trashbags.`
   },
   {
     slug: "attachment-style",
@@ -198,10 +198,38 @@ Afterwards, the after-party offers space to continue conversations and explore a
     title: "Attachment Style Workshop",
     room: "Living Room",
     time: "11:00h",
-    image: "images/workshops/attachment-style.jpg",
+    image: "images/workshops/attachment.png",
     presenterImage: "images/presenters/noly.jpg", // optional,
     presenterBio: `Hello, I'm Noly: solo-polyamorous, relationship anarchist with a thing for Kitchen Table (KTP). I'm a tattoo artist and the founder of the Polyamory Berlin Community, an online space for non-monogamous folk to find support and meet other people who share similar values. I regularly host meet ups for the community, often with educational goals in mind. I currently offer peer-support for NM people as well.`,
-    description: `Attachment: How it shapes your relationships and what you can do to navigate it`
+    description: `Attachment: How It Shapes Your Relationships & What You Can Do to Navigate It <br>
+How does attachment shape the way we love in non-monogamous relationships? How can we recognise our patterns, break unhealthy cycles, and build secure, fulfilling connections? In this 90 minutes workshop, we will talk about what attachment is, how it is formed and what we can do to deal with it better. Together we will explore the connection between attachment and codependency, and tools to navigate your emotional patterns with confidence. 
+You will receive a 25 pages digital presentation containing information on attachment theory and 3 activities you can do at home to learn more about yourself and your own attachment. By the end of the workshop, you should be able to identify your own relationship style and have a better idea of how it impacts your relationships.`
+  },
+    {
+    slug: "constallation-game",
+    presenter: "Victor & Noly",
+    type: "Game",
+    title: "Constellations - The Card Game",
+    room: "Theater Room",
+    time: "All day",
+    image: "images/workshops/constalations.png",
+    presenterImage: "images/presenters/noly.jpg", // optional,
+    presenterBio: `Hello, I'm Noly: solo-polyamorous, relationship anarchist with a thing for Kitchen Table (KTP). I'm a tattoo artist and the founder of the Polyamory Berlin Community, an online space for non-monogamous folk to find support and meet other people who share similar values. I regularly host meet ups for the community, often with educational goals in mind. I currently offer peer-support for NM people as well.`,
+    description: `Everyone has relationship goals. But only here you get the chance to play cards to make (or break!) them, while navigating the chaos that a roll of a die can throw into things...
+Come check out this new card game made by polyamorous creators, for polyamorous gamers (and everyone else!).`
+  },
+      {
+    slug: "constallation-game",
+    presenter: "Noly",
+    type: "Game",
+    title: "Constellations - The Card Game",
+    room: "Theater Room",
+    time: "All day",
+    image: "images/workshops/crafting.png",
+    presenterImage: "images/presenters/noly.jpg", // optional,
+    presenterBio: `Hello, I'm Noly: solo-polyamorous, relationship anarchist with a thing for Kitchen Table (KTP). I'm a tattoo artist and the founder of the Polyamory Berlin Community, an online space for non-monogamous folk to find support and meet other people who share similar values. I regularly host meet ups for the community, often with educational goals in mind. I currently offer peer-support for NM people as well.`,
+    description: `Welcome to this special edition of Poly Crafting: Craft and Chat! <br>
+Whether you draw, embroider, paint or tricot, this meet up is for you. All kinds of crafts are welcome at Poly Crafting, a get-together for artists and creatives who practice non-monogamy, in any of its forms. Bring your crafting tools and your questions, and meet me at the Poly Fest for making art and connecting with community. Let's talk non-monogamy! `
   },
 
   {
@@ -232,18 +260,8 @@ to listen, laugh, and connect through real experiences. <br><br>Come to tell you
 how others navigate love, growth, and curiosity in their own ways.
 `.trim()
   },
-  {
-    slug: "non-monogamy-possibilities",
-    presenter: "Noly",
-    type: "Workshop (interactive)",
-    title: "The possibilities of non-monogamy as a conscious choice",
-    room: "Kitchen",
-    time: "15:15h",
-    image: "images/workshops/non-monogamy-possibilities.jpg",
-    presenterImage: "images/presenters/noly.jpg", // optional,
-    presenterBio: `Hello, I'm Noly: solo-polyamorous, relationship anarchist with a thing for Kitchen Table (KTP). I'm a tattoo artist and the founder of the Polyamory Berlin Community, an online space for non-monogamous folk to find support and meet other people who share similar values. I regularly host meet ups for the community, often with educational goals in mind. I currently offer peer-support for NM people as well.`,
-    description: `An interactive talk where we shine light over the different kinds of non-monogamy and help attendees contemplate all the possibilities it offers, making sure they are chosing their practice consciously`
-  },
+  
+
   {
     slug: "relationship-smorgasbord",
     presenter: "Fraeya Whiffin",

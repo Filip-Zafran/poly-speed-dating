@@ -896,3 +896,75 @@ details summary {
   object-fit: cover;
   border-radius: 10px;
 }
+
+/* ===== PolyFest Info Table ===== */
+
+.pf-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.pf-info-table th {
+  background: linear-gradient(90deg, #0057B7, #D52B1E);
+  color: #fff;
+  padding: 1rem;
+  font-size: 1.1rem;
+  text-align: left;
+  font-weight: 800;
+}
+
+.pf-info-table td {
+  padding: 1rem 1.2rem;
+  vertical-align: top;
+  border-bottom: 1px solid #eee;
+}
+
+.pf-info-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pf-info-img {
+  width: 120px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+   cursor: zoom-in;
+}
+
+.pf-info-table p {
+  margin: 0 0 .5rem;
+}
+
+/* Tag style reused from schedule */
+.pf-tag--chill {
+  background: #009FE3;
+  color: #fff;
+  font-size: .8rem;
+  padding: .25rem .6rem;
+  border-radius: .5rem;
+}
+
+/* Responsive — stack cells */
+@media (max-width: 700px) {
+  .pf-info-table th,
+  .pf-info-table td {
+    display: block;
+    width: 100%;
+  }
+  .pf-info-img {
+    margin-top: .5rem;
+  }
+}
+
+.pf-info-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  cursor: zoom-in;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
