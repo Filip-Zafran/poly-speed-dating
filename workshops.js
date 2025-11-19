@@ -100,24 +100,29 @@ for consent negotiations in sexual and/or non-monogamous relationships. No prior
 `.trim()
   },
   {
-    slug: "new-to-enm",
-    presenter: "Ficho (he/him)",
-    type: "Workshop (interactive)",
-    title: "Embracing Jealousy: A Path to Growth",
-    room: "Workshop room",
-    time: "11:00h",
-    image: "images/workshops/new-to-enm.png",
-    presenterImage: "images/presenters/ficho.jpg",
-    presenterBio: `A very active community builder and the initiator of Poly Speed Dating and Poly Fest Berlin.
+  slug: "new-to-enm",
+  presenter: "Ficho (he/him)",
+  type: "Workshop (interactive)",
+  title: "Embracing Jealousy: A Path to Growth",
+  room: "Workshop room",
+  time: "11:00h",
+  image: "images/workshops/new-to-enm.png",
+  presenterImage: "images/presenters/ficho.jpg",
+  presenterBio: `
+A very active community builder and the initiator of Poly Speed Dating and Poly Fest Berlin.
 Passionate about creating spaces that spark connection, authenticity, and emotional honesty. <br><br>
 
 Opening up four years ago with his primary partner, he quickly became poly at heart and deeply passionate about creating spaces that 
-celebrate connection, communication, and openness — from events like Poly Speed Dating, KiezBurn, and Poly Fest to Emotional Intelligence 
-workshops and other community projects. In his free time, he designs poly-themed art and merch, driven by a love for breaking social norms and 
-inspiring others to explore non-monogamy grounded in transparency, authenticity, and healthy communication — the essence of Kitchen Table Poly. He firmly believes that love, like tea; best when shared… and frequently refilled.
-`,
-    description: `This workshop offers a supportive space to explore jealousy as a natural and insightful emotion within polyamorous and ethical non-monogamous relationships. Participants will learn practical tools for understanding jealousy triggers, communicating openly with partners, and transforming jealousy into personal growth and deeper connection. Through reflection, discussion, and mindfulness techniques, attendees will embrace jealousy as a pathway to emotional resilience and stronger relationships.`
-  },
+celebrate connection, communication, and openness — also events like KiezBurn and BurnHalla, to leading workshops on Emotional Intelligence, Fostering Social Connections 
+and other community projects. In his free time, he designs poly-themed art and merch, driven by a love for breaking social norms and 
+inspiring others to explore non-monogamy grounded in transparency, authenticity, and healthy communication. <br><br>
+
+`.trim(),
+  description: `
+This workshop offers a supportive space to explore jealousy as a natural and insightful emotion within polyamorous and ethical non-monogamous relationships. Participants will learn practical tools for understanding jealousy triggers, communicating openly with partners, and transforming jealousy into personal growth and deeper connection. Through reflection, discussion, and mindfulness techniques, attendees will embrace jealousy as a pathway to emotional resilience and stronger relationships.
+`.trim(),
+},
+
   {
     slug: "erotic-brain",
     presenter: "Maria Botan",
@@ -248,9 +253,9 @@ Passionate about creating spaces that spark connection, authenticity, and emotio
 
 
 Opening up four years ago with his primary partner, he quickly became poly at heart and deeply passionate about creating spaces that 
-celebrate connection, communication, and openness — from events like Poly Speed Dating, KiezBurn, and Poly Fest to Emotional Intelligence 
-workshops and other community projects. In his free time, he designs poly-themed art and merch, driven by a love for breaking social norms and 
-inspiring others to explore non-monogamy grounded in transparency, authenticity, and healthy communication — the essence of Kitchen Table Poly. <br><br>He firmly believes that love, like tea; best when shared… and frequently refilled.
+celebrate connection, communication, and openness — also events like KiezBurn, BurnHalla, to leading workshops on Emotional Intelligence, Fostering Social Connections 
+and other community projects. In his free time, he designs poly-themed art and merch, driven by a love for breaking social norms and 
+inspiring others to explore non-monogamy grounded in transparency, authenticity, and healthy communication. 
 
 `.trim(),
     description: `

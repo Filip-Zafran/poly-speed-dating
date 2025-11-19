@@ -764,6 +764,16 @@ details summary {
 .pf-title { font-weight: 700; }
 .pf-meta  { color:#555; font-size:.92rem; }
 
+.poly-party-text {
+  font-weight: 400 !important;   /* makes normal text NOT bold */
+}
+
+/* keep section titles bold */
+.poly-party-text b {
+  font-weight: 700 !important;
+}
+
+
 /* Responsive: stack as cards on small screens */
 @media (max-width: 900px) {
   .pf-schedule__heading { display: none; }
