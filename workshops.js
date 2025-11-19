@@ -225,7 +225,7 @@ You will receive a 25 pages digital presentation containing information on attac
 Come check out this new card game made by polyamorous creators, for polyamorous gamers (and everyone else!).`
   },
       {
-    slug: "constallation-game",
+    slug: "craft-and-chat",
     presenter: "Noly",
     type: "Activity",
     title: "Poly Crafting: Craft and Chat!",
