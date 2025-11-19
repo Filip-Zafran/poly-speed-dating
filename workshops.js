@@ -84,7 +84,7 @@ IG: wholeypoly
     presenter: "Stephanie Kossow & Tobi",
     type: "Workshop (interactive)",
     title: "„Das Gute an (schl)echtem Sex“ — Reading & Sharing",
-    room: "Living Room",
+    room: "Kitchen",
     time: "15:15h",
     image: "images/workshops/gutes-an-schlechtem-sex.jpg",
        presenterImage: "images/presenters/steph.jpg",
