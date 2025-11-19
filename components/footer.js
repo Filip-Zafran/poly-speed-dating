@@ -37,7 +37,7 @@ class CustomFooter extends HTMLElement {
           <a href="#" class="footer-link">Privacy</a>
           <a href="#" class="footer-link">Imprint</a>
         </div>
-        <div class="copyright">© PSD / Powered by Ficho 😎 <span id="year"></span></div>
+        <div class="copyright">© PSD / Powered by Ficho (fž) <span id="year"></span></div>
       </div>
     `;
     this.shadowRoot.getElementById('year').textContent = new Date().getFullYear();

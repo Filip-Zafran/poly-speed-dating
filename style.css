@@ -978,3 +978,26 @@ details summary {
   cursor: zoom-in;
   box-shadow: 0 4px 14px rgba(0,0,0,0.15);
 }
+
+.about-link {
+  font-weight: 600;
+  text-decoration: underline;
+  color: #2B004D; /* purple theme colour */
+  cursor: pointer;
+}
+
+.about-link:hover {
+  color: var(--poly-magenta);
+}
+
+.about-list li {
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 0.35rem;
+  color: #2B004D; /* poly purple */
+}
+
+.about-list li:hover {
+  color: var(--poly-magenta);
+}
