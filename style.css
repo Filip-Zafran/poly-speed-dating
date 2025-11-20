@@ -1001,3 +1001,13 @@ details summary {
 .about-list li:hover {
   color: var(--poly-magenta);
 }
+
+#entry-note {
+  text-align: left !important;
+  display: block; /* ensures alignment works fully */
+}
+
+/* Only the middle cell in the lunch row (Registrations / Entry point 2) */
+.pf-row--lunch .pf-schedule__cell:nth-child(3) {
+  justify-content: flex-start;
+}

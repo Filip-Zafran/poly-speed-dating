@@ -54,7 +54,7 @@ Inspired by the principles of relationship anarchy, they encourage those involve
     title: "Polyamorie & Sicherheit",
     room: "Ball room",
     time: "13:30h",
-    image: "images/workshops/poly-sicherheit.jpg",
+    image: "images/workshops/sicherheit.jpg",
     presenterImage: "images/presenters/katharina.png",
     presenterBio: `Katharina (she/her) ist Spezialistin für Gesundheitsförderung (B.A.), Polyamorie Coach und Yogalehrerin. Ihre persönliche Reise mit Polyamorie begann vor 8 Jahren, angetrieben vom Wunsch nach sexueller Freiheit und emotionaler Bindung. Ihre Überzeugung: Der Schlüssel zur erfüllten Polyamorie ist eine gesunde Beziehung mit mir selbst. Mit Achtsamkeit und Embodiment-Methoden unterstützt sie polyamore Menschen dabei, die Beziehung zu sich selbst zu nähren und starke Wurzeln für sichere und verbundene Polybeziehungen zu entwickeln. `,
     description: `Wenn wir uns in unseren Beziehungen unsicher oder überfordert fühlen, scheint es manchmal unmöglich, wirklich präsent zu sein – mit uns selbst oder unseren Partnermenschen.
@@ -115,7 +115,7 @@ Passionate about creating spaces that spark connection, authenticity, and emotio
 Opening up four years ago with his primary partner, he quickly became poly at heart and deeply passionate about creating spaces that 
 celebrate connection, communication, and openness — also events like KiezBurn and BurnHalla, to leading workshops on Emotional Intelligence, Fostering Social Connections 
 and other community projects. In his free time, he designs poly-themed art and merch, driven by a love for breaking social norms and 
-inspiring others to explore non-monogamy grounded in transparency, authenticity, and healthy communication. <br><br>
+inspiring others to explore non-monogamy grounded in transparency, authenticity, and healthy communication. <br>
 
 `.trim(),
   description: `
@@ -181,8 +181,11 @@ Around twenty participants will be randomly chosen from those who sign up. We’
 introductions and lighthearted ice-breakers before moving through several five-minute rounds with
 different partners. This format lets you meet people face-to-face and feel real chemistry.
 Afterwards, the after-party offers space to continue conversations and explore any spark that appears.<br><br>
-Duration: cca 2,5h <br><br>
-#FuckOnlineDating
+
+<b>Registration for the workshop: Only open till 13:30h</b> <i>(more info at the Opening ceremony)</i><br>
+Workshop duration: cca 2,5h 
+<br><br>
+#FuckOnlineDating :)
 `.trim()
   },
   {
