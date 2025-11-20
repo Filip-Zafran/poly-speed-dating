@@ -40,7 +40,7 @@ Inspired by the principles of relationship anarchy, they encourage those involve
     presenter: "Margherita",
     type: "Workshop (interactive)",
     title: "Community Mapping Lab",
-    room: "Ball Room",
+    room: "Ballroom",
     time: "11:00h",
     image: "images/workshops/community-mapping.jpg",
    presenterImage: "images/presenters/margherita.jpg",
@@ -52,7 +52,7 @@ Inspired by the principles of relationship anarchy, they encourage those involve
     presenter: "Katharina (she/her)",
     type: "Workshop (interactive)",
     title: "Polyamorie & Sicherheit",
-    room: "Ball room",
+    room: "Ballroom",
     time: "13:30h",
     image: "images/workshops/sicherheit.jpg",
     presenterImage: "images/presenters/katharina.png",
@@ -130,7 +130,7 @@ This workshop offers a supportive space to explore jealousy as a natural and ins
     title: "Igniting The Erotic Brain & Communicating Desire",
     room: "Kitchen",
     time: "17:00h",
-    image: "images/workshops/erotic-brain.jpg",
+    image: "images/workshops/erotic-brain.png",
       presenterImage: "images/presenters/maria.jpg",
     presenterBio: `
 ...is an ENM and Relationship Coach based in Berlin. She creates safe spaces where couples and individuals feel fully supported to explore, grow, and connect from a place of trust and hope. Maria believes that the way we build families and long-term relationships in the 21st century needs an update. Her coaching helps people unlearn outdated patterns, practise emotional intelligence, and build conscious, fulfilling relationships rooted in authenticity and choice. 
@@ -166,7 +166,7 @@ In her free time, she dances, does yoga, and most recently took a stab at comedy
     presenter: "Jay & Akela",
     type: "Speed Dating / Social Activity",
     title: "Poly Speed Dating",
-    room: "Ball Room",
+    room: "BallRoom",
     time: "15:15h",
     image: "images/workshops/speed-dating.png", // you said your file is .png
       presenterImage: "images/presenters/jay.jpg",
@@ -246,7 +246,7 @@ Whether you draw, embroider, paint or tricot, this meet up is for you. All kinds
     presenter: "Ficho (he/him)",
     type: "Community Sharing",
     title: "Open Mic: Short Poly Stories",
-    room: "Ball Room",
+    room: "BallRoom",
     time: "21:30h",
     image: "images/workshops/open-mic-poly-stories.png",
     presenterImage: "images/presenters/ficho.jpg", // optional
