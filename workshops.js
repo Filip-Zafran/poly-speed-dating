@@ -152,7 +152,7 @@ It’s a safe, light-hearted space to learn, laugh, and dive deeper into underst
     title: "Why the way we love is political",
     room: "Theater Room",
     time: "17:00h",
-    image: "images/workshops/love-political.jpg",
+    image: "images/workshops/love-more.jpg",
       presenterImage: "images/presenters/sarah.jpeg",
     presenterBio: `Sarah (she/they) started exploring non-monogamy 10 years ago when she lived in Brooklyn and stumbled upong polyamorous Burners at a festival outside of NYC. She immediately felt like this was the answer to all of her relationship problems. Of course it wasn't. But it also kind of was.
 
