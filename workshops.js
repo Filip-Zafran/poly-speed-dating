@@ -147,7 +147,7 @@ It’s a safe, light-hearted space to learn, laugh, and dive deeper into underst
   },
   {
     slug: "love-is-political",
-    presenter: "Sarah & Jorge",
+    presenter: "Sarah, Yonathan & Jorge",
     type: "Panel Discussion",
     title: "Why the way we love is political",
     room: "Theater Room",
@@ -158,7 +158,7 @@ It’s a safe, light-hearted space to learn, laugh, and dive deeper into underst
 
 Since then she has made a lot of mistakes and has been talking about them in her newsletter: monogamish as well as on Instagram under the account monogamish_me. She is also a systemic coach for individuals and couples, helping them relate more honestly and in a way that truly serves them, their values, and their goals.
 
-In her free time, she dances, does yoga, and most recently took a stab at comedy improv and loves it!`,
+In her free time, she dances, does yoga, and most recently took a stab at comedy improv and loves it!<br><br>Yonatan has been in a poly relationship for over a decade. He's got two kids, works as a social worker and early age educator, but also moonlights confusing people with his weird participatory theater.<br><br>Jorge Vega Matos is a cultural researcher and organizer exploring how we connect, belong, and build community. His work includes immersive research into online dating culture and nightlife socialization as windows into evolving social and sexual health norms.`,
     description: `Polyamory means more to our society than just “seeing multiple people at once.” It represents a different way of viewing and interacting with the world.
 In this discussion, we will explore the more socio-political as well as philosophical side of polyamory and open relating as it relates to widespread social matters like gender, feminism, mental and sexual health, and even global conflicts.
 
