@@ -214,18 +214,7 @@ In long-term relationships, you might spend >10,000 hours together, so let's tak
 Finding a good match is hard, let's give this some proper thought, and help each other figure it out and maybe even make introductions. 
 `
   },
-  {
-    slug: "poly-pub-quiz",
-    presenter: "Sara ohne H ;)",
-    type: "Pub Quiz",
-    title: "Poly Pub Quiz",
-    room: "Theater Room",
-    time: "21:30h",
-    image: "images/workshops/pub.jpg",
-    presenterImage: "images/presenters/sara.jpg", // optional,
-    presenterBio: `After 11 years of polyamory, Sara (she/her) is trying out new ways of emotional and physical relating to people. She is primarily interested in exploring alternatives to families-by-blood, and wants to work towards building communities of mutual accountability and aid. For her dayjob she is writing a phd in linguistics.`,
-    description: `Join the Poly Pub Quiz and expand your knowledge about polyamory! While the quiz follows the traditional, competitive format of pub quizzes, the aim of this one is to learn a good deal about polyamory, see new resources and get to know curious tid-bits about poly in media and history. Everybody comes out as a winner, but only one team gets a (symbolic) prize. ;-) <br>In her free time, Sara is a trashdruid-seamstress who can make a trendy raincoat out of trashbags.`
-  },
+  
   {
     slug: "attachment-style",
     presenter: "Noly",
