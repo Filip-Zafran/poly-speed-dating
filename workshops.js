@@ -147,7 +147,7 @@ It’s a safe, light-hearted space to learn, laugh, and dive deeper into underst
   },
   {
     slug: "love-is-political",
-    presenter: "Sarah",
+    presenter: "Sarah & Jorge",
     type: "Panel Discussion",
     title: "Why the way we love is political",
     room: "Theater Room",
@@ -159,7 +159,10 @@ It’s a safe, light-hearted space to learn, laugh, and dive deeper into underst
 Since then she has made a lot of mistakes and has been talking about them in her newsletter: monogamish as well as on Instagram under the account monogamish_me. She is also a systemic coach for individuals and couples, helping them relate more honestly and in a way that truly serves them, their values, and their goals.
 
 In her free time, she dances, does yoga, and most recently took a stab at comedy improv and loves it!`,
-    description: `This session features a concise keynote talk followed by a curated panel discussion with diverse voices from within the community. Together, we will explore how relationship structures intersect with culture, autonomy, identity, and society at large, offering a multifaceted look at why the ways we love are inherently political.`
+    description: `Polyamory means more to our society than just “seeing multiple people at once.” It represents a different way of viewing and interacting with the world.
+In this discussion, we will explore the more socio-political as well as philosophical side of polyamory and open relating as it relates to widespread social matters like gender, feminism, mental and sexual health, and even global conflicts.
+
+Joining us will be Jorge Vega Matos, a cultural researcher and organizer exploring how we connect, belong, and build community. His work includes immersive research into online dating culture and nightlife socialization as windows into evolving social and sexual health norms.`
   },
   {
     slug: "poly-speed-dating",
@@ -187,6 +190,20 @@ Workshop duration: cca 2,5h
 <br><br>
 #FuckOnlineDating :)
 `.trim()
+  },
+   {
+    slug: "partner",
+    presenter: "Manuel",
+    type: "Workshop (interactive)",
+    title: "What truly matters in a partner? ",
+    room: "Workshop Room",
+    time: "13:30h",
+    image: "images/workshops/partner.jpg",
+    presenterImage: "images/presenters/manuel.jpg", // optional,
+    presenterBio: `comming soon`,
+    description: `Reflecting on your dating journey: What's actually important for you in a (long-term) relationship? How can you find and connect with the kind of partner that's good for you, and you're good for them? 
+
+After a quick intro, we'll take time for individual reflection (I'll provide some reflection questions), and then you can share them with others 1-1 or in small groups (all sharing optional). Finding a good match is hard, let's give this some deep thought and then help each other figure it out!.`
   },
   {
     slug: "poly-pub-quiz",

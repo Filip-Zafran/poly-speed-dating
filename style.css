@@ -294,6 +294,46 @@ img.placeholder {
   object-fit: cover;
 }
 
+/* Row that holds both buttons */
+.buttons-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+/* Instagram button (new color) */
+.btn-ig {
+  background: #833AB4;      /* Instagram purple */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+/* Instagram icon */
+.ig-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Make text not wrap weirdly */
+.soldout-btn {
+  white-space: nowrap;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 600px) {
+  .buttons-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+
 details summary {
   cursor: pointer;
   font-weight: 700;
@@ -1038,4 +1078,79 @@ details summary {
     width: 60%;
     margin-bottom: 1rem;
   }
+}
+
+
+/* Parking info box */
+.pf-parking-box {
+  margin: 2rem auto;
+  padding: 1.3rem 1.6rem;
+  background: #f2f0ff; /* soft lilac */
+  border-left: 6px solid #d52b1e; /* poly red accent */
+  border-radius: 12px;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  max-width: 700px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.pf-parking-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+
+.pf-parking-text {
+  font-size: 1rem;
+  color: #222;
+  line-height: 1.45;
+}
+
+.pf-parking-text strong {
+  color: #0057B7; /* poly blue */
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .pf-parking-box {
+    flex-direction: row;
+    padding: 1rem;
+  }
+
+  .pf-parking-icon {
+    font-size: 2rem;
+  }
+}
+
+.party-description {
+  margin: 2rem 0;
+  position: relative;
+  padding-left: 120px;
+  min-height: 80px;
+}
+
+.party-flag {
+  width: 90px;
+  position: absolute;
+  left: 0;
+  top: 10px;
+}
+
+.party-section {
+  margin-bottom: 1.7rem;
+}
+
+.party-heading {
+  font-weight: 800;           /* only headings are bold */
+  color: #d52b1e;             /* poly red accent */
+  font-size: 1.2rem;
+  margin: 0 0 0.3rem 0;
+}
+
+.party-section p {
+  margin: 0;
+  font-weight: 400;           /* normal weight for body text */
+  line-height: 1.45;
+  color: #222;
 }

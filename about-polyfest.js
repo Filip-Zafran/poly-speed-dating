@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
       name: 'The Community',
       role: 'Founders & Advocates for PolyFest',
       bio: 'United by a shared passion for polyamory and community, our three founders first connected at a Pub Quiz during a Poly Speed Dating event in 2025. Their journey together continued through unforgettable experiences at KiezBurn, inspiring them to launch a non-profit dedicated to polyamory education and resources. Together, they are committed to fostering understanding, support, and connection within the poly and ENM communities. Substack Link - https://monogamish.substack.com/ IG - https://www.instagram.com/monogamish_me/ Coach website - https://www.monogamish.me/courses/coaching',
-      img: 'images/polyfest.png'
+      img: 'images/polyfest-small.png'
     },
     {
       name: 'Sarah',
