@@ -1154,3 +1154,67 @@ details summary {
   line-height: 1.45;
   color: #222;
 }
+
+.btn-conduct {
+  background: #A6D8FF;
+  color: #002B4E;
+  font-weight: 700;
+}
+
+.btn-conduct:hover {
+  background: #8CCBFF;
+}
+
+/* 3-button layout */
+.triple-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+/* Reuse your existing .btn */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .8rem 1.2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+/* --- Special Button Styles --- */
+
+/* Telegram button */
+.btn-telegram {
+  background: #229ED9;
+  color: white;
+}
+
+/* Telegram icon */
+.icon-telegram {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+/* Code of Conduct button (light blue) */
+.btn-conduct {
+  background: #A6D8FF;      /* soft poly blue */
+  color: #002B4E;           /* dark blue for readability */
+}
+
+.btn-conduct:hover {
+  background: #8CCBFF;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .triple-buttons {
+    flex-direction: column;
+  }
+}

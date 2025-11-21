@@ -198,12 +198,21 @@ Workshop duration: cca 2,5h
     title: "What truly matters in a partner? ",
     room: "Workshop Room",
     time: "13:30h",
-    image: "images/workshops/partner.jpg",
-    presenterImage: "images/presenters/manuel.jpg", // optional,
-    presenterBio: `comming soon`,
-    description: `Reflecting on your dating journey: What's actually important for you in a (long-term) relationship? How can you find and connect with the kind of partner that's good for you, and you're good for them? 
+    image: "images/workshops/partner.png",
+    presenterImage: "images/presenters/manuel.png", // optional,
+    presenterBio: `Hi, 
 
-After a quick intro, we'll take time for individual reflection (I'll provide some reflection questions), and then you can share them with others 1-1 or in small groups (all sharing optional). Finding a good match is hard, let's give this some deep thought and then help each other figure it out!.`
+I've spent most of the past ten years connecting and supporting people, mainly in their ambitious social impact pursuits (effectivealtruism.org), and occasionally also in their dating journeys. Last year, I co-founded Polyverse, a curated peer support community for people practicing or curious about ethical polyamory (lu.ma/polyverse).
+
+Currently, I'm building Affinity, an app to reduce social friction and facilitate meaningful connections (collaborations, friendship, love). You're welcome to try it out now, to stay in touch with fellow Polyfest attendees and soon connect with other poly folks: https://affinitymatch.org/polyfest (free of charge, signup takes ~30 seconds)
+We're still testing it (300 users and 250 matches so far), honest feedback welcome!
+`,
+    description: `What truly matters when choosing a partner? Reflect & discuss<br>What's actually important for you in a (long-term) relationship? What kind of person brings out the best in you, and you bring out the best in them? And where can you find them?
+
+In long-term relationships, you might spend >10,000 hours together, so let's take 45-90min to reflect on this. After a quick intro, we'll take time for individual reflection (I'll provide some reflection questions), followed by optional sharing 1-1 or in small groups. Stay as short or long as you want. 
+
+Finding a good match is hard, let's give this some proper thought, and help each other figure it out and maybe even make introductions. 
+`
   },
   {
     slug: "poly-pub-quiz",
