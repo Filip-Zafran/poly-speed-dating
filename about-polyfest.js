@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       name: 'The Community',
       role: 'Founders & Advocates for PolyFest',
-      bio: 'United by a shared passion for polyamory and community, our three founders first connected at a Pub Quiz during a Poly Speed Dating event in 2025. Their journey together continued through unforgettable experiences at KiezBurn, inspiring them to launch a non-profit dedicated to polyamory education and resources. Together, they are committed to fostering understanding, support, and connection within the poly and ENM communities. Substack Link - https://monogamish.substack.com/ IG - https://www.instagram.com/monogamish_me/ Coach website - https://www.monogamish.me/courses/coaching',
+      bio: 'United by a shared passion for polyamory and community, our three founders first connected at a Pub Quiz during a Poly Speed Dating event in 2025. Their journey together continued through unforgettable experiences at KiezBurn, inspiring them to launch a non-profit dedicated to polyamory education and resources. Together, they are committed to fostering understanding, support, and connection within the poly and ENM communities.',
       img: 'images/polyfest-small.png'
     },
     {
       name: 'Sarah',
       role: 'Relationship Coach & Workshop Facilitator',
-      bio: 'Sarah (she/they) started exploring non-monogamy 10 years ago when she lived in Brooklyn and stumbled upong polyamorous Burners at a festival outside of NYC. She immediately felt like this was the answer to all of her relationship problems. Of course it wasnt. But it also kind of was.Since then she has made a lot of mistakes and has been talking about them in her newsletter: monogamish as well as on Instagram under the account monogamish_me. She is also a systemic coach for individuals and couples, helping them relate more honestly and in a way that truly serves them, their values, and their goals. In her free time, she dances, does yoga, and most recently took a stab at comedy improv and loves it!',
+      bio: 'Sarah (she/they) started exploring non-monogamy 10 years ago when she lived in Brooklyn and stumbled upong polyamorous Burners at a festival outside of NYC. She immediately felt like this was the answer to all of her relationship problems. Of course it wasnt. But it also kind of was.Since then she has made a lot of mistakes and has been talking about them in her newsletter: monogamish as well as on Instagram under the account monogamish_me. She is also a systemic coach for individuals and couples, helping them relate more honestly and in a way that truly serves them, their values, and their goals. In her free time, she dances, does yoga, and most recently took a stab at comedy improv and loves it!  -  Substack Link - https://monogamish.substack.com/ IG - https://www.instagram.com/monogamish_me/ Coach website - https://www.monogamish.me/courses/coaching',
       img: 'images/presenters/sarah.jpeg'
     },
     {
