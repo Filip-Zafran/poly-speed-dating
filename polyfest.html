@@ -613,6 +613,48 @@ Whether you draw, embroider, paint or tricot, this meet up is for you. All kinds
       </article>
     </section>
 
+    <!-- =======================
+     PolyFest Mailing List
+======================== -->
+<section class="pf-subscribe" id="mailing-list">
+  <div class="pf-subscribe-card">
+    <h2>Join our mailing list</h2>
+    <p class="pf-subscribe-sub">
+      We are SUPER-DUPER careful with your data and we do NOT spam you with anything but our events.
+    </p>
+
+    <form id="pf-subscribe-form"
+          action="https://formspree.io/f/xblbvagz
+          method="POST"
+          class="pf-form">
+
+      <div class="pf-form-row">
+        <label for="pf-name">Name</label>
+        <input id="pf-name" name="name" type="text" required>
+      </div>
+
+      <div class="pf-form-row">
+        <label for="pf-email">Email</label>
+        <input id="pf-email" name="email" type="email" required>
+      </div>
+
+      <input type="hidden" name="_subject" value="PolyFest newsletter signup">
+
+      <label class="pf-checkbox pf-consent">
+        <input type="checkbox" required>
+        I agree to receive emails from PolyFest / PSD and understand I can unsubscribe anytime.
+      </label>
+
+      <div class="pf-form-actions">
+        <button type="submit" class="btn btn-primary pf-subscribe-btn">
+          Subscribe
+        </button>
+        <span id="pf-subscribe-status" class="pf-subscribe-status" aria-live="polite"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
  
     <section class="deadlines">
       <p>Questions? <a href="mailto:polyfestberlin@gmail.com">polyfestberlin@gmail.com</a></p>
@@ -625,5 +667,7 @@ Whether you draw, embroider, paint or tricot, this meet up is for you. All kinds
   <!-- Bust cache when you update workshops.js -->
   <script src="workshops.js?v=pf2"></script>
    <script src="about-polyfest.js"></script>
+<script src="subscribe.js"></script>
+
 </body>
 </html>

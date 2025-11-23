@@ -1218,3 +1218,153 @@ details summary {
     flex-direction: column;
   }
 }
+
+/* =======================
+   PolyFest Subscribe Form
+======================= */
+
+.pf-subscribe {
+  margin: 3rem 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.pf-subscribe-card {
+  width: 100%;
+  max-width: 720px;
+  background: #fff;
+  border: 2px solid rgba(0, 159, 227, 0.18);           /* soft poly blue */
+  border-radius: 18px;
+  padding: 1.6rem 1.6rem 1.2rem;
+  box-shadow: 0 10px 26px rgba(0,0,0,.06);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle top ribbon in poly colors */
+.pf-subscribe-card::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0; height:6px;
+  background: linear-gradient(90deg,
+      var(--poly-blue),
+      var(--poly-magenta),
+      var(--poly-gold),
+      var(--poly-purple)
+  );
+}
+
+.pf-subscribe-card h2{
+  margin-top: .4rem;
+  margin-bottom: .3rem;
+  font-size: 1.6rem;
+  color: var(--poly-purple);
+  font-weight: 900;
+  letter-spacing: .2px;
+}
+
+.pf-subscribe-sub{
+  color:#4a4a4a;
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+}
+
+.pf-form{
+  display: grid;
+  gap: .9rem;
+}
+
+.pf-form-row label{
+  display:block;
+  font-weight:800;
+  color:#2B004D;
+  margin: 0 0 .35rem 0;
+}
+
+.pf-form-row input[type="text"],
+.pf-form-row input[type="email"]{
+  width:100%;
+  padding:.75rem .9rem;
+  border-radius:12px;
+  border:1.5px solid #e6e6ea;
+  background:#fafafc;
+  font-size:1rem;
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+
+.pf-form-row input:focus{
+  outline:none;
+  border-color: var(--poly-blue);
+  box-shadow: 0 0 0 3px rgba(0,159,227,.12);
+  background:#fff;
+}
+
+/* fieldset */
+.pf-fieldset{
+  border:1.5px dashed rgba(52,12,70,0.25);
+  padding:.9rem;
+  border-radius:12px;
+  background:#fcfbff;
+}
+.pf-fieldset legend{
+  font-weight:900;
+  color: var(--poly-purple);
+  padding:0 .4rem;
+}
+
+/* checkbox style */
+.pf-checkbox{
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  margin:.45rem 0;
+  font-size: .98rem;
+  color:#222;
+}
+.pf-checkbox input{
+  width: 18px;
+  height: 18px;
+  accent-color: var(--poly-magenta);
+}
+
+.pf-consent{
+  margin-top:.2rem;
+  padding-top:.6rem;
+  border-top:1px solid #eee;
+  font-size:.95rem;
+}
+
+/* actions */
+.pf-form-actions{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  margin-top:.2rem;
+}
+
+.pf-subscribe-btn{
+  background: var(--poly-magenta);
+  color:#fff;
+  font-weight:900;
+}
+
+.pf-subscribe-status{
+  font-size:.95rem;
+  font-weight:700;
+  color:#2B004D;
+}
+
+/* mobile */
+@media (max-width: 600px){
+  .pf-subscribe-card{
+    padding: 1.2rem;
+    border-radius: 14px;
+  }
+  .pf-subscribe-card h2{
+    font-size: 1.4rem;
+  }
+  .pf-form-actions{
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
