@@ -616,43 +616,36 @@ Whether you draw, embroider, paint or tricot, this meet up is for you. All kinds
     <!-- =======================
      PolyFest Mailing List
 ======================== -->
-<section class="pf-subscribe" id="mailing-list">
-  <div class="pf-subscribe-card">
-    <h2>Join our mailing list</h2>
-    <p class="pf-subscribe-sub">
-      We are SUPER-DUPER careful with your data and we do NOT spam you with anything but our events.
-    </p>
+<section class="subscribe">
+  <h2>Join our mailing list</h2>
+  <p>We are SUPER-DUPER careful with your data and we do NOT spam you with anything but our Events</p>
 
-    <form id="pf-subscribe-form"
-          action="https://formspree.io/f/xblbvagz
-          method="POST"
-          class="pf-form">
+  <form action="https://formspree.io/f/xblbvagz" method="POST">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required>
+    </div>
 
-      <div class="pf-form-row">
-        <label for="pf-name">Name</label>
-        <input id="pf-name" name="name" type="text" required>
-      </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required>
+    </div>
 
-      <div class="pf-form-row">
-        <label for="pf-email">Email</label>
-        <input id="pf-email" name="email" type="email" required>
-      </div>
+    <fieldset class="form-group">
+      <legend>Interests</legend>
+      <label class="checkbox"><input type="checkbox" name="interests" value="IRL" checked> IRL Events</label>
+      <label class="checkbox"><input type="checkbox" name="interests" value="Online" checked> Online Events</label>
+    </fieldset>
 
-      <input type="hidden" name="_subject" value="PolyFest newsletter signup">
+    <input type="hidden" name="_subject" value="PSD newsletter signup">
 
-      <label class="pf-checkbox pf-consent">
-        <input type="checkbox" required>
-        I agree to receive emails from PolyFest / PSD and understand I can unsubscribe anytime.
-      </label>
+    <label class="checkbox" style="display:block;margin:.5rem 0 1rem;">
+      <input type="checkbox" required>
+      I agree to receive emails from PSD and understand I can unsubscribe anytime.
+    </label>
 
-      <div class="pf-form-actions">
-        <button type="submit" class="btn btn-primary pf-subscribe-btn">
-          Subscribe
-        </button>
-        <span id="pf-subscribe-status" class="pf-subscribe-status" aria-live="polite"></span>
-      </div>
-    </form>
-  </div>
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </form>
 </section>
 
  
