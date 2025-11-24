@@ -1465,3 +1465,67 @@ details summary {
     gap: 10px;
   }
 }
+
+/* ===========================
+   PolyFest Subscribe Box
+=========================== */
+
+.subscribe-box {
+  max-width: 650px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #f8f2ff;               /* soft poly-lavender background */
+  border-radius: 18px;
+  border: 3px solid var(--poly-gold);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+.subscribe-box h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.subscribe-box p {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #4a2c82;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.subscribe-box .form-group {
+  margin-bottom: 1rem;
+}
+
+.subscribe-box label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: .3rem;
+}
+
+.subscribe-box input[type="text"],
+.subscribe-box input[type="email"] {
+  width: 100%;
+  padding: .6rem .8rem;
+  border-radius: 10px;
+  border: 2px solid #c7b8e6;
+  background: #fff;
+  font-size: 1rem;
+}
+
+.subscribe-box input[type="text"]:focus,
+.subscribe-box input[type="email"]:focus {
+  border-color: var(--poly-magenta);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.15);
+}
+
+.subscribe-box button {
+  margin-top: 1rem;
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 0.9rem;
+  border-radius: 12px;
+}
+
