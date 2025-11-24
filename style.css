@@ -1368,3 +1368,100 @@ details summary {
     align-items: stretch;
   }
 }
+
+
+/* =======================
+   PolyFest Gallery
+======================= */
+
+.pf-gallery {
+  margin: 2.5rem 0;
+}
+
+.pf-gallery-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--poly-purple);
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+/* Responsive masonry-ish grid */
+.pf-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-auto-rows: 10px;              /* base row height for masonry */
+  grid-auto-flow: dense;
+  gap: 12px;
+}
+
+/* Each tile */
+.pf-gallery-item {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  cursor: zoom-in;
+}
+
+/* Image itself */
+.pf-gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  transition: transform 0.25s ease;
+}
+
+/* Hover zoom */
+.pf-gallery-item:hover img {
+  transform: scale(1.03);
+}
+
+/* Lightbox overlay */
+.pf-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;                    /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 2rem;
+}
+
+.pf-lightbox.open {
+  display: flex;
+}
+
+.pf-lightbox-img {
+  max-width: 95vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+  cursor: zoom-out;
+}
+
+.pf-lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 2rem;
+  background: transparent;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+/* Mobile tweaks */
+@media (max-width: 520px) {
+  .pf-gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+}

@@ -37,8 +37,60 @@ Thank you for your patience, cooperation and understanding 🙏<br>
 Your PolyFest Team
 
  </p>
-    </section>
-<div class="buttons-row">
+
+
+   </section>
+
+   <!-- =======================
+     PolyFest Mailing List
+======================== -->
+<section class="subscribe">
+  <h2>Join our mailing list</h2>
+  <p>We are SUPER-DUPER careful with your data and we do NOT spam you with anything but our Events</p>
+
+  <form action="https://formspree.io/f/xblbvagz" method="POST">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required>
+    </div>
+
+    <input type="hidden" name="_subject" value="PSD newsletter signup">
+
+    <label class="checkbox" style="display:block;margin:.5rem 0 1rem;">
+      <input type="checkbox" required>
+      I agree to receive emails from PSD and understand I can unsubscribe anytime.
+    </label>
+
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </form>
+</section>
+
+
+<!-- =======================
+     PolyFest Photo Gallery
+======================= -->
+<section class="pf-gallery" aria-label="PolyFest gallery">
+  <h2 class="pf-gallery-title">Gallery</h2>
+
+  <!-- JS will inject 32 images here -->
+  <div class="pf-gallery-grid" id="pf-gallery"></div>
+</section>
+
+<!-- Lightbox -->
+<div class="pf-lightbox" id="pf-lightbox" aria-modal="true" role="dialog">
+  <button class="pf-lightbox-close" id="pf-lightbox-close" aria-label="Close">×</button>
+  <img class="pf-lightbox-img" id="pf-lightbox-img" alt="">
+</div>
+
+
+
+
+   <div class="buttons-row">
 
   <!-- LEFT: SOLD OUT -->
   <a
@@ -613,34 +665,7 @@ Whether you draw, embroider, paint or tricot, this meet up is for you. All kinds
       </article>
     </section>
 
-    <!-- =======================
-     PolyFest Mailing List
-======================== -->
-<section class="subscribe">
-  <h2>Join our mailing list</h2>
-  <p>We are SUPER-DUPER careful with your data and we do NOT spam you with anything but our Events</p>
-
-  <form action="https://formspree.io/f/xblbvagz" method="POST">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" required>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" required>
-    </div>
-
-    <input type="hidden" name="_subject" value="PSD newsletter signup">
-
-    <label class="checkbox" style="display:block;margin:.5rem 0 1rem;">
-      <input type="checkbox" required>
-      I agree to receive emails from PSD and understand I can unsubscribe anytime.
-    </label>
-
-    <button type="submit" class="btn btn-primary">Subscribe</button>
-  </form>
-</section>
+    
 
  
     <section class="deadlines">
@@ -652,9 +677,10 @@ Whether you draw, embroider, paint or tricot, this meet up is for you. All kinds
   <custom-footer></custom-footer>
 
   <!-- Bust cache when you update workshops.js -->
-  <script src="workshops.js?v=pf2"></script>
+   <script src="gallery.js"></script>
+   <script src="workshops.js?v=pf2"></script>
    <script src="about-polyfest.js"></script>
-<script src="subscribe.js"></script>
+   <script src="subscribe.js"></script>
 
 </body>
 </html>
