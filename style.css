@@ -1529,3 +1529,8 @@ details summary {
   border-radius: 12px;
 }
 
+/* Better swipe/zoom experience */
+.pf-lightbox-img {
+  touch-action: pan-y; /* allow vertical scroll but keep horizontal swipe */
+}
+
