@@ -14,6 +14,33 @@
 <body>
   <custom-header></custom-header>
 
+  <!-- ===== Page Nav / TOC ===== -->
+<nav class="pf-page-nav" aria-label="Page sections">
+  <h3 class="pf-page-nav__title">On this page</h3>
+  <ul class="pf-page-nav__list" id="pf-page-nav-list">
+    <!-- filled by JS -->
+  </ul>
+</nav>
+
+<!-- Mobile floating button -->
+<button class="pf-nav-fab" id="pf-nav-fab" aria-haspopup="dialog" aria-controls="pf-nav-sheet">
+  Sections
+</button>
+
+<!-- Mobile bottom sheet -->
+<div class="pf-nav-sheet" id="pf-nav-sheet" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="pf-nav-sheet__inner">
+    <div class="pf-nav-sheet__header">
+      <strong>Jump to section</strong>
+      <button class="pf-nav-sheet__close" id="pf-nav-sheet-close" aria-label="Close">✕</button>
+    </div>
+    <ul class="pf-nav-sheet__list" id="pf-nav-sheet-list">
+      <!-- filled by JS -->
+    </ul>
+  </div>
+</div>
+
+
   <main class="container">
     <div class="date-badge">22 NOV 2025</div>
     <h1>Poly Fest Berlin</h1>
@@ -692,6 +719,100 @@ Whether you draw, embroider, paint or tricot, this meet up is for you. All kinds
    <script src="workshops.js?v=pf2"></script>
    <script src="about-polyfest.js"></script>
    <script src="subscribe.js"></script>
+
+   <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // === Define your sections here ===
+  // Add/remove IDs + labels to match your page.
+  const SECTIONS = [
+    { id: "pf-schedule-day", label: "Workshops Schedule" },
+    { id: "pf-info-table", label: "Chill Zone & Game" },
+    { id: "pf-party", label: "Poly Party" },
+    { id: "workshops-browser", label: "Workshop Info" },
+    { id: "pf-gallery", label: "Gallery" },
+    { id: "subscribe", label: "Mailing List" },
+    { id: "about-us", label: "About Us" }
+  ];
+
+  const desktopList = document.getElementById("pf-page-nav-list");
+  const sheetList = document.getElementById("pf-nav-sheet-list");
+
+  function buildLinks(listEl) {
+    listEl.innerHTML = "";
+    SECTIONS.forEach(s => {
+      const target = document.getElementById(s.id);
+      if (!target) return; // skip missing
+
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="#${s.id}" data-id="${s.id}">${s.label}</a>`;
+      listEl.appendChild(li);
+    });
+  }
+
+  if (desktopList) buildLinks(desktopList);
+  if (sheetList) buildLinks(sheetList);
+
+  // Smooth scroll + close sheet
+  document.body.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+
+    const id = a.getAttribute("href").slice(1);
+    if (!SECTIONS.some(s => s.id === id)) return;
+
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // Close mobile sheet if open
+    sheet.classList.remove("open");
+    sheet.setAttribute("aria-hidden", "true");
+  });
+
+  // Scrollspy
+  const links = () => Array.from(document.querySelectorAll(".pf-page-nav__list a"));
+  const observers = [];
+
+  SECTIONS.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (!el) return;
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links().forEach(l => l.classList.toggle("is-active", l.dataset.id === s.id));
+        }
+      });
+    }, { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 });
+
+    obs.observe(el);
+    observers.push(obs);
+  });
+
+  // Mobile sheet toggle
+  const fab = document.getElementById("pf-nav-fab");
+  const sheet = document.getElementById("pf-nav-sheet");
+  const closeBtn = document.getElementById("pf-nav-sheet-close");
+
+  fab?.addEventListener("click", () => {
+    sheet.classList.add("open");
+    sheet.setAttribute("aria-hidden", "false");
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    sheet.classList.remove("open");
+    sheet.setAttribute("aria-hidden", "true");
+  });
+
+  // Tap outside closes
+  sheet?.addEventListener("click", (e) => {
+    if (e.target === sheet) {
+      sheet.classList.remove("open");
+      sheet.setAttribute("aria-hidden", "true");
+    }
+  });
+});
+</script>
+
 
 </body>
 </html>

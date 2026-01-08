@@ -1534,3 +1534,274 @@ details summary {
   touch-action: pan-y; /* allow vertical scroll but keep horizontal swipe */
 }
 
+/* ===========================
+   PolyFest Page Nav (Desktop)
+=========================== */
+.pf-page-nav {
+  position: fixed;
+  right: 18px;
+  top: 120px;
+  width: 210px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: .9rem .9rem .7rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  z-index: 900;
+  font-size: .95rem;
+}
+
+.pf-page-nav__title {
+  margin: 0 0 .5rem 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #2B004D;
+}
+
+.pf-page-nav__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.pf-page-nav__list a {
+  text-decoration: none;
+  color: #333;
+  padding: 6px 8px;
+  border-radius: 8px;
+  display: block;
+  line-height: 1.25;
+}
+
+.pf-page-nav__list a:hover {
+  background: #f7f2ff;
+}
+
+.pf-page-nav__list a.is-active {
+  font-weight: 800;
+  color: var(--poly-magenta);
+  background: #fff3f8;
+  border-left: 4px solid var(--poly-magenta);
+}
+
+/* Hide desktop nav on small screens */
+@media (max-width: 980px) {
+  .pf-page-nav { display: none; }
+}
+
+/* ===========================
+   Mobile floating nav button
+=========================== */
+.pf-nav-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  border: 0;
+  padding: .8rem 1rem;
+  border-radius: 9999px;
+  font-weight: 800;
+  background: var(--poly-gold);
+  color: #000;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 980px) {
+  .pf-nav-fab { display: inline-flex; }
+}
+
+/* ===========================
+   Mobile bottom sheet
+=========================== */
+.pf-nav-sheet {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: none;
+  z-index: 1100;
+}
+
+.pf-nav-sheet.open {
+  display: block;
+}
+
+.pf-nav-sheet__inner {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  padding: 1rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.pf-nav-sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+  font-size: 1.05rem;
+}
+
+.pf-nav-sheet__close {
+  border: 0;
+  background: transparent;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.pf-nav-sheet__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.pf-nav-sheet__list a {
+  display: block;
+  padding: .9rem;
+  border-radius: 10px;
+  background: #f7f7fb;
+  color: #111;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+
+/* ===== February Calendar (PolyFest style) ===== */
+.pf-cal{
+  margin: 2rem 0;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.06);
+  overflow: hidden;
+}
+
+.pf-cal__head{
+  padding: 1.1rem 1.2rem;
+  background: linear-gradient(90deg, var(--poly-purple), var(--poly-blue));
+  color: #fff;
+}
+.pf-cal__head h2{ margin: 0; font-weight: 900; letter-spacing: .5px; }
+.pf-cal__sub{ margin: .25rem 0 0; opacity: .9; }
+
+.pf-cal__grid{
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px;
+  background: #fff;
+}
+
+.pf-cal__dow{
+  text-align: center;
+  font-weight: 800;
+  font-size: .85rem;
+  color: #6b6b6b;
+  padding: 6px 0;
+}
+
+.pf-cal__cell{
+  min-height: 76px;
+  border-radius: 14px;
+  background: #F8F5FF;
+  border: 1px solid #eee;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+}
+.pf-cal__cell--blank{
+  background: #F2F3F7;
+  border-style: dashed;
+  opacity: .6;
+}
+
+.pf-cal__num{
+  font-weight: 900;
+  color: #2B004D;
+  font-size: .95rem;
+}
+
+.pf-cal__cell--event{
+  cursor: pointer;
+  background: linear-gradient(180deg, rgba(229,0,81,.10), rgba(0,159,227,.10));
+  border: 2px solid rgba(229,0,81,.35);
+  transition: transform .08s ease, box-shadow .2s ease;
+}
+.pf-cal__cell--event:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.08);
+}
+
+.pf-cal__badge{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--poly-gold);
+  color: #1a1200;
+  font-weight: 900;
+  font-size: .72rem;
+  padding: .15rem .45rem;
+  border-radius: 999px;
+}
+
+.pf-cal__label{
+  display: block;
+  margin-top: 8px;
+  font-weight: 800;
+  font-size: .8rem;
+  color: #3a2a55;
+  line-height: 1.15;
+}
+
+/* Details box below */
+.pf-eventbox{
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+.pf-eventbox__inner{
+  padding: 1rem 1.2rem 1.4rem;
+  max-width: 900px;
+}
+.pf-eventbox__title{ margin: .2rem 0 .4rem; font-weight: 900; color: #2B004D; }
+.pf-eventbox__hint{ margin: 0 0 1rem; color: #444; }
+
+.pf-details{
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: .65rem .8rem;
+  background: #FFF9F2;
+  margin-bottom: .75rem;
+}
+.pf-details summary{
+  cursor: pointer;
+  font-weight: 900;
+  color: #2B004D;
+}
+.pf-details__body{
+  padding: .7rem .2rem .2rem;
+  color: #333;
+}
+.pf-link-btn{
+  display: inline-block;
+  background: var(--poly-magenta);
+  color: #fff;
+  font-weight: 900;
+  text-decoration: none;
+  padding: .55rem .9rem;
+  border-radius: 999px;
+}
+.pf-link-btn:hover{ filter: brightness(0.95); }
+
+/* Mobile */
+@media (max-width: 600px){
+  .pf-cal__grid{ gap: 8px; }
+  .pf-cal__cell{ min-height: 64px; padding: 8px; }
+  .pf-cal__label{ display:none; } /* keep clean on small screens */
+}
