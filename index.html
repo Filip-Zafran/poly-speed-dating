@@ -1,35 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Poly Speed Dating (PSD)</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="style.css" />
   <script src="components/header.js"></script>
   <script src="components/footer.js"></script>
 </head>
+
 <body>
   <custom-header></custom-header>
-  <div class="hero">
-    <h1>Poly Speed Dating — Berlin & Online</h1>
-    <p>Meaningful connections in a polyamorous, LGBTQIA+ friendly space.</p>
-    <a href="/apply.html" class="btn btn-primary">Apply for Next Event</a>
-  </div>
 
-  <main class="container">
- 
+  <!-- HERO -->
+  <section class="hero home-hero">
+    <div class="home-hero__inner">
+      <h1>Poly Speed Dating — Berlin & Online</h1>
+      <p class="home-hero__sub">
+        Meaningful connections in a polyamorous, consent-first, friendly space.
+      </p>
+
+      <div class="home-hero__cta">
+        <a href="/apply.html" class="btn btn-apply">Apply for Next Event</a>
+        <a href="/faq.html" class="btn btn-ghost">Read the FAQ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <main class="container home-grid">
+    <!-- TEXT -->
     <section class="about-section">
-      <h2>What is PSD</h2>
-      <p>Poly Speed Dating (PSD) is a community event that brings polyamorous and poly-curious people together in Berlin and online. Our format creates space for meaningful conversations and potential matches in an atmosphere of warmth, respect, and inclusivity.</p>
-      <p>We celebrate diversity of relationship styles, identities, and preferences, and we honor each participant's boundaries and feelings.</p>
-      <p>Our goal: to make connecting fun, safe, and authentic.</p>
-<h3>Tired of Dating Apps > join one of our events and have an oportunity to present, not just the image of yourself, but also your character!</h3>
+     <h2 class="section-title">WHAT IS PSD?</h2>
 
+
+      <p class="lead">
+        Poly Speed Dating (PSD) is a community event that brings polyamorous and poly-curious people together
+        in Berlin and online. The format creates space for meaningful conversations and potential matches in
+        an atmosphere of warmth, respect, and inclusivity.
+      </p>
+
+      <ul class="big-points">
+        <li><b>Real conversations</b> instead of endless swiping</li>
+        <li><b>Consent-first</b> culture and clear boundaries</li>
+        <li><b>Inclusive</b> across identities & relationship styles</li>
+        <li><b>Warm community vibe</b> — fun, safe, authentic</li>
+      </ul>
+
+
+      <div class="highlight-box">
+        <h3>Tired of dating apps?</h3>
+        <p>
+          Join one of our events and get the chance to show not just the image of yourself —
+          but your character.
+        </p>
+        <a href="/apply.html" class="btn btn-apply btn-apply--small">Apply now</a>
+      </div>
+
+            <p class="fun-note">
+  PS: We also sometimes venture into organizing <b>monogamous dating</b> events —
+  because love comes in many formats, and we don’t want to exclude anyone 😉
+</p>
     </section>
 
-       <img src="images/home-promo-material.png" alt="Poly Speed Dating promo image" class="hero-image">
+    <!-- IMAGE -->
+    <aside class="home-media">
+      <img
+        src="images/home-promo-material.png"
+        alt="Poly Speed Dating promo"
+        class="hero-image home-image"
+      />
 
+
+    </aside>
   </main>
-<custom-footer></custom-footer>
+
+  <custom-footer></custom-footer>
 </body>
 </html>
