@@ -1,6 +1,7 @@
 class CustomHeader extends HTMLElement {
   connectedCallback() {
     this.attachShadow({ mode: 'open' });
+
     this.shadowRoot.innerHTML = `
       <style>
         :host {
@@ -39,16 +40,15 @@ class CustomHeader extends HTMLElement {
           position: relative;
           color: #FFF;
           text-decoration: none;
-          font-weight: 600;
+          font-weight: 700;
           padding-bottom: 4px;
           transition: color 0.2s ease;
         }
 
         .nav-link:hover {
-          color: #FFCC00; /* Poly yellow accent */
+          color: #FFCC00;
         }
 
-        /* Red-magenta underline for active link */
         .nav-link.active::after {
           content: "";
           position: absolute;
@@ -82,23 +82,28 @@ class CustomHeader extends HTMLElement {
         <a href="index.html" class="logo">
           <img src="images/logo.png" alt="PSD Logo">
         </a>
+
         <nav class="nav-links">
           <a href="index.html" class="nav-link">Home</a>
-          <a href="apply.html" class="nav-link">Apply</a>
-         <a href="/merch.html" class="nav-link">
-  Poly Merch <span id="cart-count"></span>
-</a>
+          <a href="calendar.html" class="nav-link">Calendar</a>
+          <a href="faq.html" class="nav-link">FAQ</a>
+
+          <a href="merch.html" class="nav-link">
+            Poly Merch <span id="cart-count"></span>
+          </a>
 
           <a href="polyfest.html" class="nav-link">Poly Fest</a>
-          <a href="qna.html" class="nav-link">Q&A</a>
           <a href="contact.html" class="nav-link">Contact</a>
         </nav>
       </div>
     `;
 
-    // Highlight the current page link
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    // Active link highlighting
+    const currentPath =
+      window.location.pathname.split('/').pop() || 'index.html';
+
     const links = this.shadowRoot.querySelectorAll('.nav-link');
+
     links.forEach(link => {
       const href = link.getAttribute('href');
       if (href === currentPath) {
