@@ -92,7 +92,7 @@ class CustomHeader extends HTMLElement {
             Poly Merch <span id="cart-count"></span>
           </a>
 
-          <a href="polyfest.html" class="nav-link">Poly Fest</a>
+          <a href="polyfest.html" class="nav-link">PolyFest</a>
           <a href="contact.html" class="nav-link">Contact</a>
         </nav>
       </div>

@@ -1913,3 +1913,113 @@ details summary {
   margin: 0 auto 1.6rem;
   text-align: center;
 }
+
+.venues-table {
+  width: 100%;
+  max-width: 900px;
+  margin: 1.5rem auto 0;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.venues-table th,
+.venues-table td {
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+}
+
+.venues-table thead th {
+  background: linear-gradient(90deg, var(--poly-purple), var(--poly-blue));
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.venues-table tbody tr:nth-child(even) {
+  background: #f8f6fc;
+}
+
+.venues-table a {
+  color: var(--poly-magenta);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.venues-table a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Sidebar buttons (Contact / Venues / Team) ===== */
+.ws-link {
+  display: block;
+  padding: .65rem .75rem;
+  border-radius: 12px;
+  text-decoration: none;
+  background: #f7f7fb;              /* light neutral */
+  border: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+/* Default hover */
+.ws-link:hover {
+  background: #ffffff;
+  border-color: var(--poly-blue);
+  transform: translateY(-1px);
+}
+
+/* ACTIVE (currently selected) */
+.ws-link.is-active {
+  background: var(--poly-magenta);  /* strong contrast */
+  color: #ffffff;
+  border-color: var(--poly-magenta);
+  box-shadow: 0 6px 16px rgba(229,0,81,0.25);
+}
+
+/* Text inside active button */
+.ws-link.is-active .ws-title,
+.ws-link.is-active .ws-meta-mini {
+  color: #ffffff;
+}
+
+/* Optional: differentiate categories slightly */
+.contact-us .ws-link.is-active {
+  background: var(--poly-blue);
+  border-color: var(--poly-blue);
+}
+
+.venues .ws-link.is-active {
+  background: var(--poly-gold);
+  border-color: var(--poly-gold);
+  color: #1a1200;
+}
+
+.venues .ws-link.is-active .ws-title,
+.venues .ws-link.is-active .ws-meta-mini {
+  color: #1a1200;
+}
+
+.team .ws-link.is-active {
+  background: var(--poly-purple);
+  border-color: var(--poly-purple);
+}
+
+.team-detail {
+  text-align: center;
+}
+
+.team-avatar-round {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.team-role {
+  font-weight: 700;
+  color: var(--poly-magenta);
+  margin-bottom: 0.8rem;
+}

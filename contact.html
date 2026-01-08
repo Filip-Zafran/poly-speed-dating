@@ -1,78 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact - Poly Speed Dating (PSD)</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <script src="components/header.js"></script>
   <script src="components/footer.js"></script>
 </head>
+
 <body>
   <custom-header></custom-header>
 
   <main class="container">
     <h1>Contact PSD</h1>
 
-    <section class="contact-details">
-      <h2>Get in touch</h2>
-      <ul>
-        <li>Email: <a href="mailto:polyspeeddating@gmail.com">polyspeeddating@gmail.com</a></li>
-        <li>Instagram: "Coming soon"</li>
-        <li>Telegram group: "Coming soon"</li>
-      </ul>
+    <!-- =======================
+         CONTACT US
+    ======================== -->
+    <section class="contact-us">
+      <h2 class="pf-opening">Contact Us</h2>
+
+      <div class="workshops-wrap">
+        <aside class="workshops-sidebar">
+          <h2>Channels</h2>
+
+          <div class="ws-item">
+            <a class="ws-link is-active" href="#" data-contact="email">
+              <span class="ws-title">Email</span>
+              <span class="ws-meta-mini">Best for questions</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-contact="instagram">
+              <span class="ws-title">Instagram</span>
+              <span class="ws-meta-mini">Coming soon</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-contact="telegram">
+              <span class="ws-title">Telegram Group</span>
+              <span class="ws-meta-mini">Coming soon</span>
+            </a>
+          </div>
+        </aside>
+
+        <section class="ws-detail">
+          <div class="ws-detail-inner">
+            <h3 id="contactTitle">Email</h3>
+            <p id="contactBody">
+              Write us any time — we usually reply within a few days.
+            </p>
+
+            <a
+              id="contactCta"
+              class="pf-link-btn"
+              href="mailto:polyspeeddating@gmail.com"
+            >
+              polyspeeddating@gmail.com
+            </a>
+          </div>
+        </section>
+      </div>
     </section>
 
-    <section class="subscribe">
-      <h2>Join our mailing list</h2>
-      <p>We are SUPER-DUPER careful with your data and we do NOT spam you with anything but our Events</p>
-      
-   <form action="https://formspree.io/f/xnnoewka" method="POST">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input id="name" name="name" type="text" required>
-  </div>
+    <hr class="section-divider" />
 
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input id="email" name="email" type="email" required>
-  </div>
+    <!-- =======================
+         SUBSCRIBE (own section)
+    ======================== -->
+    <section class="subscribe-section">
+      <h2 class="pf-opening">Stay in the Loop</h2>
 
-  <fieldset class="form-group">
-    <legend>Interests</legend>
-    <label class="checkbox"><input type="checkbox" name="interests" value="IRL" checked> IRL Events</label>
-    <label class="checkbox"><input type="checkbox" name="interests" value="Online" checked> Online Events</label>
-  </fieldset>
+      <div class="workshops-wrap">
+        <aside class="workshops-sidebar">
+          <h2>Mailing List</h2>
+          <p class="ws-tip">
+            No spam. Only events. Ever.
+          </p>
+        </aside>
 
-  <!-- Optional: customize email subject -->
-  <input type="hidden" name="_subject" value="PSD newsletter signup">
+        <section class="ws-detail">
+          <div class="ws-detail-inner">
+            <p>
+              We are SUPER-DUPER careful with your data and only send updates
+              about PSD events.
+            </p>
 
-  <!-- Optional: redirect to your own thank-you page -->
-  <!-- <input type="hidden" name="_redirect" value="https://filip-zafran.github.io/psd-website/thanks.html"> -->
+            <form action="https://formspree.io/f/xnnoewka" method="POST">
+              <div class="form-group">
+                <label>Name</label>
+                <input name="name" type="text" required />
+              </div>
 
-  <label class="checkbox" style="display:block;margin:.5rem 0 1rem;">
-    <input type="checkbox" required>
-    I agree to receive emails from PSD and understand I can unsubscribe anytime.
-  </label>
+              <div class="form-group">
+                <label>Email</label>
+                <input name="email" type="email" required />
+              </div>
 
-  <button type="submit" class="btn btn-primary">Subscribe</button>
-</form>
+              <fieldset class="form-group">
+                <legend>Interests</legend>
+                <label class="checkbox">
+                  <input type="checkbox" name="interests" value="IRL" checked />
+                  IRL Events
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="interests" value="Online" checked />
+                  Online Events
+                </label>
+              </fieldset>
 
-     
+              <label class="checkbox" style="margin-bottom:1rem;">
+                <input type="checkbox" required />
+                I agree to receive emails from PSD and can unsubscribe anytime.
+              </label>
 
-      <p id="subscribe-success" style="display:none">Thanks for subscribing! We'll be in touch soon.</p>
-      <!-- Note: Replace with Mailchimp or Google Form later -->
+              <button type="submit" class="btn btn-primary">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
     </section>
 
-    <section class="map">
-      <h2>Our Venue: LoveLite Bar</h2>
-      <h3>Simplonstraße 38, 10245 Berlin</h3>
-      <img src="images/lovelite-logo.jpg" alt="LoveLite venue logo" class="venue-logo">
-     
+    <hr class="section-divider" />
+
+    <!-- =======================
+         OUR VENUES
+    ======================== -->
+    <section class="venues">
+      <h2 class="pf-opening">Our Venues</h2>
+
+      <div class="workshops-wrap">
+        <aside class="workshops-sidebar">
+          <h2>Locations</h2>
+
+          <div class="ws-item">
+            <a class="ws-link is-active" href="#" data-venue="lovelite">
+              <span class="ws-title">LoveLite Bar</span>
+              <span class="ws-meta-mini">10245 Berlin</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-venue="trashtelier">
+              <span class="ws-title">Trashtelier</span>
+              <span class="ws-meta-mini">12435 Berlin</span>
+            </a>
+          </div>
+        </aside>
+
+        <section class="ws-detail">
+          <div class="ws-detail-inner">
+            <h3 id="venueTitle">LoveLite Bar</h3>
+            <p id="venueBody">Simplonstraße 38, 10245 Berlin</p>
+
+            <a
+              id="venueCta"
+              class="pf-link-btn"
+              href="https://lovelit-hauke.jimdofree.com"
+              target="_blank"
+            >
+              Visit website
+            </a>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- =======================
+         OUR TEAM
+    ======================== -->
+    <section class="team">
+      <h2 class="pf-opening">Our Team</h2>
+
+      <div class="workshops-wrap">
+        <aside class="workshops-sidebar">
+          <h2>Team</h2>
+
+          <div class="ws-item">
+            <a class="ws-link is-active" href="#" data-team="ficho">
+              <span class="ws-title">Filip “Ficho” Zafran</span>
+              <span class="ws-meta-mini">Founder / Orga</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-team="sara">
+              <span class="ws-title">Sara</span>
+              <span class="ws-meta-mini">Orga</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-team="jay">
+              <span class="ws-title">Jay M.</span>
+              <span class="ws-meta-mini">Orga</span>
+            </a>
+          </div>
+        </aside>
+
+      <section class="ws-detail">
+  <div class="ws-detail-inner team-detail">
+
+    <img
+      id="teamImg"
+      src="images/presenters/ficho.jpg"
+      alt="Team member"
+      class="team-avatar-round"
+    />
+
+    <h3 id="teamName">Ficho</h3>
+    <p id="teamRole" class="team-role">moderator, organiser</p>
+
+    <p id="teamBio">
+      Opening up four years ago with his primary partner, Ficho (he/him)
+      quickly became poly at heart and deeply passionate about creating spaces
+      that celebrate connection, communication, and openness.
+    </p>
+
+  </div>
+</section>
+
+      </div>
     </section>
   </main>
 
   <custom-footer></custom-footer>
-  <script src="script.js"></script>
+
+  <!-- =======================
+       SWITCHER SCRIPT
+  ======================== -->
+  <script>
+    const CONTACT = {
+      email: {
+        title: 'Email',
+        body: 'Write us any time — we usually reply within a few days.',
+        cta: 'mailto:polyspeeddating@gmail.com'
+      },
+      instagram: {
+        title: 'Instagram',
+        body: 'Coming soon — follow us for updates and vibes.',
+        cta: '#'
+      },
+      telegram: {
+        title: 'Telegram Group',
+        body: 'Community chat coming soon.',
+        cta: '#'
+      }
+    };
+
+    const VENUES = {
+      lovelite: {
+        title: 'LoveLite Bar',
+        body: 'Simplonstraße 38, 10245 Berlin',
+        cta: 'https://lovelit-hauke.jimdofree.com'
+      },
+      trashtelier: {
+        title: 'Trashtelier',
+        body: 'Herkomerstraße 4, 12435 Berlin',
+        cta: 'https://www.trashtelier.de/'
+      }
+    };
+
+const TEAM = {
+  ficho: {
+    name: 'Ficho',
+    role: 'moderator, organiser',
+    bio: 'Opening up four years ago with his primary partner, Ficho (he/him) quickly became poly at heart and deeply passionate about creating spaces that celebrate connection, communication, and openness — from events like Poly Speed Dating, KiezBurn, and Poly Fest to Emotional Intelligence workshops and other community.',
+    img: 'images/presenters/ficho.jpg'
+  },
+  sara: {
+    name: 'Sarah',
+    role: 'moderator',
+    bio: 'Sarah (she/they) started exploring non-monogamy 10 years ago when she lived in Brooklyn and stumbled upon polyamorous Burners at a festival outside of NYC. She thought this would solve all her relationship problems. Of course it didn’t. But it also kind of did. Since then she’s been talking openly about mistakes, learning, and growth via her newsletter *monogamish*, Instagram (@monogamish_me), and her work as a systemic coach for individuals and couples.',
+    img: 'images/presenters/sarah.jpeg'
+  },
+  jay: {
+    name: 'Jay M.',
+    role: 'moderator, organiser',
+    bio: 'Jay (with Akela) is a community facilitator passionate about authentic connection, consent culture, and helping people meet face-to-face in playful, pressure-free ways.',
+    img: 'images/presenters/jay.jpg'
+  }
+};
+    
+function bindSwitcher(selector, data, titleId, bodyId, ctaId) {
+  document.querySelectorAll(selector).forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+
+      const key =
+        link.dataset.contact ||
+        link.dataset.venue ||
+        link.dataset.team;
+
+      const item = data[key];
+      if (!item) return;
+
+      // Title / Name
+      const titleEl = document.getElementById(titleId);
+      if (titleEl && (item.title || item.name)) {
+        titleEl.textContent = item.title || item.name;
+      }
+
+      // Body / Bio
+      const bodyEl = document.getElementById(bodyId);
+      if (bodyEl && (item.body || item.bio)) {
+        bodyEl.textContent = item.body || item.bio;
+      }
+
+      // CTA (Contact / Venue only)
+      if (ctaId && item.cta) {
+        const ctaEl = document.getElementById(ctaId);
+        if (ctaEl) {
+          ctaEl.href = item.cta;
+        }
+      }
+
+      // === TEAM-ONLY EXTENSIONS ===
+
+      // Team image (optional)
+      if (item.img) {
+        const imgEl = document.getElementById('teamImg');
+        if (imgEl) {
+          imgEl.src = item.img;
+          imgEl.alt = item.name || 'Team member';
+        }
+      }
+
+      // Team role (optional)
+      if (item.role) {
+        const roleEl = document.getElementById('teamRole');
+        if (roleEl) {
+          roleEl.textContent = item.role;
+        }
+      }
+
+      // === ACTIVE STATE ===
+      const group = link.closest('.workshops-sidebar');
+      if (group) {
+        group.querySelectorAll('.ws-link').forEach(a =>
+          a.classList.remove('is-active')
+        );
+      }
+
+      link.classList.add('is-active');
+    });
+  });
+}
+
+
+    bindSwitcher('[data-contact]', CONTACT, 'contactTitle', 'contactBody', 'contactCta');
+    bindSwitcher('[data-venue]', VENUES, 'venueTitle', 'venueBody', 'venueCta');
+    bindSwitcher('[data-team]', TEAM, 'teamName', 'teamBio');
+  </script>
 </body>
 </html>
