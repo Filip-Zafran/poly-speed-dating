@@ -11,134 +11,132 @@
 <body>
   <custom-header></custom-header>
 
-<section class="pf-cal" id="pf-feb-calendar">
-  <div class="pf-cal__head">
-    <h2>February 2026</h2>
-  </div>
-
-  <!-- Calendar grid -->
-  <div class="pf-cal__grid" role="grid" aria-label="February calendar">
-    <!-- DOW header -->
-    <div class="pf-cal__dow">Mon</div><div class="pf-cal__dow">Tue</div><div class="pf-cal__dow">Wed</div>
-    <div class="pf-cal__dow">Thu</div><div class="pf-cal__dow">Fri</div><div class="pf-cal__dow">Sat</div><div class="pf-cal__dow">Sun</div>
-
-    <!-- February layout (non-leap, starts on Sat): Mon..Sun -->
-    <!-- blanks for Mon–Fri -->
-    <div class="pf-cal__cell pf-cal__cell--blank"></div>
-    <div class="pf-cal__cell pf-cal__cell--blank"></div>
-    <div class="pf-cal__cell pf-cal__cell--blank"></div>
-    <div class="pf-cal__cell pf-cal__cell--blank"></div>
-    <div class="pf-cal__cell pf-cal__cell--blank"></div>
-
-    <!-- 1–2 -->
-    <div class="pf-cal__cell"><span class="pf-cal__num">1</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">2</span></div>
-
-    <!-- 3–9 -->
-    <div class="pf-cal__cell"><span class="pf-cal__num">3</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">5</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">6</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">7</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">8</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">9</span></div>
-
-    <!-- 10–16 (15 is event) -->
-    <div class="pf-cal__cell"><span class="pf-cal__num">10</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">11</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">12</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">13</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">14</span></div>
-
-    <button class="pf-cal__cell pf-cal__cell--event"
-            type="button"
-            data-event="online-mono"
-            aria-label="15.2 Berlin Online Speed Dating (Monogamous)">
-      <span class="pf-cal__num">15</span>
-      <span class="pf-cal__badge">Event</span>
-      <span class="pf-cal__label">Online Speed Dating <br> <i>(Monogamous)</i></span>
-    </button>
-
-    <div class="pf-cal__cell"><span class="pf-cal__num">16</span></div>
-
-    <!-- 17–23 (23 is event) -->
-    <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">20</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">22</span></div>
-
-    <button class="pf-cal__cell pf-cal__cell--event"
-            type="button"
-            data-event="berlin-psd"
-            aria-label="23.2 Berlin Poly Speed Dating">
-      <span class="pf-cal__num">23</span>
-      <span class="pf-cal__badge">Event</span>
-      <span class="pf-cal__label">Berlin Poly Speed Dating</span>
-    </button>
-
-    <!-- 24–28 -->
-    <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
-    <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
-  </div>
-
-  <!-- Details dropdown area -->
-  <div class="pf-eventbox" id="pf-eventbox" aria-live="polite">
-    <div class="pf-eventbox__inner">
-      <h3 class="pf-eventbox__title">Events in February</h3>
-      <p class="pf-eventbox__hint">
-        Click <strong>15.2</strong> or <strong>23.2</strong> in the calendar to see details and an application link.
-      </p>
-
-      <details class="pf-details" id="pf-details-online-mono">
-        <summary><strong>15.2</strong> — Berlin Online Speed Dating (Monogamous)</summary>
-        <div class="pf-details__body">
-          <p><strong>Format:</strong> Online / Video-based speed dating</p>
-          <p><strong>Audience:</strong> Monogamous dating</p>
-          <p><strong>What to expect:</strong> Short rounds, light icebreakers, and a friendly structure that helps you meet people beyond swiping.</p>
-          <p>
-            <a class="pf-link-btn" href="https://example.com/apply-online-mono" target="_blank" rel="noopener noreferrer">
-              Apply / Get a ticket
-            </a>
-          </p>
-        </div>
-      </details>
-
-      <details class="pf-details" id="pf-details-berlin-psd">
-        <summary><strong>23.2</strong> — Berlin PSD</summary>
-        <div class="pf-details__body">
-          <p><strong>Format:</strong> In-person event in Berlin</p>
-          <p><strong>Audience:</strong> Poly / ENM friendly</p>
-          <p><strong>What to expect:</strong> Structured speed dating rounds, time to mingle, and space to continue conversations after matching.</p>
-          <p>
-            <a class="pf-link-btn" href="https://example.com/apply-berlin-psd" target="_blank" rel="noopener noreferrer">
-              Apply / Get a ticket
-            </a>
-          </p>
-        </div>
-      </details>
-
+  <section class="pf-cal" id="pf-feb-calendar">
+    <div class="pf-cal__head">
+      <h2>February 2026</h2>
     </div>
-  </div>
-</section>
 
+    <!-- Calendar grid -->
+    <div class="pf-cal__grid" role="grid" aria-label="February calendar">
+      <!-- DOW header (Monday-first) -->
+      <div class="pf-cal__dow">Mon</div><div class="pf-cal__dow">Tue</div><div class="pf-cal__dow">Wed</div>
+      <div class="pf-cal__dow">Thu</div><div class="pf-cal__dow">Fri</div><div class="pf-cal__dow">Sat</div><div class="pf-cal__dow">Sun</div>
 
-<!-- <script>
-  window.PSD_EVENTS = [
-    { title: "Poly Fest Berlin @ LoveLite", date: "2025-11-22", color: "#FF7A00" }
-  ];
-</script>
+      <!-- February 2026 (non-leap) starts on Sunday -->
+      <!-- blanks for Mon–Sat -->
+      <div class="pf-cal__cell pf-cal__cell--blank"></div> <!-- Mon -->
+      <div class="pf-cal__cell pf-cal__cell--blank"></div> <!-- Tue -->
+      <div class="pf-cal__cell pf-cal__cell--blank"></div> <!-- Wed -->
+      <div class="pf-cal__cell pf-cal__cell--blank"></div> <!-- Thu -->
+      <div class="pf-cal__cell pf-cal__cell--blank"></div> <!-- Fri -->
+      <div class="pf-cal__cell pf-cal__cell--blank"></div> <!-- Sat -->
 
-<div id="calendar-root"></div>
-<script type="module" src="assets/calendar-widget.js"></script> -->
+      <!-- 1 (Sun) -->
+      <div class="pf-cal__cell"><span class="pf-cal__num">1</span></div>
 
+      <!-- 2–8 -->
+      <div class="pf-cal__cell"><span class="pf-cal__num">2</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">3</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">5</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">6</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">7</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">8</span></div>
 
-<script src="script.js"></script>
+      <!-- 9–15 (15 is event) -->
+      <div class="pf-cal__cell"><span class="pf-cal__num">9</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">10</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">11</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">12</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">13</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">14</span></div>
 
+      <button class="pf-cal__cell pf-cal__cell--event"
+              type="button"
+              data-event="online-mono"
+              aria-label="15.2 Berlin Online Speed Dating (Monogamous)">
+        <span class="pf-cal__num">15</span>
+        <span class="pf-cal__badge">Event</span>
+        <span class="pf-cal__label">Online Speed Dating <br> <i>(Monogamous)</i></span>
+      </button>
 
+      <!-- 16–22 -->
+      <div class="pf-cal__cell"><span class="pf-cal__num">16</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">20</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">22</span></div>
+
+      <!-- 23–28 (23 is event) -->
+      <button class="pf-cal__cell pf-cal__cell--event"
+              type="button"
+              data-event="berlin-psd"
+              aria-label="23.2 Berlin Poly Speed Dating">
+        <span class="pf-cal__num">23</span>
+        <span class="pf-cal__badge">Event</span>
+        <span class="pf-cal__label">Berlin Poly Speed Dating</span>
+      </button>
+
+      <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
+      <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
+    </div>
+
+    <!-- Details dropdown area -->
+    <div class="pf-eventbox" id="pf-eventbox" aria-live="polite">
+      <div class="pf-eventbox__inner">
+        <h3 class="pf-eventbox__title">Events in February</h3>
+        <p class="pf-eventbox__hint">
+          Click <strong>15.2</strong> or <strong>23.2</strong> in the calendar to see details and an application link.
+        </p>
+
+        <details class="pf-details" id="pf-details-online-mono">
+          <summary><strong>15.2</strong> — Berlin Online Speed Dating (Monogamous)</summary>
+          <div class="pf-details__body">
+            <p><strong>Format:</strong> Online / Video-based speed dating</p>
+            <p><strong>Audience:</strong> Monogamous dating</p>
+            <p><strong>What to expect:</strong> Short rounds, light icebreakers, and a friendly structure that helps you meet people beyond swiping.</p>
+            <p>
+              <a class="pf-link-btn" href="https://example.com/apply-online-mono" target="_blank" rel="noopener noreferrer">
+                Apply / Get a ticket
+              </a>
+            </p>
+          </div>
+        </details>
+
+        <details class="pf-details" id="pf-details-berlin-psd">
+          <summary><strong>23.2</strong> — Berlin PSD</summary>
+          <div class="pf-details__body">
+            <p><strong>Format:</strong> In-person event in Berlin</p>
+            <p><strong>Audience:</strong> Poly / ENM friendly</p>
+            <p><strong>What to expect:</strong> Structured speed dating rounds, time to mingle, and space to continue conversations after matching.</p>
+            <p>
+              <a class="pf-link-btn" href="https://example.com/apply-berlin-psd" target="_blank" rel="noopener noreferrer">
+                Apply / Get a ticket
+              </a>
+            </p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!--
+  <script>
+    window.PSD_EVENTS = [
+      { title: "Poly Fest Berlin @ LoveLite", date: "2025-11-22", color: "#FF7A00" }
+    ];
+  </script>
+
+  <div id="calendar-root"></div>
+  <script type="module" src="assets/calendar-widget.js"></script>
+  -->
+
+  <script src="script.js"></script>
 </body>
 </html>
