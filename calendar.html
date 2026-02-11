@@ -11,97 +11,25 @@
 <body>
   <custom-header></custom-header>
 
-  <!-- ================= FEBRUARY ================= -->
-  <section class="pf-cal" id="pf-feb-calendar">
-    <div class="pf-cal__head">
-      <h2>February 2026</h2>
-    </div>
 
-    <div class="pf-cal__grid" role="grid" aria-label="February calendar">
-      <div class="pf-cal__dow">Mon</div><div class="pf-cal__dow">Tue</div><div class="pf-cal__dow">Wed</div>
-      <div class="pf-cal__dow">Thu</div><div class="pf-cal__dow">Fri</div><div class="pf-cal__dow">Sat</div><div class="pf-cal__dow">Sun</div>
-
-      <!-- Feb 1 is Sunday -->
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-
-      <div class="pf-cal__cell"><span class="pf-cal__num">1</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">2</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">3</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">5</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">6</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">7</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">8</span></div>
-
-      <div class="pf-cal__cell"><span class="pf-cal__num">9</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">10</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">11</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">12</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">13</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">14</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">15</span></div>
-
-      <div class="pf-cal__cell"><span class="pf-cal__num">16</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">20</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
-
-      <!-- EVENT -->
-      <button class="pf-cal__cell pf-cal__cell--event"
-              type="button"
-              data-event="online-mono"
-              aria-label="22.2 Berlin Online Speed Dating (Monogamous)">
-        <span class="pf-cal__num">22</span>
-        <span class="pf-cal__badge">Event</span>
-        <span class="pf-cal__label">Online Speed Dating <br> <i>(Monogamous)</i></span>
-      </button>
-
-      <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
-    </div>
 
     <!-- Event Details -->
     <div class="pf-eventbox" id="pf-eventbox" aria-live="polite">
       <div class="pf-eventbox__inner">
         <h3 class="pf-eventbox__title">Events</h3>
-        <p class="pf-eventbox__hint">
-          Click <strong>22.2</strong> or <strong>2.3</strong> in the calendar to see details and an application link.
-        </p>
+  
+ <details class="pf-details" id="pf-details-berlin-psd" open>
+  <summary><strong>02.03.2026</strong> — Berlin Poly Speed Dating</summary>
+  <div class="pf-details__body">
+    <p><strong>Format:</strong> In-person event in Berlin</p>
+    <p><strong>Audience:</strong> Poly / ENM friendly</p>
+    <p><strong>What to expect:</strong> Structured speed dating rounds, mingling, and post-match hangout time.</p>
+    <p>
+      <a class="pf-link-btn" href="https://forms.gle/knszNXYbLNH3kGUi9" target="_blank">Apply / More info</a>
+    </p>
+  </div>
+</details>
 
-        <details class="pf-details" id="pf-details-online-mono">
-          <summary><strong>22.2</strong> — Berlin Online Speed Dating (Monogamous)</summary>
-          <div class="pf-details__body">
-            <p><strong>Format:</strong> Online / Video-based speed dating</p>
-            <p><strong>Audience:</strong> Monogamous dating</p>
-            <p><strong>What to expect:</strong> Short rounds, light icebreakers, and a friendly structure that helps you meet people beyond swiping.</p>
-            <p>
-              <a class="pf-link-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSd56-R6O45cARrwJ4OP2b-cjrpMVon4373QE8ta8fDZ8fkOew/viewform" target="_blank">Apply / Get a ticket</a>
-            </p>
-          </div>
-        </details>
-
-        <details class="pf-details" id="pf-details-berlin-psd">
-          <summary><strong>2.3</strong> — Berlin PSD</summary>
-          <div class="pf-details__body">
-            <p><strong>Format:</strong> In-person event in Berlin</p>
-            <p><strong>Audience:</strong> Poly / ENM friendly</p>
-            <p><strong>What to expect:</strong> Structured speed dating rounds, mingling, and post-match hangout time.</p>
-            <p>
-              <a class="pf-link-btn" href="https://forms.gle/knszNXYbLNH3kGUi9" target="_blank">Apply / Get a ticket</a>
-            </p>
-          </div>
-        </details>
       </div>
     </div>
   </section>
