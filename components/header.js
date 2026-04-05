@@ -83,18 +83,19 @@ class CustomHeader extends HTMLElement {
           <img src="images/logo.png" alt="PSD Logo">
         </a>
 
-        <nav class="nav-links">
-          <a href="index.html" class="nav-link">Home</a>
-          <a href="calendar.html" class="nav-link">Calendar</a>
-          <a href="faq.html" class="nav-link">FAQ</a>
+  <nav class="nav-links">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="calendar.html" class="nav-link">Calendar</a>
+  <a href="identity.html" class="nav-link">Identity</a>
+  <a href="faq.html" class="nav-link">FAQ</a>
 
-          <a href="merch.html" class="nav-link">
-            Poly Merch <span id="cart-count"></span>
-          </a>
+  <a href="merch.html" class="nav-link">
+    Poly Merch <span id="cart-count"></span>
+  </a>
 
-          <a href="polyfest.html" class="nav-link">PolyFest</a>
-          <a href="contact.html" class="nav-link">Contact</a>
-        </nav>
+
+  <a href="contact.html" class="nav-link">Contact</a>
+</nav>
       </div>
     `;
 
