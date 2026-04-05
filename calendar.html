@@ -7,95 +7,413 @@
   <link rel="stylesheet" href="style.css">
   <script src="components/header.js"></script>
   <script src="components/footer.js"></script>
+
+  <style>
+    .pf-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .pf-eventbox {
+      margin: 2rem auto 3rem;
+    }
+
+    .pf-eventbox__inner {
+      background: #fff;
+      border: 2px solid #111;
+      border-radius: 24px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .pf-eventbox__title {
+      margin: 0 0 1rem;
+      font-size: 1.6rem;
+      line-height: 1.2;
+    }
+
+    .pf-details {
+      border: 1px solid #ddd;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fafafa;
+    }
+
+    .pf-details summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.25rem;
+      font-size: 1.05rem;
+      background: #f2f2f2;
+    }
+
+    .pf-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .pf-details__body {
+      padding: 1rem 1.25rem 1.25rem;
+    }
+
+    .pf-link-btn {
+      display: inline-block;
+      padding: 0.8rem 1.2rem;
+      border-radius: 999px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .pf-link-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
+    }
+
+    .pf-cal {
+      margin: 0 0 3rem;
+    }
+
+    .pf-cal__head {
+      margin-bottom: 1rem;
+    }
+
+    .pf-cal__head h2 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    .pf-cal__grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .pf-cal__dow {
+      font-weight: 700;
+      text-align: center;
+      padding: 0.7rem 0.25rem;
+      background: #f2f2f2;
+      border-radius: 12px;
+    }
+
+    .pf-cal__cell,
+    .pf-cal__cell--blank {
+      min-height: 110px;
+      border-radius: 16px;
+      border: 1px solid #ddd;
+      background: #fff;
+      padding: 0.65rem;
+      position: relative;
+      text-align: left;
+    }
+
+    .pf-cal__cell--blank {
+      background: transparent;
+      border: none;
+    }
+
+    .pf-cal__cell {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    button.pf-cal__cell {
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button.pf-cal__cell:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .pf-cal__num {
+      font-weight: 800;
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .pf-cal__badge {
+      display: inline-block;
+      margin-top: 4px;
+      margin-bottom: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      border-radius: 999px;
+      background: #e53935;
+      color: #fff;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .pf-cal__label {
+      font-size: 0.9rem;
+      line-height: 1.25;
+      font-weight: 600;
+    }
+
+    .pf-cal__cell--event {
+      transform: scale(1.03);
+      border: 2px solid #e53935;
+    }
+
+    @media (max-width: 900px) {
+      .pf-cal__grid {
+        gap: 8px;
+      }
+
+      .pf-cal__cell,
+      .pf-cal__cell--blank {
+        min-height: 90px;
+        padding: 0.5rem;
+      }
+
+      .pf-cal__label {
+        font-size: 0.8rem;
+      }
+
+      .pf-cal__badge {
+        font-size: 11px;
+        padding: 4px 8px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .pf-page {
+        padding: 1rem 0.75rem 3rem;
+      }
+
+      .pf-cal__dow {
+        font-size: 0.8rem;
+        padding: 0.55rem 0.15rem;
+      }
+
+      .pf-cal__cell,
+      .pf-cal__cell--blank {
+        min-height: 78px;
+        padding: 0.4rem;
+        border-radius: 12px;
+      }
+
+      .pf-cal__num {
+        font-size: 0.92rem;
+      }
+
+      .pf-cal__label {
+        font-size: 0.72rem;
+        line-height: 1.15;
+      }
+
+      .pf-cal__badge {
+        font-size: 10px;
+        padding: 4px 7px;
+      }
+    }
+  </style>
 </head>
 <body>
   <custom-header></custom-header>
 
-
+  <main class="pf-page">
 
     <!-- Event Details -->
     <div class="pf-eventbox" id="pf-eventbox" aria-live="polite">
       <div class="pf-eventbox__inner">
         <h3 class="pf-eventbox__title">Events</h3>
-  
- <details class="pf-details" id="pf-details-berlin-psd" open>
-  <summary><strong>02.03.2026</strong> — Berlin Poly Speed Dating</summary>
-  <div class="pf-details__body">
-    <p><strong>Format:</strong> In-person event in Berlin</p>
-    <p><strong>Audience:</strong> Poly / ENM friendly</p>
-    <p><strong>What to expect:</strong> Structured speed dating rounds, mingling, and post-match hangout time.</p>
-    <p>
-      <a class="pf-link-btn" href="https://forms.gle/knszNXYbLNH3kGUi9" target="_blank">Apply / More info</a>
-    </p>
-  </div>
-</details>
 
+        <details class="pf-details" id="pf-details-berlin-psd" open>
+          <summary><strong>03.06.2026</strong> — Berlin Poly Speed Dating</summary>
+          <div class="pf-details__body">
+            <p><strong>Format:</strong> In-person event in Berlin</p>
+            <p><strong>Audience:</strong> Poly / ENM friendly</p>
+            <p><strong>Start time:</strong> 19:00</p>
+            <p><strong>Application deadline:</strong> 20.05.2026</p>
+            <p><strong>What to expect:</strong> Structured speed dating rounds, mingling, and post-match hangout time.</p>
+            <p>
+              <a class="pf-link-btn" href="https://forms.gle/knszNXYbLNH3kGUi9" target="_blank" rel="noopener noreferrer">Apply / More info</a>
+            </p>
+          </div>
+        </details>
       </div>
     </div>
-  </section>
 
-  <!-- ================= MARCH ================= -->
-  <section class="pf-cal" id="pf-mar-calendar">
-    <div class="pf-cal__head">
-      <h2>March 2026</h2>
-    </div>
+    <!-- ================= APRIL ================= -->
+    <section class="pf-cal" id="pf-apr-calendar">
+      <div class="pf-cal__head">
+        <h2>April 2026</h2>
+      </div>
 
-    <div class="pf-cal__grid" role="grid" aria-label="March calendar">
-      <div class="pf-cal__dow">Mon</div><div class="pf-cal__dow">Tue</div><div class="pf-cal__dow">Wed</div>
-      <div class="pf-cal__dow">Thu</div><div class="pf-cal__dow">Fri</div><div class="pf-cal__dow">Sat</div><div class="pf-cal__dow">Sun</div>
+      <div class="pf-cal__grid" role="grid" aria-label="April calendar">
+        <div class="pf-cal__dow">Mon</div><div class="pf-cal__dow">Tue</div><div class="pf-cal__dow">Wed</div>
+        <div class="pf-cal__dow">Thu</div><div class="pf-cal__dow">Fri</div><div class="pf-cal__dow">Sat</div><div class="pf-cal__dow">Sun</div>
 
-      <!-- March 1 is Sunday -->
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
-      <div class="pf-cal__cell pf-cal__cell--blank"></div>
+        <!-- April 1 is Wednesday -->
+        <div class="pf-cal__cell--blank"></div>
+        <div class="pf-cal__cell--blank"></div>
 
-      <div class="pf-cal__cell"><span class="pf-cal__num">1</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">1</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">2</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">3</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">5</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">6</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">7</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">8</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">9</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">10</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">11</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">12</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">13</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">14</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">15</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">16</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">20</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">22</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">29</span></div>
 
-      <!-- EVENT -->
-      <button class="pf-cal__cell pf-cal__cell--event"
-              type="button"
-              data-event="berlin-psd"
-              aria-label="2.3 Berlin Poly Speed Dating">
-        <span class="pf-cal__num">2</span>
-        <span class="pf-cal__badge">Event</span>
-        <span class="pf-cal__label">Berlin Poly Speed Dating</span>
-      </button>
+        <button class="pf-cal__cell pf-cal__cell--event"
+                type="button"
+                onclick="window.open('https://www.duckdatingapps.com/event.html?slug=blind-duck-dating-registry-deadline-april-2026', '_blank')"
+                aria-label="30.4 Blind Duck Dating second deadline">
+          <span class="pf-cal__num">30</span>
+         <span class="pf-cal__badge pf-cal__badge--deadline">Deadline</span>
+          <span class="pf-cal__label">Blind Duck Dating – 2nd deadline</span>
+        </button>
+      </div>
+    </section>
 
-      <div class="pf-cal__cell"><span class="pf-cal__num">3</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">5</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">6</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">7</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">8</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">9</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">10</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">11</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">12</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">13</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">14</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">15</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">16</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">20</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">22</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">29</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">30</span></div>
-      <div class="pf-cal__cell"><span class="pf-cal__num">31</span></div>
-    </div>
-  </section>
+    <!-- ================= MAY ================= -->
+    <section class="pf-cal" id="pf-may-calendar">
+      <div class="pf-cal__head">
+        <h2>May 2026</h2>
+      </div>
 
+      <div class="pf-cal__grid" role="grid" aria-label="May calendar">
+        <div class="pf-cal__dow">Mon</div><div class="pf-cal__dow">Tue</div><div class="pf-cal__dow">Wed</div>
+        <div class="pf-cal__dow">Thu</div><div class="pf-cal__dow">Fri</div><div class="pf-cal__dow">Sat</div><div class="pf-cal__dow">Sun</div>
+
+        <!-- May 1 is Friday -->
+        <div class="pf-cal__cell--blank"></div>
+        <div class="pf-cal__cell--blank"></div>
+        <div class="pf-cal__cell--blank"></div>
+        <div class="pf-cal__cell--blank"></div>
+
+        <div class="pf-cal__cell"><span class="pf-cal__num">1</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">2</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">3</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">5</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">6</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">7</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">8</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">9</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">10</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">11</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">12</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">13</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">14</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">15</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">16</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
+
+        <button class="pf-cal__cell pf-cal__cell--event"
+                type="button"
+                onclick="window.open('https://forms.gle/knszNXYbLNH3kGUi9', '_blank')"
+                aria-label="20.5 PSD application deadline">
+          <span class="pf-cal__num">20</span>
+<span class="pf-cal__badge pf-cal__badge--deadline">Deadline</span>
+          <span class="pf-cal__label">PSD application deadline</span>
+        </button>
+
+        <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">22</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">29</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">30</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">31</span></div>
+      </div>
+    </section>
+
+    <!-- ================= JUNE ================= -->
+    <section class="pf-cal" id="pf-jun-calendar">
+      <div class="pf-cal__head">
+        <h2>June 2026</h2>
+      </div>
+
+      <div class="pf-cal__grid" role="grid" aria-label="June calendar">
+        <div class="pf-cal__dow">Mon</div><div class="pf-cal__dow">Tue</div><div class="pf-cal__dow">Wed</div>
+        <div class="pf-cal__dow">Thu</div><div class="pf-cal__dow">Fri</div><div class="pf-cal__dow">Sat</div><div class="pf-cal__dow">Sun</div>
+
+        <!-- June 1 is Monday -->
+        <div class="pf-cal__cell"><span class="pf-cal__num">1</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">2</span></div>
+
+        <button class="pf-cal__cell pf-cal__cell--event"
+                type="button"
+                onclick="window.open('https://forms.gle/knszNXYbLNH3kGUi9', '_blank')"
+                aria-label="3.6 Berlin Poly Speed Dating at 19:00">
+          <span class="pf-cal__num">3</span>
+          <span class="pf-cal__badge">Event</span>
+          <span class="pf-cal__label">Berlin Poly Speed Dating<br>19:00</span>
+        </button>
+
+        <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">5</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">6</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">7</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">8</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">9</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">10</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">11</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">12</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">13</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">14</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">15</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">16</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">20</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">22</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">29</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">30</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <custom-footer></custom-footer>
   <script src="script.js"></script>
 </body>
 </html>
