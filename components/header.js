@@ -87,6 +87,7 @@ class CustomHeader extends HTMLElement {
   <a href="index.html" class="nav-link">Home</a>
   <a href="calendar.html" class="nav-link">Calendar</a>
   <a href="identity.html" class="nav-link">Identity</a>
+   <a href="polyfest.html" class="nav-link">PolyFest</a>
   <a href="faq.html" class="nav-link">FAQ</a>
 
   <a href="merch.html" class="nav-link">

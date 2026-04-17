@@ -1,0 +1,971 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply — Poly Speed Dating Berlin</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="components/header.js"></script>
+  <script src="components/footer.js"></script>
+
+  <style>
+    .apply-page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .apply-switch-group {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.apply-switch {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60px;
+}
+
+.apply-switch input[type="radio"] {
+  accent-color: var(--poly-magenta);
+}
+
+@media (max-width: 640px) {
+  .apply-switch-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+    .apply-shell {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(52, 12, 70, 0.08);
+      border-radius: 28px;
+      box-shadow: 0 18px 50px rgba(52, 12, 70, 0.12);
+      overflow: hidden;
+    }
+
+    .apply-hero {
+      background: linear-gradient(135deg, var(--poly-purple), var(--poly-blue));
+      color: #fff;
+      padding: 2rem 1.25rem 1.6rem;
+      text-align: center;
+    }
+
+    .apply-hero h1 {
+      margin: 0 0 0.45rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+    }
+
+    .apply-hero p {
+      margin: 0 auto;
+      max-width: 760px;
+      opacity: 0.96;
+      font-size: 1.05rem;
+    }
+
+    .apply-hero-meta {
+      margin-top: 1rem;
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .apply-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .apply-body {
+      padding: 1.25rem;
+    }
+
+    .apply-intro-card {
+      background: #fff9f2;
+      border: 1px solid rgba(252, 191, 0, 0.35);
+      border-radius: 24px;
+      padding: 1.25rem;
+      box-shadow: 0 8px 22px rgba(0,0,0,.05);
+      margin-bottom: 1.25rem;
+    }
+
+    .apply-intro-card h2 {
+      margin: 0 0 0.6rem;
+      color: var(--poly-purple);
+      font-size: 1.6rem;
+    }
+
+    .apply-intro-card p {
+      margin: 0.7rem 0;
+      color: #413752;
+    }
+
+    .apply-event-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .apply-event-item {
+      background: #fff;
+      border: 1px solid rgba(52, 12, 70, 0.1);
+      border-radius: 18px;
+      padding: 0.9rem 1rem;
+    }
+
+    .apply-event-item strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: var(--poly-purple);
+    }
+
+    .apply-warning {
+      margin-top: 1rem;
+      background: linear-gradient(90deg, #fff0f2, #fff7dc);
+      border: 2px solid var(--poly-magenta);
+      border-radius: 20px;
+      padding: 1rem 1.1rem;
+      box-shadow: 0 10px 24px rgba(229,0,81,0.08);
+    }
+
+    .apply-warning-title {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--poly-magenta);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .apply-warning p {
+      margin: 0;
+      font-weight: 800;
+      color: #5b2340;
+      line-height: 1.45;
+    }
+
+    .apply-contact-note {
+      margin-top: 1rem;
+      padding: 0.95rem 1rem;
+      border-radius: 18px;
+      background: rgba(0,159,227,0.1);
+      border-left: 5px solid var(--poly-blue);
+      color: #18405f;
+      font-weight: 600;
+    }
+
+    .apply-progress-wrap {
+      margin-bottom: 1.4rem;
+    }
+
+    .apply-progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .apply-step-text {
+      font-weight: 900;
+      color: var(--poly-purple);
+      font-size: 1rem;
+    }
+
+    .apply-step-label {
+      color: #6b5a7b;
+      font-weight: 700;
+    }
+
+    .apply-progress {
+      width: 100%;
+      height: 14px;
+      border-radius: 999px;
+      background: #efe8fb;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .apply-progress-bar {
+      height: 100%;
+      width: 33.333%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--poly-magenta), var(--poly-gold));
+      transition: width 0.25s ease;
+    }
+
+    .apply-card {
+      background: #fff;
+      border: 1px solid rgba(52,12,70,0.1);
+      border-radius: 24px;
+      padding: 1.2rem;
+      box-shadow: 0 10px 26px rgba(0,0,0,.05);
+    }
+
+    .apply-step {
+      display: none;
+    }
+
+    .apply-step.is-active {
+      display: block;
+    }
+
+    .apply-step h2 {
+      margin-top: 0;
+      margin-bottom: 0.35rem;
+      color: var(--poly-purple);
+      font-size: 1.7rem;
+    }
+
+    .apply-step-intro {
+      margin-top: 0;
+      margin-bottom: 1.1rem;
+      color: #5b5370;
+    }
+
+    .apply-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .apply-grid-1 {
+      grid-column: 1 / -1;
+    }
+
+    .apply-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .apply-field label,
+    .apply-legend {
+      font-weight: 800;
+      color: #2b004d;
+    }
+
+    .apply-help {
+      font-size: 0.92rem;
+      color: #6f6782;
+    }
+
+    .apply-required {
+      color: var(--poly-magenta);
+    }
+
+    .apply-input,
+    .apply-select,
+    .apply-textarea {
+      width: 100%;
+      border: 1.5px solid #ddd6ee;
+      background: #fcfbff;
+      color: var(--text);
+      border-radius: 16px;
+      padding: 0.85rem 0.95rem;
+      font: inherit;
+      transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .apply-input:focus,
+    .apply-select:focus,
+    .apply-textarea:focus {
+      outline: none;
+      border-color: var(--poly-blue);
+      box-shadow: 0 0 0 4px rgba(0, 159, 227, 0.12);
+      background: #fff;
+    }
+
+    .apply-textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .apply-radio-group,
+    .apply-check-group {
+      display: grid;
+      gap: 0.6rem;
+      margin-top: 0.3rem;
+    }
+
+    .apply-choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      background: #fcfbff;
+      border: 1.5px solid #e3daf3;
+      border-radius: 16px;
+      padding: 0.85rem 0.95rem;
+      transition: border-color .15s ease, transform .12s ease, background .15s ease;
+    }
+
+    .apply-choice:hover {
+      border-color: var(--poly-blue);
+      transform: translateY(-1px);
+      background: #fff;
+    }
+
+    .apply-choice input {
+      margin-top: 0.2rem;
+      accent-color: var(--poly-magenta);
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .apply-choice-text strong {
+      display: block;
+      color: #2b004d;
+      margin-bottom: 0.15rem;
+    }
+
+    .apply-choice-text small {
+      color: #6d637d;
+      line-height: 1.4;
+    }
+
+    .apply-box {
+      margin-top: 1rem;
+      background: #fff9f2;
+      border: 1px solid rgba(252, 191, 0, 0.45);
+      border-radius: 18px;
+      padding: 1rem;
+    }
+
+    .apply-box h3 {
+      margin: 0 0 0.4rem;
+      color: #4a2c00;
+    }
+
+    .apply-box p {
+      margin: 0.25rem 0 0;
+      color: #5b4c2a;
+    }
+
+    .apply-note {
+      margin-top: 0.85rem;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      background: rgba(0,159,227,0.12);
+      border-left: 4px solid var(--poly-blue);
+      color: #18405f;
+      font-weight: 600;
+    }
+
+    .apply-error,
+    .apply-success,
+    .apply-status {
+      margin-top: 1rem;
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      font-weight: 700;
+      display: none;
+    }
+
+    .apply-error.is-visible,
+    .apply-success.is-visible,
+    .apply-status.is-visible {
+      display: block;
+    }
+
+    .apply-error {
+      background: #fff1f1;
+      color: #8d1f1f;
+      border: 1px solid #f0b7b7;
+    }
+
+    .apply-success {
+      background: #eefcf3;
+      color: #14663c;
+      border: 1px solid #b7e5c7;
+    }
+
+    .apply-status {
+      background: #f3f8ff;
+      color: #1a4d7a;
+      border: 1px solid #c7ddf5;
+    }
+
+    .apply-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .apply-actions-right {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .apply-btn {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .apply-btn[disabled] {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .apply-summary {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 0.8rem;
+    }
+
+    .apply-summary-row {
+      background: #fcfbff;
+      border: 1px solid #e5dcf3;
+      border-radius: 16px;
+      padding: 0.85rem 0.95rem;
+    }
+
+    .apply-summary-row strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: var(--poly-purple);
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    .field-error {
+      color: #a11c1c;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: none;
+    }
+
+    .field-error.is-visible {
+      display: block;
+    }
+
+    .input-invalid {
+      border-color: #d43c3c !important;
+      box-shadow: 0 0 0 4px rgba(212,60,60,0.08) !important;
+      background: #fffafa !important;
+    }
+
+    @media (max-width: 760px) {
+      .apply-grid,
+      .apply-event-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .apply-body {
+        padding: 1rem;
+      }
+
+      .apply-hero {
+        padding: 1.6rem 1rem 1.3rem;
+      }
+
+      .apply-actions,
+      .apply-actions-right {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .apply-actions .btn,
+      .apply-actions-right .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <custom-header></custom-header>
+
+  <main class="apply-page">
+    <section class="apply-shell">
+      <header class="apply-hero">
+        <h1>Polyamorous Speed Dating Event</h1>
+        <p>
+          A polyamorous, LGBTQIA+ friendly speed dating event centered on warmth,
+          respect, inclusivity, and meaningful connection.
+        </p>
+
+        <div class="apply-hero-meta">
+          <span class="apply-pill" id="eventDisplayPill">Event: Poly Speed Dating Berlin</span>
+          <span class="apply-pill" id="slugDisplayPill">Slug: —</span>
+        </div>
+      </header>
+
+      <div class="apply-body">
+        <section class="apply-intro-card">
+          <h2>Welcome</h2>
+          <p>
+            Our primary aim is to create a space that encourages meaningful connections in
+            an atmosphere defined by warmth, respect, and inclusivity.
+          </p>
+          <p>
+            We recognize and celebrate the rich diversity that each participant brings —
+            cultural, relational, and personal — and we seek to honor each individual’s
+            identity, boundaries, and feelings.
+          </p>
+          <p>
+            The event is designed as a diverse dating space that focuses on polyamorous
+            relationship frameworks while making room for participants’ gender identities
+            and orientation preferences.
+          </p>
+
+          <div class="apply-event-grid">
+            <div class="apply-event-item">
+              <strong>When</strong>
+              Wed, 3 Jun 2026 · 19:00–23:00
+            </div>
+            <div class="apply-event-item">
+              <strong>Application deadline</strong>
+              20 May 2026
+            </div>
+            <div class="apply-event-item">
+              <strong>Where</strong>
+              Trashtelier · 12435 Berlin
+            </div>
+            <div class="apply-event-item">
+              <strong>Participation fee</strong>
+              9 EUR / 15 EUR · drinks included
+            </div>
+            <div class="apply-event-item">
+              <strong>Application status update by</strong>
+              24 May 2026
+            </div>
+            <div class="apply-event-item">
+              <strong>Contact</strong>
+              polyspeeddatingberlin@gmail.com
+            </div>
+          </div>
+
+          <div class="apply-warning">
+            <div class="apply-warning-title">Important</div>
+            <p>
+              Applying does <u>not</u> guarantee attendance. This form is an application,
+              not a final RSVP. We review applications carefully to create a balanced event.
+            </p>
+          </div>
+
+          <div class="apply-contact-note">
+            Cancellation policy: no refunds or spot transfers are possible. If you cannot
+            attend, please let us know as soon as possible — we aim for a well-balanced
+            event, and each person truly counts.
+          </div>
+        </section>
+
+        <div class="apply-progress-wrap">
+          <div class="apply-progress-top">
+            <div class="apply-step-text" id="stepText">Step 1/3</div>
+            <div class="apply-step-label" id="stepLabel">My info</div>
+          </div>
+          <div class="apply-progress" aria-hidden="true">
+            <div class="apply-progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <div class="apply-card">
+          <form id="psdApplyForm" novalidate>
+            <input type="hidden" name="event_name" id="eventNameHidden" />
+            <input type="hidden" name="event_slug" id="eventSlugHidden" />
+            <input type="hidden" name="source" id="sourceHidden" />
+            <input type="hidden" name="source_id" id="sourceIdHidden" />
+            <input type="hidden" name="utm_source" id="utmSourceHidden" />
+            <input type="hidden" name="utm_medium" id="utmMediumHidden" />
+            <input type="hidden" name="utm_campaign" id="utmCampaignHidden" />
+            <input type="hidden" name="ref" id="refHidden" />
+            <input type="hidden" name="landing_page_url" id="landingPageUrlHidden" />
+            <input type="hidden" name="user_agent" id="userAgentHidden" />
+            <input type="hidden" name="gender_identity" id="genderIdentityHidden" />
+            <input type="hidden" name="interested_in" id="interestedInHidden" />
+            <input type="hidden" name="application_meta" id="applicationMetaHidden" />
+
+            <section class="apply-step is-active" data-step="1">
+              <h2>My info</h2>
+              <p class="apply-step-intro">
+                Tell us a little about yourself so we can better understand who is applying.
+              </p>
+
+              <div class="apply-grid">
+                <div class="apply-field">
+                  <label for="nameOrNickname">Name or NickName <span class="apply-required">*</span></label>
+                  <input class="apply-input" type="text" id="nameOrNickname" name="name_or_nickname" maxlength="120" />
+                  <div class="field-error">Please add your name or nickname.</div>
+                </div>
+
+                <div class="apply-field">
+                  <label for="email">Email <span class="apply-required">*</span></label>
+                  <input class="apply-input" type="email" id="email" name="email" maxlength="160" />
+                  <div class="field-error">Please enter a valid email address.</div>
+                </div>
+
+                <div class="apply-field">
+                  <label for="ageRange">Age Range <span class="apply-required">*</span></label>
+                  <select class="apply-select" id="ageRange" name="age_range">
+                    <option value="">Please choose</option>
+                    <option>18–25</option>
+                    <option>22–30</option>
+                    <option>26–35</option>
+                    <option>32–40</option>
+                    <option>36–45</option>
+                    <option>42–50</option>
+                    <option>46–55</option>
+                    <option>52–60</option>
+                    <option>60+</option>
+                  </select>
+                  <div class="field-error">Please choose an age range.</div>
+                </div>
+
+                <div class="apply-field">
+                  <span class="apply-legend">Will Stay In Berlin Next 6 Months <span class="apply-required">*</span></span>
+                  <div class="apply-radio-group">
+                    <label class="apply-choice">
+                      <input type="radio" name="stay_in_berlin_next_6_months" value="Yes" />
+                      <span class="apply-choice-text"><strong>Yes</strong></span>
+                    </label>
+                    <label class="apply-choice">
+                      <input type="radio" name="stay_in_berlin_next_6_months" value="No" />
+                      <span class="apply-choice-text"><strong>No</strong></span>
+                    </label>
+                    <label class="apply-choice">
+                      <input type="radio" name="stay_in_berlin_next_6_months" value="Not sure yet" />
+                      <span class="apply-choice-text"><strong>Not sure yet</strong></span>
+                    </label>
+                  </div>
+                  <div class="field-error">Please choose one option.</div>
+                </div>
+
+                <div class="apply-field">
+                  <label for="genderPrimary">I identify as <span class="apply-required">*</span></label>
+                  <select class="apply-select" id="genderPrimary">
+                    <option value="">Please choose</option>
+                    <option value="Man">Man</option>
+                    <option value="Woman">Woman</option>
+                    <option value="Non-binary">Non-binary</option>
+                    <option value="Agender">Agender</option>
+                    <option value="Bigender">Bigender</option>
+                  </select>
+                  <div class="field-error">Please choose your identity.</div>
+                </div>
+
+            <div class="apply-field is-hidden" id="genderSecondaryWrap">
+  <span class="apply-legend">Additional identity detail</span>
+  <div class="apply-radio-group apply-switch-group">
+    <label class="apply-choice apply-switch">
+      <input type="radio" name="genderSecondary" value="Cis" />
+      <span class="apply-choice-text"><strong>Cis</strong></span>
+    </label>
+
+    <label class="apply-choice apply-switch">
+      <input type="radio" name="genderSecondary" value="Trans" />
+      <span class="apply-choice-text"><strong>Trans</strong></span>
+    </label>
+  </div>
+</div>
+
+                <div class="apply-field apply-grid-1">
+                  <span class="apply-legend">Interested in <span class="apply-required">*</span></span>
+
+                  <div class="apply-check-group">
+                    <label class="apply-choice">
+                      <input type="checkbox" class="interest-checkbox" value="All" id="interestAll" />
+                      <span class="apply-choice-text">
+                        <strong>All</strong>
+                        <small>All genders / identities</small>
+                      </span>
+                    </label>
+
+                    <label class="apply-choice">
+                      <input type="checkbox" class="interest-checkbox" value="Men" id="interestMen" />
+                      <span class="apply-choice-text"><strong>Men</strong></span>
+                    </label>
+
+               <div class="apply-field is-hidden" id="interestMenDetailWrap">
+  <span class="apply-legend">Men detail</span>
+  <div class="apply-radio-group apply-switch-group">
+    <label class="apply-choice apply-switch">
+      <input type="radio" name="interestMenDetail" value="Cis Men" />
+      <span class="apply-choice-text"><strong>Cis Men</strong></span>
+    </label>
+
+    <label class="apply-choice apply-switch">
+      <input type="radio" name="interestMenDetail" value="Trans Men" />
+      <span class="apply-choice-text"><strong>Trans Men</strong></span>
+    </label>
+  </div>
+</div>
+
+                    <label class="apply-choice">
+                      <input type="checkbox" class="interest-checkbox" value="Women" id="interestWomen" />
+                      <span class="apply-choice-text"><strong>Women</strong></span>
+                    </label>
+
+              <div class="apply-field is-hidden" id="interestWomenDetailWrap">
+  <span class="apply-legend">Women detail</span>
+  <div class="apply-radio-group apply-switch-group">
+    <label class="apply-choice apply-switch">
+      <input type="radio" name="interestWomenDetail" value="Cis Women" />
+      <span class="apply-choice-text"><strong>Cis Women</strong></span>
+    </label>
+
+    <label class="apply-choice apply-switch">
+      <input type="radio" name="interestWomenDetail" value="Trans Women" />
+      <span class="apply-choice-text"><strong>Trans Women</strong></span>
+    </label>
+  </div>
+</div>
+
+                    <label class="apply-choice">
+                      <input type="checkbox" class="interest-checkbox" value="Non-binary people" />
+                      <span class="apply-choice-text"><strong>Non-binary people</strong></span>
+                    </label>
+
+                    <label class="apply-choice">
+                      <input type="checkbox" class="interest-checkbox" value="Agender people" />
+                      <span class="apply-choice-text"><strong>Agender people</strong></span>
+                    </label>
+
+                    <label class="apply-choice">
+                      <input type="checkbox" class="interest-checkbox" value="Bigender people" />
+                      <span class="apply-choice-text"><strong>Bigender people</strong></span>
+                    </label>
+                  </div>
+
+                  <div class="field-error" id="interestedInError">Please choose at least one option.</div>
+                </div>
+              </div>
+            </section>
+
+            <section class="apply-step" data-step="2">
+              <h2>About me</h2>
+              <p class="apply-step-intro">
+                This helps us curate the event thoughtfully and understand your interest.
+              </p>
+
+              <div class="apply-grid">
+                <div class="apply-field apply-grid-1">
+                  <label for="aboutYourself">Tell us a bit about yourself. <span class="apply-required">*</span></label>
+                  <textarea class="apply-textarea" id="aboutYourself" name="about_yourself"></textarea>
+                  <div class="field-error">Please tell us a bit about yourself.</div>
+                </div>
+
+                <div class="apply-field apply-grid-1">
+                  <label for="whyInterested">Why are you interested in this event? <span class="apply-required">*</span></label>
+                  <textarea class="apply-textarea" id="whyInterested" name="why_interested"></textarea>
+                  <div class="field-error">Please tell us why you are interested.</div>
+                </div>
+
+                <div class="apply-field">
+                  <label for="referredByName">Referred By Name</label>
+                  <input class="apply-input" type="text" id="referredByName" name="referred_by_name" maxlength="120" />
+                </div>
+
+                <div class="apply-field">
+                  <label for="referredByEmail">Referred By Email</label>
+                  <input class="apply-input" type="email" id="referredByEmail" name="referred_by_email" maxlength="160" />
+                  <div class="field-error">Please enter a valid email address.</div>
+                </div>
+              </div>
+
+              <div class="apply-box">
+                <h3>I want to apply for</h3>
+
+                <div class="apply-radio-group">
+                  <label class="apply-choice">
+                    <input type="radio" name="application_type" value="Normal price (18 EUR)" />
+                    <span class="apply-choice-text">
+                      <strong>Normal price (18 EUR)</strong>
+                      <small>Standard ticket price.</small>
+                    </span>
+                  </label>
+
+                  <label class="apply-choice">
+                    <input type="radio" name="application_type" value="Low Budget / requires volunteering (9 EUR)" />
+                    <span class="apply-choice-text">
+                      <strong>Low Budget / requires volunteering (9 EUR)</strong>
+                      <small>For people who need a lower price point and can help on the event day.</small>
+                    </span>
+                  </label>
+
+                  <label class="apply-choice">
+                    <input type="radio" name="application_type" value="VIP support (25 EUR)" />
+                    <span class="apply-choice-text">
+                      <strong>VIP (25 EUR) — voluntary support</strong>
+                      <small>Support the project if you have a bit extra. No extra perks.</small>
+                    </span>
+                  </label>
+                </div>
+
+                <div class="field-error" id="applicationTypeError">Please choose one option.</div>
+
+                <div id="lowBudgetWrap" class="is-hidden">
+                  <div class="apply-note">
+                    We only have a limited number of low-budget spots. If selected, you will be notified.
+                    All shifts are on the day of the event.
+                  </div>
+
+                  <div class="apply-grid" style="margin-top: 1rem;">
+                    <div class="apply-field">
+                      <label for="volunteerShift1">Shift priority 1 <span class="apply-required">*</span></label>
+                      <select class="apply-select" id="volunteerShift1">
+                        <option value="">Please choose</option>
+                        <option value="SHIFT 1: buying snacks and drinks">SHIFT 1: buying snacks and drinks</option>
+                        <option value="SHIFT 2: coming earlier to set up">SHIFT 2: coming earlier to set up</option>
+                        <option value="SHIFT 3: stay and clean up afterwards">SHIFT 3: stay and clean up afterwards</option>
+                      </select>
+                      <div class="field-error">Please choose your first priority shift.</div>
+                    </div>
+
+                    <div class="apply-field">
+                      <label for="volunteerShift2">Shift priority 2 <span class="apply-required">*</span></label>
+                      <select class="apply-select" id="volunteerShift2">
+                        <option value="">Please choose</option>
+                        <option value="SHIFT 1: buying snacks and drinks">SHIFT 1: buying snacks and drinks</option>
+                        <option value="SHIFT 2: coming earlier to set up">SHIFT 2: coming earlier to set up</option>
+                        <option value="SHIFT 3: stay and clean up afterwards">SHIFT 3: stay and clean up afterwards</option>
+                      </select>
+                      <div class="field-error">Please choose your second priority shift.</div>
+                    </div>
+
+                    <div class="apply-field apply-grid-1">
+                      <label for="lowBudgetReason">Why are you applying for low budget, and why should you get it? <span class="apply-required">*</span></label>
+                      <textarea class="apply-textarea" id="lowBudgetReason"></textarea>
+                      <div class="field-error">Please add your low-budget explanation.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="vipWrap" class="is-hidden">
+                  <div class="apply-note">
+                    Cute duck disclaimer: VIP here means generous support, not special treatment.
+                    No secret powers, no fast lane, no extra selection advantage.
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="apply-step" data-step="3">
+              <h2>Final check</h2>
+              <p class="apply-step-intro">
+                Final consent, a few practical questions, and a last review before sending.
+              </p>
+
+              <div class="apply-grid">
+                <div class="apply-field">
+                  <span class="apply-legend">
+                    Have you already participated this particular Poly Speed Dating before (not a different one)?
+                    <span class="apply-required">*</span>
+                  </span>
+                  <div class="apply-radio-group">
+                    <label class="apply-choice">
+                      <input type="radio" name="participated_before" value="Yes" />
+                      <span class="apply-choice-text"><strong>Yes</strong></span>
+                    </label>
+                    <label class="apply-choice">
+                      <input type="radio" name="participated_before" value="No" />
+                      <span class="apply-choice-text"><strong>No</strong></span>
+                    </label>
+                  </div>
+                  <div class="field-error">Please choose one option.</div>
+                </div>
+
+                <div class="apply-field">
+                  <span class="apply-legend">
+                    Have you applied for this particular Poly Speed Dating before (not a different one)?
+                    <span class="apply-required">*</span>
+                  </span>
+                  <div class="apply-radio-group">
+                    <label class="apply-choice">
+                      <input type="radio" name="applied_before" value="Yes" />
+                      <span class="apply-choice-text"><strong>Yes</strong></span>
+                    </label>
+                    <label class="apply-choice">
+                      <input type="radio" name="applied_before" value="No" />
+                      <span class="apply-choice-text"><strong>No</strong></span>
+                    </label>
+                  </div>
+                  <div class="field-error">Please choose one option.</div>
+                </div>
+
+                <div class="apply-field apply-grid-1">
+                  <span class="apply-legend">
+                    Read and accept the Code of Conduct <span class="apply-required">*</span>
+                  </span>
+                  <label class="apply-choice">
+                    <input type="checkbox" id="codeOfConduct" name="code_of_conduct" value="Yes" />
+                    <span class="apply-choice-text">
+                      <strong>I have read and accept the Code of Conduct.</strong>
+                      <small>
+                        Please read it before submitting.
+                        <a href="https://www.duckdatingapps.com/code-of-conduct.html" target="_blank" rel="noopener noreferrer">Open Code of Conduct</a>
+                      </small>
+                    </span>
+                  </label>
+                  <div class="field-error">You need to accept the Code of Conduct.</div>
+                </div>
+
+                <div class="apply-field">
+                  <label for="secretWord">What's the secret word that you have found in the Code of Conduct? <span class="apply-required">*</span></label>
+                  <input class="apply-input" type="text" id="secretWord" name="secret_word" maxlength="120" />
+                  <div class="field-error">Please add the secret word.</div>
+                </div>
+
+                <div class="apply-field apply-grid-1">
+                  <label for="remarks">Remarks - anything else you would like us to know?</label>
+                  <textarea class="apply-textarea" id="remarks" name="remarks"></textarea>
+                </div>
+              </div>
+
+              <div class="apply-box">
+                <h3>Quick review</h3>
+                <div class="apply-summary" id="reviewSummary"></div>
+              </div>
+            </section>
+
+            <div class="apply-error" id="formError" role="alert"></div>
+            <div class="apply-status" id="formStatus" role="status"></div>
+            <div class="apply-success" id="formSuccess" role="status"></div>
+
+            <div class="apply-actions">
+              <button type="button" id="prevBtn" class="btn btn-ghost apply-btn is-hidden">Previous</button>
+
+              <div class="apply-actions-right">
+                <button type="button" id="nextBtn" class="btn btn-apply apply-btn">Next</button>
+                <button type="submit" id="submitBtn" class="btn btn-apply apply-btn is-hidden">Submit application</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <custom-footer></custom-footer>
+
+  <script>
+    window.PSD_APPS_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_APPS_SCRIPT_WEB_APP_URL_HERE";
+  </script>
+  <script src="js/apply-form.js"></script>
+</body>
+</html>
+```
+
+A small correction you may want in the text: you wrote `3nd Jun 2026` and `24th May 2025`. I changed that to **3 Jun 2026** and **24 May 2026** so it reads correctly and matches the event timeline.
