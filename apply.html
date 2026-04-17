@@ -21,6 +21,18 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.apply-box--full {
+  width: 100%;
+}
+
+.apply-box--full .apply-radio-group {
+  width: 100%;
+}
+
+.apply-box--full .apply-choice {
+  width: 100%;
+}
+
 .apply-switch {
   align-items: center;
   justify-content: center;
@@ -501,13 +513,10 @@
     <section class="apply-shell">
       <header class="apply-hero">
         <h1>Polyamorous Speed Dating Event</h1>
-        <p>
-          A polyamorous, LGBTQIA+ friendly speed dating event centered on warmth,
-          respect, inclusivity, and meaningful connection.
-        </p>
+     
 
         <div class="apply-hero-meta">
-          <span class="apply-pill" id="eventDisplayPill">Event: Poly Speed Dating Berlin</span>
+          <span class="apply-pill" id="eventDisplayPill">Hosted by: Duck Dating Apps</span>
           <span class="apply-pill" id="slugDisplayPill">Slug: —</span>
         </div>
       </header>
@@ -515,14 +524,9 @@
       <div class="apply-body">
         <section class="apply-intro-card">
           <h2>Welcome</h2>
+  
           <p>
-            Our primary aim is to create a space that encourages meaningful connections in
-            an atmosphere defined by warmth, respect, and inclusivity.
-          </p>
-          <p>
-            We recognize and celebrate the rich diversity that each participant brings —
-            cultural, relational, and personal — and we seek to honor each individual’s
-            identity, boundaries, and feelings.
+            The main goal is to that people have the oportunity to meet new people and interact with them in a safe space.
           </p>
           <p>
             The event is designed as a diverse dating space that focuses on polyamorous
@@ -548,7 +552,7 @@
               9 EUR / 15 EUR · drinks included
             </div>
             <div class="apply-event-item">
-              <strong>Application status update by</strong>
+              <strong>We will get back to you by:</strong>
               24 May 2026
             </div>
             <div class="apply-event-item">
@@ -559,15 +563,15 @@
 
           <div class="apply-warning">
             <div class="apply-warning-title">Important</div>
-            <p>
-              Applying does <u>not</u> guarantee attendance. This form is an application,
+            <p><b>
+              Applying does <u>NOT</u> guarantee attendance. This form is an application,
               not a final RSVP. We review applications carefully to create a balanced event.
-            </p>
+            </b></p>
           </div>
 
           <div class="apply-contact-note">
             Cancellation policy: no refunds or spot transfers are possible. If you cannot
-            attend, please let us know as soon as possible — we aim for a well-balanced
+            attend, please let us know as soon as possible, so we can invite someone else. We aim for a well-balanced
             event, and each person truly counts.
           </div>
         </section>
@@ -618,7 +622,7 @@
                 </div>
 
                 <div class="apply-field">
-                  <label for="ageRange">Age Range <span class="apply-required">*</span></label>
+                  <label for="ageRange">Tell us Roughly Your Age Range <span class="apply-required">*</span></label>
                   <select class="apply-select" id="ageRange" name="age_range">
                     <option value="">Please choose</option>
                     <option>18–25</option>
@@ -773,93 +777,145 @@
                   <div class="field-error">Please tell us why you are interested.</div>
                 </div>
 
-                <div class="apply-field">
-                  <label for="referredByName">Referred By Name</label>
-                  <input class="apply-input" type="text" id="referredByName" name="referred_by_name" maxlength="120" />
-                </div>
+      <div class="apply-field apply-grid-1">
+  <span class="apply-legend">Were you referred by someone?</span>
 
-                <div class="apply-field">
-                  <label for="referredByEmail">Referred By Email</label>
-                  <input class="apply-input" type="email" id="referredByEmail" name="referred_by_email" maxlength="160" />
-                  <div class="field-error">Please enter a valid email address.</div>
-                </div>
-              </div>
+  <div class="apply-radio-group apply-switch-group">
+    <label class="apply-choice apply-switch">
+      <input type="radio" name="was_referred" value="No" checked />
+      <span class="apply-choice-text">
+        <strong>No</strong>
+      </span>
+    </label>
 
-              <div class="apply-box">
-                <h3>I want to apply for</h3>
+    <label class="apply-choice apply-switch">
+      <input type="radio" name="was_referred" value="Yes" />
+      <span class="apply-choice-text">
+        <strong>Yes</strong>
+      </span>
+    </label>
+  </div>
 
-                <div class="apply-radio-group">
-                  <label class="apply-choice">
-                    <input type="radio" name="application_type" value="Normal price (18 EUR)" />
-                    <span class="apply-choice-text">
-                      <strong>Normal price (18 EUR)</strong>
-                      <small>Standard ticket price.</small>
-                    </span>
-                  </label>
+  <div class="apply-help" style="margin-top:0.4rem;">
+    Learn more about our referral rewards:
+    <a
+      href="https://www.polyspeeddating/refferal_program"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Referral Program
+    </a>
+  </div>
+</div>
 
-                  <label class="apply-choice">
-                    <input type="radio" name="application_type" value="Low Budget / requires volunteering (9 EUR)" />
-                    <span class="apply-choice-text">
-                      <strong>Low Budget / requires volunteering (9 EUR)</strong>
-                      <small>For people who need a lower price point and can help on the event day.</small>
-                    </span>
-                  </label>
+<div id="referredWrap" class="apply-grid apply-grid-1 is-hidden">
+  <div class="apply-field">
+    <label for="referredByName">Referred By Name</label>
+    <input
+      class="apply-input"
+      type="text"
+      id="referredByName"
+      name="referred_by_name"
+      maxlength="120"
+    />
+  </div>
 
-                  <label class="apply-choice">
-                    <input type="radio" name="application_type" value="VIP support (25 EUR)" />
-                    <span class="apply-choice-text">
-                      <strong>VIP (25 EUR) — voluntary support</strong>
-                      <small>Support the project if you have a bit extra. No extra perks.</small>
-                    </span>
-                  </label>
-                </div>
+  <div class="apply-field">
+    <label for="referredByEmail">Referred By Email</label>
+    <input
+      class="apply-input"
+      type="email"
+      id="referredByEmail"
+      name="referred_by_email"
+      maxlength="160"
+    />
+    <div class="field-error">Please enter a valid email address.</div>
+  </div>
+</div>
 
-                <div class="field-error" id="applicationTypeError">Please choose one option.</div>
+  
+<div class="apply-box">
+  <h3>I want to apply for</h3>
 
-                <div id="lowBudgetWrap" class="is-hidden">
-                  <div class="apply-note">
-                    We only have a limited number of low-budget spots. If selected, you will be notified.
-                    All shifts are on the day of the event.
-                  </div>
+  <div class="apply-radio-group">
+    <label class="apply-choice">
+      <input type="radio" name="application_type" value="Normal price (18 EUR)" />
+      <span class="apply-choice-text">
+        <strong>Normal price (18 EUR)</strong>
+        <small>Standard ticket price.</small>
+      </span>
+    </label>
 
-                  <div class="apply-grid" style="margin-top: 1rem;">
-                    <div class="apply-field">
-                      <label for="volunteerShift1">Shift priority 1 <span class="apply-required">*</span></label>
-                      <select class="apply-select" id="volunteerShift1">
-                        <option value="">Please choose</option>
-                        <option value="SHIFT 1: buying snacks and drinks">SHIFT 1: buying snacks and drinks</option>
-                        <option value="SHIFT 2: coming earlier to set up">SHIFT 2: coming earlier to set up</option>
-                        <option value="SHIFT 3: stay and clean up afterwards">SHIFT 3: stay and clean up afterwards</option>
-                      </select>
-                      <div class="field-error">Please choose your first priority shift.</div>
-                    </div>
+    <label class="apply-choice">
+      <input type="radio" name="application_type" value="Low Budget / requires volunteering (9 EUR)" />
+      <span class="apply-choice-text">
+        <strong>Low Budget / requires volunteering (9 EUR)</strong>
+        <small>For people who need a lower price point and can help on the day of the event by volounteering.</small>
+      </span>
+    </label>
 
-                    <div class="apply-field">
-                      <label for="volunteerShift2">Shift priority 2 <span class="apply-required">*</span></label>
-                      <select class="apply-select" id="volunteerShift2">
-                        <option value="">Please choose</option>
-                        <option value="SHIFT 1: buying snacks and drinks">SHIFT 1: buying snacks and drinks</option>
-                        <option value="SHIFT 2: coming earlier to set up">SHIFT 2: coming earlier to set up</option>
-                        <option value="SHIFT 3: stay and clean up afterwards">SHIFT 3: stay and clean up afterwards</option>
-                      </select>
-                      <div class="field-error">Please choose your second priority shift.</div>
-                    </div>
+    <label class="apply-choice">
+      <input type="radio" name="application_type" value="VIP support (25 EUR)" />
+      <span class="apply-choice-text">
+        <strong>VIP (25 EUR) — voluntary support</strong>
+        <small>Support the project if you have a bit extra. No extra perks.</small>
+      </span>
+    </label>
+  </div>
+<div class="field-error" id="applicationTypeError">Please choose one option.</div>
 
-                    <div class="apply-field apply-grid-1">
-                      <label for="lowBudgetReason">Why are you applying for low budget, and why should you get it? <span class="apply-required">*</span></label>
-                      <textarea class="apply-textarea" id="lowBudgetReason"></textarea>
-                      <div class="field-error">Please add your low-budget explanation.</div>
-                    </div>
-                  </div>
-                </div>
+<div id="lowBudgetWrap" class="is-hidden">
+  <div class="apply-note">
+    We only have a limited amount of low-budget spots. You will be notified if you get one.
+    <br>All shifts are on the day of the event.
+<br>You will only get 1 shift.  
+</div>
 
-                <div id="vipWrap" class="is-hidden">
-                  <div class="apply-note">
-                    Cute duck disclaimer: VIP here means generous support, not special treatment.
-                    No secret powers, no fast lane, no extra selection advantage.
-                  </div>
-                </div>
-              </div>
+  <div class="apply-grid" style="margin-top: 1rem;">
+    <div class="apply-field">
+      <label for="volunteerShift1">
+        Shift priority 1 <span class="apply-required">*</span>
+      </label>
+      <select class="apply-select" id="volunteerShift1">
+        <option value="">Please choose</option>
+        <option value="SHIFT 1: buying snacks and drinks">SHIFT 1: buying snacks and drinks</option>
+        <option value="SHIFT 2: coming earlier to set up">SHIFT 2: coming earlier to set up</option>
+        <option value="SHIFT 3: stay and clean up afterwards">SHIFT 3: stay and clean up afterwards</option>
+      </select>
+      <div class="field-error">Please choose your first priority shift.</div>
+    </div>
+
+    <div class="apply-field">
+      <label for="volunteerShift2">
+        Shift priority 2 <span class="apply-required">*</span>
+      </label>
+      <select class="apply-select" id="volunteerShift2">
+        <option value="">Please choose</option>
+        <option value="SHIFT 1: buying snacks and drinks">SHIFT 1: buying snacks and drinks</option>
+        <option value="SHIFT 2: coming earlier to set up">SHIFT 2: coming earlier to set up</option>
+        <option value="SHIFT 3: stay and clean up afterwards">SHIFT 3: stay and clean up afterwards</option>
+      </select>
+      <div class="field-error">Please choose your second priority shift.</div>
+    </div>
+
+    <div class="apply-field apply-grid-1">
+      <label for="lowBudgetReason">
+        Why are you applying for low budget, and why should you get it?
+        <span class="apply-required">*</span>
+      </label>
+      <textarea class="apply-textarea" id="lowBudgetReason"></textarea>
+      <div class="field-error">Please add your low-budget explanation.</div>
+    </div>
+  </div>
+</div>
+
+<div id="vipWrap" class="is-hidden">
+  <div class="apply-note">
+    Cute duck disclaimer: VIP here simply means extra support for the project.
+    It does not improve your chances and comes with no extra benefits.
+  </div>
+</div>
+
             </section>
 
             <section class="apply-step" data-step="3">

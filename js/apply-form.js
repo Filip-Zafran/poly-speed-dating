@@ -20,6 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const interestWomenDetailWrap = document.getElementById("interestWomenDetailWrap");
   const interestedInHidden = document.getElementById("interestedInHidden");
 
+  const referredWrap = document.getElementById("referredWrap");
+
+  const lowBudgetWrap = document.getElementById("lowBudgetWrap");
+  const vipWrap = document.getElementById("vipWrap");
+  const volunteerShift1 = document.getElementById("volunteerShift1");
+  const volunteerShift2 = document.getElementById("volunteerShift2");
+  const lowBudgetReason = document.getElementById("lowBudgetReason");
+
   function updateUI() {
     steps.forEach((step) => {
       const num = Number(step.dataset.step);
@@ -137,6 +145,46 @@ document.addEventListener("DOMContentLoaded", function () {
     interestedInHidden.value = selected.join(", ");
   }
 
+  function updateReferralField() {
+    const selected = document.querySelector('input[name="was_referred"]:checked');
+    if (!selected || !referredWrap) return;
+
+    const isYes = selected.value === "Yes";
+    referredWrap.classList.toggle("is-hidden", !isYes);
+
+    if (!isYes) {
+      const name = document.getElementById("referredByName");
+      const email = document.getElementById("referredByEmail");
+
+      if (name) name.value = "";
+      if (email) email.value = "";
+    }
+  }
+
+  function updateApplicationTypeField() {
+    const selected = getCheckedValue("application_type");
+
+    if (lowBudgetWrap) {
+      lowBudgetWrap.classList.toggle(
+        "is-hidden",
+        selected !== "Low Budget / requires volunteering (9 EUR)"
+      );
+    }
+
+    if (vipWrap) {
+      vipWrap.classList.toggle(
+        "is-hidden",
+        selected !== "VIP support (25 EUR)"
+      );
+    }
+
+    if (selected !== "Low Budget / requires volunteering (9 EUR)") {
+      if (volunteerShift1) volunteerShift1.value = "";
+      if (volunteerShift2) volunteerShift2.value = "";
+      if (lowBudgetReason) lowBudgetReason.value = "";
+    }
+  }
+
   if (nextBtn) {
     nextBtn.addEventListener("click", function () {
       if (currentStep < totalSteps) {
@@ -177,7 +225,17 @@ document.addEventListener("DOMContentLoaded", function () {
     input.addEventListener("change", syncInterestHiddenField);
   });
 
+  document.querySelectorAll('input[name="was_referred"]').forEach((input) => {
+    input.addEventListener("change", updateReferralField);
+  });
+
+  document.querySelectorAll('input[name="application_type"]').forEach((input) => {
+    input.addEventListener("change", updateApplicationTypeField);
+  });
+
   updateUI();
   updateGenderField();
   updateInterestField();
+  updateReferralField();
+  updateApplicationTypeField();
 });
