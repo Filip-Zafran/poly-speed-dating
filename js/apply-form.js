@@ -239,3 +239,42 @@ document.addEventListener("DOMContentLoaded", function () {
   updateReferralField();
   updateApplicationTypeField();
 });
+
+const form = document.getElementById("psdApplyForm");
+
+if (form) {
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    console.log("FORM SUBMIT STARTED");
+
+    const formData = new FormData(form);
+
+    // make sure hidden fields are up to date
+    if (typeof syncGenderHiddenField === "function") {
+      syncGenderHiddenField();
+    }
+
+    if (typeof syncInterestHiddenField === "function") {
+      syncInterestHiddenField();
+    }
+
+    try {
+      const response = await fetch(window.PSD_APPS_SCRIPT_URL, {
+        method: "POST",
+        body: formData
+      });
+
+      console.log("SUBMIT RESPONSE", response);
+
+      if (!response.ok) {
+        throw new Error("Request failed with status " + response.status);
+      }
+
+      alert("Application sent successfully!");
+    } catch (error) {
+      console.error("SUBMIT ERROR:", error);
+      alert("Submit failed.");
+    }
+  });
+}
