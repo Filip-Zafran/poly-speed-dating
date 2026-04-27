@@ -47,12 +47,12 @@ class CustomFooter extends HTMLElement {
       <div class="container">
         <div class="footer-links">
           <a
-            href="images/PSD-CoC.pdf"
+            href="images/PSD - CoC & Schedule.pdf"
             class="footer-link"
             target="_blank"
             rel="noopener"
           >
-            📄 Code of Conduct
+            📄 PSD CoC & schedule
           </a>
 
           <a href="privacy.html" class="footer-link">Privacy</a>
