@@ -80,7 +80,7 @@ class CustomHeader extends HTMLElement {
 
       <div class="container">
         <a href="index.html" class="logo">
-          <img src="images/logo.png" alt="PSD Logo">
+          <img src="images/PSD-logo.png" alt="PSD Logo">
         </a>
 
   <nav class="nav-links">
