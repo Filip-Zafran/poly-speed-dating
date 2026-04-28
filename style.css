@@ -1847,16 +1847,8 @@ img.placeholder {
   width: 88px;
   height: 88px;
   margin: 0 auto 18px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--poly-purple), var(--poly-blue));
-  color: var(--poly-white);
-  font-weight: 900;
-  font-size: 1.6rem;
-  letter-spacing: 0.08em;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  display: block;
+  object-fit: contain;
 }
 
 .linktree-top h1 {
@@ -2085,7 +2077,6 @@ img.placeholder {
   .linktree-logo {
     width: 76px;
     height: 76px;
-    font-size: 1.35rem;
   }
 
   .linktree-link {
