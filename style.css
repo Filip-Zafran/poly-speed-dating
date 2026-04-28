@@ -1844,8 +1844,8 @@ img.placeholder {
 }
 
 .linktree-logo {
-  width: 88px;
-  height: 88px;
+  width: 440px;
+  height: 440px;
   margin: 0 auto 18px;
   display: block;
   object-fit: contain;
@@ -2075,8 +2075,8 @@ img.placeholder {
   }
 
   .linktree-logo {
-    width: 76px;
-    height: 76px;
+    width: 380px;
+    height: 380px;
   }
 
   .linktree-link {
