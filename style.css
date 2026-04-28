@@ -1933,10 +1933,10 @@ img.placeholder {
 .linktree-link--highlight {
   background: linear-gradient(
     135deg,
-    rgba(252, 191, 0, 0.18),
-    rgba(255, 255, 255, 0.95)
+    #e0f2fe,
+    #bfdbfe
   );
-  border-color: rgba(252, 191, 0, 0.55);
+  border-color: rgba(0, 102, 255, 0.3);
 }
 
 .linktree-link--placeholder {

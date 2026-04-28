@@ -17,13 +17,15 @@
 
     .pf-eventbox {
       margin: 2rem auto 3rem;
+      max-width: 1200px;
+      padding: 0 1rem;
     }
 
     .pf-eventbox__inner {
       background: #fff;
       border: 2px solid #111;
       border-radius: 24px;
-      padding: 1.5rem;
+      padding: 1.5rem 0;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     }
 
@@ -31,6 +33,7 @@
       margin: 0 0 1rem;
       font-size: 1.6rem;
       line-height: 1.2;
+      padding: 0 1.5rem;
     }
 
     .pf-details {
@@ -70,6 +73,138 @@
     .pf-link-btn:hover {
       transform: translateY(-1px);
       opacity: 0.92;
+    }
+
+    .pf-events-grid {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      width: 100%;
+    }
+
+    .pf-event-tag {
+      flex: 1 1 0;
+      min-width: 0;
+      list-style: none;
+      border-radius: 20px;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pf-event-tag:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+    }
+
+    .pf-event-tag--psd {
+      border-left: 6px solid #7c3aed;
+    }
+
+    .pf-event-tag--psd .pf-event-tag__summary {
+      background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+    }
+
+    .pf-event-tag--bdd {
+      border-left: 6px solid #fbbf24;
+    }
+
+    .pf-event-tag--bdd .pf-event-tag__summary {
+      background: linear-gradient(135deg, #fef3c7, #fed7aa);
+    }
+
+    .pf-event-tag__summary {
+      cursor: pointer;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-weight: 700;
+      list-style: none;
+      user-select: none;
+    }
+
+    .pf-event-tag__summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .pf-event-tag__title {
+      font-size: 1.4rem;
+      color: #1f2937;
+    }
+
+    .pf-event-tag__date {
+      font-size: 0.9rem;
+      color: #6b7280;
+      font-weight: 600;
+    }
+
+    .pf-event-tag__badge {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      width: fit-content;
+      color: #1f2937;
+    }
+
+    .pf-event-tag__body {
+      padding: 1.5rem;
+      background: #fff;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .pf-event-tag__body p {
+      margin: 0.75rem 0;
+    }
+
+    .pf-audience-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1rem 0;
+    }
+
+    .pf-tag {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .pf-tag--poly {
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
+    }
+
+    .pf-tag--enm {
+      background: linear-gradient(135deg, #60a5fa, #0099ff);
+    }
+
+    .pf-tag--straight {
+      background: linear-gradient(135deg, #34d399, #10b981);
+    }
+
+    .pf-tag--lgbtq {
+      background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    }
+
+    .pf-tag--monogamous {
+      background: linear-gradient(135deg, #f472b6, #ec4899);
+    }
+
+    .pf-tag--friendships {
+      background: linear-gradient(135deg, #fb923c, #f97316);
+    }
+
+    @media (max-width: 900px) {
+      .pf-events-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .pf-cal {
@@ -146,11 +281,15 @@
       font-size: 12px;
       font-weight: 800;
       border-radius: 999px;
-      background: #e53935;
+      background: #7c3aed;
       color: #fff;
       line-height: 1;
       text-transform: uppercase;
       letter-spacing: 0.02em;
+    }
+
+    .pf-cal__badge--deadline {
+      background: #10b981;
     }
 
     .pf-cal__label {
@@ -161,7 +300,93 @@
 
     .pf-cal__cell--event {
       transform: scale(1.03);
-      border: 2px solid #e53935;
+      border: 2px solid #7c3aed;
+      background: #7c3aed;
+      color: #fff;
+    }
+
+    .pf-cal__cell--event .pf-cal__num {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .pf-cal__cell--event .pf-cal__label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .pf-cal__cell--event .pf-cal__badge {
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .pf-cal__cell--deadline {
+      background: #10b981;
+      border: 2px solid #059669;
+      color: #fff;
+    }
+
+    .pf-cal__cell--deadline .pf-cal__num {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .pf-cal__cell--deadline .pf-cal__label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .pf-cal__cell--deadline .pf-cal__badge--deadline {
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .pf-cal__cell--blind-duck {
+      background: #fbbf24;
+      border: 2px solid #f59e0b;
+      color: #000;
+    }
+
+    .pf-cal__cell--blind-duck .pf-cal__num {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #000;
+    }
+
+    .pf-cal__cell--blind-duck .pf-cal__label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .pf-cal__cell--blind-duck .pf-cal__badge {
+      background: rgba(0, 0, 0, 0.15);
+      color: #000;
+      font-weight: 900;
+    }
+
+    .pf-cal__cell--approval {
+      background: #d1fae5;
+      border: 2px solid #6ee7b7;
+      color: #065f46;
+    }
+
+    .pf-cal__cell--approval .pf-cal__num {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #065f46;
+    }
+
+    .pf-cal__cell--approval .pf-cal__label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #065f46;
     }
 
     @media (max-width: 900px) {
@@ -226,78 +451,57 @@
     <!-- Event Details -->
     <div class="pf-eventbox" id="pf-eventbox" aria-live="polite">
       <div class="pf-eventbox__inner">
-        <h3 class="pf-eventbox__title">Events</h3>
+        <h3 class="pf-eventbox__title">Upcoming Events</h3>
 
-        <details class="pf-details" id="pf-details-berlin-psd" open>
-          <summary><strong>03.06.2026</strong> — Berlin Poly Speed Dating</summary>
-          <div class="pf-details__body">
-            <p><strong>Format:</strong> In-person event in Berlin</p>
-            <p><strong>Audience:</strong> Poly / ENM friendly</p>
-            <p><strong>Start time:</strong> 19:00</p>
-            <p><strong>Application deadline:</strong> 20.05.2026</p>
-            <p><strong>What to expect:</strong> Structured speed dating rounds, mingling, and post-match hangout time.</p>
-            <p>
-              <a class="pf-link-btn" href="https://poly-speed-dating.onrender.com/apply.html" target="_blank" rel="noopener noreferrer">Apply / More info</a>
-            </p>
-          </div>
-        </details>
+        <div class="pf-events-grid">
+          <details class="pf-event-tag pf-event-tag--psd" id="pf-details-berlin-psd" open>
+            <summary class="pf-event-tag__summary">
+              <span class="pf-event-tag__title">Poly Speed Dating</span>
+              <span class="pf-event-tag__date">03.06.2026</span>
+              <span class="pf-event-tag__badge">~30 people</span>
+            </summary>
+            <div class="pf-event-tag__body">
+              <p><strong>Format:</strong> In-person moderated event, close to Treptower park</p>
+              <div class="pf-audience-tags">
+                <span class="pf-tag pf-tag--poly">Poly</span>
+                <span class="pf-tag pf-tag--enm">ENM</span>
+                <span class="pf-tag pf-tag--straight">Straight</span>
+                <span class="pf-tag pf-tag--lgbtq">LGBTQ+</span>
+              </div>
+              <p><strong>Start time:</strong> 19:00</p>
+              <p><strong>Application deadline:</strong> 20.05.2026</p>
+              <p><strong>What to expect:</strong> Structured speed dating rounds, mingling, and post-match hangout time.</p>
+              <p>
+                <a class="pf-link-btn" href="https://poly-speed-dating.onrender.com/apply.html" target="_blank" rel="noopener noreferrer">Apply / More info</a>
+              </p>
+            </div>
+          </details>
+
+          <details class="pf-event-tag pf-event-tag--bdd" id="pf-details-blind-duck" open>
+            <summary class="pf-event-tag__summary">
+              <span class="pf-event-tag__title">Blind Duck Dating</span>
+              <span class="pf-event-tag__date">Multiple dates</span>
+              <span class="pf-event-tag__badge">8 people</span>
+            </summary>
+            <div class="pf-event-tag__body">
+              <p><strong>Format:</strong> In-person event in Berlin</p>
+              <div class="pf-audience-tags">
+                <span class="pf-tag pf-tag--monogamous">Monogamous</span>
+                <span class="pf-tag pf-tag--friendships">Friendships</span>
+                <span class="pf-tag pf-tag--poly">Poly</span>
+                <span class="pf-tag pf-tag--enm">ENM</span>
+                <span class="pf-tag pf-tag--straight">Straight</span>
+                <span class="pf-tag pf-tag--lgbtq">LGBTQ+</span>
+              </div>
+              <p><strong>What to expect:</strong> Unique blind dating format where you meet new people face-to-face in a fun, pressure-free environment.</p>
+              <p>
+                <a class="pf-link-btn" href="https://www.duckdatingapps.com/event.html?slug=blind-duck-dating-registry-deadline-april-2026" target="_blank" rel="noopener noreferrer">Learn more / Apply</a>
+              </p>
+            </div>
+          </details>
+        </div>
       </div>
     </div>
-
-    <!-- ================= APRIL ================= -->
-    <section class="pf-cal" id="pf-apr-calendar">
-      <div class="pf-cal__head">
-        <h2>April 2026</h2>
-      </div>
-
-      <div class="pf-cal__grid" role="grid" aria-label="April calendar">
-        <div class="pf-cal__dow">Mon</div><div class="pf-cal__dow">Tue</div><div class="pf-cal__dow">Wed</div>
-        <div class="pf-cal__dow">Thu</div><div class="pf-cal__dow">Fri</div><div class="pf-cal__dow">Sat</div><div class="pf-cal__dow">Sun</div>
-
-        <!-- April 1 is Wednesday -->
-        <div class="pf-cal__cell--blank"></div>
-        <div class="pf-cal__cell--blank"></div>
-
-        <div class="pf-cal__cell"><span class="pf-cal__num">1</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">2</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">3</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">5</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">6</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">7</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">8</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">9</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">10</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">11</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">12</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">13</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">14</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">15</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">16</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">20</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">22</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">29</span></div>
-
-        <button class="pf-cal__cell pf-cal__cell--event"
-                type="button"
-                onclick="window.open('https://www.duckdatingapps.com/event.html?slug=blind-duck-dating-registry-deadline-april-2026', '_blank')"
-                aria-label="30.4 Blind Duck Dating second deadline">
-          <span class="pf-cal__num">30</span>
-         <span class="pf-cal__badge pf-cal__badge--deadline">Deadline</span>
-          <span class="pf-cal__label">Blind Duck Dating – 2nd deadline</span>
-        </button>
-      </div>
-    </section>
 
     <!-- ================= MAY ================= -->
     <section class="pf-cal" id="pf-may-calendar">
@@ -335,18 +539,22 @@
         <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
 
-        <button class="pf-cal__cell pf-cal__cell--event"
+        <button class="pf-cal__cell pf-cal__cell--event pf-cal__cell--deadline"
                 type="button"
                 onclick="window.open('https://poly-speed-dating.onrender.com/apply.html', '_blank')"
-                aria-label="20.5 PSD application deadline">
+                aria-label="20.5 Poly Speed Dating Deadline">
           <span class="pf-cal__num">20</span>
 <span class="pf-cal__badge pf-cal__badge--deadline">Deadline</span>
-          <span class="pf-cal__label">PSD application deadline</span>
+          <span class="pf-cal__label">Poly Speed Dating - Deadline</span>
         </button>
 
         <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">22</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
+
+        <div class="pf-cal__cell pf-cal__cell--approval">
+          <span class="pf-cal__num">23</span>
+          <span class="pf-cal__label">Poly Speed Dating<br>Approval responses</span>
+        </div>
         <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
@@ -354,7 +562,15 @@
         <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">29</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">30</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">31</span></div>
+
+        <button class="pf-cal__cell pf-cal__cell--event pf-cal__cell--blind-duck"
+                type="button"
+                onclick="window.open('https://www.duckdatingapps.com/event.html?slug=blind-duck-dating-registry-deadline-april-2026', '_blank')"
+                aria-label="31.5 Blind Duck Dating third deadline">
+          <span class="pf-cal__num">31</span>
+<span class="pf-cal__badge pf-cal__badge--deadline">Deadline</span>
+          <span class="pf-cal__label">Blind Duck Dating – 3rd deadline</span>
+        </button>
       </div>
     </section>
 
@@ -375,10 +591,10 @@
         <button class="pf-cal__cell pf-cal__cell--event"
                 type="button"
                 onclick="window.open('https://poly-speed-dating.onrender.com/apply.html', '_blank')"
-                aria-label="3.6 Berlin Poly Speed Dating at 19:00">
+                aria-label="3.6 Poly Speed Dating Event 19:00-22:00">
           <span class="pf-cal__num">3</span>
           <span class="pf-cal__badge">Event</span>
-          <span class="pf-cal__label">Berlin Poly Speed Dating<br>19:00</span>
+          <span class="pf-cal__label">Poly Speed Dating - Event<br>19:00 - 22:00h</span>
         </button>
 
         <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
