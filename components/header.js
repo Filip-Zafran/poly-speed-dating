@@ -26,7 +26,7 @@ class CustomHeader extends HTMLElement {
         }
 
         .logo img {
-          height: 48px;
+          height: 62px;
           display: block;
         }
 
