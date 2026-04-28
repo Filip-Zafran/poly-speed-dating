@@ -1846,9 +1846,11 @@ img.placeholder {
 .linktree-logo {
   width: 440px;
   height: 440px;
-  margin: 0 auto 8px;
+  margin: 0;
+  padding: 0;
   display: block;
   object-fit: contain;
+  border: none;
 }
 
 .linktree-top h1 {
@@ -2077,7 +2079,8 @@ img.placeholder {
   .linktree-logo {
     width: 380px;
     height: 380px;
-    margin-bottom: 6px;
+    margin: 0;
+    padding: 0;
   }
 
   .linktree-link {
