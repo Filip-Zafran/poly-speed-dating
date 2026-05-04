@@ -52,6 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  function getCheckedValues(name) {
+    const checked = [];
+    document.querySelectorAll(`input[name="${name}"]:checked`).forEach((input) => {
+      checked.push(input.value.trim());
+    });
+    return checked;
+  }
+
   function updateGenderField() {
     if (!genderPrimary || !genderSecondaryWrap) return;
 
@@ -107,10 +115,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (interestMen && !interestMen.checked) {
       clearRadioGroup("interestMenDetail");
+    } else if (interestMen && interestMen.checked) {
+      // Ensure at least one checkbox is selected
+      const menChecked = getCheckedValues("interestMenDetail").length;
+      if (menChecked === 0) {
+        document.querySelector('input[name="interestMenDetail"]').checked = true;
+      }
     }
 
     if (interestWomen && !interestWomen.checked) {
       clearRadioGroup("interestWomenDetail");
+    } else if (interestWomen && interestWomen.checked) {
+      // Ensure at least one checkbox is selected
+      const womenChecked = getCheckedValues("interestWomenDetail").length;
+      if (womenChecked === 0) {
+        document.querySelector('input[name="interestWomenDetail"]').checked = true;
+      }
     }
 
     syncInterestHiddenField();
@@ -130,12 +150,22 @@ document.addEventListener("DOMContentLoaded", function () {
       if (cb.id === "interestAll") return;
 
       if (cb.id === "interestMen") {
-        selected.push(getCheckedValue("interestMenDetail") || "Men");
+        const menDetails = getCheckedValues("interestMenDetail");
+        if (menDetails.length > 0) {
+          selected.push(...menDetails);
+        } else {
+          selected.push("Men");
+        }
         return;
       }
 
       if (cb.id === "interestWomen") {
-        selected.push(getCheckedValue("interestWomenDetail") || "Women");
+        const womenDetails = getCheckedValues("interestWomenDetail");
+        if (womenDetails.length > 0) {
+          selected.push(...womenDetails);
+        } else {
+          selected.push("Women");
+        }
         return;
       }
 
@@ -218,11 +248,25 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.querySelectorAll('input[name="interestMenDetail"]').forEach((input) => {
-    input.addEventListener("change", syncInterestHiddenField);
+    input.addEventListener("change", function () {
+      // Prevent unchecking all options
+      const checkedCount = getCheckedValues("interestMenDetail").length;
+      if (checkedCount === 0) {
+        this.checked = true;
+      }
+      syncInterestHiddenField();
+    });
   });
 
   document.querySelectorAll('input[name="interestWomenDetail"]').forEach((input) => {
-    input.addEventListener("change", syncInterestHiddenField);
+    input.addEventListener("change", function () {
+      // Prevent unchecking all options
+      const checkedCount = getCheckedValues("interestWomenDetail").length;
+      if (checkedCount === 0) {
+        this.checked = true;
+      }
+      syncInterestHiddenField();
+    });
   });
 
   document.querySelectorAll('input[name="was_referred"]').forEach((input) => {
