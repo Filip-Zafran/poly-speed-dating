@@ -394,6 +394,20 @@
       color: #065f46;
     }
 
+    .pf-cal__summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .pf-cal__summary::-webkit-details-marker {
+      display: none;
+    }
+
     @media (max-width: 900px) {
       .pf-cal__grid {
         gap: 8px;
@@ -440,11 +454,19 @@
         display: none;
       }
 
+      details.pf-cal__cell--approval .pf-cal__label {
+        display: block;
+        font-size: 0.72rem;
+        line-height: 1.15;
+        padding: 6px 0 0 0;
+      }
+
       .pf-cal__badge {
         display: block;
         font-size: 10px;
         padding: 4px 7px;
         margin-top: 20px;
+        align-self: flex-end;
       }
     }
   </style>
@@ -558,10 +580,12 @@
 
         <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
 
-        <div class="pf-cal__cell pf-cal__cell--approval">
-          <span class="pf-cal__num">24</span>
+        <details class="pf-cal__cell pf-cal__cell--approval">
+          <summary class="pf-cal__summary">
+            <span class="pf-cal__num">24</span>
+          </summary>
           <span class="pf-cal__label">Poly Speed Dating<br>Approval responses</span>
-        </div>
+        </details>
         <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
