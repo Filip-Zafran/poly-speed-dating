@@ -203,7 +203,12 @@
 
     @media (max-width: 900px) {
       .pf-events-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+      }
+
+      .pf-event-tag {
+        flex: none;
+        width: 100%;
       }
     }
 
@@ -432,8 +437,7 @@
       }
 
       .pf-cal__label {
-        font-size: 0.72rem;
-        line-height: 1.15;
+        display: none;
       }
 
       .pf-cal__badge {
@@ -538,24 +542,24 @@
         <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">20</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
 
         <button class="pf-cal__cell pf-cal__cell--event pf-cal__cell--deadline"
                 type="button"
                 onclick="window.open('https://poly-speed-dating.onrender.com/apply.html', '_blank')"
-                aria-label="20.5 Poly Speed Dating Deadline">
-          <span class="pf-cal__num">20</span>
-<span class="pf-cal__badge pf-cal__badge--deadline">Deadline</span>
+                aria-label="22.5 Poly Speed Dating Deadline">
+          <span class="pf-cal__num">22</span>
+          <span class="pf-cal__badge pf-cal__badge--deadline">PSD</span>
           <span class="pf-cal__label">Poly Speed Dating - Deadline</span>
         </button>
 
-        <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">22</span></div>
+        <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
 
         <div class="pf-cal__cell pf-cal__cell--approval">
-          <span class="pf-cal__num">23</span>
+          <span class="pf-cal__num">24</span>
           <span class="pf-cal__label">Poly Speed Dating<br>Approval responses</span>
         </div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">24</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
         <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
@@ -568,7 +572,7 @@
                 onclick="window.open('https://www.duckdatingapps.com/event.html?slug=blind-duck-dating-registry-deadline-april-2026', '_blank')"
                 aria-label="31.5 Blind Duck Dating third deadline">
           <span class="pf-cal__num">31</span>
-<span class="pf-cal__badge pf-cal__badge--deadline">Deadline</span>
+          <span class="pf-cal__badge pf-cal__badge--deadline">BDD</span>
           <span class="pf-cal__label">Blind Duck Dating – 3rd deadline</span>
         </button>
       </div>
@@ -593,7 +597,7 @@
                 onclick="window.open('https://poly-speed-dating.onrender.com/apply.html', '_blank')"
                 aria-label="3.6 Poly Speed Dating Event 19:00-22:00">
           <span class="pf-cal__num">3</span>
-          <span class="pf-cal__badge">Event</span>
+          <span class="pf-cal__badge">PSD</span>
           <span class="pf-cal__label">Poly Speed Dating - Event<br>19:00 - 22:00h</span>
         </button>
 

@@ -286,9 +286,75 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const form = document.getElementById("psdApplyForm");
 
+function validateForm() {
+  const requiredFields = {
+    name_or_nickname: "Name or Nickname",
+    email: "Email",
+    age_range: "Age Range",
+    about_yourself: "Tell us about yourself",
+    why_interested: "Why are you interested",
+    gender_identity: "Gender Identity",
+    interested_in: "Interested In",
+    code_of_conduct: "Code of Conduct acceptance",
+    secret_word: "Secret word"
+  };
+
+  const errors = [];
+
+  // Check text fields
+  for (const [fieldName, fieldLabel] of Object.entries(requiredFields)) {
+    const field = form.querySelector(`[name="${fieldName}"]`);
+    if (field && !field.value.trim()) {
+      errors.push(`${fieldLabel} is required`);
+    }
+  }
+
+  // Check if at least one interest checkbox is selected
+  const interestCheckboxes = form.querySelectorAll('input[name="interested_in"]:checked, input[name="interestMenDetail"]:checked, input[name="interestWomenDetail"]:checked, input[class="interest-checkbox"]:checked');
+  if (interestCheckboxes.length === 0) {
+    errors.push("Please select at least one interest option");
+  }
+
+  // Check if gender identity requires secondary selection
+  const genderPrimary = form.querySelector('[name="gender_identity"]');
+  if (genderPrimary && (genderPrimary.value === "Man" || genderPrimary.value === "Woman")) {
+    const genderSecondary = form.querySelector('input[name="genderSecondary"]:checked');
+    if (!genderSecondary) {
+      errors.push("Please select Cis or Trans for your gender identity");
+    }
+  }
+
+  // Check if Men/Women is selected, require Cis or Trans selection
+  const interestMen = form.querySelector('#interestMen');
+  const interestWomen = form.querySelector('#interestWomen');
+
+  if (interestMen && interestMen.checked) {
+    const menDetail = form.querySelector('input[name="interestMenDetail"]:checked');
+    if (!menDetail) {
+      errors.push("Please select Cis Men and/or Trans Men");
+    }
+  }
+
+  if (interestWomen && interestWomen.checked) {
+    const womenDetail = form.querySelector('input[name="interestWomenDetail"]:checked');
+    if (!womenDetail) {
+      errors.push("Please select Cis Women and/or Trans Women");
+    }
+  }
+
+  return errors;
+}
+
 if (form) {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+
+    // Validate form
+    const errors = validateForm();
+    if (errors.length > 0) {
+      alert("Please fill in all required fields:\n\n" + errors.join("\n"));
+      return;
+    }
 
     console.log("FORM SUBMIT STARTED");
 

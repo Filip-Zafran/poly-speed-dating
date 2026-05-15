@@ -536,11 +536,11 @@
           <div class="apply-event-grid">
             <div class="apply-event-item">
               <strong>When</strong>
-              Wed, 3 Jun 2026 · 19:00–23:00
+              Wed, 3 Jun 2026 · 19:00–22:00
             </div>
             <div class="apply-event-item">
               <strong>Application deadline</strong>
-              20 May 2026
+              22 May 2026
             </div>
             <div class="apply-event-item">
               <strong>Where</strong>
@@ -610,19 +610,19 @@
               <div class="apply-grid">
                 <div class="apply-field">
                   <label for="nameOrNickname">Name or NickName <span class="apply-required">*</span></label>
-                  <input class="apply-input" type="text" id="nameOrNickname" name="name_or_nickname" maxlength="120" />
+                  <input class="apply-input" type="text" id="nameOrNickname" name="name_or_nickname" maxlength="120" required />
                   <div class="field-error">Please add your name or nickname.</div>
                 </div>
 
                 <div class="apply-field">
                   <label for="email">Email <span class="apply-required">*</span></label>
-                  <input class="apply-input" type="email" id="email" name="email" maxlength="160" />
+                  <input class="apply-input" type="email" id="email" name="email" maxlength="160" required />
                   <div class="field-error">Please enter a valid email address.</div>
                 </div>
 
                 <div class="apply-field">
                   <label for="ageRange">Tell us Roughly Your Age Range <span class="apply-required">*</span></label>
-                  <select class="apply-select" id="ageRange" name="age_range">
+                  <select class="apply-select" id="ageRange" name="age_range" required>
                     <option value="">Please choose</option>
                     <option>18–25</option>
                     <option>22–30</option>
@@ -658,7 +658,7 @@
 
                 <div class="apply-field">
                   <label for="genderPrimary">I identify as <span class="apply-required">*</span></label>
-                  <select class="apply-select" id="genderPrimary">
+                  <select class="apply-select" id="genderPrimary" required>
                     <option value="">Please choose</option>
                     <option value="Man">Man</option>
                     <option value="Woman">Woman</option>
@@ -766,13 +766,13 @@
               <div class="apply-grid">
                 <div class="apply-field apply-grid-1">
                   <label for="aboutYourself">Tell us a bit about yourself. <span class="apply-required">*</span></label>
-                  <textarea class="apply-textarea" id="aboutYourself" name="about_yourself"></textarea>
+                  <textarea class="apply-textarea" id="aboutYourself" name="about_yourself" required></textarea>
                   <div class="field-error">Please tell us a bit about yourself.</div>
                 </div>
 
                 <div class="apply-field apply-grid-1">
                   <label for="whyInterested">Why are you interested in this event? <span class="apply-required">*</span></label>
-                  <textarea class="apply-textarea" id="whyInterested" name="why_interested"></textarea>
+                  <textarea class="apply-textarea" id="whyInterested" name="why_interested" required></textarea>
                   <div class="field-error">Please tell us why you are interested.</div>
                 </div>
 
@@ -979,7 +979,7 @@
 
                 <div class="apply-field">
                   <label for="secretWord">What's the secret word that you have found in the Code of Conduct? <span class="apply-required">*</span></label>
-                  <input class="apply-input" type="text" id="secretWord" name="secret_word" maxlength="120" />
+                  <input class="apply-input" type="text" id="secretWord" name="secret_word" maxlength="120" required />
                   <div class="field-error">Please add the secret word.</div>
                 </div>
 
