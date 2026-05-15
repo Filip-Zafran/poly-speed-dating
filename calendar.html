@@ -471,7 +471,26 @@
     }
 
     @media (min-width: 641px) {
+      details.pf-cal__cell--approval {
+        position: relative;
+      }
+
       details.pf-cal__cell--approval .pf-cal__label {
+        display: block;
+      }
+
+      details.pf-cal__cell--approval summary {
+        cursor: default;
+        pointer-events: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      details.pf-cal__cell--approval .pf-cal__label {
+        display: none;
+      }
+
+      details.pf-cal__cell--approval[open] .pf-cal__label {
         display: block;
       }
     }
@@ -586,7 +605,7 @@
 
         <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
 
-        <details class="pf-cal__cell pf-cal__cell--approval" open>
+        <details class="pf-cal__cell pf-cal__cell--approval">
           <summary class="pf-cal__summary">
             <span class="pf-cal__num">24</span>
           </summary>
