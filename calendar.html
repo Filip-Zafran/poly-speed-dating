@@ -605,7 +605,7 @@
 
         <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
 
-        <details class="pf-cal__cell pf-cal__cell--approval">
+        <details class="pf-cal__cell pf-cal__cell--approval" open>
           <summary class="pf-cal__summary">
             <span class="pf-cal__num">24</span>
           </summary>
@@ -686,5 +686,24 @@
 
   <custom-footer></custom-footer>
   <script src="script.js"></script>
+  <script>
+    function handleApprovalDetailsResponsive() {
+      const details = document.querySelector('details.pf-cal__cell--approval');
+      if (!details) return;
+
+      function updateDetails() {
+        if (window.innerWidth <= 640) {
+          details.removeAttribute('open');
+        } else {
+          details.setAttribute('open', '');
+        }
+      }
+
+      updateDetails();
+      window.addEventListener('resize', updateDetails);
+    }
+
+    document.addEventListener('DOMContentLoaded', handleApprovalDetailsResponsive);
+  </script>
 </body>
 </html>
