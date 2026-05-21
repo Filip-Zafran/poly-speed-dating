@@ -1,50 +1,265 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import axios from "axios";
+import { chromium } from "playwright";
 
 dotenv.config();
 
 const app = express();
-
 app.use(cors());
+
+async function fetchTicketmasterEvents(keyword) {
+  try {
+    const apiKey = process.env.TICKETMASTER_API_KEY;
+    if (!apiKey || apiKey === "your_ticketmaster_api_key_here") return null;
+
+    const url = `https://app.ticketmaster.com/discovery/v2/events.json?q=${encodeURIComponent(keyword)}&city=berlin&size=2&apikey=${apiKey}`;
+    const response = await fetch(url);
+
+    if (!response.ok) return null;
+
+    const data = await response.json();
+
+    if (data._embedded && data._embedded.events && data._embedded.events.length > 0) {
+      return data._embedded.events.slice(0, 2).map((event) => ({
+        title: event.name,
+        description: event.description || `Event related to ${keyword} in Berlin`,
+        url: event.url,
+        image: event.images?.[0]?.url || "",
+        start: new Date().toISOString(),
+        end: new Date().toISOString(),
+        source: "Ticketmaster"
+      }));
+    }
+    return null;
+  } catch (error) {
+    console.log(`Ticketmaster error for "${keyword}":`, error.message);
+    return null;
+  }
+}
+
+async function fetchMeetupEvents(keyword) {
+  try {
+    const apiKey = process.env.MEETUP_API_KEY;
+    if (!apiKey || apiKey === "your_meetup_api_key_here") return null;
+
+    // Meetup GraphQL API
+    const query = `
+      query {
+        eventsByTopic(topic: "${keyword}", first: 2, lat: 52.52, lon: 13.405) {
+          edges {
+            node {
+              id
+              title
+              description
+              eventUrl
+              dateTime
+              endTime
+            }
+          }
+        }
+      }
+    `;
+
+    const response = await fetch("https://api.meetup.com/gql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({ query })
+    });
+
+    if (!response.ok) return null;
+
+    const data = await response.json();
+
+    if (data.data?.eventsByTopic?.edges && data.data.eventsByTopic.edges.length > 0) {
+      return data.data.eventsByTopic.edges.slice(0, 2).map((edge) => ({
+        title: edge.node.title,
+        description: edge.node.description || `Meetup event related to ${keyword}`,
+        url: edge.node.eventUrl,
+        image: "",
+        start: edge.node.dateTime || new Date().toISOString(),
+        end: edge.node.endTime || new Date().toISOString(),
+        source: "Meetup"
+      }));
+    }
+    return null;
+  } catch (error) {
+    console.log(`Meetup error for "${keyword}":`, error.message);
+    return null;
+  }
+}
+
+async function fetchEventimEvents(keyword) {
+  try {
+    const apiKey = process.env.EVENTIM_API_KEY;
+    if (!apiKey || apiKey === "your_eventim_api_key_here") return null;
+
+    // Eventim API endpoint for event search
+    const url = `https://api.eventim.com/search?q=${encodeURIComponent(keyword + " berlin")}&limit=2&apikey=${apiKey}`;
+    const response = await fetch(url);
+
+    if (!response.ok) return null;
+
+    const data = await response.json();
+
+    if (data.events && Array.isArray(data.events) && data.events.length > 0) {
+      return data.events.slice(0, 2).map((event) => ({
+        title: event.title || event.name,
+        description: event.description || `Event related to ${keyword} in Berlin`,
+        url: event.url || event.link || `https://www.eventim.de/search?q=${encodeURIComponent(keyword)}`,
+        image: event.image || event.imageUrl || "",
+        start: event.dateTime || event.date || new Date().toISOString(),
+        end: event.endTime || new Date().toISOString(),
+        source: "Eventim"
+      }));
+    }
+    return null;
+  } catch (error) {
+    console.log(`Eventim error for "${keyword}":`, error.message);
+    return null;
+  }
+}
+
+async function fetchGoogleEvents(keyword) {
+  let browser;
+  try {
+    console.log(`[Google] Launching browser for "${keyword}"...`);
+
+    browser = await chromium.launch({
+      headless: true,
+      args: ["--disable-blink-features=AutomationControlled"]
+    });
+
+    const context = await browser.newContext({
+      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    });
+    const page = await context.newPage();
+
+    const searchQuery = `${keyword} berlin events`;
+    const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}&hl=en&gl=de`;
+
+    console.log(`[Google] Navigating to: ${googleUrl}`);
+    await page.goto(googleUrl, { waitUntil: "domcontentloaded", timeout: 15000 });
+
+    // Wait for search results to load
+    console.log(`[Google] Waiting for results...`);
+    await page.waitForSelector('div[data-sokoban-container], h3', { timeout: 10000 }).catch(() => {
+      console.log(`[Google] Selector timeout - proceeding anyway`);
+    });
+
+    // Debug: Check page content
+    const pageContent = await page.content();
+    const hasResults = pageContent.includes('href') && pageContent.includes('http');
+    const contentLength = pageContent.length;
+    console.log(`[Google] Page loaded: ${contentLength} bytes, has links: ${hasResults}`);
+
+    // Extract search results - simpler approach: get all links with titles
+    console.log(`[Google] Evaluating page...`);
+    const evaluationResult = await page.evaluate(() => {
+      const items = [];
+      const seen = new Set();
+
+      // Get all links on the page
+      document.querySelectorAll("a[href]").forEach((link) => {
+        let url = link.getAttribute("href");
+        const title = link.textContent.trim();
+
+        if (!url || !title || title.length < 5) return;
+
+        // Extract real URL from Google redirect
+        if (url.includes("/url?q=")) {
+          const match = url.match(/\/url\?q=([^&]+)/);
+          if (match) {
+            try {
+              url = decodeURIComponent(match[1]);
+            } catch (e) {
+              return; // Skip if decode fails
+            }
+          }
+        }
+
+        // Only include valid HTTP/HTTPS URLs that aren't Google's own, and no duplicates
+        if (url.startsWith("http") && !url.includes("google.com") && !url.includes("youtube.com") && !seen.has(url)) {
+          items.push({ title, url });
+          seen.add(url);
+        }
+      });
+
+      return { items: items.slice(0, 2), totalLinks: document.querySelectorAll("a[href]").length, resultsFound: items.length };
+    });
+
+    console.log(`[Google] Total links on page: ${evaluationResult.totalLinks}, Qualified results: ${evaluationResult.resultsFound}`);
+
+    if (evaluationResult.items.length > 0) {
+      console.log(`[Google] ✅ Found ${evaluationResult.items.length} results`);
+      return evaluationResult.items.map((item) => ({
+        title: item.title,
+        description: `Event related to ${keyword} in Berlin`,
+        url: item.url,
+        image: "",
+        start: new Date().toISOString(),
+        end: new Date().toISOString(),
+        source: "Google Search"
+      }));
+    }
+
+    return null;
+
+  } catch (error) {
+    console.log(`[Google] Error for "${keyword}":`, error.message);
+    return null;
+  } finally {
+    if (browser) {
+      try {
+        await browser.close();
+      } catch (e) {
+        // Ignore close errors
+      }
+    }
+  }
+}
 
 app.get("/api/events", async (req, res) => {
   try {
     const keyword = req.query.keyword || "Berlin";
 
-    // Use JSONPlaceholder API (free, no auth required)
-    const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts?_limit=7`
-    );
+    // Try Google Search first (flexible web search)
+    console.log(`\n🔍 Searching for "${keyword}"...`);
+    console.log(`1️⃣  Trying Google Search...`);
+    let events = await fetchGoogleEvents(keyword);
+    if (events && events.length > 0) {
+      console.log(`✅ Found ${events.length} Google Search results for "${keyword}"`);
+      return res.json(events);
+    }
 
-    // Transform JSONPlaceholder posts into event-like data
-    const events = response.data.map((post, index) => {
-      // Generate random future dates for events
-      const startDate = new Date(2026, 5, Math.floor(Math.random() * 25) + 1);
-      const endDate = new Date(startDate);
-      endDate.setHours(startDate.getHours() + 2);
+    // Fallback to Ticketmaster (for concerts, theatre, sports)
+    console.log(`2️⃣  Trying Ticketmaster...`);
+    events = await fetchTicketmasterEvents(keyword);
+    if (events && events.length > 0) {
+      console.log(`✅ Found ${events.length} Ticketmaster results for "${keyword}"`);
+      return res.json(events);
+    }
 
-      return {
-        title: `${keyword.charAt(0).toUpperCase() + keyword.slice(1)} Event #${post.id}`,
-        description: post.body.substring(0, 120) + "...",
-        url: `https://jsonplaceholder.typicode.com/posts/${post.id}`,
-        image: `https://via.placeholder.com/300x200?text=Event+${post.id}`,
-        start: startDate.toISOString(),
-        end: endDate.toISOString()
-      };
-    });
+    // Fallback to Eventim
+    console.log(`3️⃣  Trying Eventim...`);
+    events = await fetchEventimEvents(keyword);
+    if (events && events.length > 0) {
+      console.log(`✅ Found ${events.length} Eventim results for "${keyword}"`);
+      return res.json(events);
+    }
 
-    console.log(`✓ API request for "${keyword}" returning ${events.length} events from JSONPlaceholder`);
-    res.json(events);
+    // No results from any source
+    console.log(`❌ No events found for "${keyword}"`);
+    res.json([]);
 
   } catch (error) {
-    const errorData = error.response?.data || error.message;
-    console.error("API Error:", errorData);
-
+    console.error("🚨 API Error:", error.message);
     res.status(500).json({
       error: "Failed to fetch events",
-      details: errorData
+      details: error.message
     });
   }
 });
