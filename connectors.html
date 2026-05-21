@@ -842,14 +842,14 @@
           const matchLiked = match.likedEventIds.includes(event.id);
           const mutual = userLiked && matchLiked;
 
-          let domainUrl = ‘’;
-          let faviconUrl = ‘’;
+          let domainUrl = '';
+          let faviconUrl = '';
           if (event.url) {
             const urlObj = new URL(event.url);
-            domainUrl = urlObj.hostname.replace(‘www.’, ‘’);
-            faviconUrl = ‘https://www.google.com/s2/favicons?domain=’ + urlObj.hostname + ‘&sz=64’;
+            domainUrl = urlObj.hostname.replace('www.', '');
+            faviconUrl = 'https://www.google.com/s2/favicons?domain=' + urlObj.hostname + '&sz=64';
           }
-          const logoHtml = faviconUrl ? ‘<img src="’ + faviconUrl + ‘" alt="logo" class="event-logo">’ : ‘<div class="event-logo-placeholder"></div>’;
+          const logoHtml = faviconUrl ? '<img src="' + faviconUrl + '" alt="logo" class="event-logo">' : '<div class="event-logo-placeholder"></div>';
 
           return `
             <article class="event-card ${mutual ? "event-mutual" : userLiked ? "event-liked" : ""}">
@@ -871,7 +871,7 @@
                 ${mutual ? '<span class="mutual-badge">You both liked this event</span>' : ""}
                 <div class="event-actions">
                   <button type="button" class="connector-btn connector-btn-primary connector-btn-small" data-like-event="${event.id}" data-match-id="${match.id}">
-                    ${userLiked ? "Interested" : "I’m interested"}
+                    ${userLiked ? "Interested" : "I'm interested"}
                   </button>
                   <a class="connector-btn connector-btn-secondary connector-btn-small" href="${event.url}" target="_blank" rel="noopener noreferrer">Open event</a>
                 </div>
