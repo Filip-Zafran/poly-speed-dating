@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connectors — Duck Dating Apps</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="components/header.js"></script>
+  <script src="components/footer.js"></script>
+
+  <style>
+    :root {
+      --poly-purple: #340c46;
+      --poly-blue: #009fe3;
+      --poly-magenta: #e50051;
+      --poly-gold: #fcbf00;
+      --text: #25142f;
+      --muted: #6f6782;
+      --card: #ffffff;
+      --soft: #fcfbff;
+    }
+
+    body {
+      background: linear-gradient(180deg, #fff7fb 0%, #f5fbff 100%);
+      color: var(--text);
+    }
+
+    .connectors-page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .connectors-shell {
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(52,12,70,0.08);
+      border-radius: 28px;
+      box-shadow: 0 18px 50px rgba(52,12,70,0.12);
+      overflow: hidden;
+    }
+
+    .connectors-hero {
+      background: linear-gradient(135deg, var(--poly-purple), var(--poly-blue));
+      color: #fff;
+      padding: 2.2rem 1.2rem;
+      text-align: center;
+    }
+
+    .connectors-hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.05;
+    }
+
+    .connectors-hero p {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 1.08rem;
+      opacity: 0.95;
+    }
+
+    .connectors-body {
+      padding: 1.2rem;
+    }
+
+    .connector-card {
+      background: var(--card);
+      border: 1px solid rgba(52,12,70,0.1);
+      border-radius: 24px;
+      padding: 1.2rem;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      margin-bottom: 1rem;
+    }
+
+    .connector-card h2,
+    .connector-card h3 {
+      margin-top: 0;
+      color: var(--poly-purple);
+    }
+
+    .connector-intro {
+      background: #fff9f2;
+      border: 1px solid rgba(252,191,0,0.35);
+    }
+
+    .connector-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .connector-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .connector-field label,
+    .connector-legend {
+      font-weight: 850;
+      color: #2b004d;
+    }
+
+    .connector-help {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .connector-input {
+      width: 100%;
+      border: 1.5px solid #ddd6ee;
+      background: #fcfbff;
+      color: var(--text);
+      border-radius: 16px;
+      padding: 0.85rem 0.95rem;
+      font: inherit;
+    }
+
+    .connector-check-group {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.4rem;
+    }
+
+    .connector-choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      background: #fcfbff;
+      border: 1.5px solid #e3daf3;
+      border-radius: 16px;
+      padding: 0.8rem 0.9rem;
+      transition: border-color 0.15s ease, transform 0.12s ease, background 0.15s ease;
+    }
+
+    .connector-choice:hover {
+      border-color: var(--poly-blue);
+      transform: translateY(-1px);
+      background: #fff;
+    }
+
+    .connector-choice input {
+      margin-top: 0.2rem;
+      accent-color: var(--poly-magenta);
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .connector-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.2rem;
+    }
+
+    .connector-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 0.82rem 1.1rem;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    }
+
+    .connector-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .connector-btn-primary {
+      background: linear-gradient(90deg, var(--poly-magenta), var(--poly-gold));
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(229,0,81,0.16);
+    }
+
+    .connector-btn-secondary {
+      background: #efe8fb;
+      color: var(--poly-purple);
+    }
+
+    .connector-btn-small {
+      padding: 0.62rem 0.85rem;
+      font-size: 0.92rem;
+    }
+
+    .connector-alert {
+      padding: 0.9rem 1rem;
+      border-radius: 18px;
+      margin: 0.9rem 0;
+      font-weight: 700;
+    }
+
+    .connector-alert-info {
+      background: rgba(0,159,227,0.1);
+      border-left: 5px solid var(--poly-blue);
+      color: #18405f;
+    }
+
+    .connector-alert-success {
+      background: #eefcf3;
+      border-left: 5px solid #20a35b;
+      color: #14663c;
+    }
+
+    .connector-alert-warning {
+      background: #fff7dc;
+      border-left: 5px solid var(--poly-gold);
+      color: #5b4c2a;
+    }
+
+    .connector-match-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .match-card {
+      border: 1px solid rgba(52,12,70,0.12);
+      border-radius: 22px;
+      padding: 1rem;
+      background: #fff;
+    }
+
+    .match-card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-bottom: 0.8rem;
+    }
+
+    .match-card h3 {
+      margin: 0 0 0.25rem;
+    }
+
+    .match-type {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 0.35rem 0.65rem;
+      background: #efe8fb;
+      color: var(--poly-purple);
+      font-weight: 900;
+      font-size: 0.88rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 0.75rem 0;
+    }
+
+    .tag {
+      border-radius: 999px;
+      background: rgba(0,159,227,0.1);
+      color: #18405f;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.8rem;
+    }
+
+    .event-card {
+      overflow: hidden;
+      border: 1px solid rgba(52,12,70,0.12);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.045);
+    }
+
+    .event-image {
+      height: 150px;
+      background: linear-gradient(135deg, #efe8fb, #dff5ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--poly-purple);
+      font-weight: 900;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .event-content {
+      padding: 0.9rem;
+    }
+
+    .event-content h4 {
+      margin: 0 0 0.35rem;
+      color: var(--poly-purple);
+      font-size: 1.05rem;
+    }
+
+    .event-meta {
+      display: grid;
+      gap: 0.25rem;
+      color: #5e536c;
+      font-size: 0.92rem;
+      margin: 0.6rem 0;
+    }
+
+    .event-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+
+    .event-liked {
+      border: 2px solid #20a35b;
+      background: #f7fff9;
+    }
+
+    .event-mutual {
+      border: 2px solid var(--poly-magenta);
+      background: #fff7fb;
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    .mutual-badge {
+      display: inline-flex;
+      margin-top: 0.5rem;
+      border-radius: 999px;
+      padding: 0.38rem 0.65rem;
+      background: #fff0f2;
+      color: var(--poly-magenta);
+      font-weight: 900;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 760px) {
+      .connector-grid,
+      .connector-check-group,
+      .event-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .connectors-body {
+        padding: 1rem;
+      }
+
+      .connector-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <custom-header></custom-header>
+
+  <main class="connectors-page">
+    <section class="connectors-shell">
+      <header class="connectors-hero">
+        <h1>Connectors</h1>
+        <p>Unlock your matches, discover shared interests, and find easy meetup ideas in Berlin.</p>
+      </header>
+
+      <div class="connectors-body">
+        <section class="connector-card connector-intro">
+          <h2>How it works</h2>
+          <p>
+            Before seeing your matches, complete the Connectors Questionnaire. Once both people have filled it in,
+            you can see overlapping interests and suggested events or date ideas.
+          </p>
+          <div class="connector-alert connector-alert-info">
+            MVP demo: this page currently uses mock match data and generated event/search suggestions. API integration can be added later.
+          </div>
+        </section>
+
+        <section class="connector-card" id="questionnaireSection">
+          <h2>Connectors Questionnaire</h2>
+          <p class="connector-help">Choose everything you would enjoy doing with a social or romantic match.</p>
+
+          <form id="connectorsForm">
+            <div class="connector-grid">
+              <div class="connector-field">
+                <span class="connector-legend">Movement / Sport</span>
+                <div class="connector-check-group" data-category="movement">
+                  <label class="connector-choice"><input type="checkbox" value="hiking" /> Hiking</label>
+                  <label class="connector-choice"><input type="checkbox" value="bouldering" /> Bouldering</label>
+                  <label class="connector-choice"><input type="checkbox" value="climbing" /> Climbing</label>
+                  <label class="connector-choice"><input type="checkbox" value="stretching" /> Stretching</label>
+                  <label class="connector-choice"><input type="checkbox" value="yoga" /> Yoga</label>
+                  <label class="connector-choice"><input type="checkbox" value="swimming" /> Swimming</label>
+                  <label class="connector-choice"><input type="checkbox" value="cycling" /> Cycling</label>
+                  <label class="connector-choice"><input type="checkbox" value="dancing" /> Dancing</label>
+                </div>
+              </div>
+
+              <div class="connector-field">
+                <span class="connector-legend">Music / Nightlife</span>
+                <div class="connector-check-group" data-category="music">
+                  <label class="connector-choice"><input type="checkbox" value="techno" /> Techno</label>
+                  <label class="connector-choice"><input type="checkbox" value="house" /> House</label>
+                  <label class="connector-choice"><input type="checkbox" value="jazz" /> Jazz</label>
+                  <label class="connector-choice"><input type="checkbox" value="punk" /> Punk</label>
+                  <label class="connector-choice"><input type="checkbox" value="metal" /> Metal</label>
+                  <label class="connector-choice"><input type="checkbox" value="indie concerts" /> Indie concerts</label>
+                  <label class="connector-choice"><input type="checkbox" value="karaoke" /> Karaoke</label>
+                  <label class="connector-choice"><input type="checkbox" value="sober parties" /> Sober parties</label>
+                </div>
+              </div>
+
+              <div class="connector-field">
+                <span class="connector-legend">Creative / Culture</span>
+                <div class="connector-check-group" data-category="culture">
+                  <label class="connector-choice"><input type="checkbox" value="museums" /> Museums</label>
+                  <label class="connector-choice"><input type="checkbox" value="galleries" /> Galleries</label>
+                  <label class="connector-choice"><input type="checkbox" value="cinema" /> Cinema</label>
+                  <label class="connector-choice"><input type="checkbox" value="photography" /> Photography</label>
+                  <label class="connector-choice"><input type="checkbox" value="drawing" /> Drawing</label>
+                  <label class="connector-choice"><input type="checkbox" value="pottery" /> Pottery</label>
+                  <label class="connector-choice"><input type="checkbox" value="workshops" /> Workshops</label>
+                  <label class="connector-choice"><input type="checkbox" value="flea markets" /> Flea markets</label>
+                </div>
+              </div>
+
+              <div class="connector-field">
+                <span class="connector-legend">Social / Lifestyle</span>
+                <div class="connector-check-group" data-category="lifestyle">
+                  <label class="connector-choice"><input type="checkbox" value="cafes" /> Cafés</label>
+                  <label class="connector-choice"><input type="checkbox" value="brunch" /> Brunch</label>
+                  <label class="connector-choice"><input type="checkbox" value="board games" /> Board games</label>
+                  <label class="connector-choice"><input type="checkbox" value="gaming" /> Gaming</label>
+                  <label class="connector-choice"><input type="checkbox" value="cooking" /> Cooking</label>
+                  <label class="connector-choice"><input type="checkbox" value="picnics" /> Picnics</label>
+                  <label class="connector-choice"><input type="checkbox" value="queer events" /> Queer events</label>
+                  <label class="connector-choice"><input type="checkbox" value="poly events" /> Poly events</label>
+                </div>
+              </div>
+
+              <div class="connector-field">
+                <span class="connector-legend">Preferred meetup energy</span>
+                <div class="connector-check-group" data-category="energy">
+                  <label class="connector-choice"><input type="checkbox" value="sober activities" /> Sober</label>
+                  <label class="connector-choice"><input type="checkbox" value="casual drinks" /> Casual drinks</label>
+                  <label class="connector-choice"><input type="checkbox" value="party" /> Party</label>
+                  <label class="connector-choice"><input type="checkbox" value="deep conversations" /> Deep talks</label>
+                  <label class="connector-choice"><input type="checkbox" value="daytime meetup" /> Daytime</label>
+                  <label class="connector-choice"><input type="checkbox" value="evening meetup" /> Evening</label>
+                </div>
+              </div>
+
+              <div class="connector-field">
+                <label for="instagramHandle">Do you want to share your Instagram?</label>
+                <input class="connector-input" type="text" id="instagramHandle" placeholder="@yourhandle or Instagram link" />
+                <small class="connector-help">Optional. Only share this if you are comfortable being contacted there.</small>
+              </div>
+            </div>
+
+            <div class="connector-actions">
+              <button type="submit" class="connector-btn connector-btn-primary">Save & Unlock Matches</button>
+              <button type="button" class="connector-btn connector-btn-secondary" id="resetDemoBtn">Reset Demo</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="connector-card is-hidden" id="matchesSection">
+          <h2>Your Matches</h2>
+          <p class="connector-help">Demo matches below show how Connectors could work after a PSD event.</p>
+          <div class="connector-match-list" id="matchesList"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <custom-footer></custom-footer>
+
+  <script>
+    const STORAGE_KEY = "dda_connectors_demo_profile";
+    const EVENT_LIKES_KEY = "dda_connectors_demo_event_likes";
+
+    const demoMatches = [
+      {
+        id: "match_1",
+        name: "Alex",
+        matchType: "Romantic Match",
+        connectorsCompleted: true,
+        instagram: "@alex_demo",
+        interests: ["bouldering", "yoga", "cafes", "museums", "sober activities", "deep conversations", "cinema"],
+        likedEventIds: ["event_bouldering_1"]
+      },
+      {
+        id: "match_2",
+        name: "Sam",
+        matchType: "Social Match",
+        connectorsCompleted: true,
+        instagram: "",
+        interests: ["techno", "queer events", "dancing", "party", "galleries", "flea markets", "house"],
+        likedEventIds: ["event_queer_1"]
+      },
+      {
+        id: "match_3",
+        name: "Mika",
+        matchType: "Social Match",
+        connectorsCompleted: false,
+        instagram: "",
+        interests: [],
+        likedEventIds: []
+      }
+    ];
+
+    const eventTemplates = {
+      bouldering: {
+        id: "event_bouldering_1",
+        title: "Bouldering Session in Berlin",
+        description: "A low-pressure active meetup idea. Great for talking between climbs.",
+        date: "This week",
+        time: "Flexible",
+        price: "Approx. €10–18",
+        location: "Berlin bouldering gyms",
+        image: "",
+        source: "Google Search",
+        url: "https://www.google.com/search?q=Berlin+bouldering+event+this+week"
+      },
+      yoga: {
+        id: "event_yoga_1",
+        title: "Yoga or Stretching Class",
+        description: "A calm sober activity for a gentle first meetup.",
+        date: "This week",
+        time: "Flexible",
+        price: "Free–€20",
+        location: "Berlin",
+        image: "",
+        source: "Google Search",
+        url: "https://www.google.com/search?q=Berlin+yoga+class+this+week"
+      },
+      cafes: {
+        id: "event_cafe_1",
+        title: "Coffee Walk or Café Meetup",
+        description: "Simple, safe and easy. Good for social or romantic matches.",
+        date: "Any day",
+        time: "Afternoon or evening",
+        price: "€3–10",
+        location: "Berlin cafés",
+        image: "",
+        source: "Google Search",
+        url: "https://www.google.com/search?q=cozy+cafes+Berlin+date"
+      },
+      museums: {
+        id: "event_museum_1",
+        title: "Museum or Exhibition Visit",
+        description: "A good connector if you want something cultural with natural conversation starters.",
+        date: "This week",
+        time: "Flexible",
+        price: "Free–€15",
+        location: "Berlin museums",
+        image: "",
+        source: "Berlin.de Search",
+        url: "https://www.berlin.de/en/events/?q=museum"
+      },
+      cinema: {
+        id: "event_cinema_1",
+        title: "Cinema Night",
+        description: "A relaxed event if you both like film and want something structured.",
+        date: "This week",
+        time: "Evening",
+        price: "€8–15",
+        location: "Berlin cinemas",
+        image: "",
+        source: "Google Search",
+        url: "https://www.google.com/search?q=Berlin+cinema+events+this+week"
+      },
+      techno: {
+        id: "event_techno_1",
+        title: "Techno Event",
+        description: "For matches who want nightlife energy and dancing.",
+        date: "This weekend",
+        time: "Night",
+        price: "Varies",
+        location: "Berlin clubs",
+        image: "",
+        source: "Resident Advisor Search",
+        url: "https://ra.co/events/de/berlin"
+      },
+      "queer events": {
+        id: "event_queer_1",
+        title: "Queer Community Event",
+        description: "A community-based meetup idea with a social atmosphere.",
+        date: "This week",
+        time: "Flexible",
+        price: "Free–€20",
+        location: "Berlin",
+        image: "",
+        source: "Google Search",
+        url: "https://www.google.com/search?q=Berlin+queer+events+this+week"
+      },
+      galleries: {
+        id: "event_gallery_1",
+        title: "Gallery Visit",
+        description: "A nice low-pressure connector with things to talk about naturally.",
+        date: "This week",
+        time: "Afternoon / evening",
+        price: "Often free",
+        location: "Berlin galleries",
+        image: "",
+        source: "Google Search",
+        url: "https://www.google.com/search?q=Berlin+gallery+opening+this+week"
+      },
+      "board games": {
+        id: "event_boardgames_1",
+        title: "Board Game Night",
+        description: "Good for social matches or low-pressure first meetings.",
+        date: "This week",
+        time: "Evening",
+        price: "Free–€10",
+        location: "Berlin",
+        image: "",
+        source: "Meetup Search",
+        url: "https://www.meetup.com/find/?keywords=board%20games&location=de--Berlin"
+      },
+      default: {
+        id: "event_default_1",
+        title: "Berlin Connector Search",
+        description: "Explore events based on your shared interests.",
+        date: "This week",
+        time: "Flexible",
+        price: "Varies",
+        location: "Berlin",
+        image: "",
+        source: "Google Search",
+        url: "https://www.google.com/search?q=Berlin+events+this+week"
+      }
+    };
+
+    const form = document.getElementById("connectorsForm");
+    const matchesSection = document.getElementById("matchesSection");
+    const matchesList = document.getElementById("matchesList");
+    const resetDemoBtn = document.getElementById("resetDemoBtn");
+
+    function getProfileFromForm() {
+      const selectedInterests = [];
+
+      document.querySelectorAll('#connectorsForm input[type="checkbox"]:checked').forEach((checkbox) => {
+        selectedInterests.push(checkbox.value);
+      });
+
+      const instagram = document.getElementById("instagramHandle").value.trim();
+
+      return {
+        connectorsCompleted: true,
+        instagram,
+        interests: [...new Set(selectedInterests)]
+      };
+    }
+
+    function saveProfile(profile) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+    }
+
+    function getProfile() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+
+      try {
+        return JSON.parse(raw);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function getEventLikes() {
+      const raw = localStorage.getItem(EVENT_LIKES_KEY);
+      if (!raw) return {};
+
+      try {
+        return JSON.parse(raw);
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function saveEventLikes(likes) {
+      localStorage.setItem(EVENT_LIKES_KEY, JSON.stringify(likes));
+    }
+
+    function getOverlap(userInterests, matchInterests) {
+      return userInterests.filter((interest) => matchInterests.includes(interest));
+    }
+
+    function buildSearchUrl(platform, interest) {
+      const query = encodeURIComponent(`Berlin ${interest} event this week`);
+
+      if (platform === "eventbrite") return `https://www.eventbrite.de/d/germany--berlin/${encodeURIComponent(interest)}/`;
+      if (platform === "meetup") return `https://www.meetup.com/find/?keywords=${encodeURIComponent(interest)}&location=de--Berlin`;
+      if (platform === "berlin") return `https://www.berlin.de/en/events/?q=${encodeURIComponent(interest)}`;
+      if (platform === "luma") return `https://lu.ma/search?q=${encodeURIComponent(`Berlin ${interest}`)}`;
+
+      return `https://www.google.com/search?q=${query}`;
+    }
+
+    async function createSuggestedEvents(overlaps) {
+      const events = [];
+      const usedEventIds = new Set();
+
+      // Fetch events from API for each interest
+      for (const interest of overlaps) {
+        try {
+          const response = await fetch(`http://localhost:3000/api/events?keyword=${encodeURIComponent(interest)}`);
+          if (response.ok) {
+            const apiEvents = await response.json();
+
+            if (Array.isArray(apiEvents)) {
+              apiEvents.forEach((event, idx) => {
+                const eventId = `api_${interest}_${idx}`;
+                if (!usedEventIds.has(eventId) && events.length < 7) {
+                  events.push({
+                    id: eventId,
+                    title: event.title || `${capitalize(interest)} Event`,
+                    description: event.description || `Event related to ${interest}`,
+                    date: event.start ? event.start.split('T')[0] : "TBD",
+                    time: event.start ? event.start.split('T')[1]?.substring(0, 5) : "Flexible",
+                    price: "Varies",
+                    location: "Berlin",
+                    image: event.image || "",
+                    source: "Eventbrite API",
+                    url: event.url || "#",
+                    matchedInterestTags: [interest]
+                  });
+                  usedEventIds.add(eventId);
+                }
+              });
+            }
+          }
+        } catch (error) {
+          console.log(`Could not fetch events for "${interest}":`, error.message);
+          // Fall back to template if API fails
+          const template = eventTemplates[interest];
+          if (template && !usedEventIds.has(template.id)) {
+            events.push({ ...template, matchedInterestTags: [interest] });
+            usedEventIds.add(template.id);
+          }
+        }
+      }
+
+      // Fill remaining slots with templates if needed
+      if (events.length < 3) {
+        overlaps.forEach((interest) => {
+          if (events.length >= 3) return;
+          const template = eventTemplates[interest];
+          if (template && !usedEventIds.has(template.id)) {
+            events.push({ ...template, matchedInterestTags: [interest] });
+            usedEventIds.add(template.id);
+          }
+        });
+      }
+
+      if (events.length === 0) {
+        events.push(eventTemplates.default);
+      }
+
+      return events.slice(0, 7);
+    }
+
+    function capitalize(text) {
+      return text.charAt(0).toUpperCase() + text.slice(1);
+    }
+
+    async function renderMatches() {
+      const profile = getProfile();
+      const eventLikes = getEventLikes();
+
+      if (!profile || !profile.connectorsCompleted) {
+        matchesSection.classList.add("is-hidden");
+        return;
+      }
+
+      matchesSection.classList.remove("is-hidden");
+      matchesList.innerHTML = "";
+
+      for (const match of demoMatches) {
+        const card = document.createElement("article");
+        card.className = "match-card";
+
+        if (!match.connectorsCompleted) {
+          card.innerHTML = `
+            <div class="match-card-header">
+              <div>
+                <h3>${match.name}</h3>
+                <span class="match-type">${match.matchType}</span>
+              </div>
+            </div>
+            <div class="connector-alert connector-alert-warning">
+              This person has not completed Connectors yet. Check back later to discover your overlapping interests.
+            </div>
+          `;
+          matchesList.appendChild(card);
+          continue;
+        }
+
+        const overlaps = getOverlap(profile.interests, match.interests);
+        const suggestedEvents = await createSuggestedEvents(overlaps);
+
+        const overlapHtml = overlaps.length
+          ? overlaps.map((interest) => `<span class="tag">${interest}</span>`).join("")
+          : `<div class="connector-alert connector-alert-warning">No clear overlap yet. You can still write and ask what they would enjoy doing.</div>`;
+
+        const instagramHtml = profile.instagram && match.instagram
+          ? `<div class="connector-alert connector-alert-success">You both shared Instagram. You can connect there: <strong>${match.instagram}</strong></div>`
+          : `<div class="connector-alert connector-alert-info">Instagram is only shown when people choose to share it.</div>`;
+
+        const eventsHtml = suggestedEvents.map((event) => {
+          const userLiked = eventLikes[match.id] && eventLikes[match.id][event.id];
+          const matchLiked = match.likedEventIds.includes(event.id);
+          const mutual = userLiked && matchLiked;
+
+          return `
+            <article class="event-card ${mutual ? "event-mutual" : userLiked ? "event-liked" : ""}">
+              ${event.image ? `<img src="${event.image}" alt="${event.title}">` : `<div class="event-image">${event.title}</div>`}
+              <div class="event-content">
+                <h4>${event.title}</h4>
+                <p>${event.description}</p>
+                <div class="event-meta">
+                  <span><strong>Date:</strong> ${event.date}</span>
+                  <span><strong>Time:</strong> ${event.time}</span>
+                  <span><strong>Price:</strong> ${event.price}</span>
+                  <span><strong>Location:</strong> ${event.location}</span>
+                  <span><strong>Source:</strong> ${event.source}</span>
+                  ${event.url ? `<span><strong>Website:</strong> <a href="${event.url}" target="_blank" rel="noopener noreferrer" style="color: #009fe3; text-decoration: underline;">${new URL(event.url).hostname.replace('www.', '')}</a></span>` : ""}
+                </div>
+                <div class="tag-list">
+                  ${(event.matchedInterestTags || []).map((tag) => `<span class="tag">${tag}</span>`).join("")}
+                </div>
+                ${mutual ? `<span class="mutual-badge">You both liked this event</span>` : ""}
+                <div class="event-actions">
+                  <button type="button" class="connector-btn connector-btn-primary connector-btn-small" data-like-event="${event.id}" data-match-id="${match.id}">
+                    ${userLiked ? "Interested" : "I’m interested"}
+                  </button>
+                  <a class="connector-btn connector-btn-secondary connector-btn-small" href="${event.url}" target="_blank" rel="noopener noreferrer">Open event</a>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        card.innerHTML = `
+          <div class="match-card-header">
+            <div>
+              <h3>${match.name}</h3>
+              <span class="match-type">${match.matchType}</span>
+            </div>
+          </div>
+
+          <h4>Shared interests</h4>
+          <div class="tag-list">${overlapHtml}</div>
+
+          ${instagramHtml}
+
+          <h4>Suggested connector events</h4>
+          <div class="event-grid">${eventsHtml}</div>
+        `;
+
+        matchesList.appendChild(card);
+      }
+
+      document.querySelectorAll("[data-like-event]").forEach((button) => {
+        button.addEventListener("click", function () {
+          const eventId = this.dataset.likeEvent;
+          const matchId = this.dataset.matchId;
+          toggleEventLike(matchId, eventId);
+        });
+      });
+    }
+
+    function toggleEventLike(matchId, eventId) {
+      const likes = getEventLikes();
+
+      if (!likes[matchId]) likes[matchId] = {};
+      likes[matchId][eventId] = !likes[matchId][eventId];
+
+      saveEventLikes(likes);
+      renderMatches();
+    }
+
+    function loadProfileIntoForm(profile) {
+      if (!profile) return;
+
+      document.querySelectorAll('#connectorsForm input[type="checkbox"]').forEach((checkbox) => {
+        checkbox.checked = profile.interests.includes(checkbox.value);
+      });
+
+      const instagramInput = document.getElementById("instagramHandle");
+      if (instagramInput) instagramInput.value = profile.instagram || "";
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const profile = getProfileFromForm();
+
+      if (profile.interests.length < 3) {
+        alert("Please choose at least 3 interests so we can find meaningful overlaps.");
+        return;
+      }
+
+      saveProfile(profile);
+      renderMatches();
+      matchesSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    resetDemoBtn.addEventListener("click", function () {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(EVENT_LIKES_KEY);
+      window.location.reload();
+    });
+
+    const existingProfile = getProfile();
+    loadProfileIntoForm(existingProfile);
+    renderMatches();
+  </script>
+</body>
+</html>
