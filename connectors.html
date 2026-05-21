@@ -868,7 +868,7 @@
                 <div class="tag-list">
                   ${(event.matchedInterestTags || []).map((tag) => '<span class="tag">' + tag + '</span>').join("")}
                 </div>
-                ${mutual ? `<span class="mutual-badge">You both liked this event</span>` : ""}
+                ${mutual ? '<span class="mutual-badge">You both liked this event</span>' : ""}
                 <div class="event-actions">
                   <button type="button" class="connector-btn connector-btn-primary connector-btn-small" data-like-event="${event.id}" data-match-id="${match.id}">
                     ${userLiked ? "Interested" : "I’m interested"}
