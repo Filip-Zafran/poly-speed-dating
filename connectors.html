@@ -866,7 +866,7 @@
                   <span><strong>Location:</strong> ${event.location}</span>
                 </div>
                 <div class="tag-list">
-                  ${(event.matchedInterestTags || []).map((tag) => `<span class="tag">${tag}</span>`).join("")}
+                  ${(event.matchedInterestTags || []).map((tag) => '<span class="tag">' + tag + '</span>').join("")}
                 </div>
                 ${mutual ? `<span class="mutual-badge">You both liked this event</span>` : ""}
                 <div class="event-actions">
