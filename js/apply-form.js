@@ -2,6 +2,156 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentStep = 1;
   const totalSteps = 3;
 
+  const QUIZ_PASS_PERCENT = 80;
+
+  const psdQuizQuestions = [
+    {
+      question: "What does consent mean at PSD?",
+      answers: [
+        "A yes at the beginning means yes forever",
+        "Consent should be enthusiastic and can change at any time",
+        "Consent is only needed for physical contact",
+        "Consent is assumed during flirting"
+      ],
+      correctAnswer: "Consent should be enthusiastic and can change at any time",
+      explanation: "Consent can be withdrawn at any time and should always be enthusiastic."
+    },
+    {
+      question: "Can participants exchange personal contact details during the event?",
+      answers: [
+        "Yes, anytime",
+        "Only during breaks",
+        "No, organizers handle follow-ups after mutual matches",
+        "Only after the 1-on-1 rounds"
+      ],
+      correctAnswer: "No, organizers handle follow-ups after mutual matches",
+      explanation: "The event avoids pressure and awkwardness around contact sharing."
+    },
+    {
+      question: "How should participants treat pronouns and identities?",
+      answers: [
+        "Only use binary pronouns",
+        "Use each participant’s chosen name and pronouns",
+        "Avoid pronouns completely",
+        "Only ask organizers"
+      ],
+      correctAnswer: "Use each participant’s chosen name and pronouns",
+      explanation: "Respect and inclusivity are core values of PSD."
+    },
+    {
+      question: "What should extroverted participants try to do?",
+      answers: [
+        "Lead every conversation",
+        "Speak louder so everyone hears them",
+        "Give space to quieter people",
+        "Talk during silence"
+      ],
+      correctAnswer: "Give space to quieter people",
+      explanation: "Balanced conversations help everyone feel included."
+    },
+    {
+      question: "What are introverted participants encouraged to do?",
+      answers: [
+        "Avoid talking",
+        "Only listen",
+        "Speak up and show themselves",
+        "Skip the 1-on-1s"
+      ],
+      correctAnswer: "Speak up and show themselves",
+      explanation: "The event encourages balanced participation from everyone. We know it can be tough, but people need to see you."
+    },
+    {
+      question: "What should you do if you witness inappropriate behavior?",
+      answers: [
+        "Ignore it",
+        "Post about it later",
+        "Inform the organizers immediately",
+        "Handle it alone"
+      ],
+      correctAnswer: "Inform the organizers immediately",
+      explanation: "Organizers are there to maintain a safe environment. Even if you are unsure, let us know and we will see how to use the most appropriate steps to manage the situation. We have a LOT of experience ;)"
+    },
+    {
+      question: "What should you do if you feel overwhelmed or uncomfortable?",
+      answers: [
+        "Leave immediately without saying anything",
+        "Take a break and/or speak to organizers",
+        "Force yourself to continue",
+        "Drink more alcohol"
+      ],
+      correctAnswer: "Take a break and/or speak to organizers",
+      explanation: "Participants are encouraged to prioritize comfort and safety."
+    },
+    {
+      question: "What is the recommendation regarding perfumes and fragrances?",
+      answers: [
+        "Wear strong perfumes",
+        "Avoid strong fragrances",
+        "Only natural fragrances are allowed",
+        "Perfume is encouraged"
+      ],
+      correctAnswer: "Avoid strong fragrances",
+      explanation: "Some participants may have allergies or sensitivities."
+    },
+    {
+      question: "Can couples participate together looking for a third person?",
+      answers: [
+        "Yes, always",
+        "Only during mingling",
+        "No, no unicorn hunting",
+        "Only with organizer permission"
+      ],
+      correctAnswer: "No, no unicorn hunting",
+      explanation: "The event is designed for individual participation."
+    },
+    {
+      question: "Can participants select both romantic and social interest?",
+      answers: [
+        "No, only one",
+        "Only organizers can choose both",
+        "Yes, participants can choose both or only one",
+        "Only after the event"
+      ],
+      correctAnswer: "Yes, participants can choose both or only one",
+      explanation: "Yes, participants can choose both or only one. Or none. Participants can customize the type of connections they seek."
+    },
+    {
+      question: "What is the recommendation regarding alcohol/drug consumption?",
+      answers: [
+        "Drink as much as possible",
+        "Alcohol and drugs are required",
+        "Keep alcohol consumption minimal. We have a strict no drug policy",
+        "Only cocktails are allowed"
+      ],
+      correctAnswer: "Keep alcohol consumption minimal. We have a strict no drug policy",
+      explanation: "Visibly intoxicated participants may be removed."
+    },
+    {
+      question: "When are matches and contact sharing confirmed?",
+      answers: [
+        "Immediately during the event",
+        "The next day at noon in the Software",
+        "During the first break",
+        "Only in person"
+      ],
+      correctAnswer: "The next day at noon in the Software",
+      explanation: "Sometimes one needs to sleep on it. You can change your preferences anytime before noon next day. <span style='color: #d43c3c; font-weight: bold;'>So make sure you remember your password</span>"
+    },
+    {
+      question: "What should participants NOT do in the matching software?",
+      answers: [
+        "Select multiple people",
+        "Add their partners",
+        "Choose social matches",
+        "Revise selections later"
+      ],
+      correctAnswer: "Add their partners",
+      explanation: "Participants should not add existing partners into the system, as it may reduce your chances to meet new people."
+    }
+  ];
+
+  const form = document.getElementById("psdApplyForm");
+
   const steps = document.querySelectorAll(".apply-step");
   const nextBtn = document.getElementById("nextBtn");
   const prevBtn = document.getElementById("prevBtn");
@@ -27,6 +177,31 @@ document.addEventListener("DOMContentLoaded", function () {
   const volunteerShift1 = document.getElementById("volunteerShift1");
   const volunteerShift2 = document.getElementById("volunteerShift2");
   const lowBudgetReason = document.getElementById("lowBudgetReason");
+
+  const quizScorePercent = document.getElementById("quizScorePercent");
+  const quizCorrectCount = document.getElementById("quizCorrectCount");
+  const quizTotalQuestions = document.getElementById("quizTotalQuestions");
+  const quizPassed = document.getElementById("quizPassed");
+
+  const startQuizBtn = document.getElementById("startQuizBtn");
+  const quizStartScreen = document.getElementById("quizStartScreen");
+  const quizWindow = document.getElementById("quizWindow");
+  const quizResultScreen = document.getElementById("quizResultScreen");
+  const quizProgressText = document.getElementById("quizProgressText");
+  const quizProgressBar = document.getElementById("quizProgressBar");
+  const quizQuestion = document.getElementById("quizQuestion");
+  const quizAnswers = document.getElementById("quizAnswers");
+  const quizExplanation = document.getElementById("quizExplanation");
+  const quizNextBtn = document.getElementById("quizNextBtn");
+  const quizBackBtn = document.getElementById("quizBackBtn");
+  const redoQuizBtn = document.getElementById("redoQuizBtn");
+  const continueAfterQuizBtn = document.getElementById("continueAfterQuizBtn");
+  const quizScoreText = document.getElementById("quizScoreText");
+
+  let quizCurrentIndex = 0;
+  let quizCorrectAnswers = 0;
+  let quizAnswered = false;
+  let quizSelectedAnswer = "";
 
   function updateUI() {
     steps.forEach((step) => {
@@ -116,20 +291,22 @@ document.addEventListener("DOMContentLoaded", function () {
     if (interestMen && !interestMen.checked) {
       clearRadioGroup("interestMenDetail");
     } else if (interestMen && interestMen.checked) {
-      // Ensure at least one checkbox is selected
       const menChecked = getCheckedValues("interestMenDetail").length;
-      if (menChecked === 0) {
-        document.querySelector('input[name="interestMenDetail"]').checked = true;
+      const firstMenDetail = document.querySelector('input[name="interestMenDetail"]');
+
+      if (menChecked === 0 && firstMenDetail) {
+        firstMenDetail.checked = true;
       }
     }
 
     if (interestWomen && !interestWomen.checked) {
       clearRadioGroup("interestWomenDetail");
     } else if (interestWomen && interestWomen.checked) {
-      // Ensure at least one checkbox is selected
       const womenChecked = getCheckedValues("interestWomenDetail").length;
-      if (womenChecked === 0) {
-        document.querySelector('input[name="interestWomenDetail"]').checked = true;
+      const firstWomenDetail = document.querySelector('input[name="interestWomenDetail"]');
+
+      if (womenChecked === 0 && firstWomenDetail) {
+        firstWomenDetail.checked = true;
       }
     }
 
@@ -151,21 +328,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (cb.id === "interestMen") {
         const menDetails = getCheckedValues("interestMenDetail");
-        if (menDetails.length > 0) {
-          selected.push(...menDetails);
-        } else {
-          selected.push("Men");
-        }
+        selected.push(...(menDetails.length > 0 ? menDetails : ["Men"]));
         return;
       }
 
       if (cb.id === "interestWomen") {
         const womenDetails = getCheckedValues("interestWomenDetail");
-        if (womenDetails.length > 0) {
-          selected.push(...womenDetails);
-        } else {
-          selected.push("Women");
-        }
+        selected.push(...(womenDetails.length > 0 ? womenDetails : ["Women"]));
         return;
       }
 
@@ -215,6 +384,236 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function resetQuizHiddenFields() {
+    if (quizScorePercent) quizScorePercent.value = "";
+    if (quizCorrectCount) quizCorrectCount.value = "";
+    if (quizTotalQuestions) quizTotalQuestions.value = String(psdQuizQuestions.length);
+    if (quizPassed) quizPassed.value = "";
+  }
+
+  function startQuiz() {
+    quizCurrentIndex = 0;
+    quizCorrectAnswers = 0;
+    quizAnswered = false;
+    quizSelectedAnswer = "";
+
+    resetQuizHiddenFields();
+
+    if (quizStartScreen) quizStartScreen.classList.add("is-hidden");
+    if (quizResultScreen) quizResultScreen.classList.add("is-hidden");
+    if (quizWindow) quizWindow.classList.remove("is-hidden");
+
+    renderQuizQuestion();
+  }
+
+  function renderQuizQuestion() {
+    const currentQuestion = psdQuizQuestions[quizCurrentIndex];
+
+    quizAnswered = false;
+    quizSelectedAnswer = "";
+
+    if (quizProgressText) {
+      quizProgressText.textContent = `Question ${quizCurrentIndex + 1} / ${psdQuizQuestions.length}`;
+    }
+
+    if (quizProgressBar) {
+      quizProgressBar.style.width = `${((quizCurrentIndex + 1) / psdQuizQuestions.length) * 100}%`;
+    }
+
+    if (quizQuestion) {
+      quizQuestion.textContent = currentQuestion.question;
+    }
+
+    if (quizExplanation) {
+      quizExplanation.textContent = "";
+      quizExplanation.classList.add("is-hidden");
+    }
+
+    if (quizNextBtn) {
+      quizNextBtn.textContent =
+        quizCurrentIndex === psdQuizQuestions.length - 1 ? "Finish Quiz" : "Next Question";
+      quizNextBtn.disabled = true;
+    }
+
+    if (quizBackBtn) {
+      quizBackBtn.classList.toggle("is-hidden", quizCurrentIndex === 0);
+    }
+
+    if (!quizAnswers) return;
+
+    quizAnswers.innerHTML = "";
+
+    currentQuestion.answers.forEach((answer) => {
+      const label = document.createElement("label");
+      label.className = "apply-choice quiz-answer-choice";
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "quiz_answer";
+      input.value = answer;
+
+      const span = document.createElement("span");
+      span.className = "apply-choice-text";
+      span.innerHTML = `<strong>${answer}</strong>`;
+
+      label.appendChild(input);
+      label.appendChild(span);
+
+      input.addEventListener("change", function () {
+        handleQuizAnswer(answer);
+      });
+
+      quizAnswers.appendChild(label);
+    });
+  }
+
+  function handleQuizAnswer(answer) {
+    if (quizAnswered) return;
+
+    const currentQuestion = psdQuizQuestions[quizCurrentIndex];
+    quizAnswered = true;
+    quizSelectedAnswer = answer;
+
+    const isCorrect = answer === currentQuestion.correctAnswer;
+
+    if (isCorrect) {
+      quizCorrectAnswers++;
+    }
+
+    document.querySelectorAll(".quiz-answer-choice").forEach((label) => {
+      const input = label.querySelector("input");
+      const value = input ? input.value : "";
+
+      input.disabled = true;
+
+      if (value === currentQuestion.correctAnswer) {
+        label.style.borderColor = "#20a35b";
+        label.style.background = "#eefcf3";
+      }
+
+      if (value === quizSelectedAnswer && value !== currentQuestion.correctAnswer) {
+        label.style.borderColor = "#d43c3c";
+        label.style.background = "#fff1f1";
+      }
+    });
+
+    if (quizExplanation) {
+      quizExplanation.innerHTML = currentQuestion.explanation;
+      quizExplanation.classList.remove("is-hidden");
+    }
+
+    if (quizNextBtn) quizNextBtn.disabled = false;
+  }
+
+  function goToPreviousQuizQuestion() {
+    if (quizCurrentIndex > 0) {
+      quizCurrentIndex--;
+      renderQuizQuestion();
+    }
+  }
+
+  function goToNextQuizQuestion() {
+    if (!quizAnswered) {
+      alert("Please choose one answer before continuing.");
+      return;
+    }
+
+    if (quizCurrentIndex < psdQuizQuestions.length - 1) {
+      quizCurrentIndex++;
+      renderQuizQuestion();
+      return;
+    }
+
+    finishQuiz();
+  }
+
+  function finishQuiz() {
+    const total = psdQuizQuestions.length;
+    const percent = Math.round((quizCorrectAnswers / total) * 100);
+    const passed = percent >= QUIZ_PASS_PERCENT;
+
+    if (quizScorePercent) quizScorePercent.value = String(percent);
+    if (quizCorrectCount) quizCorrectCount.value = String(quizCorrectAnswers);
+    if (quizTotalQuestions) quizTotalQuestions.value = String(total);
+    if (quizPassed) quizPassed.value = passed ? "Yes" : "No";
+
+    if (quizWindow) quizWindow.classList.add("is-hidden");
+    if (quizResultScreen) quizResultScreen.classList.remove("is-hidden");
+
+    if (quizScoreText) {
+      quizScoreText.innerHTML = `
+        You answered <strong>${quizCorrectAnswers} / ${total}</strong> correctly.<br>
+        Your score: <strong>${percent}%</strong>.<br>
+        ${
+          passed
+            ? "Great, you passed the quiz and can continue with the application."
+            : "Please redo the quiz. You need at least 80% to continue."
+        }
+      `;
+    }
+
+    if (continueAfterQuizBtn) {
+      continueAfterQuizBtn.classList.toggle("is-hidden", !passed);
+    }
+  }
+
+  function validateForm() {
+    const requiredFields = {
+      name_or_nickname: "Name or Nickname",
+      email: "Email",
+      age_range: "Age Range",
+      about_yourself: "Tell us about yourself",
+      why_interested: "Why are you interested",
+      gender_identity: "Gender Identity",
+      interested_in: "Interested In",
+      code_of_conduct: "Code of Conduct acceptance"
+    };
+
+    const errors = [];
+
+    for (const [fieldName, fieldLabel] of Object.entries(requiredFields)) {
+      const field = form.querySelector(`[name="${fieldName}"]`);
+
+      if (field && field.type === "checkbox" && !field.checked) {
+        errors.push(`${fieldLabel} is required`);
+      } else if (field && !field.value.trim()) {
+        errors.push(`${fieldLabel} is required`);
+      }
+    }
+
+    const selectedGender = genderPrimary ? genderPrimary.value : "";
+
+    if ((selectedGender === "Man" || selectedGender === "Woman") && !getCheckedValue("genderSecondary")) {
+      errors.push("Please select Cis or Trans for your gender identity");
+    }
+
+    const interestCheckboxes = form.querySelectorAll(".interest-checkbox:checked");
+
+    if (interestCheckboxes.length === 0) {
+      errors.push("Please select at least one interest option");
+    }
+
+    if (interestMen && interestMen.checked) {
+      const menDetail = form.querySelector('input[name="interestMenDetail"]:checked');
+      if (!menDetail) {
+        errors.push("Please select Cis Men and/or Trans Men");
+      }
+    }
+
+    if (interestWomen && interestWomen.checked) {
+      const womenDetail = form.querySelector('input[name="interestWomenDetail"]:checked');
+      if (!womenDetail) {
+        errors.push("Please select Cis Women and/or Trans Women");
+      }
+    }
+
+    if (!quizPassed || quizPassed.value !== "Yes") {
+      errors.push("Please pass the Code of Conduct quiz");
+    }
+
+    return errors;
+  }
+
   if (nextBtn) {
     nextBtn.addEventListener("click", function () {
       if (currentStep < totalSteps) {
@@ -249,22 +648,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.querySelectorAll('input[name="interestMenDetail"]').forEach((input) => {
     input.addEventListener("change", function () {
-      // Prevent unchecking all options
       const checkedCount = getCheckedValues("interestMenDetail").length;
-      if (checkedCount === 0) {
-        this.checked = true;
-      }
+      if (checkedCount === 0) this.checked = true;
       syncInterestHiddenField();
     });
   });
 
   document.querySelectorAll('input[name="interestWomenDetail"]').forEach((input) => {
     input.addEventListener("change", function () {
-      // Prevent unchecking all options
       const checkedCount = getCheckedValues("interestWomenDetail").length;
-      if (checkedCount === 0) {
-        this.checked = true;
-      }
+      if (checkedCount === 0) this.checked = true;
       syncInterestHiddenField();
     });
   });
@@ -277,114 +670,61 @@ document.addEventListener("DOMContentLoaded", function () {
     input.addEventListener("change", updateApplicationTypeField);
   });
 
+  if (startQuizBtn) startQuizBtn.addEventListener("click", startQuiz);
+  if (quizNextBtn) quizNextBtn.addEventListener("click", goToNextQuizQuestion);
+  if (quizBackBtn) quizBackBtn.addEventListener("click", goToPreviousQuizQuestion);
+  if (redoQuizBtn) redoQuizBtn.addEventListener("click", startQuiz);
+
+  if (continueAfterQuizBtn) {
+    continueAfterQuizBtn.addEventListener("click", function () {
+      if (quizResultScreen) quizResultScreen.classList.add("is-hidden");
+      if (quizContainer) {
+        const statusMsg = document.createElement("div");
+        statusMsg.className = "apply-note";
+        statusMsg.textContent = "✓ Quiz completed! You can now submit the application.";
+        quizContainer.prepend(statusMsg);
+      }
+    });
+  }
+
+  if (form) {
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      syncGenderHiddenField();
+      syncInterestHiddenField();
+
+      const errors = validateForm();
+
+      if (errors.length > 0) {
+        alert("Please fill in all required fields:\n\n" + errors.join("\n"));
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(window.PSD_APPS_SCRIPT_URL, {
+          method: "POST",
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error("Request failed with status " + response.status);
+        }
+
+        alert("Application sent successfully!");
+      } catch (error) {
+        console.error("SUBMIT ERROR:", error);
+        alert("Submit failed.");
+      }
+    });
+  }
+
   updateUI();
   updateGenderField();
   updateInterestField();
   updateReferralField();
   updateApplicationTypeField();
+  resetQuizHiddenFields();
 });
-
-const form = document.getElementById("psdApplyForm");
-
-function validateForm() {
-  const requiredFields = {
-    name_or_nickname: "Name or Nickname",
-    email: "Email",
-    age_range: "Age Range",
-    about_yourself: "Tell us about yourself",
-    why_interested: "Why are you interested",
-    gender_identity: "Gender Identity",
-    interested_in: "Interested In",
-    code_of_conduct: "Code of Conduct acceptance",
-    secret_word: "Secret word"
-  };
-
-  const errors = [];
-
-  // Check text fields
-  for (const [fieldName, fieldLabel] of Object.entries(requiredFields)) {
-    const field = form.querySelector(`[name="${fieldName}"]`);
-    if (field && !field.value.trim()) {
-      errors.push(`${fieldLabel} is required`);
-    }
-  }
-
-  // Check if at least one interest checkbox is selected
-  const interestCheckboxes = form.querySelectorAll('input[name="interested_in"]:checked, input[name="interestMenDetail"]:checked, input[name="interestWomenDetail"]:checked, input[class="interest-checkbox"]:checked');
-  if (interestCheckboxes.length === 0) {
-    errors.push("Please select at least one interest option");
-  }
-
-  // Check if gender identity requires secondary selection
-  const genderPrimary = form.querySelector('[name="gender_identity"]');
-  if (genderPrimary && (genderPrimary.value === "Man" || genderPrimary.value === "Woman")) {
-    const genderSecondary = form.querySelector('input[name="genderSecondary"]:checked');
-    if (!genderSecondary) {
-      errors.push("Please select Cis or Trans for your gender identity");
-    }
-  }
-
-  // Check if Men/Women is selected, require Cis or Trans selection
-  const interestMen = form.querySelector('#interestMen');
-  const interestWomen = form.querySelector('#interestWomen');
-
-  if (interestMen && interestMen.checked) {
-    const menDetail = form.querySelector('input[name="interestMenDetail"]:checked');
-    if (!menDetail) {
-      errors.push("Please select Cis Men and/or Trans Men");
-    }
-  }
-
-  if (interestWomen && interestWomen.checked) {
-    const womenDetail = form.querySelector('input[name="interestWomenDetail"]:checked');
-    if (!womenDetail) {
-      errors.push("Please select Cis Women and/or Trans Women");
-    }
-  }
-
-  return errors;
-}
-
-if (form) {
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    // Validate form
-    const errors = validateForm();
-    if (errors.length > 0) {
-      alert("Please fill in all required fields:\n\n" + errors.join("\n"));
-      return;
-    }
-
-    console.log("FORM SUBMIT STARTED");
-
-    const formData = new FormData(form);
-
-    // make sure hidden fields are up to date
-    if (typeof syncGenderHiddenField === "function") {
-      syncGenderHiddenField();
-    }
-
-    if (typeof syncInterestHiddenField === "function") {
-      syncInterestHiddenField();
-    }
-
-    try {
-      const response = await fetch(window.PSD_APPS_SCRIPT_URL, {
-        method: "POST",
-        body: formData
-      });
-
-      console.log("SUBMIT RESPONSE", response);
-
-      if (!response.ok) {
-        throw new Error("Request failed with status " + response.status);
-      }
-
-      alert("Application sent successfully!");
-    } catch (error) {
-      console.error("SUBMIT ERROR:", error);
-      alert("Submit failed.");
-    }
-  });
-}

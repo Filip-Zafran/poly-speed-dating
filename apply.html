@@ -477,6 +477,41 @@
       background: #fffafa !important;
     }
 
+
+    /* Code of Conduct Quiz */
+    #quizContainer {
+      margin-top: 1rem;
+    }
+
+    #quizWindow {
+      max-width: 700px;
+      margin: 1.5rem auto;
+      padding: 1rem;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(52,12,70,0.08);
+    }
+
+    .quiz-answer-choice input:disabled {
+      cursor: not-allowed;
+    }
+
+    .quiz-answer-choice.is-correct {
+      border-color: #20a35b !important;
+      background: #eefcf3 !important;
+    }
+
+    .quiz-answer-choice.is-wrong {
+      border-color: #d43c3c !important;
+      background: #fff1f1 !important;
+    }
+
+    #quizScoreText {
+      color: #413752;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
     @media (max-width: 760px) {
       .apply-grid,
       .apply-event-grid {
@@ -600,6 +635,10 @@
             <input type="hidden" name="gender_identity" id="genderIdentityHidden" />
             <input type="hidden" name="interested_in" id="interestedInHidden" />
             <input type="hidden" name="application_meta" id="applicationMetaHidden" />
+            <input type="hidden" name="quiz_score_percent" id="quizScorePercent" />
+            <input type="hidden" name="quiz_correct_count" id="quizCorrectCount" />
+            <input type="hidden" name="quiz_total_questions" id="quizTotalQuestions" />
+            <input type="hidden" name="quiz_passed" id="quizPassed" />
 
             <section class="apply-step is-active" data-step="1">
               <h2>My info</h2>
@@ -977,10 +1016,71 @@
                   <div class="field-error">You need to accept the Code of Conduct.</div>
                 </div>
 
-                <div class="apply-field">
-                  <label for="secretWord">What's the secret word that you have found in the Code of Conduct? <span class="apply-required">*</span></label>
-                  <input class="apply-input" type="text" id="secretWord" name="secret_word" maxlength="120" required />
-                  <div class="field-error">Please add the secret word.</div>
+                <div class="apply-box apply-grid-1" id="quizContainer">
+                  <h3>Code of Conduct Quiz <span class="apply-required">*</span></h3>
+
+                  <p>
+                    Please complete the short Code of Conduct quiz before submitting.
+                    You need at least 80% to continue.
+                    <br />
+                    <a href="images/PSD - CoC & Schedule.pdf" target="_blank" rel="noopener noreferrer">
+                      Open Code of Conduct
+                    </a>
+                  </p>
+
+                  <div id="quizStartScreen">
+                    <button type="button" class="btn btn-apply apply-btn" id="startQuizBtn">
+                      Start Quiz
+                    </button>
+                  </div>
+
+                  <div id="quizWindow" class="is-hidden">
+                    <div class="apply-progress-wrap">
+                      <div class="apply-progress-top">
+                        <div class="apply-step-text" id="quizProgressText">Question 1 / 17</div>
+                      </div>
+
+                      <div class="apply-progress" aria-hidden="true">
+                        <div class="apply-progress-bar" id="quizProgressBar"></div>
+                      </div>
+                    </div>
+
+                    <div class="apply-card">
+                      <h3 id="quizQuestion"></h3>
+
+                      <div class="apply-radio-group" id="quizAnswers"></div>
+
+                      <div id="quizExplanation" class="apply-note is-hidden"></div>
+
+                      <div class="apply-actions">
+                        <button type="button" class="btn btn-ghost apply-btn" id="quizBackBtn">
+                          Back
+                        </button>
+
+                        <div class="apply-actions-right">
+                          <button type="button" class="btn btn-apply apply-btn" id="quizNextBtn">
+                            Next Question
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="quizResultScreen" class="is-hidden">
+                    <h3>Your Result</h3>
+
+                    <p id="quizScoreText"></p>
+
+                    <div class="apply-actions">
+                      <button type="button" class="btn btn-ghost apply-btn" id="redoQuizBtn">
+                        Redo Quiz
+                      </button>
+
+                      <button type="button" class="btn btn-apply apply-btn is-hidden" id="continueAfterQuizBtn">
+                        Continue to application
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="apply-field apply-grid-1">
@@ -1016,7 +1116,7 @@
   <custom-footer></custom-footer>
 
   <script>
-    window.PSD_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby745aqpf7wjMvUvgG5Ytfnq9u7B3ixEnTg_MwGErzwshQSMw28Sy0FRcTSjF-uy1kkcg/exec";
+    window.PSD_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzW_g6fA8g0Cp2Vn_U1vIILIQIQH0Hkcgw2dGSTpdu0gKXMnOVQYzQkJzHCPC1NuC3XLw/exec";
   </script>
   <script src="js/apply-form.js"></script>
 </body>
