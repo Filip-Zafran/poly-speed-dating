@@ -276,46 +276,62 @@
     .event-card {
       overflow: hidden;
       border: 1px solid rgba(52,12,70,0.12);
-      border-radius: 20px;
+      border-radius: 12px;
       background: #fff;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.045);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     }
 
-    .event-image {
-      height: 150px;
-      background: linear-gradient(135deg, #efe8fb, #dff5ff);
+    .event-header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: var(--poly-purple);
-      font-weight: 900;
-      text-align: center;
-      padding: 1rem;
+      gap: 0.6rem;
+      padding: 0.6rem;
+      background: #f9f7fc;
+      border-bottom: 1px solid rgba(52,12,70,0.08);
     }
 
-    .event-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      display: block;
+    .event-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .event-logo-placeholder {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #efe8fb, #dff5ff);
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .event-domain {
+      font-size: 0.75rem;
+      color: #5e536c;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
     }
 
     .event-content {
-      padding: 0.9rem;
+      padding: 0.5rem;
     }
 
     .event-content h4 {
-      margin: 0 0 0.35rem;
+      margin: 0 0 0.2rem;
       color: var(--poly-purple);
-      font-size: 1.05rem;
+      font-size: 0.9rem;
+      line-height: 1.2;
     }
 
     .event-meta {
       display: grid;
-      gap: 0.25rem;
+      gap: 0.15rem;
       color: #5e536c;
-      font-size: 0.92rem;
-      margin: 0.6rem 0;
+      font-size: 0.75rem;
+      margin: 0.3rem 0;
     }
 
     .event-actions {
@@ -826,19 +842,28 @@
           const matchLiked = match.likedEventIds.includes(event.id);
           const mutual = userLiked && matchLiked;
 
+          let domainUrl = ‘’;
+          let faviconUrl = ‘’;
+          if (event.url) {
+            const urlObj = new URL(event.url);
+            domainUrl = urlObj.hostname.replace(‘www.’, ‘’);
+            faviconUrl = ‘https://www.google.com/s2/favicons?domain=’ + urlObj.hostname + ‘&sz=64’;
+          }
+          const logoHtml = faviconUrl ? ‘<img src="’ + faviconUrl + ‘" alt="logo" class="event-logo">’ : ‘<div class="event-logo-placeholder"></div>’;
+
           return `
             <article class="event-card ${mutual ? "event-mutual" : userLiked ? "event-liked" : ""}">
-              ${event.image ? `<img src="${event.image}" alt="${event.title}">` : `<div class="event-image">${event.title}</div>`}
+              <div class="event-header">
+                ${logoHtml}
+                <div class="event-domain">${domainUrl}</div>
+              </div>
               <div class="event-content">
                 <h4>${event.title}</h4>
-                <p>${event.description}</p>
                 <div class="event-meta">
                   <span><strong>Date:</strong> ${event.date}</span>
                   <span><strong>Time:</strong> ${event.time}</span>
                   <span><strong>Price:</strong> ${event.price}</span>
                   <span><strong>Location:</strong> ${event.location}</span>
-                  <span><strong>Source:</strong> ${event.source}</span>
-                  ${event.url ? `<span><strong>Website:</strong> <a href="${event.url}" target="_blank" rel="noopener noreferrer" style="color: #009fe3; text-decoration: underline;">${new URL(event.url).hostname.replace('www.', '')}</a></span>` : ""}
                 </div>
                 <div class="tag-list">
                   ${(event.matchedInterestTags || []).map((tag) => `<span class="tag">${tag}</span>`).join("")}

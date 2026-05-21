@@ -1,5 +1,50 @@
 # 🔗 Connectors Feature - User Guide
 
+## Quick Start - Starting the Servers
+
+Before you can use the Connectors feature, you need to start two servers:
+
+### 1. Start the API Server (Node.js)
+
+Open a terminal in the project directory and run:
+
+```bash
+node server.js
+```
+
+You should see:
+```
+Server running on http://localhost:3000
+```
+
+**Keep this terminal open** - the server must stay running.
+
+### 2. Start the HTTP Server (in a new terminal)
+
+Open a **second terminal** in the same directory and run:
+
+```bash
+python3 -m http.server 8080
+```
+
+You should see:
+```
+Serving HTTP on 0.0.0.0 port 8080
+```
+
+**Keep this terminal open too** - the server must stay running.
+
+### 3. Open Connectors
+
+Navigate to:
+```
+http://localhost:8080/connectors.html
+```
+
+That's it! You're ready to use Connectors.
+
+---
+
 ## Overview
 
 **Connectors** is a feature that helps PSD participants discover shared interests with their matches and suggests relevant events and meetup ideas in Berlin.
@@ -16,9 +61,15 @@
 
 ## Getting Started
 
+### Prerequisites
+
+Make sure both servers are running (see **Quick Start** section above):
+- ✅ API Server on http://localhost:3000
+- ✅ HTTP Server on http://localhost:8080
+
 ### Opening Connectors
 
-Navigate to the Connectors page:
+Once the servers are running, navigate to:
 ```
 http://localhost:8080/connectors.html
 ```
