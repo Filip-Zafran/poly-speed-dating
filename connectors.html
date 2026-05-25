@@ -550,6 +550,300 @@
       font-size: 0.88rem;
     }
 
+    /* Matching Page Intro */
+    .matching-page {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, rgba(52,12,70,0.05), rgba(0,159,227,0.05));
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      border: 2px solid rgba(52,12,70,0.1);
+    }
+
+    .matching-page h2 {
+      font-size: 2.8rem;
+      color: var(--poly-purple);
+      margin: 0 0 0.8rem;
+      font-weight: 900;
+    }
+
+    .matching-page .match-count {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin: 0.5rem 0 1.5rem;
+      font-weight: 700;
+    }
+
+    .matching-page p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 1rem 0;
+      color: var(--muted);
+    }
+
+    /* Multi-Step Accordion Sections */
+    .questionnaire-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .accordion-section {
+      background: white;
+      border: 2px solid rgba(52,12,70,0.12);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .accordion-section.active {
+      border-color: var(--poly-purple);
+      box-shadow: 0 8px 24px rgba(52,12,70,0.15);
+    }
+
+    .accordion-section.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      background: linear-gradient(135deg, #f9f7fc, #f5fbff);
+      cursor: pointer;
+      border-bottom: 1px solid rgba(52,12,70,0.08);
+      transition: background 0.2s ease;
+    }
+
+    .accordion-section.active .accordion-header {
+      background: linear-gradient(135deg, #efe8fb, #e3f2fd);
+    }
+
+    .accordion-header:hover {
+      background: linear-gradient(135deg, #f5f1fb, #f0f9ff);
+    }
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(52,12,70,0.1);
+      color: var(--poly-purple);
+      font-weight: 900;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .accordion-section.active .step-number {
+      background: var(--poly-purple);
+      color: white;
+    }
+
+    .accordion-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--poly-purple);
+      flex: 1;
+    }
+
+    .accordion-status {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(52,12,70,0.08);
+      color: var(--poly-purple);
+      font-weight: 600;
+    }
+
+    .accordion-section.active .accordion-status {
+      background: rgba(0,159,227,0.15);
+      color: var(--poly-blue);
+    }
+
+    .accordion-section.completed .accordion-status {
+      background: rgba(32,163,91,0.15);
+      color: #20a35b;
+      content: "✓ Completed";
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 1.5rem;
+      background: white;
+    }
+
+    .accordion-section.active .accordion-content {
+      display: block;
+    }
+
+    /* Custom Activity Tags */
+    .custom-activities-input {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .custom-activities-input input {
+      flex: 1;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid rgba(52,12,70,0.2);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .custom-activities-input button {
+      padding: 0.6rem 1rem;
+      background: var(--poly-blue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .custom-activities-input button:hover {
+      background: #0087b8;
+    }
+
+    .custom-activity-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background: rgba(0,159,227,0.12);
+      border: 1px solid rgba(0,159,227,0.3);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      color: #18405f;
+      font-weight: 600;
+      margin: 0.25rem;
+    }
+
+    .custom-activity-tag button {
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .custom-activity-tag button:hover {
+      color: var(--poly-magenta);
+    }
+
+    /* Chatting Quiz Styling */
+    .quiz-question {
+      margin-bottom: 1.8rem;
+    }
+
+    .quiz-question h4 {
+      color: var(--poly-purple);
+      margin: 0 0 1rem;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .quiz-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 0.8rem 1rem;
+      background: #fafbfc;
+      border: 1px solid rgba(52,12,70,0.1);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      background: #f5f7fb;
+      border-color: rgba(52,12,70,0.2);
+    }
+
+    .quiz-option input[type="radio"] {
+      margin-top: 0.2rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .quiz-option input[type="radio"]:checked + label {
+      font-weight: 600;
+      color: var(--poly-purple);
+    }
+
+    .quiz-option label {
+      cursor: pointer;
+      color: var(--text);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Section Navigation */
+    .accordion-navigation {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(52,12,70,0.08);
+    }
+
+    .accordion-navigation button {
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .accordion-navigation .back-btn {
+      background: rgba(52,12,70,0.08);
+      color: var(--poly-purple);
+      flex: 0.8;
+    }
+
+    .accordion-navigation .back-btn:hover {
+      background: rgba(52,12,70,0.12);
+    }
+
+    .accordion-navigation .back-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .accordion-navigation .next-btn {
+      background: var(--poly-purple);
+      color: white;
+      flex: 1.2;
+    }
+
+    .accordion-navigation .next-btn:hover:not(:disabled) {
+      background: #2a0a3a;
+    }
+
+    .accordion-navigation .next-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
     @media (max-width: 760px) {
       .connector-grid,
       .connector-check-group,
@@ -563,6 +857,14 @@
 
       .connector-btn {
         width: 100%;
+      }
+
+      .matching-page h2 {
+        font-size: 2rem;
+      }
+
+      .matching-page .match-count {
+        font-size: 1.1rem;
       }
     }
   </style>
@@ -590,94 +892,249 @@
         </section>
 
         <section class="connector-card" id="questionnaireSection">
-          <h2>Connectors Questionnaire</h2>
-          <p class="connector-help">Choose everything you would enjoy doing with a social or romantic match.</p>
+          <!-- Matching Page Intro -->
+          <div class="matching-page" id="matchingPageIntro">
+            <h2>Matching Page</h2>
+            <p class="match-count" id="matchCountDisplay">Congratulations you have: 0 Romantic and 0 Social matches</p>
+            <p>We have noticed that many people get stuck on this part.</p>
+            <p><strong>This is why we introduced the Connectors!</strong></p>
+            <p>In order to see your matches, please fill in these 3 Connectors:</p>
+          </div>
 
           <form id="connectorsForm">
-            <div class="connector-grid">
-              <div class="connector-field">
-                <span class="connector-legend">Movement / Sport</span>
-                <div class="connector-check-group" data-category="movement">
-                  <label class="connector-choice"><input type="checkbox" value="hiking" /> Hiking</label>
-                  <label class="connector-choice"><input type="checkbox" value="bouldering" /> Bouldering</label>
-                  <label class="connector-choice"><input type="checkbox" value="climbing" /> Climbing</label>
-                  <label class="connector-choice"><input type="checkbox" value="stretching" /> Stretching</label>
-                  <label class="connector-choice"><input type="checkbox" value="yoga" /> Yoga</label>
-                  <label class="connector-choice"><input type="checkbox" value="swimming" /> Swimming</label>
-                  <label class="connector-choice"><input type="checkbox" value="cycling" /> Cycling</label>
-                  <label class="connector-choice"><input type="checkbox" value="dancing" /> Dancing</label>
+            <div class="questionnaire-sections">
+              <!-- Section 1: Social Connector -->
+              <div class="accordion-section active" data-section="1">
+                <div class="accordion-header">
+                  <div class="step-number">1</div>
+                  <div class="accordion-title">Social</div>
+                  <div class="accordion-status" id="status-1">Complete</div>
+                </div>
+                <div class="accordion-content">
+                  <p class="connector-help">Share your social media handles so matches can connect with you</p>
+
+                  <div class="connector-field">
+                    <label for="instagramHandle">Do you want to share your Instagram?</label>
+                    <input class="connector-input" type="text" id="instagramHandle" placeholder="@yourhandle or Instagram link" />
+                    <small class="connector-help">Optional. Only share this if you are comfortable being contacted there.</small>
+                  </div>
+
+                  <div class="connector-field">
+                    <label for="spotifyHandle">Do you want to share your Spotify?</label>
+                    <input class="connector-input" type="text" id="spotifyHandle" placeholder="Spotify username or profile link" />
+                    <small class="connector-help">Optional. Share your music taste with matches.</small>
+                  </div>
+
+                  <div class="accordion-navigation">
+                    <button type="button" class="back-btn" id="backBtn-1" disabled>← Back</button>
+                    <button type="button" class="next-btn" id="nextBtn-1">Next →</button>
+                  </div>
                 </div>
               </div>
 
-              <div class="connector-field">
-                <span class="connector-legend">Music / Nightlife</span>
-                <div class="connector-check-group" data-category="music">
-                  <label class="connector-choice"><input type="checkbox" value="techno" /> Techno</label>
-                  <label class="connector-choice"><input type="checkbox" value="house" /> House</label>
-                  <label class="connector-choice"><input type="checkbox" value="jazz" /> Jazz</label>
-                  <label class="connector-choice"><input type="checkbox" value="punk" /> Punk</label>
-                  <label class="connector-choice"><input type="checkbox" value="metal" /> Metal</label>
-                  <label class="connector-choice"><input type="checkbox" value="indie concerts" /> Indie concerts</label>
-                  <label class="connector-choice"><input type="checkbox" value="karaoke" /> Karaoke</label>
-                  <label class="connector-choice"><input type="checkbox" value="sober parties" /> Sober parties</label>
+              <!-- Section 2: Activities Connector -->
+              <div class="accordion-section disabled" data-section="2">
+                <div class="accordion-header">
+                  <div class="step-number">2</div>
+                  <div class="accordion-title">Activities</div>
+                  <div class="accordion-status" id="status-2">Complete</div>
+                </div>
+                <div class="accordion-content">
+                  <p class="connector-help">Choose everything you would enjoy doing with a match</p>
+
+                  <div class="connector-grid">
+                    <div class="connector-field">
+                      <span class="connector-legend">Movement / Sport</span>
+                      <div class="connector-check-group" data-category="movement">
+                        <label class="connector-choice"><input type="checkbox" value="hiking" /> Hiking</label>
+                        <label class="connector-choice"><input type="checkbox" value="bouldering" /> Bouldering</label>
+                        <label class="connector-choice"><input type="checkbox" value="climbing" /> Climbing</label>
+                        <label class="connector-choice"><input type="checkbox" value="stretching" /> Stretching</label>
+                        <label class="connector-choice"><input type="checkbox" value="yoga" /> Yoga</label>
+                        <label class="connector-choice"><input type="checkbox" value="swimming" /> Swimming</label>
+                        <label class="connector-choice"><input type="checkbox" value="cycling" /> Cycling</label>
+                        <label class="connector-choice"><input type="checkbox" value="dancing" /> Dancing</label>
+                      </div>
+                    </div>
+
+                    <div class="connector-field">
+                      <span class="connector-legend">Music / Nightlife</span>
+                      <div class="connector-check-group" data-category="music">
+                        <label class="connector-choice"><input type="checkbox" value="techno" /> Techno</label>
+                        <label class="connector-choice"><input type="checkbox" value="house" /> House</label>
+                        <label class="connector-choice"><input type="checkbox" value="jazz" /> Jazz</label>
+                        <label class="connector-choice"><input type="checkbox" value="punk" /> Punk</label>
+                        <label class="connector-choice"><input type="checkbox" value="metal" /> Metal</label>
+                        <label class="connector-choice"><input type="checkbox" value="indie concerts" /> Indie concerts</label>
+                        <label class="connector-choice"><input type="checkbox" value="karaoke" /> Karaoke</label>
+                        <label class="connector-choice"><input type="checkbox" value="sober parties" /> Sober parties</label>
+                      </div>
+                    </div>
+
+                    <div class="connector-field">
+                      <span class="connector-legend">Creative / Culture</span>
+                      <div class="connector-check-group" data-category="culture">
+                        <label class="connector-choice"><input type="checkbox" value="museums" /> Museums</label>
+                        <label class="connector-choice"><input type="checkbox" value="galleries" /> Galleries</label>
+                        <label class="connector-choice"><input type="checkbox" value="cinema" /> Cinema</label>
+                        <label class="connector-choice"><input type="checkbox" value="photography" /> Photography</label>
+                        <label class="connector-choice"><input type="checkbox" value="drawing" /> Drawing</label>
+                        <label class="connector-choice"><input type="checkbox" value="pottery" /> Pottery</label>
+                        <label class="connector-choice"><input type="checkbox" value="workshops" /> Workshops</label>
+                        <label class="connector-choice"><input type="checkbox" value="flea markets" /> Flea markets</label>
+                      </div>
+                    </div>
+
+                    <div class="connector-field">
+                      <span class="connector-legend">Social / Lifestyle</span>
+                      <div class="connector-check-group" data-category="lifestyle">
+                        <label class="connector-choice"><input type="checkbox" value="cafes" /> Cafés</label>
+                        <label class="connector-choice"><input type="checkbox" value="brunch" /> Brunch</label>
+                        <label class="connector-choice"><input type="checkbox" value="board games" /> Board games</label>
+                        <label class="connector-choice"><input type="checkbox" value="gaming" /> Gaming</label>
+                        <label class="connector-choice"><input type="checkbox" value="cooking" /> Cooking</label>
+                        <label class="connector-choice"><input type="checkbox" value="picnics" /> Picnics</label>
+                        <label class="connector-choice"><input type="checkbox" value="queer events" /> Queer events</label>
+                        <label class="connector-choice"><input type="checkbox" value="poly events" /> Poly events</label>
+                      </div>
+                    </div>
+
+                    <div class="connector-field">
+                      <span class="connector-legend">Preferred meetup energy</span>
+                      <div class="connector-check-group" data-category="energy">
+                        <label class="connector-choice"><input type="checkbox" value="sober activities" /> Sober</label>
+                        <label class="connector-choice"><input type="checkbox" value="casual drinks" /> Casual drinks</label>
+                        <label class="connector-choice"><input type="checkbox" value="party" /> Party</label>
+                        <label class="connector-choice"><input type="checkbox" value="deep conversations" /> Deep talks</label>
+                        <label class="connector-choice"><input type="checkbox" value="daytime meetup" /> Daytime</label>
+                        <label class="connector-choice"><input type="checkbox" value="evening meetup" /> Evening</label>
+                      </div>
+                    </div>
+
+                    <div class="connector-field">
+                      <label>Anything else you would like to add?</label>
+                      <div class="custom-activities-input">
+                        <input type="text" id="customActivityInput" placeholder="Type an activity and press Add" />
+                        <button type="button" id="addActivityBtn">Add</button>
+                      </div>
+                      <div id="customActivityTags" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;"></div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-navigation">
+                    <button type="button" class="back-btn" id="backBtn-2">← Back</button>
+                    <button type="button" class="next-btn" id="nextBtn-2" disabled>Next →</button>
+                  </div>
                 </div>
               </div>
 
-              <div class="connector-field">
-                <span class="connector-legend">Creative / Culture</span>
-                <div class="connector-check-group" data-category="culture">
-                  <label class="connector-choice"><input type="checkbox" value="museums" /> Museums</label>
-                  <label class="connector-choice"><input type="checkbox" value="galleries" /> Galleries</label>
-                  <label class="connector-choice"><input type="checkbox" value="cinema" /> Cinema</label>
-                  <label class="connector-choice"><input type="checkbox" value="photography" /> Photography</label>
-                  <label class="connector-choice"><input type="checkbox" value="drawing" /> Drawing</label>
-                  <label class="connector-choice"><input type="checkbox" value="pottery" /> Pottery</label>
-                  <label class="connector-choice"><input type="checkbox" value="workshops" /> Workshops</label>
-                  <label class="connector-choice"><input type="checkbox" value="flea markets" /> Flea markets</label>
+              <!-- Section 3: Chatting Quiz -->
+              <div class="accordion-section disabled" data-section="3">
+                <div class="accordion-header">
+                  <div class="step-number">3</div>
+                  <div class="accordion-title">Chatting Quiz</div>
+                  <div class="accordion-status" id="status-3">Complete</div>
                 </div>
-              </div>
+                <div class="accordion-content">
+                  <p class="connector-help">Tell us about your communication style so we can help you find compatible matches</p>
 
-              <div class="connector-field">
-                <span class="connector-legend">Social / Lifestyle</span>
-                <div class="connector-check-group" data-category="lifestyle">
-                  <label class="connector-choice"><input type="checkbox" value="cafes" /> Cafés</label>
-                  <label class="connector-choice"><input type="checkbox" value="brunch" /> Brunch</label>
-                  <label class="connector-choice"><input type="checkbox" value="board games" /> Board games</label>
-                  <label class="connector-choice"><input type="checkbox" value="gaming" /> Gaming</label>
-                  <label class="connector-choice"><input type="checkbox" value="cooking" /> Cooking</label>
-                  <label class="connector-choice"><input type="checkbox" value="picnics" /> Picnics</label>
-                  <label class="connector-choice"><input type="checkbox" value="queer events" /> Queer events</label>
-                  <label class="connector-choice"><input type="checkbox" value="poly events" /> Poly events</label>
+                  <div class="quiz-question">
+                    <h4>1. What type of messages do you enjoy most?</h4>
+                    <div class="quiz-options">
+                      <label class="quiz-option">
+                        <input type="radio" name="q1" value="fast-back-and-forth" />
+                        <label>Fast back-and-forth chatting</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q1" value="thoughtful-longer" />
+                        <label>Thoughtful longer messages</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q1" value="memes-voice-chaos" />
+                        <label>Memes, voice notes & chaos</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q1" value="practical-planning" />
+                        <label>Mostly practical/planning messages</label>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="quiz-question">
+                    <h4>2. What messaging habit turns you off most?</h4>
+                    <div class="quiz-options">
+                      <label class="quiz-option">
+                        <input type="radio" name="q2" value="disappearing" />
+                        <label>Disappearing without explanation</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q2" value="instant-replies" />
+                        <label>Expecting instant replies</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q2" value="dry-answers" />
+                        <label>Dry one-word answers</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q2" value="too-many-at-once" />
+                        <label>Too many messages at once</label>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="quiz-question">
+                    <h4>3. How do you feel about double texting?</h4>
+                    <div class="quiz-options">
+                      <label class="quiz-option">
+                        <input type="radio" name="q3" value="totally-fine" />
+                        <label>Totally fine, do it all the time</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q3" value="fine-occasionally" />
+                        <label>Fine occasionally</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q3" value="depends-context" />
+                        <label>Depends on context</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q3" value="prefer-waiting" />
+                        <label>Prefer waiting for a reply first</label>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="quiz-question">
+                    <h4>4. What communication style feels most attractive?</h4>
+                    <div class="quiz-options">
+                      <label class="quiz-option">
+                        <input type="radio" name="q4" value="warm-expressive" />
+                        <label>Warm and emotionally expressive</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q4" value="deep-thoughtful" />
+                        <label>Deep and thoughtful</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q4" value="flirty-playful" />
+                        <label>Flirty and playful</label>
+                      </label>
+                      <label class="quiz-option">
+                        <input type="radio" name="q4" value="calm-low-pressure" />
+                        <label>Calm and low-pressure</label>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="accordion-navigation">
+                    <button type="button" class="back-btn" id="backBtn-3">← Back</button>
+                    <button type="button" class="next-btn" id="nextBtn-3" disabled>Complete & Unlock Matches</button>
+                  </div>
                 </div>
-              </div>
-
-              <div class="connector-field">
-                <span class="connector-legend">Preferred meetup energy</span>
-                <div class="connector-check-group" data-category="energy">
-                  <label class="connector-choice"><input type="checkbox" value="sober activities" /> Sober</label>
-                  <label class="connector-choice"><input type="checkbox" value="casual drinks" /> Casual drinks</label>
-                  <label class="connector-choice"><input type="checkbox" value="party" /> Party</label>
-                  <label class="connector-choice"><input type="checkbox" value="deep conversations" /> Deep talks</label>
-                  <label class="connector-choice"><input type="checkbox" value="daytime meetup" /> Daytime</label>
-                  <label class="connector-choice"><input type="checkbox" value="evening meetup" /> Evening</label>
-                </div>
-              </div>
-
-              <div class="connector-field">
-                <label for="instagramHandle">Do you want to share your Instagram?</label>
-                <input class="connector-input" type="text" id="instagramHandle" placeholder="@yourhandle or Instagram link" />
-                <small class="connector-help">Optional. Only share this if you are comfortable being contacted there.</small>
-              </div>
-
-              <div class="connector-field">
-                <label for="spotifyHandle">Do you want to share your Spotify?</label>
-                <input class="connector-input" type="text" id="spotifyHandle" placeholder="Spotify username or profile link" />
-                <small class="connector-help">Optional. Share your music taste with matches.</small>
               </div>
             </div>
 
-            <div class="connector-actions">
-              <button type="submit" class="connector-btn connector-btn-primary">Save & Unlock Matches</button>
+            <div class="connector-actions" style="margin-top: 2rem;">
               <button type="button" class="connector-btn connector-btn-secondary" id="resetDemoBtn">Reset Demo</button>
             </div>
           </form>
@@ -869,11 +1326,20 @@
       const instagram = document.getElementById("instagramHandle").value.trim();
       const spotify = document.getElementById("spotifyHandle").value.trim();
 
+      // Get chatting quiz responses
+      const chattingQuiz = {
+        q1: document.querySelector('input[name="q1"]:checked')?.value || '',
+        q2: document.querySelector('input[name="q2"]:checked')?.value || '',
+        q3: document.querySelector('input[name="q3"]:checked')?.value || '',
+        q4: document.querySelector('input[name="q4"]:checked')?.value || ''
+      };
+
       return {
         connectorsCompleted: true,
         instagram,
         spotify,
-        interests: [...new Set(selectedInterests)]
+        interests: [...new Set(selectedInterests)],
+        chattingQuiz
       };
     }
 
@@ -993,7 +1459,18 @@
       const profile = getProfile();
       const eventLikes = getEventLikes();
 
-      if (!profile || !profile.connectorsCompleted) {
+      // Check if all 3 connectors are completed
+      const allConnectorsCompleted = profile &&
+        profile.connectorsCompleted &&
+        profile.interests &&
+        profile.interests.length >= 3 &&
+        profile.chattingQuiz &&
+        profile.chattingQuiz.q1 &&
+        profile.chattingQuiz.q2 &&
+        profile.chattingQuiz.q3 &&
+        profile.chattingQuiz.q4;
+
+      if (!allConnectorsCompleted) {
         matchesSection.classList.add("is-hidden");
         return;
       }
@@ -1162,7 +1639,172 @@
 
       const instagramInput = document.getElementById("instagramHandle");
       if (instagramInput) instagramInput.value = profile.instagram || "";
+
+      const spotifyInput = document.getElementById("spotifyHandle");
+      if (spotifyInput) spotifyInput.value = profile.spotify || "";
+
+      // Load chatting quiz responses
+      if (profile.chattingQuiz) {
+        Object.entries(profile.chattingQuiz).forEach(([question, answer]) => {
+          const radio = document.querySelector(`input[name="${question}"][value="${answer}"]`);
+          if (radio) radio.checked = true;
+        });
+      }
     }
+
+    function countMatches() {
+      let romanticCount = 0;
+      let socialCount = 0;
+
+      demoMatches.forEach((match) => {
+        if (match.connectorsCompleted) {
+          if (match.matchType === "Romantic Match") {
+            romanticCount++;
+          } else if (match.matchType === "Social Match") {
+            socialCount++;
+          }
+        }
+      });
+
+      return { romanticCount, socialCount };
+    }
+
+    function showSection(sectionNumber) {
+      // Hide all sections
+      document.querySelectorAll('.accordion-section').forEach((section) => {
+        section.classList.remove('active');
+      });
+
+      // Show the requested section
+      const section = document.querySelector(`.accordion-section[data-section="${sectionNumber}"]`);
+      if (section) {
+        section.classList.add('active');
+      }
+
+      // Update disabled state for sections
+      document.querySelectorAll('.accordion-section').forEach((sec) => {
+        const secNum = parseInt(sec.getAttribute('data-section'));
+        if (secNum < sectionNumber) {
+          sec.classList.remove('disabled');
+        } else if (secNum > sectionNumber) {
+          sec.classList.add('disabled');
+        }
+      });
+
+      // Scroll to form
+      document.getElementById('questionnaireSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function validateSection(sectionNumber) {
+      if (sectionNumber === 1) {
+        // Social section doesn't require validation
+        return true;
+      } else if (sectionNumber === 2) {
+        // Activities: must have at least 3 interests
+        const checkedInterests = document.querySelectorAll('#connectorsForm input[type="checkbox"]:checked').length;
+        return checkedInterests >= 3;
+      } else if (sectionNumber === 3) {
+        // Chatting Quiz: all 4 questions must be answered
+        const q1 = document.querySelector('input[name="q1"]:checked');
+        const q2 = document.querySelector('input[name="q2"]:checked');
+        const q3 = document.querySelector('input[name="q3"]:checked');
+        const q4 = document.querySelector('input[name="q4"]:checked');
+        return q1 && q2 && q3 && q4;
+      }
+      return false;
+    }
+
+    function updateMatchingPageDisplay() {
+      const { romanticCount, socialCount } = countMatches();
+      const matchCountDisplay = document.getElementById('matchCountDisplay');
+      if (matchCountDisplay) {
+        matchCountDisplay.textContent = `Congratulations you have: ${romanticCount} Romantic and ${socialCount} Social matches`;
+      }
+    }
+
+    function addCustomActivity(activity) {
+      if (!activity.trim()) return;
+
+      const tagsContainer = document.getElementById('customActivityTags');
+      const tag = document.createElement('div');
+      tag.className = 'custom-activity-tag';
+      tag.innerHTML = `
+        ${activity}
+        <button type="button" onclick="this.parentElement.remove()">×</button>
+      `;
+      tagsContainer.appendChild(tag);
+    }
+
+    // Section Navigation Event Listeners
+    document.getElementById('nextBtn-1').addEventListener('click', function() {
+      showSection(2);
+    });
+
+    document.getElementById('backBtn-2').addEventListener('click', function() {
+      showSection(1);
+    });
+
+    document.getElementById('nextBtn-2').addEventListener('click', function() {
+      if (!validateSection(2)) {
+        alert("Please select at least 3 activities so we can find overlaps.");
+        return;
+      }
+      showSection(3);
+    });
+
+    document.getElementById('backBtn-3').addEventListener('click', function() {
+      showSection(2);
+    });
+
+    document.getElementById('nextBtn-3').addEventListener('click', function() {
+      if (!validateSection(3)) {
+        alert("Please answer all 4 questions in the chatting quiz.");
+        return;
+      }
+
+      const profile = getProfileFromForm();
+      saveProfile(profile);
+      renderMatches();
+      matchesSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    // Custom Activity Input Handler
+    document.getElementById('addActivityBtn').addEventListener('click', function() {
+      const input = document.getElementById('customActivityInput');
+      const activity = input.value.trim();
+      if (activity) {
+        addCustomActivity(activity);
+        input.value = '';
+      }
+    });
+
+    document.getElementById('customActivityInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('addActivityBtn').click();
+      }
+    });
+
+    // Update matching page display and validate section 2 on interest changes
+    document.querySelectorAll('#connectorsForm input[type="checkbox"]').forEach((checkbox) => {
+      checkbox.addEventListener('change', function() {
+        const checkedCount = document.querySelectorAll('#connectorsForm input[type="checkbox"]:checked').length;
+        const nextBtn2 = document.getElementById('nextBtn-2');
+        nextBtn2.disabled = checkedCount < 3;
+      });
+    });
+
+    // Validate section 3 (quiz) on radio button changes
+    document.querySelectorAll('#connectorsForm input[type="radio"]').forEach((radio) => {
+      radio.addEventListener('change', function() {
+        const q1 = document.querySelector('input[name="q1"]:checked');
+        const q2 = document.querySelector('input[name="q2"]:checked');
+        const q3 = document.querySelector('input[name="q3"]:checked');
+        const q4 = document.querySelector('input[name="q4"]:checked');
+        const nextBtn3 = document.getElementById('nextBtn-3');
+        nextBtn3.disabled = !(q1 && q2 && q3 && q4);
+      });
+    });
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -1185,8 +1827,18 @@
       window.location.reload();
     });
 
+    // Initialize page
+    updateMatchingPageDisplay();
+
     const existingProfile = getProfile();
     loadProfileIntoForm(existingProfile);
+
+    // If profile exists and is completed, skip to matches section
+    if (existingProfile && existingProfile.connectorsCompleted) {
+      document.getElementById('matchingPageIntro').style.display = 'none';
+      document.getElementById('questionnaireSection').style.display = 'none';
+    }
+
     renderMatches();
   </script>
 </body>
