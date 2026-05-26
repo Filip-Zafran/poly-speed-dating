@@ -270,6 +270,11 @@
       border-radius: 22px 22px 0 0;
     }
 
+    .match-card-social-blue {
+      background: linear-gradient(135deg, rgba(0, 159, 227, 0.08), rgba(0, 159, 227, 0.04));
+      border-left-color: var(--poly-blue);
+    }
+
     .match-card-header {
       display: flex;
       justify-content: space-between;
@@ -567,11 +572,27 @@
       font-weight: 900;
     }
 
-    .matching-page .match-count {
-      font-size: 1.4rem;
+    .match-count-container {
+      margin: 1rem 0 1.5rem;
+    }
+
+    .match-count-intro {
+      font-size: 1.1rem;
       color: var(--text);
-      margin: 0.5rem 0 1.5rem;
-      font-weight: 700;
+      margin: 0 0 0.3rem;
+      font-weight: 500;
+    }
+
+    .match-count-numbers {
+      font-size: 2rem;
+      color: var(--poly-purple);
+      margin: 0;
+      font-weight: 900;
+    }
+
+    .match-count-numbers span {
+      color: var(--poly-magenta);
+      font-weight: 900;
     }
 
     .matching-page p {
@@ -1001,7 +1022,10 @@
           <!-- Matching Page Intro -->
           <div class="matching-page" id="matchingPageIntro">
             <h2>Matching Page</h2>
-            <p class="match-count" id="matchCountDisplay">Congratulations you have: 0 Romantic and 0 Social matches</p>
+            <div class="match-count-container">
+              <p class="match-count-intro">Congratulations you have:</p>
+              <p class="match-count-numbers" id="matchCountDisplay"><span id="romanticCount">0</span> Romantic and <span id="socialCount">0</span> Social matches</p>
+            </div>
             <p>We have noticed that many people get stuck on this part.</p>
             <p><strong>This is why we introduced the Connectors!</strong></p>
             <p>In order to see your matches, please fill in these 3 Connectors:</p>
@@ -1312,10 +1336,10 @@
         id: "match_3",
         name: "Mika",
         matchType: "Social Match",
-        connectorsCompleted: false,
+        connectorsCompleted: true,
         instagram: "",
         spotify: "",
-        interests: [],
+        interests: ["cafes", "brunch", "board games", "museums"],
         likedEventIds: []
       }
     ];
@@ -1614,6 +1638,11 @@
         const card = document.createElement("article");
         card.className = "match-card";
 
+        // Add special styling for Mika's card (Social Match)
+        if (match.name === "Mika" && match.matchType === "Social Match") {
+          card.classList.add("match-card-social-blue");
+        }
+
         if (!match.connectorsCompleted) {
           card.innerHTML = `
             <div class="match-card-header">
@@ -1849,10 +1878,10 @@
 
     function updateMatchingPageDisplay() {
       const { romanticCount, socialCount } = countMatches();
-      const matchCountDisplay = document.getElementById('matchCountDisplay');
-      if (matchCountDisplay) {
-        matchCountDisplay.textContent = `Congratulations you have: ${romanticCount} Romantic and ${socialCount} Social matches`;
-      }
+      const romanticCountSpan = document.getElementById('romanticCount');
+      const socialCountSpan = document.getElementById('socialCount');
+      if (romanticCountSpan) romanticCountSpan.textContent = romanticCount;
+      if (socialCountSpan) socialCountSpan.textContent = socialCount;
     }
 
     function addCustomActivity(activity) {
