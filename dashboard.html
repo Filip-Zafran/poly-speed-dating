@@ -205,57 +205,67 @@
       margin-left: auto;
     }
 
-    /* Person Cards */
-    .person-cards {
+    /* Person List Items */
+    .person-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
     }
 
-    .person-card {
+    .person-item {
       background: white;
       border: 1px solid #e0e0e0;
       border-left: 4px solid;
       border-radius: 8px;
-      padding: 1rem;
+      padding: 0.8rem;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .person-card:hover {
+    .person-item:hover {
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       border-color: #ccc;
     }
 
-    .person-card.gender-men {
+    .person-item.gender-men {
       border-left-color: #0066cc;
       background: linear-gradient(135deg, rgba(0,102,204,0.02), rgba(0,102,204,0.01));
     }
 
-    .person-card.gender-women {
+    .person-item.gender-women {
       border-left-color: #cc3333;
       background: linear-gradient(135deg, rgba(204,51,51,0.02), rgba(204,51,51,0.01));
     }
 
-    .person-card.gender-non-binary,
-    .person-card.gender-agender,
-    .person-card.gender-other {
+    .person-item.gender-non-binary,
+    .person-item.gender-agender,
+    .person-item.gender-other {
       border-left-color: #ffcc00;
       background: linear-gradient(135deg, rgba(255,204,0,0.02), rgba(255,204,0,0.01));
     }
 
-    .person-card-header {
+    .person-item-header {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.8rem;
       cursor: pointer;
+    }
+
+    .person-number {
+      font-weight: bold;
+      color: #333;
+      min-width: 28px;
+      font-size: 0.95rem;
     }
 
     .person-languages {
       display: flex;
-      gap: 0.4rem;
-      font-size: 1.2rem;
-      min-width: 50px;
+      gap: 0.3rem;
+      font-size: 1rem;
+      min-width: 45px;
     }
 
     .person-info {
@@ -264,35 +274,37 @@
     }
 
     .person-name {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: #1a1a1a;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.2rem;
     }
 
     .person-meta {
       display: flex;
-      gap: 1rem;
-      font-size: 0.8rem;
+      gap: 0.8rem;
+      font-size: 0.75rem;
       color: #666;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
-    .person-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
+    .person-age,
+    .person-email {
+      white-space: nowrap;
     }
 
     .gender-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       font-weight: bold;
       color: white;
+      flex-shrink: 0;
     }
 
     .gender-badge.men {
@@ -311,12 +323,13 @@
     }
 
     .person-expand-icon {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: #999;
       transition: transform 0.2s ease;
+      flex-shrink: 0;
     }
 
-    .person-card.expanded .person-expand-icon {
+    .person-item.expanded .person-expand-icon {
       transform: rotate(180deg);
     }
 
@@ -598,13 +611,20 @@
         genders.add(a.gender);
         orientations.add(deriveOrientation(a));
         a.languages.forEach(l => languages.add(l));
-        relationships.add(a.relationshipStyle);
+        // Skip "Open to both" - it will be expanded to both categories
+        if (a.relationshipStyle !== 'Open to both') {
+          relationships.add(a.relationshipStyle);
+        }
         intentions.add(a.mainIntention);
         ages.add(a.ageGroup);
         kidsOptions.add(a.kids);
         a.conversationStyle.forEach(c => conversations.add(c));
         if (a.attendance) attendances.add(a.attendance);
       });
+
+      // Always include Monogamous and Polyamorous in filter options
+      relationships.add('Monogamous');
+      relationships.add('Polyamorous / ENM');
 
       // Render filter groups
       renderFilterGroup('genderFilters', Array.from(genders).sort());
@@ -691,9 +711,14 @@
           return false;
         }
 
-        // Relationship filter
-        if (filters.relationships.length > 0 && !filters.relationships.includes(a.relationshipStyle)) {
-          return false;
+        // Relationship filter - include "Open to both" in both categories
+        if (filters.relationships.length > 0) {
+          const applicantRels = a.relationshipStyle === 'Open to both'
+            ? ['Monogamous', 'Polyamorous / ENM']
+            : [a.relationshipStyle];
+          if (!filters.relationships.some(f => applicantRels.includes(f))) {
+            return false;
+          }
         }
 
         // Intention filter
@@ -734,16 +759,27 @@
       document.getElementById('totalApplicants').textContent = applicants.length;
       document.getElementById('visibleApplicants').textContent = filtered.length;
 
+      // Expand "Open to both" people to both relationship styles
+      const expandedPeople = [];
+      filtered.forEach(person => {
+        if (person.relationshipStyle === 'Open to both') {
+          expandedPeople.push({ ...person, relationshipStyle: 'Monogamous' });
+          expandedPeople.push({ ...person, relationshipStyle: 'Polyamorous / ENM' });
+        } else {
+          expandedPeople.push(person);
+        }
+      });
+
       // Group by relationship style → intention → orientation
       const grouped = {};
 
-      filtered.forEach(person => {
+      expandedPeople.forEach(person => {
         const rel = person.relationshipStyle;
         const int = person.mainIntention;
         const orient = deriveOrientation(person);
 
         if (!grouped[rel]) grouped[rel] = {};
-        if (!grouped[int]) grouped[rel][int] = {};
+        if (!grouped[rel][int]) grouped[rel][int] = {};
         if (!grouped[rel][int][orient]) grouped[rel][int][orient] = [];
 
         grouped[rel][int][orient].push(person);
@@ -752,7 +788,10 @@
       // Render sections
       let html = '';
 
-      Object.keys(grouped).sort().forEach(relationship => {
+      const relationshipOrder = ['Monogamous', 'Polyamorous / ENM'];
+      relationshipOrder.forEach(relationship => {
+        if (!grouped[relationship]) return;
+
         html += `<div class="relationship-style-section">
           <h2 class="relationship-style-title">${relationship}</h2>
           <div class="intention-grid">`;
@@ -778,9 +817,9 @@
                   ${orientation}
                   <span class="orientation-count">${people.length}</span>
                 </div>
-                <div class="person-cards">
-                  ${people.map(person => renderPersonCard(person)).join('')}
-                </div>
+                <ol class="person-list">
+                  ${people.map((person, idx) => renderPersonItem(person, idx + 1)).join('')}
+                </ol>
               </div>
             `;
           });
@@ -802,37 +841,28 @@
       addCardEventListeners();
     }
 
-    function renderPersonCard(person) {
+    function renderPersonItem(person, number) {
       const flags = getLanguageFlags(person.languages);
       const genderClass = getGenderClass(person.gender);
       const badgeText = getGenderBadge(person.gender);
 
       return `
-        <div class="person-card ${genderClass}">
-          <div class="person-card-header">
+        <li class="person-item ${genderClass}">
+          <div class="person-item-header">
+            <div class="person-number">${number}.</div>
             <div class="person-languages">${flags}</div>
             <div class="person-info">
               <div class="person-name">${person.name}</div>
               <div class="person-meta">
-                <div class="person-meta-item">
-                  <span class="gender-badge ${genderClass.replace('gender-', '')}">${badgeText}</span>
-                  ${person.ageGroup}
-                </div>
-                <div class="person-meta-item">${person.email}</div>
+                <span class="gender-badge ${genderClass.replace('gender-', '')}">${badgeText}</span>
+                <span class="person-age">${person.ageGroup}</span>
+                <span class="person-email">${person.email}</span>
               </div>
             </div>
             <div class="person-expand-icon">▼</div>
           </div>
           <div class="person-details">
             <div class="detail-grid">
-              <div class="detail-item">
-                <div class="detail-label">Relationship Style</div>
-                <div class="detail-value">${person.relationshipStyle}</div>
-              </div>
-              <div class="detail-item">
-                <div class="detail-label">Main Intention</div>
-                <div class="detail-value">${person.mainIntention}</div>
-              </div>
               <div class="detail-item">
                 <div class="detail-label">Conversation Style</div>
                 <div class="detail-value">${person.conversationStyle.join(', ')}</div>
@@ -848,14 +878,6 @@
               <div class="detail-item">
                 <div class="detail-label">Dating w/ Kids</div>
                 <div class="detail-value">${person.datingWithKids}</div>
-              </div>
-              <div class="detail-item">
-                <div class="detail-label">Languages</div>
-                <div class="detail-value">${person.languages.join(', ')}</div>
-              </div>
-              <div class="detail-item">
-                <div class="detail-label">Stay in Berlin</div>
-                <div class="detail-value">${person.stayBerlin}</div>
               </div>
               <div class="detail-item full-width">
                 <div class="detail-label">Interests</div>
@@ -899,13 +921,13 @@
               ` : ''}
             </div>
           </div>
-        </div>
+        </li>
       `;
     }
 
     function addCardEventListeners() {
-      document.querySelectorAll('.person-card').forEach(card => {
-        card.addEventListener('click', function() {
+      document.querySelectorAll('.person-item').forEach(item => {
+        item.addEventListener('click', function() {
           this.classList.toggle('expanded');
         });
       });
