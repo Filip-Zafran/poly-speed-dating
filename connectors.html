@@ -742,7 +742,7 @@
       color: var(--poly-magenta);
     }
 
-    /* Chatting Quiz Styling */
+    /* Texting Style Styling */
     .quiz-question {
       margin-bottom: 1.8rem;
     }
@@ -793,6 +793,112 @@
       color: var(--text);
       font-size: 0.95rem;
       margin: 0;
+    }
+
+    /* Activities Accordion */
+    .activities-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .activity-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .activity-card[data-category="movement"] {
+      background: linear-gradient(135deg, rgba(220, 53, 69, 0.08), rgba(220, 53, 69, 0.04));
+    }
+
+    .activity-card[data-category="movement"] .activity-header {
+      background: linear-gradient(135deg, #dc3545, #c82333);
+    }
+
+    .activity-card[data-category="music"] {
+      background: linear-gradient(135deg, rgba(111, 66, 193, 0.08), rgba(111, 66, 193, 0.04));
+    }
+
+    .activity-card[data-category="music"] .activity-header {
+      background: linear-gradient(135deg, #6f42c1, #5a32a3);
+    }
+
+    .activity-card[data-category="culture"] {
+      background: linear-gradient(135deg, rgba(252, 191, 0, 0.08), rgba(252, 191, 0, 0.04));
+    }
+
+    .activity-card[data-category="culture"] .activity-header {
+      background: linear-gradient(135deg, #fcbf00, #e0a800);
+    }
+
+    .activity-card[data-category="lifestyle"] {
+      background: linear-gradient(135deg, rgba(40, 167, 69, 0.08), rgba(40, 167, 69, 0.04));
+    }
+
+    .activity-card[data-category="lifestyle"] .activity-header {
+      background: linear-gradient(135deg, #28a745, #218838);
+    }
+
+    .activity-card[data-category="energy"] {
+      background: linear-gradient(135deg, rgba(0, 159, 227, 0.08), rgba(0, 159, 227, 0.04));
+    }
+
+    .activity-card[data-category="energy"] .activity-header {
+      background: linear-gradient(135deg, #009fe3, #007bb8);
+    }
+
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.2rem;
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+
+    .activity-header:hover {
+      opacity: 0.9;
+    }
+
+    .activity-toggle {
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .activity-card.open .activity-toggle {
+      transform: rotate(180deg);
+    }
+
+    .activity-content {
+      display: none;
+      padding: 1rem 1.2rem;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .activity-card.open .activity-content {
+      display: block;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .custom-activities-disclaimer {
+      display: block;
+      color: #999;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
     }
 
     /* Section Navigation */
@@ -942,81 +1048,107 @@
                 <div class="accordion-content">
                   <p class="connector-help">Choose everything you would enjoy doing with a match</p>
 
-                  <div class="connector-grid">
-                    <div class="connector-field">
-                      <span class="connector-legend">Movement / Sport</span>
-                      <div class="connector-check-group" data-category="movement">
-                        <label class="connector-choice"><input type="checkbox" value="hiking" /> Hiking</label>
-                        <label class="connector-choice"><input type="checkbox" value="bouldering" /> Bouldering</label>
-                        <label class="connector-choice"><input type="checkbox" value="climbing" /> Climbing</label>
-                        <label class="connector-choice"><input type="checkbox" value="stretching" /> Stretching</label>
-                        <label class="connector-choice"><input type="checkbox" value="yoga" /> Yoga</label>
-                        <label class="connector-choice"><input type="checkbox" value="swimming" /> Swimming</label>
-                        <label class="connector-choice"><input type="checkbox" value="cycling" /> Cycling</label>
-                        <label class="connector-choice"><input type="checkbox" value="dancing" /> Dancing</label>
+                  <div class="activities-accordion">
+                    <div class="activity-card" data-category="movement">
+                      <div class="activity-header">
+                        <span class="activity-title">Movement / Sport</span>
+                        <span class="activity-toggle">▼</span>
+                      </div>
+                      <div class="activity-content">
+                        <div class="connector-check-group" data-category="movement">
+                          <label class="connector-choice"><input type="checkbox" value="hiking" /> Hiking</label>
+                          <label class="connector-choice"><input type="checkbox" value="bouldering" /> Bouldering</label>
+                          <label class="connector-choice"><input type="checkbox" value="climbing" /> Climbing</label>
+                          <label class="connector-choice"><input type="checkbox" value="stretching" /> Stretching</label>
+                          <label class="connector-choice"><input type="checkbox" value="yoga" /> Yoga</label>
+                          <label class="connector-choice"><input type="checkbox" value="swimming" /> Swimming</label>
+                          <label class="connector-choice"><input type="checkbox" value="cycling" /> Cycling</label>
+                          <label class="connector-choice"><input type="checkbox" value="dancing" /> Dancing</label>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="connector-field">
-                      <span class="connector-legend">Music / Nightlife</span>
-                      <div class="connector-check-group" data-category="music">
-                        <label class="connector-choice"><input type="checkbox" value="techno" /> Techno</label>
-                        <label class="connector-choice"><input type="checkbox" value="house" /> House</label>
-                        <label class="connector-choice"><input type="checkbox" value="jazz" /> Jazz</label>
-                        <label class="connector-choice"><input type="checkbox" value="punk" /> Punk</label>
-                        <label class="connector-choice"><input type="checkbox" value="metal" /> Metal</label>
-                        <label class="connector-choice"><input type="checkbox" value="indie concerts" /> Indie concerts</label>
-                        <label class="connector-choice"><input type="checkbox" value="karaoke" /> Karaoke</label>
-                        <label class="connector-choice"><input type="checkbox" value="sober parties" /> Sober parties</label>
+                    <div class="activity-card" data-category="music">
+                      <div class="activity-header">
+                        <span class="activity-title">Music / Nightlife</span>
+                        <span class="activity-toggle">▼</span>
+                      </div>
+                      <div class="activity-content">
+                        <div class="connector-check-group" data-category="music">
+                          <label class="connector-choice"><input type="checkbox" value="techno" /> Techno</label>
+                          <label class="connector-choice"><input type="checkbox" value="house" /> House</label>
+                          <label class="connector-choice"><input type="checkbox" value="jazz" /> Jazz</label>
+                          <label class="connector-choice"><input type="checkbox" value="punk" /> Punk</label>
+                          <label class="connector-choice"><input type="checkbox" value="metal" /> Metal</label>
+                          <label class="connector-choice"><input type="checkbox" value="indie concerts" /> Indie concerts</label>
+                          <label class="connector-choice"><input type="checkbox" value="karaoke" /> Karaoke</label>
+                          <label class="connector-choice"><input type="checkbox" value="sober parties" /> Sober parties</label>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="connector-field">
-                      <span class="connector-legend">Creative / Culture</span>
-                      <div class="connector-check-group" data-category="culture">
-                        <label class="connector-choice"><input type="checkbox" value="museums" /> Museums</label>
-                        <label class="connector-choice"><input type="checkbox" value="galleries" /> Galleries</label>
-                        <label class="connector-choice"><input type="checkbox" value="cinema" /> Cinema</label>
-                        <label class="connector-choice"><input type="checkbox" value="photography" /> Photography</label>
-                        <label class="connector-choice"><input type="checkbox" value="drawing" /> Drawing</label>
-                        <label class="connector-choice"><input type="checkbox" value="pottery" /> Pottery</label>
-                        <label class="connector-choice"><input type="checkbox" value="workshops" /> Workshops</label>
-                        <label class="connector-choice"><input type="checkbox" value="flea markets" /> Flea markets</label>
+                    <div class="activity-card" data-category="culture">
+                      <div class="activity-header">
+                        <span class="activity-title">Creative / Culture</span>
+                        <span class="activity-toggle">▼</span>
+                      </div>
+                      <div class="activity-content">
+                        <div class="connector-check-group" data-category="culture">
+                          <label class="connector-choice"><input type="checkbox" value="museums" /> Museums</label>
+                          <label class="connector-choice"><input type="checkbox" value="galleries" /> Galleries</label>
+                          <label class="connector-choice"><input type="checkbox" value="cinema" /> Cinema</label>
+                          <label class="connector-choice"><input type="checkbox" value="photography" /> Photography</label>
+                          <label class="connector-choice"><input type="checkbox" value="drawing" /> Drawing</label>
+                          <label class="connector-choice"><input type="checkbox" value="pottery" /> Pottery</label>
+                          <label class="connector-choice"><input type="checkbox" value="workshops" /> Workshops</label>
+                          <label class="connector-choice"><input type="checkbox" value="flea markets" /> Flea markets</label>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="connector-field">
-                      <span class="connector-legend">Social / Lifestyle</span>
-                      <div class="connector-check-group" data-category="lifestyle">
-                        <label class="connector-choice"><input type="checkbox" value="cafes" /> Cafés</label>
-                        <label class="connector-choice"><input type="checkbox" value="brunch" /> Brunch</label>
-                        <label class="connector-choice"><input type="checkbox" value="board games" /> Board games</label>
-                        <label class="connector-choice"><input type="checkbox" value="gaming" /> Gaming</label>
-                        <label class="connector-choice"><input type="checkbox" value="cooking" /> Cooking</label>
-                        <label class="connector-choice"><input type="checkbox" value="picnics" /> Picnics</label>
-                        <label class="connector-choice"><input type="checkbox" value="queer events" /> Queer events</label>
-                        <label class="connector-choice"><input type="checkbox" value="poly events" /> Poly events</label>
+                    <div class="activity-card" data-category="lifestyle">
+                      <div class="activity-header">
+                        <span class="activity-title">Social / Lifestyle</span>
+                        <span class="activity-toggle">▼</span>
+                      </div>
+                      <div class="activity-content">
+                        <div class="connector-check-group" data-category="lifestyle">
+                          <label class="connector-choice"><input type="checkbox" value="cafes" /> Cafés</label>
+                          <label class="connector-choice"><input type="checkbox" value="brunch" /> Brunch</label>
+                          <label class="connector-choice"><input type="checkbox" value="board games" /> Board games</label>
+                          <label class="connector-choice"><input type="checkbox" value="gaming" /> Gaming</label>
+                          <label class="connector-choice"><input type="checkbox" value="cooking" /> Cooking</label>
+                          <label class="connector-choice"><input type="checkbox" value="picnics" /> Picnics</label>
+                          <label class="connector-choice"><input type="checkbox" value="queer events" /> Queer events</label>
+                          <label class="connector-choice"><input type="checkbox" value="poly events" /> Poly events</label>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="connector-field">
-                      <span class="connector-legend">Preferred meetup energy</span>
-                      <div class="connector-check-group" data-category="energy">
-                        <label class="connector-choice"><input type="checkbox" value="sober activities" /> Sober</label>
-                        <label class="connector-choice"><input type="checkbox" value="casual drinks" /> Casual drinks</label>
-                        <label class="connector-choice"><input type="checkbox" value="party" /> Party</label>
-                        <label class="connector-choice"><input type="checkbox" value="deep conversations" /> Deep talks</label>
-                        <label class="connector-choice"><input type="checkbox" value="daytime meetup" /> Daytime</label>
-                        <label class="connector-choice"><input type="checkbox" value="evening meetup" /> Evening</label>
+                    <div class="activity-card" data-category="energy">
+                      <div class="activity-header">
+                        <span class="activity-title">Preferred meetup energy</span>
+                        <span class="activity-toggle">▼</span>
+                      </div>
+                      <div class="activity-content">
+                        <div class="connector-check-group" data-category="energy">
+                          <label class="connector-choice"><input type="checkbox" value="sober activities" /> Sober</label>
+                          <label class="connector-choice"><input type="checkbox" value="casual drinks" /> Casual drinks</label>
+                          <label class="connector-choice"><input type="checkbox" value="party" /> Party</label>
+                          <label class="connector-choice"><input type="checkbox" value="deep conversations" /> Deep talks</label>
+                          <label class="connector-choice"><input type="checkbox" value="daytime meetup" /> Daytime</label>
+                          <label class="connector-choice"><input type="checkbox" value="evening meetup" /> Evening</label>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="connector-field">
+                    <div class="connector-field" style="grid-column: 1 / -1;">
                       <label>Anything else you would like to add?</label>
                       <div class="custom-activities-input">
                         <input type="text" id="customActivityInput" placeholder="Type an activity and press Add" />
                         <button type="button" id="addActivityBtn">Add</button>
                       </div>
+                      <small class="custom-activities-disclaimer">Add something important and we will add it as a Tag to your profile</small>
                       <div id="customActivityTags" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;"></div>
                     </div>
                   </div>
@@ -1028,11 +1160,11 @@
                 </div>
               </div>
 
-              <!-- Section 3: Chatting Quiz -->
+              <!-- Section 3: Texting Style -->
               <div class="accordion-section disabled" data-section="3">
                 <div class="accordion-header">
                   <div class="step-number">3</div>
-                  <div class="accordion-title">Chatting Quiz</div>
+                  <div class="accordion-title">Texting Style</div>
                   <div class="accordion-status" id="status-3">Complete</div>
                 </div>
                 <div class="accordion-content">
@@ -1705,7 +1837,7 @@
         const checkedInterests = document.querySelectorAll('#connectorsForm input[type="checkbox"]:checked').length;
         return checkedInterests >= 3;
       } else if (sectionNumber === 3) {
-        // Chatting Quiz: all 4 questions must be answered
+        // Texting Style: all 4 questions must be answered
         const q1 = document.querySelector('input[name="q1"]:checked');
         const q2 = document.querySelector('input[name="q2"]:checked');
         const q3 = document.querySelector('input[name="q3"]:checked');
@@ -1806,6 +1938,30 @@
         nextBtn3.disabled = !(q1 && q2 && q3 && q4);
       });
     });
+
+    // Activity card accordion (open one at a time)
+    document.querySelectorAll('.activity-header').forEach((header) => {
+      header.addEventListener('click', function() {
+        const card = this.parentElement;
+        const isOpen = card.classList.contains('open');
+
+        // Close all cards
+        document.querySelectorAll('.activity-card').forEach((c) => {
+          c.classList.remove('open');
+        });
+
+        // Open this card if it wasn't open
+        if (!isOpen) {
+          card.classList.add('open');
+        }
+      });
+    });
+
+    // Open first activity card by default
+    const firstActivityCard = document.querySelector('.activity-card');
+    if (firstActivityCard) {
+      firstActivityCard.classList.add('open');
+    }
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
