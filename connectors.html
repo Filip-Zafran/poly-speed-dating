@@ -1679,6 +1679,7 @@
       const section = document.querySelector(`.accordion-section[data-section="${sectionNumber}"]`);
       if (section) {
         section.classList.add('active');
+        section.classList.remove('disabled');
       }
 
       // Update disabled state for sections
