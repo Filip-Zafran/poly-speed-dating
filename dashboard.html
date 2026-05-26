@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blind Duck Dating - Admin Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    .dashboard-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Filters */
+    .filter-sidebar {
+      width: 320px;
+      background: white;
+      border-right: 1px solid #e0e0e0;
+      padding: 2rem;
+      overflow-y: auto;
+      position: sticky;
+      top: 0;
+      max-height: 100vh;
+    }
+
+    .filter-sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: #666;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-sidebar h3:first-child {
+      margin-top: 0;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .filter-checkbox input {
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+
+    .filter-checkbox label {
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .filter-count {
+      color: #999;
+      font-size: 0.85rem;
+    }
+
+    /* Main Content */
+    .dashboard-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .dashboard-header {
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+
+    .dashboard-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #666;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Parent Sections */
+    .relationship-style-section {
+      margin-bottom: 3rem;
+    }
+
+    .relationship-style-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #1a1a1a;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    /* Intention Subsections */
+    .intention-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .intention-subsection {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .intention-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .intention-count {
+      display: inline-block;
+      background: #f0f0f0;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #666;
+      margin-left: auto;
+    }
+
+    /* Orientation Groups */
+    .orientation-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .orientation-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .orientation-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #555;
+      padding: 0.8rem;
+      background: #f8f9fa;
+      border-radius: 6px;
+      margin-bottom: 0.8rem;
+    }
+
+    .orientation-count {
+      display: inline-block;
+      background: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: #999;
+      margin-left: auto;
+    }
+
+    /* Person Cards */
+    .person-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .person-card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-left: 4px solid;
+      border-radius: 8px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .person-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-color: #ccc;
+    }
+
+    .person-card.gender-men {
+      border-left-color: #0066cc;
+      background: linear-gradient(135deg, rgba(0,102,204,0.02), rgba(0,102,204,0.01));
+    }
+
+    .person-card.gender-women {
+      border-left-color: #cc3333;
+      background: linear-gradient(135deg, rgba(204,51,51,0.02), rgba(204,51,51,0.01));
+    }
+
+    .person-card.gender-non-binary,
+    .person-card.gender-agender,
+    .person-card.gender-other {
+      border-left-color: #ffcc00;
+      background: linear-gradient(135deg, rgba(255,204,0,0.02), rgba(255,204,0,0.01));
+    }
+
+    .person-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+    }
+
+    .person-languages {
+      display: flex;
+      gap: 0.4rem;
+      font-size: 1.2rem;
+      min-width: 50px;
+    }
+
+    .person-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .person-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.3rem;
+    }
+
+    .person-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .person-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .gender-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .gender-badge.men {
+      background: #0066cc;
+    }
+
+    .gender-badge.women {
+      background: #cc3333;
+    }
+
+    .gender-badge.non-binary,
+    .gender-badge.agender,
+    .gender-badge.other {
+      background: #ffcc00;
+      color: #333;
+    }
+
+    .person-expand-icon {
+      font-size: 1.2rem;
+      color: #999;
+      transition: transform 0.2s ease;
+    }
+
+    .person-card.expanded .person-expand-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Expanded Content */
+    .person-details {
+      display: none;
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .person-card.expanded .person-details {
+      display: block;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .detail-value {
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .detail-full-width {
+      grid-column: 1 / -1;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.3rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f0f0f0;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #999;
+    }
+
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .empty-state-text {
+      font-size: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .intention-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        flex-direction: column;
+      }
+
+      .filter-sidebar {
+        width: 100%;
+        position: static;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 1.5rem;
+      }
+
+      .dashboard-content {
+        padding: 1.5rem;
+      }
+
+      .dashboard-stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar Filters -->
+    <div class="filter-sidebar">
+      <h3>🔍 Search</h3>
+      <input type="text" class="search-box" id="searchInput" placeholder="Search name or email...">
+
+      <h3>Gender</h3>
+      <div class="filter-group" id="genderFilters"></div>
+
+      <h3>Orientation</h3>
+      <div class="filter-group" id="orientationFilters"></div>
+
+      <h3>Languages</h3>
+      <div class="filter-group" id="languageFilters"></div>
+
+      <h3>Relationship Style</h3>
+      <div class="filter-group" id="relationshipFilters"></div>
+
+      <h3>Main Intention</h3>
+      <div class="filter-group" id="intentionFilters"></div>
+
+      <h3>Age Group</h3>
+      <div class="filter-group" id="ageFilters"></div>
+
+      <h3>Kids</h3>
+      <div class="filter-group" id="kidsFilters"></div>
+
+      <h3>Conversation Style</h3>
+      <div class="filter-group" id="conversationFilters"></div>
+
+      <h3>Attendance Likelihood</h3>
+      <div class="filter-group" id="attendanceFilters"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-content">
+      <div class="dashboard-header">
+        <h1>Blind Duck Dating Dashboard</h1>
+        <div class="dashboard-stats">
+          <div class="stat-box">
+            <span class="stat-label">Total Applicants</span>
+            <span class="stat-number" id="totalApplicants">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Visible (Filtered)</span>
+            <span class="stat-number" id="visibleApplicants">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="dashboardSections"></div>
+    </div>
+  </div>
+
+  <script>
+    // Form Response Data
+    const applicants = [
+      { timestamp: '3/19/2026 21:17:57', email: 'Roberto.castagna@gmail.com', name: 'Roberto', languages: ['English', 'Other'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['18–25', '26–35', '36–45'], mainIntention: 'Long-term relationship', relationshipStyle: 'Polyamorous / ENM', kids: 'I have kids', datingWithKids: 'Depends', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Arts / culture', 'Music / nightlife', 'Personal growth', 'Tech / nerdy'], avoid: ['Curious & open', 'Kink-friendly / Sex-positive'], mustHave: '', additionalNotes: '', referral: '', intimacy: '', musicGenres: '', meetingPlaces: '', genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/19/2026 22:14:27', email: 'olya.oppenheim@gmail.com', name: 'Olya', languages: ['English', 'German', 'Other'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Men'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['36–45'], mainIntention: 'Long-term relationship', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Depends', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Social & lively', interests: ['Music / nightlife', 'Nature / outdoors', 'Personal growth', 'Other'], avoid: ['Strong political stances', 'black-white thinking'], mustHave: 'Fichoooo', additionalNotes: '', referral: '', intimacy: 'Kink-friendly / Sex-positive', musicGenres: '', meetingPlaces: '', genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/19/2026 22:31:39', email: 'schaechter@mac.com', name: 'Eric', languages: ['English', 'German', 'Other'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '45+', meetAgeRange: ['26–35', '36–45', '45+'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Flirty', interests: ['Sports / active', 'Arts / culture', 'Tech / nerdy'], avoid: [], mustHave: '', additionalNotes: '', referral: 'Ficho', intimacy: 'Kink-friendly / Sex-positive', musicGenres: '', meetingPlaces: '', genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/19/2026 22:52:05', email: 'lorna.ather@gmail.com', name: 'Lorna', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Anyone'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Casual dating', relationshipStyle: 'Open to both', kids: 'I have kids', datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Flirty', interests: ['Sports / active', 'Music / nightlife', 'Personal growth'], avoid: ['No long-distance', 'no bigots'], mustHave: 'a job and a brain', additionalNotes: '', referral: 'Ficho!', intimacy: 'Kink-friendly / Sex-positive', musicGenres: '', meetingPlaces: '', genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/19/2026 23:22:59', email: 'aaron.thornburgh@gmail.com', name: 'Aaron', languages: ['English'], stayBerlin: 'Yes', gender: 'Non-binary', meetPreferences: ['Women', 'Non-binary people'], groupVibe: 'Mixed group', ageGroup: '45+', meetAgeRange: ['26–35', '36–45', '45+'], mainIntention: 'Long-term relationship', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Depends', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Chill & relaxed', interests: ['Arts / culture', 'Personal growth', 'Tech / nerdy'], avoid: [], mustHave: '', additionalNotes: 'New to ENM/poly, travels frequently', referral: 'Ficho', intimacy: 'Kink-friendly / Sex-positive', musicGenres: '', meetingPlaces: '', genderFeedback: "Although my gender identity is NB, I'm only physically attracted to female bodies. Also I'm very shy until it's clear the other person is interested in me.", eventSource: '', attendance: '', bio: 'Thoughtful, kind' },
+      { timestamp: '3/20/2026 16:07:04', email: 'haustein.anne@googlemail.com', name: 'Anne', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Men', 'Women', 'Non-binary people', 'Anyone'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Friends / social', relationshipStyle: 'Polyamorous / ENM', kids: 'I have kids', datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Sports / active', 'Music / nightlife', 'Reading / philosophy'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Kink-friendly / Sex-positive', musicGenres: '', meetingPlaces: '', genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/20/2026 19:14:25', email: 'fraeya@gmail.com', name: 'Fraeya', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Men'], groupVibe: 'Mostly similar to me', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45', '45+'], mainIntention: 'Long-term relationship', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'No', conversationStyle: ['Mix of both'], eveningVibe: 'Social & lively', interests: ['Sports / active', 'Music / nightlife', 'Personal growth'], avoid: [], mustHave: '', additionalNotes: '', referral: 'Ficho', intimacy: 'Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Disco', 'Classical / Ambient / Chillout', 'Rock / Metal / Punk / Ska'], meetingPlaces: ['Bar', 'Café', 'Park', 'Bouldering'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/21/2026 9:38:50', email: 'lilaramaniamit@gmail.com', name: 'Amit', languages: ['English'], stayBerlin: 'No', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '26–35', meetAgeRange: ['18–25', '26–35', '36–45', '45+'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Depends', conversationStyle: ['Mix of both'], eveningVibe: 'Flirty', interests: ['Sports / active', 'Music / nightlife', 'Nature / outdoors', 'Personal growth'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Classical / Ambient / Chillout', 'Latin / Afrobeat'], meetingPlaces: ['Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/22/2026 11:29:36', email: 'amansarangal01@gmail.com', name: 'Aman', languages: ['English'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Women', 'Non-binary people', 'Anyone'], groupVibe: 'Mixed group', ageGroup: '26–35', meetAgeRange: ['18–25', '26–35', '36–45', '45+'], mainIntention: 'Casual dating', relationshipStyle: 'Open to both', kids: 'I want kids', datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Sports / active', 'Music / nightlife', 'Nature / outdoors'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'More traditional, Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Hip-Hop / Rap / R&B', 'Jazz / Blues / Soul / Funk'], meetingPlaces: ['Bar', 'Café', 'Park', 'Bouldering'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/22/2026 19:16:33', email: 'willi@angry-hamster.com', name: 'The Hamster', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45', '45+'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Sports / active', 'Arts / culture', 'Nature / outdoors'], avoid: ['Hippies'], mustHave: 'Their shit together', additionalNotes: '', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Classical / Ambient / Chillout', 'Rock / Metal / Punk / Ska', 'Pop / Chart'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/25/2026 13:40:59', email: 'lauramopi90@gmail.com', name: 'Lau', languages: ['English', 'German', 'Spanish'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Men', 'Women'], groupVibe: 'Mixed group', ageGroup: '26–35', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Long-term relationship', relationshipStyle: 'Polyamorous / ENM', kids: 'Not sure', datingWithKids: 'Depends', conversationStyle: ['Mix of both'], eveningVibe: 'Social & lively', interests: ['Music / nightlife', 'Nature / outdoors', 'Personal growth'], avoid: ['Traditional romantic relationships', 'people who only speak German'], mustHave: '', additionalNotes: "I'd love to meet people who build their relationships from the approach of Relationship Anarchy", referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Latin / Afrobeat'], meetingPlaces: ['Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/28/2026 10:50:03', email: 'sonuschka@posteo.de', name: 'Sonja (sonuschka)', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Everyone'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['36–45'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Social & lively', interests: ['Sports / active', 'Arts / culture', 'Music / nightlife', 'Personal growth', 'Reading / philosophy'], avoid: ['Machos'], mustHave: '', additionalNotes: "What a great idea! I'm very excited to try this kind of dating", referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Jazz / Blues / Soul / Funk', 'Classical / Ambient / Chillout', 'Rock / Metal / Punk / Ska'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: 'Most of the time I identify as a woman but sometimes I don't', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/28/2026 16:50:07', email: 'shivamone141997@gmail.com', name: 'Shivam Sunderam', languages: ['English'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '26–35', meetAgeRange: ['18–25', '26–35'], mainIntention: 'Long-term relationship', relationshipStyle: 'Monogamous', kids: 'I want kids', datingWithKids: 'No', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Chill & relaxed', interests: ['Sports / active', 'Arts / culture', 'Music / nightlife', 'Nature / outdoors', 'Personal growth', 'Tech / nerdy', 'Reading / philosophy'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'More traditional, Curious & open', musicGenres: ['Pop / Chart'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/29/2026 17:07:30', email: 'acco+duckdating@mailbox.org', name: 'Jonas', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mostly similar to me', ageGroup: '26–35', meetAgeRange: ['26–35'], mainIntention: 'Long-term relationship', relationshipStyle: 'Monogamous', kids: 'Not sure', datingWithKids: 'No', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Arts / culture', 'Music / nightlife', 'Reading / philosophy'], avoid: ['Smokers', 'addicts', 'drifters'], mustHave: 'Wit', additionalNotes: "LF someone equal parts 'down to earth' and slightly crazy/artsy", referral: '', intimacy: 'More traditional, Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Rock / Metal / Punk / Ska', 'Latin / Afrobeat'], meetingPlaces: ['Bar', 'Café', 'Park', 'Bouldering'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/29/2026 17:37:39', email: 'cemseksek@gmail.com', name: 'cem', languages: ['English'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35'], mainIntention: 'Long-term relationship', relationshipStyle: 'Open to both', kids: 'I want kids', datingWithKids: 'Depends', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Arts / culture', 'Music / nightlife', 'Nature / outdoors', 'Personal growth', 'Tech / nerdy', 'Reading / philosophy'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Jazz / Blues / Soul / Funk', 'Classical / Ambient / Chillout'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/29/2026 20:57:16', email: 'carmen.florentina.mihaescu@gmail.com', name: 'carmen', languages: ['English'], stayBerlin: 'No', gender: 'Woman', meetPreferences: ['Men'], groupVibe: 'Mixed group', ageGroup: '26–35', meetAgeRange: ['26–35'], mainIntention: 'Long-term relationship', relationshipStyle: 'Monogamous', kids: "Don't want kids", datingWithKids: 'No', conversationStyle: ['Mix of both'], eveningVibe: 'Social & lively', interests: ['Sports / active', 'Music / nightlife', 'Nature / outdoors', 'Personal growth', 'Tech / nerdy'], avoid: ['Extremely religious', 'or muslim'], mustHave: '', additionalNotes: '', referral: '', intimacy: 'More traditional', musicGenres: ['Jazz / Blues / Soul / Funk', 'Classical / Ambient / Chillout', 'Pop / Chart', 'Latin / Afrobeat'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/30/2026 9:09:24', email: 'jeremy@shub.info', name: 'Kale', languages: ['English'], stayBerlin: 'Yes', gender: 'Non-Binary', meetPreferences: ['Women', 'Non-Binary', 'Agender'], groupVibe: 'Mostly similar to me', ageGroup: '45+', meetAgeRange: ['36–45', '45+'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Depends', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Flirty', interests: ['Nature / outdoors', 'Personal growth', 'Reading / philosophy'], avoid: ['Privileged cis het men'], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Jazz / Blues / Soul / Funk', 'Latin / Afrobeat'], meetingPlaces: ['Café', 'Park', 'Bouldering'], genderFeedback: 'Trans* Queer Pansexual Playsexual', eventSource: '', attendance: '', bio: 'Open curiosity' },
+      { timestamp: '3/30/2026 11:07:11', email: 'lutzsto@gmail.com', name: 'Lutz', languages: ['English', 'German', 'French (basic)'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Men', 'Women', 'Non-Binary', 'Agender', 'Everyone'], groupVibe: 'Mixed group', ageGroup: '45+', meetAgeRange: ['26–35', '36–45', '45+'], mainIntention: 'Friends / social', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Social & lively', interests: ['Arts / culture', 'Music / nightlife', 'Reading / philosophy'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Indie / Alternative / Britpop'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: 'Man / Bi-Sexual', eventSource: '', attendance: '', bio: 'Very open minded. Great initiative, would love to get involved.' },
+      { timestamp: '3/30/2026 18:34:19', email: 'me@sascha-bach.de', name: 'Sascha', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Everyone'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45', '45+'], mainIntention: 'Long-term relationship', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Yes', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Chill & relaxed', interests: ['Sports / active', 'Music / nightlife', 'Nature / outdoors', 'Personal growth', 'Tech / nerdy', 'Reading / philosophy'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Rock / Metal / Punk / Ska', 'Pop / Chart'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/31/2026 8:09:42', email: 'soelbhowmick@icloud.com', name: 'Sho', languages: ['English'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '26–35', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Casual dating', relationshipStyle: 'Open to both', kids: 'I want kids', datingWithKids: 'No', conversationStyle: ['Mix of both'], eveningVibe: 'Flirty', interests: ['Sports / active', 'Arts / culture', 'Nature / outdoors'], avoid: ['Cannot date Vegans or specific food preferences'], mustHave: '', additionalNotes: 'Lives close to Friedrichshain and not In Spandau', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Jazz / Blues / Soul / Funk', 'Rock / Metal / Punk / Ska'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: 'Straight', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/31/2026 8:41:01', email: 'udayankashalikar@gmail.com', name: 'Udi', languages: ['English'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Depends', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Social & lively', interests: ['Sports / active', 'Nature / outdoors', 'Reading / philosophy'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Kink-friendly / Sex-positive', musicGenres: ['Hip-Hop / Rap / R&B', 'Classical / Ambient / Chillout', 'Rock / Metal / Punk / Ska'], meetingPlaces: ['Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/31/2026 11:08:40', email: 'freeway5555@protonmail.com', name: 'Kenoa', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Men'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['36–45', '45+'], mainIntention: 'Long-term relationship', relationshipStyle: 'Monogamous', kids: 'Not sure', datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Social & lively', interests: ['Sports / active', 'Arts / culture', 'Music / nightlife', 'Nature / outdoors', 'Personal growth'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Curious & open', musicGenres: ['Techno / House / Electronic', 'Jazz / Blues / Soul / Funk', 'Latin / Afrobeat'], meetingPlaces: ['Bar', 'Café', 'Park', 'Bouldering'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/31/2026 14:08:09', email: 'Caudwell2002@gmail.com', name: 'Ward', languages: ['English'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Everyone'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45', '45+'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Depends', conversationStyle: ['Mix of both'], eveningVibe: 'Flirty', interests: ['Arts / culture', 'Music / nightlife', 'Tech / nerdy'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Jazz / Blues / Soul / Funk', 'Rock / Metal / Punk / Ska'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: 'Cisman, Pansexual', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/31/2026 16:37:49', email: 'Synox67@gmail.com', name: 'Eli', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Casual dating', relationshipStyle: 'Open to both', kids: 'I have kids', datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Fun & light', interests: ['Sports / active', 'Music / nightlife', 'Nature / outdoors'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Hip-Hop / Rap / R&B', 'Jazz / Blues / Soul / Funk', 'Pop / Chart', 'Latin / Afrobeat'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '3/31/2026 22:01:46', email: 'mira008@gmx.de', name: 'Mira', languages: ['German', 'English'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Men', 'Non-Binary', 'Agender', 'Everyone'], groupVibe: 'Mostly similar to me', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45', '45+'], mainIntention: 'Long-term relationship', relationshipStyle: 'Monogamous', kids: "Don't want kids", datingWithKids: 'No', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Chill & relaxed', interests: ['Sports / active', 'Music / nightlife', 'Personal growth'], avoid: [], mustHave: '', additionalNotes: 'My relationship style is monogamous so far, but I\'m open for change in the future. Age range I\'d like to meet is mostly 38-49', referral: '', intimacy: 'More traditional, Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Rock / Metal / Punk / Ska', 'Pop / Chart'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: 'Mainly interested in men, but there are exceptions', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '4/1/2026 15:37:35', email: 'JCrown@web.de', name: 'Chris', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mostly similar to me', ageGroup: '36–45', meetAgeRange: ['18–25', '26–35'], mainIntention: 'Long-term relationship', relationshipStyle: 'Monogamous', kids: 'I want kids', datingWithKids: 'Depends', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Flirty', interests: ['Sports / active', 'Personal growth', 'Body work, massage', 'Sensuality'], avoid: [], mustHave: 'Jonas', additionalNotes: '', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Classical / Ambient / Chillout', 'Rock / Metal / Punk / Ska'], meetingPlaces: ['Park', 'Bouldering'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '4/5/2026 22:45:16', email: 'johe.berlin@proton.me', name: 'Jo', languages: ['English', 'German', 'French'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35'], mainIntention: 'Casual dating', relationshipStyle: 'Open to both', kids: 'I have kids', datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Social & lively', interests: ['Sports / active', 'Arts / culture', 'Personal growth'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Rock / Metal / Punk / Ska', 'Pop / Chart'], meetingPlaces: ['Bar', 'Café', 'Park', 'Bouldering'], genderFeedback: '', eventSource: 'Telegram', attendance: '', bio: '' },
+      { timestamp: '4/9/2026 13:10:37', email: 'aggarwal.mayank@live.com', name: 'Mayank', languages: ['English'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women', 'Non-Binary'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Depends', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Sports / active', 'Arts / culture', 'Nature / outdoors', 'Tech / nerdy', 'Reading / philosophy'], avoid: ['Most likely cannot join the even in April as I will be travelling'], mustHave: '', additionalNotes: 'But would be interested sometime later this year.', referral: 'Ficho', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Jazz / Blues / Soul / Funk', 'Classical / Ambient / Chillout'], meetingPlaces: ['Bar', 'Café', 'Park', 'Bouldering'], genderFeedback: '', eventSource: 'Telegram', attendance: '', bio: '' },
+      { timestamp: '4/9/2026 13:42:43', email: 'heavenly0430@gmail.com', name: 'Jung', languages: ['English'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Men'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['36–45'], mainIntention: 'Casual dating', relationshipStyle: 'Monogamous', kids: "Don't want kids", datingWithKids: 'Yes', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Arts / culture', 'Music / nightlife', 'Nature / outdoors', 'Tech / nerdy', 'Reading / philosophy'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'More traditional, Curious & open', musicGenres: ['Hip-Hop / Rap / R&B', 'Jazz / Blues / Soul / Funk', 'Classical / Ambient / Chillout', 'Rock / Metal / Punk / Ska', 'Pop / Chart'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: 'Other', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '4/9/2026 15:54:06', email: 'amine.bakkari.96@gmail.com', name: 'IAMIN', languages: ['English', 'French and Spanish'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mostly different from me', ageGroup: '26–35', meetAgeRange: ['26–35'], mainIntention: 'Casual dating', relationshipStyle: 'Monogamous', kids: 'I want kids', datingWithKids: 'No', conversationStyle: ['Mix of both'], eveningVibe: 'Flirty', interests: ['Sports / active', 'Music / nightlife', 'Personal growth'], avoid: ['Too tall, i prefer not more than 170cm'], mustHave: '', additionalNotes: 'Preference is she has north african or arabic origins, but not a must.', referral: '', intimacy: 'More traditional, Curious & open', musicGenres: ['Techno / House / Electronic', 'Jazz / Blues / Soul / Funk', 'Latin / Afrobeat'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '4/10/2026 16:17:46', email: 'maria_jungjung@web.de', name: 'Maria', languages: ['English', 'German'], stayBerlin: 'Yes', gender: 'Woman', meetPreferences: ['Women', 'Non-Binary', 'Agender'], groupVibe: 'Mixed group', ageGroup: '26–35', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Friends / social', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'Depends', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Sports / active', 'Nature / outdoors', 'Personal growth', 'Houseplants!'], avoid: ['Cigarette smoke'], mustHave: '', additionalNotes: '', referral: 'Friend told me', intimacy: 'Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Jazz / Blues / Soul / Funk', 'Classical / Ambient / Chillout'], meetingPlaces: ['Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '4/19/2026 22:31:59', email: 'sportbillykpme@gmail.com', name: 'Michalis', languages: ['English', 'German', 'Spanish and Greek'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women', 'Non-Binary'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Long-term relationship', relationshipStyle: 'Polyamorous / ENM', kids: "Don't want kids", datingWithKids: 'No', conversationStyle: ['Mix of both'], eveningVibe: 'Flirty', interests: ['Sports / active', 'Nature / outdoors', 'Anticapitalism'], avoid: [], mustHave: '', additionalNotes: '', referral: '', intimacy: 'Curious & open, Kink-friendly / Sex-positive', musicGenres: ['Hip-Hop / Rap / R&B', 'Jazz / Blues / Soul / Funk', 'Latin / Afrobeat'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: '', eventSource: 'Telegram', attendance: '', bio: '' },
+      { timestamp: '4/21/2026 19:58:08', email: 'vkarama@proton.me', name: 'Vik', languages: ['English', 'Greek'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '26–35', meetAgeRange: ['18–25', '26–35'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: 'Not sure', datingWithKids: 'Depends', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Chill & relaxed', interests: ['Music / nightlife', 'Nature / outdoors', 'Reading / philosophy'], avoid: [], mustHave: '', additionalNotes: 'Although I am inclining towards heterosexual relationships, I don\'t like traditional gender expressions and form. I like to express a lit my "feminine cute" side', referral: 'Friend told me', intimacy: 'Curious & open', musicGenres: ['Jazz / Blues / Soul / Funk', 'Rock / Metal / Punk / Ska', 'Experimental, improvised, noise'], meetingPlaces: ['Bar', 'Park', 'Bouldering'], genderFeedback: '', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '4/22/2026 18:32:42', email: 'raduburtescu@yahoo.com', name: 'Radu', languages: ['English', 'German', 'Romanian'], stayBerlin: 'Yes', gender: 'Agender', meetPreferences: ['Women', 'Non-Binary', 'Agender'], groupVibe: 'Mostly similar to me', ageGroup: '36–45', meetAgeRange: ['18–25', '26–35', '36–45', '45+'], mainIntention: 'Casual dating', relationshipStyle: 'Polyamorous / ENM', kids: 'Not sure', datingWithKids: 'Depends', conversationStyle: ['Mix of both'], eveningVibe: 'Chill & relaxed', interests: ['Nature / outdoors', 'Personal growth', 'Tech / nerdy'], avoid: ['Terfs', 'anti feminists', 'neo-nazis'], mustHave: 'vegans', additionalNotes: 'Thank you for organizing what could be a fun and if not, interesting event', referral: '', intimacy: 'Kink-friendly / Sex-positive', musicGenres: ['Techno / House / Electronic', 'Hip-Hop / Rap / R&B', 'Jazz / Blues / Soul / Funk', 'Classical / Ambient / Chillout', 'Rock / Metal / Punk / Ska', 'Pop / Chart', 'Brass instrumentals'], meetingPlaces: ['Café', 'Park', 'Bouldering'], genderFeedback: 'Into Assumed Female At Birth people across the gender spectrum Other', eventSource: '', attendance: '', bio: '' },
+      { timestamp: '4/24/2026 14:35:28', email: 'peti.bankuti@gmail.com', name: 'Peter', languages: ['English', 'Hungarian'], stayBerlin: 'Yes', gender: 'Man', meetPreferences: ['Women'], groupVibe: 'Mixed group', ageGroup: '36–45', meetAgeRange: ['26–35', '36–45'], mainIntention: 'Long-term relationship', relationshipStyle: 'Monogamous', kids: 'I want kids', datingWithKids: 'Yes', conversationStyle: ['Deep & meaningful'], eveningVibe: 'Chill & relaxed', interests: ['Sports / active', 'Music / nightlife', 'travel'], avoid: [], mustHave: '', additionalNotes: '', referral: 'Friend told me', intimacy: 'Kink-friendly / Sex-positive', musicGenres: ['Jazz / Blues / Soul / Funk', 'Rock / Metal / Punk / Ska'], meetingPlaces: ['Bar', 'Café', 'Park'], genderFeedback: '', eventSource: '', attendance: '', bio: '' }
+    ];
+
+    // Derive sexual orientation
+    function deriveOrientation(person) {
+      const gender = person.gender.toLowerCase();
+      const meets = person.meetPreferences.map(m => m.toLowerCase());
+
+      // Non-binary or Agender attracted to anyone → LGBTQ+
+      if (gender.includes('non-binary') || gender.includes('agender')) {
+        return 'LGBTQ+';
+      }
+
+      // Man only meeting women → Straight
+      if (gender === 'man' && meets.length === 1 && meets.includes('women')) {
+        return 'Straight';
+      }
+
+      // Woman only meeting men → Straight
+      if (gender === 'woman' && meets.length === 1 && meets.includes('men')) {
+        return 'Straight';
+      }
+
+      // Everyone else → LGBTQ+
+      return 'LGBTQ+';
+    }
+
+    // Get language flags
+    function getLanguageFlags(languages) {
+      const flags = [];
+      const hasGerman = languages.some(l => l.toLowerCase().includes('german'));
+      const hasEnglish = languages.some(l => l.toLowerCase().includes('english'));
+
+      if (hasGerman) flags.push('🇩🇪');
+      if (hasEnglish) flags.push('🇬🇧');
+      if (flags.length === 0) flags.push('🌐');
+
+      return flags.join(' ');
+    }
+
+    // Get gender color class
+    function getGenderClass(gender) {
+      const g = gender.toLowerCase();
+      if (g === 'man') return 'gender-men';
+      if (g === 'woman') return 'gender-women';
+      if (g.includes('non-binary')) return 'gender-non-binary';
+      if (g === 'agender') return 'gender-agender';
+      return 'gender-other';
+    }
+
+    // Get gender badge text
+    function getGenderBadge(gender) {
+      const g = gender.toLowerCase();
+      if (g === 'man') return 'M';
+      if (g === 'woman') return 'W';
+      if (g.includes('non-binary')) return 'NB';
+      if (g === 'agender') return 'A';
+      return '?';
+    }
+
+    // Build unique filter options
+    function buildFilters() {
+      const genders = new Set();
+      const orientations = new Set();
+      const languages = new Set();
+      const relationships = new Set();
+      const intentions = new Set();
+      const ages = new Set();
+      const kidsOptions = new Set();
+      const conversations = new Set();
+      const attendances = new Set();
+
+      applicants.forEach(a => {
+        genders.add(a.gender);
+        orientations.add(deriveOrientation(a));
+        a.languages.forEach(l => languages.add(l));
+        relationships.add(a.relationshipStyle);
+        intentions.add(a.mainIntention);
+        ages.add(a.ageGroup);
+        kidsOptions.add(a.kids);
+        a.conversationStyle.forEach(c => conversations.add(c));
+        if (a.attendance) attendances.add(a.attendance);
+      });
+
+      // Render filter groups
+      renderFilterGroup('genderFilters', Array.from(genders).sort());
+      renderFilterGroup('orientationFilters', Array.from(orientations).sort());
+      renderFilterGroup('languageFilters', Array.from(languages).sort());
+      renderFilterGroup('relationshipFilters', Array.from(relationships).sort());
+      renderFilterGroup('intentionFilters', Array.from(intentions).sort());
+      renderFilterGroup('ageFilters', Array.from(ages).sort((a, b) => {
+        const order = ['18–25', '26–35', '36–45', '45+'];
+        return order.indexOf(a) - order.indexOf(b);
+      }));
+      renderFilterGroup('kidsFilters', Array.from(kidsOptions).sort());
+      renderFilterGroup('conversationFilters', Array.from(conversations).sort());
+      if (attendances.size > 0) {
+        renderFilterGroup('attendanceFilters', Array.from(attendances).sort());
+      }
+    }
+
+    function renderFilterGroup(containerId, options) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = options.map(opt => `
+        <label class="filter-checkbox">
+          <input type="checkbox" value="${opt}">
+          <label>${opt}</label>
+          <span class="filter-count">(${applicants.filter(a => {
+            if (containerId === 'genderFilters') return a.gender === opt;
+            if (containerId === 'orientationFilters') return deriveOrientation(a) === opt;
+            if (containerId === 'languageFilters') return a.languages.includes(opt);
+            if (containerId === 'relationshipFilters') return a.relationshipStyle === opt;
+            if (containerId === 'intentionFilters') return a.mainIntention === opt;
+            if (containerId === 'ageFilters') return a.ageGroup === opt;
+            if (containerId === 'kidsFilters') return a.kids === opt;
+            if (containerId === 'conversationFilters') return a.conversationStyle.includes(opt);
+            if (containerId === 'attendanceFilters') return a.attendance === opt;
+            return false;
+          }).length})</span>
+        </label>
+      `).join('');
+    }
+
+    // Get active filters
+    function getActiveFilters() {
+      const filters = {
+        search: document.getElementById('searchInput').value.toLowerCase(),
+        genders: getCheckedValues('genderFilters'),
+        orientations: getCheckedValues('orientationFilters'),
+        languages: getCheckedValues('languageFilters'),
+        relationships: getCheckedValues('relationshipFilters'),
+        intentions: getCheckedValues('intentionFilters'),
+        ages: getCheckedValues('ageFilters'),
+        kids: getCheckedValues('kidsFilters'),
+        conversations: getCheckedValues('conversationFilters'),
+        attendances: getCheckedValues('attendanceFilters')
+      };
+      return filters;
+    }
+
+    function getCheckedValues(containerId) {
+      return Array.from(document.querySelectorAll(`#${containerId} input:checked`)).map(c => c.value);
+    }
+
+    // Filter applicants
+    function filterApplicants() {
+      const filters = getActiveFilters();
+
+      return applicants.filter(a => {
+        // Search filter
+        if (filters.search && !a.name.toLowerCase().includes(filters.search) && !a.email.toLowerCase().includes(filters.search)) {
+          return false;
+        }
+
+        // Gender filter
+        if (filters.genders.length > 0 && !filters.genders.includes(a.gender)) {
+          return false;
+        }
+
+        // Orientation filter
+        if (filters.orientations.length > 0 && !filters.orientations.includes(deriveOrientation(a))) {
+          return false;
+        }
+
+        // Language filter
+        if (filters.languages.length > 0 && !filters.languages.some(l => a.languages.includes(l))) {
+          return false;
+        }
+
+        // Relationship filter
+        if (filters.relationships.length > 0 && !filters.relationships.includes(a.relationshipStyle)) {
+          return false;
+        }
+
+        // Intention filter
+        if (filters.intentions.length > 0 && !filters.intentions.includes(a.mainIntention)) {
+          return false;
+        }
+
+        // Age filter
+        if (filters.ages.length > 0 && !filters.ages.includes(a.ageGroup)) {
+          return false;
+        }
+
+        // Kids filter
+        if (filters.kids.length > 0 && !filters.kids.includes(a.kids)) {
+          return false;
+        }
+
+        // Conversation filter
+        if (filters.conversations.length > 0 && !filters.conversations.some(c => a.conversationStyle.includes(c))) {
+          return false;
+        }
+
+        // Attendance filter
+        if (filters.attendances.length > 0 && !filters.attendances.includes(a.attendance)) {
+          return false;
+        }
+
+        return true;
+      });
+    }
+
+    // Render dashboard
+    function renderDashboard() {
+      const filtered = filterApplicants();
+      const container = document.getElementById('dashboardSections');
+
+      // Update stats
+      document.getElementById('totalApplicants').textContent = applicants.length;
+      document.getElementById('visibleApplicants').textContent = filtered.length;
+
+      // Group by relationship style → intention → orientation
+      const grouped = {};
+
+      filtered.forEach(person => {
+        const rel = person.relationshipStyle;
+        const int = person.mainIntention;
+        const orient = deriveOrientation(person);
+
+        if (!grouped[rel]) grouped[rel] = {};
+        if (!grouped[int]) grouped[rel][int] = {};
+        if (!grouped[rel][int][orient]) grouped[rel][int][orient] = [];
+
+        grouped[rel][int][orient].push(person);
+      });
+
+      // Render sections
+      let html = '';
+
+      Object.keys(grouped).sort().forEach(relationship => {
+        html += `<div class="relationship-style-section">
+          <h2 class="relationship-style-title">${relationship}</h2>
+          <div class="intention-grid">`;
+
+        Object.keys(grouped[relationship]).sort().forEach(intention => {
+          const intentionPeople = grouped[relationship][intention];
+          const totalCount = Object.values(intentionPeople).reduce((sum, arr) => sum + arr.length, 0);
+
+          html += `<div class="intention-subsection">
+            <div class="intention-title">
+              ${intention}
+              <span class="intention-count">${totalCount}</span>
+            </div>`;
+
+          Object.keys(intentionPeople).sort((a, b) => {
+            const order = ['Straight', 'LGBTQ+'];
+            return order.indexOf(a) - order.indexOf(b);
+          }).forEach(orientation => {
+            const people = intentionPeople[orientation];
+            html += `
+              <div class="orientation-group">
+                <div class="orientation-title">
+                  ${orientation}
+                  <span class="orientation-count">${people.length}</span>
+                </div>
+                <div class="person-cards">
+                  ${people.map(person => renderPersonCard(person)).join('')}
+                </div>
+              </div>
+            `;
+          });
+
+          html += '</div>';
+        });
+
+        html += '</div></div>';
+      });
+
+      if (filtered.length === 0) {
+        html = `<div class="empty-state">
+          <div class="empty-state-icon">🔍</div>
+          <div class="empty-state-text">No applicants match your filters</div>
+        </div>`;
+      }
+
+      container.innerHTML = html;
+      addCardEventListeners();
+    }
+
+    function renderPersonCard(person) {
+      const flags = getLanguageFlags(person.languages);
+      const genderClass = getGenderClass(person.gender);
+      const badgeText = getGenderBadge(person.gender);
+
+      return `
+        <div class="person-card ${genderClass}">
+          <div class="person-card-header">
+            <div class="person-languages">${flags}</div>
+            <div class="person-info">
+              <div class="person-name">${person.name}</div>
+              <div class="person-meta">
+                <div class="person-meta-item">
+                  <span class="gender-badge ${genderClass.replace('gender-', '')}">${badgeText}</span>
+                  ${person.ageGroup}
+                </div>
+                <div class="person-meta-item">${person.email}</div>
+              </div>
+            </div>
+            <div class="person-expand-icon">▼</div>
+          </div>
+          <div class="person-details">
+            <div class="detail-grid">
+              <div class="detail-item">
+                <div class="detail-label">Relationship Style</div>
+                <div class="detail-value">${person.relationshipStyle}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Main Intention</div>
+                <div class="detail-value">${person.mainIntention}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Conversation Style</div>
+                <div class="detail-value">${person.conversationStyle.join(', ')}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Evening Vibe</div>
+                <div class="detail-value">${person.eveningVibe}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Kids</div>
+                <div class="detail-value">${person.kids}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Dating w/ Kids</div>
+                <div class="detail-value">${person.datingWithKids}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Languages</div>
+                <div class="detail-value">${person.languages.join(', ')}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Stay in Berlin</div>
+                <div class="detail-value">${person.stayBerlin}</div>
+              </div>
+              <div class="detail-item full-width">
+                <div class="detail-label">Interests</div>
+                <div class="tag-list">${person.interests.map(i => `<span class="tag">${i}</span>`).join('')}</div>
+              </div>
+              ${person.musicGenres.length > 0 ? `
+              <div class="detail-item full-width">
+                <div class="detail-label">Music Genres</div>
+                <div class="tag-list">${person.musicGenres.map(g => `<span class="tag">${g}</span>`).join('')}</div>
+              </div>
+              ` : ''}
+              ${person.meetingPlaces.length > 0 ? `
+              <div class="detail-item full-width">
+                <div class="detail-label">Meeting Preferences</div>
+                <div class="tag-list">${person.meetingPlaces.map(p => `<span class="tag">${p}</span>`).join('')}</div>
+              </div>
+              ` : ''}
+              ${person.avoid ? `
+              <div class="detail-item full-width">
+                <div class="detail-label">Avoids</div>
+                <div class="detail-value">${person.avoid}</div>
+              </div>
+              ` : ''}
+              ${person.mustHave ? `
+              <div class="detail-item full-width">
+                <div class="detail-label">Must-Have</div>
+                <div class="detail-value">${person.mustHave}</div>
+              </div>
+              ` : ''}
+              ${person.additionalNotes ? `
+              <div class="detail-item full-width">
+                <div class="detail-label">Notes</div>
+                <div class="detail-value">${person.additionalNotes}</div>
+              </div>
+              ` : ''}
+              ${person.genderFeedback ? `
+              <div class="detail-item full-width">
+                <div class="detail-label">Gender / Orientation Feedback</div>
+                <div class="detail-value">${person.genderFeedback}</div>
+              </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function addCardEventListeners() {
+      document.querySelectorAll('.person-card').forEach(card => {
+        card.addEventListener('click', function() {
+          this.classList.toggle('expanded');
+        });
+      });
+    }
+
+    // Event listeners
+    document.getElementById('searchInput').addEventListener('input', renderDashboard);
+    document.querySelectorAll('.filter-checkbox input').forEach(checkbox => {
+      checkbox.addEventListener('change', renderDashboard);
+    });
+
+    // Initialize
+    buildFilters();
+    renderDashboard();
+  </script>
+</body>
+</html>
