@@ -335,7 +335,7 @@
     <div class="legend">
       <div class="legend-item">
         <div class="legend-color active"></div>
-        <span><strong>👥 Active</strong> — 5 needed (♀5 + ♂5) | 🏳️‍🌈 LGBTQ+ needs 10 total</span>
+        <span><strong>👥 Active</strong> — Straight: 10 needed (♀5 + ♂5) | 🏳️‍🌈 LGBTQ+: 10 people (any gender)</span>
       </div>
       <div class="legend-item">
         <div class="legend-color backup"></div>
@@ -572,15 +572,17 @@
 
       categoryList.forEach(cat => {
         const isLGBTQ = cat.ori === 'LGBTQ+';
-        const requiredPeople = isLGBTQ ? 10 : 5;
-        const requiredEach = isLGBTQ ? 5 : 5;
-        const reservePeople = isLGBTQ ? 2 : 2;
+        const requiredPeople = isLGBTQ ? 10 : 10; // 10 total for both
+        const requiredEach = 5; // 5 women or 5 men for straight
+        const reservePeople = 2;
 
-        const totalPeople = cat.women.length + cat.men.length;
+        const allParticipants = [...cat.women, ...cat.men, ...cat.other];
+        const totalPeople = allParticipants.length;
         const isDone = totalPeople >= requiredPeople;
 
-        const missingW = Math.max(0, requiredEach - cat.women.length);
-        const missingM = Math.max(0, requiredEach - cat.men.length);
+        const missingW = Math.max(0, 5 - cat.women.length);
+        const missingM = Math.max(0, 5 - cat.men.length);
+        const missingTotal = Math.max(0, requiredPeople - totalPeople);
 
         const section = document.createElement('div');
         const relationshipClass = cat.rel.includes('Polyamorous') ? 'poly' : 'mono';
@@ -591,10 +593,13 @@
 
         const title = document.createElement('div');
         title.className = 'header-title';
+        const statusText = isLGBTQ
+          ? (isDone ? '✓ DONE' : `Missing: ${missingTotal}`)
+          : (isDone ? '✓ DONE' : `Missing: W${missingW}, M${missingM}`);
         title.innerHTML = `
           <span>${cat.rel} > ${cat.int} > ${cat.ori}</span>
-          <span class="status-badge ${isDone ? 'done' : missingW === 0 && missingM === 0 ? 'pending' : 'missing'}">
-            ${isDone ? '✓ DONE' : `Missing: W${missingW}, M${missingM}`}
+          <span class="status-badge ${isDone ? 'done' : missingW === 0 && missingM === 0 && !isLGBTQ ? 'pending' : missingTotal === 0 && isLGBTQ ? 'pending' : 'missing'}">
+            ${statusText}
           </span>
         `;
         header.appendChild(title);
@@ -611,55 +616,96 @@
 
         const table = document.createElement('table');
         const thead = document.createElement('thead');
-        thead.innerHTML = `<tr><th>Women</th><th>Men</th></tr>`;
-        table.appendChild(thead);
 
-        const tbody = document.createElement('tbody');
+        if (isLGBTQ) {
+          // For LGBTQ+: single column with all participants
+          thead.innerHTML = `<tr><th>Participants (${totalPeople}/10)</th></tr>`;
+          table.appendChild(thead);
 
-        // Active rows (5 required)
-        for (let i = 0; i < 5; i++) {
-          const tr = document.createElement('tr');
-          tr.className = 'active-row';
+          const tbody = document.createElement('tbody');
 
-          const wCell = document.createElement('td');
-          wCell.innerHTML = i < cat.women.length ? createParticipantHTML(cat.women[i]) : '<span class="missing-text">–</span>';
-          tr.appendChild(wCell);
+          // Active rows (10 required)
+          for (let i = 0; i < 10; i++) {
+            const tr = document.createElement('tr');
+            tr.className = 'active-row';
 
-          const mCell = document.createElement('td');
-          mCell.innerHTML = i < cat.men.length ? createParticipantHTML(cat.men[i]) : '<span class="missing-text">–</span>';
-          tr.appendChild(mCell);
+            const cell = document.createElement('td');
+            cell.innerHTML = i < allParticipants.length ? createParticipantHTML(allParticipants[i]) : '<span class="missing-text">–</span>';
+            tr.appendChild(cell);
 
-          tbody.appendChild(tr);
+            tbody.appendChild(tr);
+          }
+
+          // Reserve rows (2 optional)
+          for (let i = 10; i < 12; i++) {
+            const tr = document.createElement('tr');
+            tr.className = 'backup-row';
+
+            const cell = document.createElement('td');
+            cell.innerHTML = i < allParticipants.length ? createParticipantHTML(allParticipants[i]) : '<span style="color: #999;">–</span>';
+            tr.appendChild(cell);
+
+            tbody.appendChild(tr);
+          }
+
+          table.appendChild(tbody);
+        } else {
+          // For Straight: separate women and men columns
+          thead.innerHTML = `<tr><th>Women (${cat.women.length}/5)</th><th>Men (${cat.men.length}/5)</th></tr>`;
+          table.appendChild(thead);
+
+          const tbody = document.createElement('tbody');
+
+          // Active rows (5 required from each)
+          for (let i = 0; i < 5; i++) {
+            const tr = document.createElement('tr');
+            tr.className = 'active-row';
+
+            const wCell = document.createElement('td');
+            wCell.innerHTML = i < cat.women.length ? createParticipantHTML(cat.women[i]) : '<span class="missing-text">–</span>';
+            tr.appendChild(wCell);
+
+            const mCell = document.createElement('td');
+            mCell.innerHTML = i < cat.men.length ? createParticipantHTML(cat.men[i]) : '<span class="missing-text">–</span>';
+            tr.appendChild(mCell);
+
+            tbody.appendChild(tr);
+          }
+
+          // Reserve rows (2 optional, colored differently)
+          for (let i = 5; i < 7; i++) {
+            const tr = document.createElement('tr');
+            tr.className = 'backup-row';
+
+            const wCell = document.createElement('td');
+            wCell.innerHTML = i < cat.women.length ? createParticipantHTML(cat.women[i]) : '<span style="color: #999;">–</span>';
+            tr.appendChild(wCell);
+
+            const mCell = document.createElement('td');
+            mCell.innerHTML = i < cat.men.length ? createParticipantHTML(cat.men[i]) : '<span style="color: #999;">–</span>';
+            tr.appendChild(mCell);
+
+            tbody.appendChild(tr);
+          }
+
+          table.appendChild(tbody);
         }
 
-        // Reserve rows (2 optional, colored differently)
-        for (let i = 5; i < 7; i++) {
-          const tr = document.createElement('tr');
-          tr.className = 'backup-row';
-
-          const wCell = document.createElement('td');
-          wCell.innerHTML = i < cat.women.length ? createParticipantHTML(cat.women[i]) : '<span style="color: #999;">–</span>';
-          tr.appendChild(wCell);
-
-          const mCell = document.createElement('td');
-          mCell.innerHTML = i < cat.men.length ? createParticipantHTML(cat.men[i]) : '<span style="color: #999;">–</span>';
-          tr.appendChild(mCell);
-
-          tbody.appendChild(tr);
-        }
-
-        table.appendChild(tbody);
         content.appendChild(table);
 
         // Add category info
         const info = document.createElement('div');
         info.style.cssText = 'font-size: 0.9rem; color: #666; margin-top: 1rem;';
-        const allParticipants = [...cat.women, ...cat.men];
         const allEmails = allParticipants.map(p => p.email).join(', ');
-        info.innerHTML = `
-          <strong>Status:</strong> ${cat.women.length} women, ${cat.men.length} men (Total: ${totalPeople}/${requiredPeople})<br>
-          ${isLGBTQ ? '<strong>LGBTQ+ Category:</strong> Requires 10+ people + 2 reserves' : '<strong>Straight Category:</strong> Requires 5 women + 5 men + 2 reserves'}
-        `;
+
+        let statusHTML = '';
+        if (isLGBTQ) {
+          statusHTML = `<strong>Status:</strong> ${totalPeople} total people (Required: 10 + 2 reserves)<br><strong>Note:</strong> No gender requirements for LGBTQ+ groups`;
+        } else {
+          statusHTML = `<strong>Status:</strong> ${cat.women.length} women, ${cat.men.length} men (Total: ${totalPeople}/10)<br><strong>Note:</strong> Requires 5 women + 5 men + 2 reserves`;
+        }
+
+        info.innerHTML = statusHTML;
         content.appendChild(info);
 
         // Add copy emails button
