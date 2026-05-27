@@ -907,14 +907,14 @@
       return counts;
     }
 
-    function formatGenderCounts(counts) {
-      const circles = [];
-      if (counts.W > 0) circles.push(`<span class="gender-count gender-count-women">${counts.W}</span>`);
-      if (counts.M > 0) circles.push(`<span class="gender-count gender-count-men">${counts.M}</span>`);
-      if (counts.NB > 0) circles.push(`<span class="gender-count gender-count-nb">${counts.NB}</span>`);
-      if (counts.A > 0) circles.push(`<span class="gender-count gender-count-agender">${counts.A}</span>`);
-      if (counts.Other > 0) circles.push(`<span class="gender-count gender-count-other">${counts.Other}</span>`);
-      return circles.length > 0 ? `<span class="gender-counts">${circles.join('')}</span>` : '';
+    function getGenderCountsText(counts) {
+      const parts = [];
+      if (counts.W > 0) parts.push(`W${counts.W}`);
+      if (counts.M > 0) parts.push(`M${counts.M}`);
+      if (counts.NB > 0) parts.push(`NB${counts.NB}`);
+      if (counts.A > 0) parts.push(`A${counts.A}`);
+      if (counts.Other > 0) parts.push(`O${counts.Other}`);
+      return parts.length > 0 ? `(${parts.join(', ')})` : '';
     }
 
     // Render dashboard
@@ -970,7 +970,7 @@
         html += `<div class="relationship-style-section collapsible-section expanded" data-rel-idx="${relIdx}">
           <h2 class="relationship-style-title collapsible-header">
             <span class="chevron">▼</span>
-            ${relationship} ${formatGenderCounts(getGenderCounts(relPeople))}
+            ${relationship} ${getGenderCountsText(getGenderCounts(relPeople))}
           </h2>
           <div class="collapsible-content">
             <div class="intention-grid">`;
@@ -987,7 +987,7 @@
           html += `<div class="intention-subsection collapsible-section expanded" data-rel-idx="${relIdx}" data-int-idx="${intIdx}">
             <div class="intention-title collapsible-header">
               <span class="chevron">▼</span>
-              ${intention} ${formatGenderCounts(getGenderCounts(allIntentionPeople))}
+              ${intention} ${getGenderCountsText(getGenderCounts(allIntentionPeople))}
             </div>
             <div class="collapsible-content">`;
 
@@ -1012,7 +1012,7 @@
               <div class="orientation-group collapsible-section expanded" data-rel-idx="${relIdx}" data-int-idx="${intIdx}" data-orient-idx="${orientIdx}">
                 <div class="orientation-title collapsible-header">
                   <span class="chevron">▼</span>
-                  ${orientation} ${formatGenderCounts(orientCounts)}
+                  ${orientation} ${getGenderCountsText(orientCounts)}
                 </div>
                 <div class="collapsible-content">
                   <ol class="person-list">
