@@ -380,6 +380,63 @@
     .copy-emails-btn.copied {
       background: #27ae60;
     }
+
+    .participant-cell {
+      position: relative;
+    }
+
+    .remove-btn {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s, background 0.2s;
+    }
+
+    .participant-cell:hover .remove-btn {
+      opacity: 1;
+    }
+
+    .remove-btn:hover {
+      background: #c0392b;
+    }
+
+    /* Divider between main and backup */
+    .main-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #e74c3c 0%, #e74c3c 50%, transparent 100%);
+      margin: 0.5rem 0;
+    }
+
+    tr.active-row {
+      background: #f0f8ff;
+    }
+
+    tr.active-row:hover {
+      background: #e0f0ff;
+    }
+
+    tr.backup-row {
+      background: #fff8e1;
+      border-top: 3px dashed #e74c3c;
+    }
+
+    tr.backup-row:hover {
+      background: #fff0c2;
+    }
   </style>
 </head>
 <body>
@@ -592,34 +649,41 @@
       return '';
     }
 
-    // Create participant info HTML
-    function createParticipantHTML(person) {
+    // Track removed participants per category
+    const removedParticipants = {};
+
+    // Create participant info HTML with remove button
+    function createParticipantHTML(person, categoryKey, isBackup) {
+      const removeId = `remove-${categoryKey}-${person.email.replace(/[@.]/g, '-')}`;
       return `
-        <span class="participant-name">
-          ${person.name}
-          <div class="participant-info">
-            <div class="participant-info-item">
-              <span class="participant-info-label">Email:</span>
-              <span class="participant-info-value">${person.email}</span>
+        <div class="participant-cell">
+          <span class="participant-name">
+            ${person.name}
+            <div class="participant-info">
+              <div class="participant-info-item">
+                <span class="participant-info-label">Email:</span>
+                <span class="participant-info-value">${person.email}</span>
+              </div>
+              <div class="participant-info-item">
+                <span class="participant-info-label">Gender:</span>
+                <span class="participant-info-value">${person.gender}</span>
+              </div>
+              <div class="participant-info-item">
+                <span class="participant-info-label">Age:</span>
+                <span class="participant-info-value">${person.ageGroup}</span>
+              </div>
+              <div class="participant-info-item">
+                <span class="participant-info-label">Intention:</span>
+                <span class="participant-info-value">${person.mainIntention}</span>
+              </div>
+              <div class="participant-info-item">
+                <span class="participant-info-label">Relationship:</span>
+                <span class="participant-info-value">${person.relationshipStyle}</span>
+              </div>
             </div>
-            <div class="participant-info-item">
-              <span class="participant-info-label">Gender:</span>
-              <span class="participant-info-value">${person.gender}</span>
-            </div>
-            <div class="participant-info-item">
-              <span class="participant-info-label">Age:</span>
-              <span class="participant-info-value">${person.ageGroup}</span>
-            </div>
-            <div class="participant-info-item">
-              <span class="participant-info-label">Intention:</span>
-              <span class="participant-info-value">${person.mainIntention}</span>
-            </div>
-            <div class="participant-info-item">
-              <span class="participant-info-label">Relationship:</span>
-              <span class="participant-info-value">${person.relationshipStyle}</span>
-            </div>
-          </div>
-        </span>
+          </span>
+          <button class="remove-btn" id="${removeId}" title="Remove from list">✕</button>
+        </div>
       `;
     }
 
@@ -722,6 +786,8 @@
         const table = document.createElement('table');
         const thead = document.createElement('thead');
 
+        const categoryKey = `${cat.rel}|${cat.int}|${cat.ori}`;
+
         if (isLGBTQ) {
           // For LGBTQ+: single column with all participants
           thead.innerHTML = `<tr><th>Participants (${totalPeople}/10)</th></tr>`;
@@ -729,25 +795,32 @@
 
           const tbody = document.createElement('tbody');
 
-          // Active rows (10 required)
-          for (let i = 0; i < 10; i++) {
+          // Main rows (8 people)
+          for (let i = 0; i < 8; i++) {
             const tr = document.createElement('tr');
             tr.className = 'active-row';
 
             const cell = document.createElement('td');
-            cell.innerHTML = i < allParticipants.length ? createParticipantHTML(allParticipants[i]) : '<span class="missing-text">–</span>';
+            cell.innerHTML = i < allParticipants.length ? createParticipantHTML(allParticipants[i], categoryKey, false) : '<span class="missing-text">–</span>';
             tr.appendChild(cell);
 
             tbody.appendChild(tr);
           }
 
-          // Reserve rows (2 optional)
-          for (let i = 10; i < 12; i++) {
+          // Divider
+          const dividerRow = document.createElement('tr');
+          const dividerCell = document.createElement('td');
+          dividerCell.innerHTML = '<div class="main-divider"></div>';
+          dividerRow.appendChild(dividerCell);
+          tbody.appendChild(dividerRow);
+
+          // Backup rows (2 optional)
+          for (let i = 8; i < 10; i++) {
             const tr = document.createElement('tr');
             tr.className = 'backup-row';
 
             const cell = document.createElement('td');
-            cell.innerHTML = i < allParticipants.length ? createParticipantHTML(allParticipants[i]) : '<span style="color: #999;">–</span>';
+            cell.innerHTML = i < allParticipants.length ? createParticipantHTML(allParticipants[i], categoryKey, true) : '<span style="color: #999;">–</span>';
             tr.appendChild(cell);
 
             tbody.appendChild(tr);
@@ -761,33 +834,43 @@
 
           const tbody = document.createElement('tbody');
 
-          // Active rows (5 required from each)
-          for (let i = 0; i < 5; i++) {
+          // Main rows (4 from each = 8 total)
+          for (let i = 0; i < 4; i++) {
             const tr = document.createElement('tr');
             tr.className = 'active-row';
 
             const wCell = document.createElement('td');
-            wCell.innerHTML = i < cat.women.length ? createParticipantHTML(cat.women[i]) : '<span class="missing-text">–</span>';
+            wCell.innerHTML = i < cat.women.length ? createParticipantHTML(cat.women[i], categoryKey, false) : '<span class="missing-text">–</span>';
             tr.appendChild(wCell);
 
             const mCell = document.createElement('td');
-            mCell.innerHTML = i < cat.men.length ? createParticipantHTML(cat.men[i]) : '<span class="missing-text">–</span>';
+            mCell.innerHTML = i < cat.men.length ? createParticipantHTML(cat.men[i], categoryKey, false) : '<span class="missing-text">–</span>';
             tr.appendChild(mCell);
 
             tbody.appendChild(tr);
           }
 
-          // Reserve rows (2 optional, colored differently)
-          for (let i = 5; i < 7; i++) {
+          // Divider
+          const dividerRow = document.createElement('tr');
+          const dividerCell1 = document.createElement('td');
+          const dividerCell2 = document.createElement('td');
+          dividerCell1.innerHTML = '<div class="main-divider"></div>';
+          dividerCell2.innerHTML = '<div class="main-divider"></div>';
+          dividerRow.appendChild(dividerCell1);
+          dividerRow.appendChild(dividerCell2);
+          tbody.appendChild(dividerRow);
+
+          // Backup rows (1 from each = 2 total)
+          for (let i = 4; i < 5; i++) {
             const tr = document.createElement('tr');
             tr.className = 'backup-row';
 
             const wCell = document.createElement('td');
-            wCell.innerHTML = i < cat.women.length ? createParticipantHTML(cat.women[i]) : '<span style="color: #999;">–</span>';
+            wCell.innerHTML = i < cat.women.length ? createParticipantHTML(cat.women[i], categoryKey, true) : '<span style="color: #999;">–</span>';
             tr.appendChild(wCell);
 
             const mCell = document.createElement('td');
-            mCell.innerHTML = i < cat.men.length ? createParticipantHTML(cat.men[i]) : '<span style="color: #999;">–</span>';
+            mCell.innerHTML = i < cat.men.length ? createParticipantHTML(cat.men[i], categoryKey, true) : '<span style="color: #999;">–</span>';
             tr.appendChild(mCell);
 
             tbody.appendChild(tr);
@@ -801,7 +884,10 @@
         // Add category info
         const info = document.createElement('div');
         info.style.cssText = 'font-size: 0.9rem; color: #666; margin-top: 1rem;';
-        const allEmails = allParticipants.map(p => p.email).join(', ');
+        // Only copy first 8 people
+        const mainParticipants = isLGBTQ ? allParticipants.slice(0, 8) :
+          [...cat.women.slice(0, 4), ...cat.men.slice(0, 4)];
+        const mainEmails = mainParticipants.map(p => p.email).join(', ');
 
         let statusHTML = '';
         if (isLGBTQ) {
@@ -813,16 +899,16 @@
         info.innerHTML = statusHTML;
         content.appendChild(info);
 
-        // Add copy emails button
+        // Add copy emails button (only main 8)
         const copyBtn = document.createElement('button');
         copyBtn.className = 'copy-emails-btn';
-        copyBtn.textContent = `📋 Copy All Emails (${allParticipants.length})`;
+        copyBtn.textContent = `📋 Copy Main 8 Emails (${mainParticipants.length})`;
         copyBtn.addEventListener('click', () => {
-          navigator.clipboard.writeText(allEmails).then(() => {
+          navigator.clipboard.writeText(mainEmails).then(() => {
             copyBtn.textContent = '✓ Copied!';
             copyBtn.classList.add('copied');
             setTimeout(() => {
-              copyBtn.textContent = `📋 Copy All Emails (${allParticipants.length})`;
+              copyBtn.textContent = `📋 Copy Main 8 Emails (${mainParticipants.length})`;
               copyBtn.classList.remove('copied');
             }, 2000);
           });
@@ -830,6 +916,19 @@
         content.appendChild(copyBtn);
 
         section.appendChild(content);
+
+        // Add remove button event listeners
+        setTimeout(() => {
+          const removeButtons = section.querySelectorAll('.remove-btn');
+          removeButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const td = btn.closest('td');
+              td.innerHTML = '<span class="missing-text">–</span>';
+              btn.remove();
+            });
+          });
+        }, 0);
 
         // Toggle collapse
         header.addEventListener('click', () => {
