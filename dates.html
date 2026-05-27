@@ -1133,7 +1133,7 @@
         const statusClass = isDone ? 'done' : (missingW === 0 && missingM === 0 && !isLGBTQ) || (missingTotal === 0 && isLGBTQ) ? 'ready' : 'missing';
         statusBadge.className = `status-badge ${statusClass}`;
         statusBadge.textContent = statusText;
-        statusBadge.style.cssText = 'cursor: pointer; border: none; padding: inherit; font-size: inherit; background: inherit; color: inherit;';
+        statusBadge.style.cssText = 'cursor: pointer; border: none; padding: inherit; font-size: inherit;';
 
         // Create dropdown menu
         const dropdown = document.createElement('div');
