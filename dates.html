@@ -458,10 +458,12 @@
       position: relative;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: 0.5rem 0.8rem;
-      border-radius: 6px;
+      gap: 0.4rem;
+      padding: 0.15rem 0.4rem 0.15rem 0.4rem;
+      border-radius: 4px;
       font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.1rem;
     }
 
     .participant-cell.gender-bg-women {
@@ -482,30 +484,32 @@
 
     .participant-content {
       flex: 1;
+      min-width: 0;
     }
 
     .participant-bezirk {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: #666;
       font-weight: 500;
       white-space: nowrap;
-      min-width: 120px;
-      text-align: right;
+      flex-shrink: 0;
+      margin: 0 0.3rem;
     }
 
     .attraction-container {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.3rem;
       flex-wrap: wrap;
-      margin-top: 0.3rem;
+      margin-top: 0.1rem;
+      width: 100%;
     }
 
     .attraction-item {
       display: inline-block;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       color: white;
     }
 
@@ -535,28 +539,22 @@
     }
 
     .remove-btn {
-      position: absolute;
-      top: 50%;
-      right: 8px;
-      transform: translateY(-50%);
+      flex-shrink: 0;
       background: #e74c3c;
       color: white;
       border: none;
       border-radius: 50%;
-      width: 28px;
-      height: 28px;
+      width: 22px;
+      height: 22px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 0.9rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      transition: opacity 0.2s, background 0.2s;
-    }
-
-    .participant-cell:hover .remove-btn {
-      opacity: 1;
+      transition: background 0.2s;
+      padding: 0;
+      margin-left: 0.2rem;
     }
 
     .remove-btn:hover {
@@ -565,9 +563,9 @@
 
     /* Divider between main and backup */
     .main-divider {
-      height: 3px;
+      height: 2px;
       background: linear-gradient(90deg, #e74c3c 0%, #e74c3c 50%, transparent 100%);
-      margin: 0.5rem 0;
+      margin: 0.2rem 0;
     }
 
     tr.active-row {
