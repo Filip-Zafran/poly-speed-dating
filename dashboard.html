@@ -176,6 +176,81 @@
       margin-left: auto;
     }
 
+    .gender-counts {
+      display: inline-flex;
+      gap: 0.4rem;
+      align-items: center;
+      margin-left: 0.8rem;
+    }
+
+    .gender-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .gender-count-women {
+      background: #cc3333;
+    }
+
+    .gender-count-men {
+      background: #0066cc;
+    }
+
+    .gender-count-nb,
+    .gender-count-agender {
+      background: #ffcc00;
+      color: #333;
+    }
+
+    .gender-count-other {
+      background: #888;
+    }
+
+    /* Collapsible Sections */
+    .collapsible-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .collapsible-header {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .collapsible-header:hover {
+      opacity: 0.8;
+    }
+
+    .chevron {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.9rem;
+    }
+
+    .collapsible-section.collapsed .chevron {
+      transform: rotate(-90deg);
+    }
+
+    .collapsible-content {
+      display: block;
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+
+    .collapsible-section.collapsed .collapsible-content {
+      display: none;
+    }
+
     /* Orientation Groups */
     .orientation-group {
       margin-bottom: 1.5rem;
@@ -777,13 +852,13 @@
     }
 
     function formatGenderCounts(counts) {
-      const parts = [];
-      if (counts.W > 0) parts.push(`W${counts.W}`);
-      if (counts.M > 0) parts.push(`M${counts.M}`);
-      if (counts.NB > 0) parts.push(`NB${counts.NB}`);
-      if (counts.A > 0) parts.push(`A${counts.A}`);
-      if (counts.Other > 0) parts.push(`O${counts.Other}`);
-      return parts.length > 0 ? `(${parts.join(', ')})` : '';
+      const circles = [];
+      if (counts.W > 0) circles.push(`<span class="gender-count gender-count-women">${counts.W}</span>`);
+      if (counts.M > 0) circles.push(`<span class="gender-count gender-count-men">${counts.M}</span>`);
+      if (counts.NB > 0) circles.push(`<span class="gender-count gender-count-nb">${counts.NB}</span>`);
+      if (counts.A > 0) circles.push(`<span class="gender-count gender-count-agender">${counts.A}</span>`);
+      if (counts.Other > 0) circles.push(`<span class="gender-count gender-count-other">${counts.Other}</span>`);
+      return circles.length > 0 ? `<span class="gender-counts">${circles.join('')}</span>` : '';
     }
 
     // Render dashboard
@@ -825,7 +900,7 @@
       let html = '';
 
       const relationshipOrder = ['Monogamous', 'Polyamorous / ENM'];
-      relationshipOrder.forEach(relationship => {
+      relationshipOrder.forEach((relationship, relIdx) => {
         if (!grouped[relationship]) return;
 
         // Get all people in this relationship style
@@ -836,11 +911,15 @@
           });
         });
 
-        html += `<div class="relationship-style-section">
-          <h2 class="relationship-style-title">${relationship} ${formatGenderCounts(getGenderCounts(relPeople))}</h2>
-          <div class="intention-grid">`;
+        html += `<div class="relationship-style-section collapsible-section expanded" data-rel-idx="${relIdx}">
+          <h2 class="relationship-style-title collapsible-header">
+            <span class="chevron">▼</span>
+            ${relationship} ${formatGenderCounts(getGenderCounts(relPeople))}
+          </h2>
+          <div class="collapsible-content">
+            <div class="intention-grid">`;
 
-        Object.keys(grouped[relationship]).sort().forEach(intention => {
+        Object.keys(grouped[relationship]).sort().forEach((intention, intIdx) => {
           const intentionPeople = grouped[relationship][intention];
 
           // Get all people in this intention
@@ -849,15 +928,17 @@
             allIntentionPeople.push(...orientations);
           });
 
-          html += `<div class="intention-subsection">
-            <div class="intention-title">
+          html += `<div class="intention-subsection collapsible-section expanded" data-rel-idx="${relIdx}" data-int-idx="${intIdx}">
+            <div class="intention-title collapsible-header">
+              <span class="chevron">▼</span>
               ${intention} ${formatGenderCounts(getGenderCounts(allIntentionPeople))}
-            </div>`;
+            </div>
+            <div class="collapsible-content">`;
 
           Object.keys(intentionPeople).sort((a, b) => {
             const order = ['Straight', 'LGBTQ+'];
             return order.indexOf(a) - order.indexOf(b);
-          }).forEach(orientation => {
+          }).forEach((orientation, orientIdx) => {
             const people = intentionPeople[orientation];
 
             // Get gender counts for this orientation
@@ -872,21 +953,24 @@
             });
 
             html += `
-              <div class="orientation-group">
-                <div class="orientation-title">
-                  ▶ ${orientation} ${formatGenderCounts(orientCounts)}
+              <div class="orientation-group collapsible-section expanded" data-rel-idx="${relIdx}" data-int-idx="${intIdx}" data-orient-idx="${orientIdx}">
+                <div class="orientation-title collapsible-header">
+                  <span class="chevron">▼</span>
+                  ${orientation} ${formatGenderCounts(orientCounts)}
                 </div>
-                <ol class="person-list">
-                  ${sortedPeople.map((person, idx) => renderPersonItem(person, idx + 1)).join('')}
-                </ol>
+                <div class="collapsible-content">
+                  <ol class="person-list">
+                    ${sortedPeople.map((person, idx) => renderPersonItem(person, idx + 1)).join('')}
+                  </ol>
+                </div>
               </div>
             `;
           });
 
-          html += '</div>';
+          html += '</div></div>';
         });
 
-        html += '</div></div>';
+        html += '</div></div></div>';
       });
 
       if (filtered.length === 0) {
@@ -985,9 +1069,22 @@
     }
 
     function addCardEventListeners() {
+      // Person item click handlers
       document.querySelectorAll('.person-item').forEach(item => {
         item.addEventListener('click', function() {
           this.classList.toggle('expanded');
+        });
+      });
+
+      // Collapsible section click handlers
+      document.querySelectorAll('.collapsible-header').forEach(header => {
+        header.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const section = this.closest('.collapsible-section');
+          if (section) {
+            section.classList.toggle('collapsed');
+          }
         });
       });
     }
