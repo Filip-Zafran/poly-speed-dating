@@ -848,7 +848,7 @@
 
         const relTag = document.createElement('span');
         relTag.className = `category-tag ${getTagColorClass('relationship', cat.rel)} ${opacityClass}`;
-        relTag.textContent = cat.rel;
+        relTag.textContent = `${cat.rel} (${totalPeople})`;
 
         const intTag = document.createElement('span');
         intTag.className = `category-tag ${getTagColorClass('intention', cat.int)} ${opacityClass}`;
