@@ -948,16 +948,16 @@
 
       // Attendance info with tags
       const attended = person.attendedEvents || 0;
-      const paymentAmount = person.totalPayments || 0;
+      const basePrice = 5; // Standard €5 per event
 
       // Calculate payment with discount - only event 3 (50%) and event 5 (FREE)
-      let discountedPayment = paymentAmount;
+      let discountedPayment = basePrice;
       let discountTag = '';
       if (attended === 5) {
         discountedPayment = 0; // FREE
         discountTag = '<span class="tag tag-free">FREE</span>';
       } else if (attended === 3) {
-        discountedPayment = (paymentAmount * 0.5).toFixed(1); // 50% discount
+        discountedPayment = (basePrice * 0.5); // 50% discount = €2.5
         discountTag = '<span class="tag tag-discount">50%</span>';
       }
 
@@ -1286,21 +1286,21 @@
 
         // Calculate and display total fees - only event 3 (50%) and event 5 (FREE)
         let totalFees = 0;
+        const basePrice = 5;
         allParticipants.forEach(person => {
           const attended = person.attendedEvents || 0;
-          const paymentAmount = person.totalPayments || 0;
-          let discountedPayment = paymentAmount;
+          let discountedPayment = basePrice;
           if (attended === 5) {
             discountedPayment = 0;
           } else if (attended === 3) {
-            discountedPayment = (paymentAmount * 0.5);
+            discountedPayment = (basePrice * 0.5);
           }
           totalFees += discountedPayment;
         });
 
         const totalDiv = document.createElement('div');
         totalDiv.style.cssText = 'font-size: 0.95rem; color: #340c46; font-weight: 700; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 2px solid #ddd; text-align: right;';
-        totalDiv.innerHTML = `<strong>Total Fees: €${totalFees.toFixed(2)}</strong>`;
+        totalDiv.innerHTML = `<strong>TOTAL EVENT: €${totalFees.toFixed(1)}</strong>`;
         content.appendChild(totalDiv);
 
         section.appendChild(content);
