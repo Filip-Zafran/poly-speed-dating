@@ -975,8 +975,7 @@
         }
         intentions.add(a.mainIntention);
         ages.add(a.ageGroup);
-        kidsOptions.add(a.kids);
-        a.conversationStyle.forEach(c => conversations.add(c));
+        if (a.datingWithKids) kidsOptions.add(a.datingWithKids);
         if (a.attendance) attendances.add(a.attendance);
       });
 
@@ -1014,8 +1013,7 @@
             if (containerId === 'relationshipFilters') return a.relationshipStyle === opt;
             if (containerId === 'intentionFilters') return a.mainIntention === opt;
             if (containerId === 'ageFilters') return a.ageGroup === opt;
-            if (containerId === 'kidsFilters') return a.kids === opt;
-            if (containerId === 'conversationFilters') return a.conversationStyle.includes(opt);
+            if (containerId === 'kidsFilters') return a.datingWithKids === opt;
             if (containerId === 'attendanceFilters') return a.attendance === opt;
             return false;
           }).length})</span>
@@ -1090,12 +1088,7 @@
         }
 
         // Kids filter
-        if (filters.kids.length > 0 && !filters.kids.includes(a.kids)) {
-          return false;
-        }
-
-        // Conversation filter
-        if (filters.conversations.length > 0 && !filters.conversations.some(c => a.conversationStyle.includes(c))) {
+        if (filters.kids.length > 0 && !filters.kids.includes(a.datingWithKids)) {
           return false;
         }
 
@@ -1255,16 +1248,12 @@
           <div class="person-details">
             <div class="detail-grid">
               <div class="detail-item">
-                <div class="detail-label">Conversation Style</div>
-                <div class="detail-value">${person.conversationStyle.join(', ')}</div>
+                <div class="detail-label">Music Genres</div>
+                <div class="detail-value">${person.musicGenres.join(', ')}</div>
               </div>
               <div class="detail-item">
                 <div class="detail-label">Evening Vibe</div>
                 <div class="detail-value">${person.eveningVibe}</div>
-              </div>
-              <div class="detail-item">
-                <div class="detail-label">Kids</div>
-                <div class="detail-value">${person.kids}</div>
               </div>
               <div class="detail-item">
                 <div class="detail-label">Dating w/ Kids</div>
@@ -1341,8 +1330,8 @@
     function exportToCSV() {
       const headers = [
         'Name', 'Email', 'Gender', 'Age', 'Languages',
-        'Relationship Style', 'Main Intention', 'Kids', 'Dating with Kids',
-        'Conversation Style', 'Evening Vibe', 'Interests', 'Music Genres',
+        'Relationship Style', 'Main Intention', 'Dating with Kids',
+        'Intimacy', 'Evening Vibe', 'Interests', 'Music Genres',
         'Meeting Places', 'Avoids', 'Must-Have', 'Notes', 'Gender Feedback',
         'Stay in Berlin', 'Referral', 'Event Source', 'Attendance', 'Bio'
       ];
@@ -1355,9 +1344,8 @@
         person.languages.join('; '),
         person.relationshipStyle,
         person.mainIntention,
-        person.kids,
         person.datingWithKids,
-        person.conversationStyle.join('; '),
+        person.intimacy,
         person.eveningVibe,
         person.interests.join('; '),
         person.musicGenres.join('; '),
@@ -1384,8 +1372,8 @@
     function exportToXLS() {
       const headers = [
         'Name', 'Email', 'Gender', 'Age', 'Languages',
-        'Relationship Style', 'Main Intention', 'Kids', 'Dating with Kids',
-        'Conversation Style', 'Evening Vibe', 'Interests', 'Music Genres',
+        'Relationship Style', 'Main Intention', 'Dating with Kids',
+        'Intimacy', 'Evening Vibe', 'Interests', 'Music Genres',
         'Meeting Places', 'Avoids', 'Must-Have', 'Notes', 'Gender Feedback',
         'Stay in Berlin', 'Referral', 'Event Source', 'Attendance', 'Bio'
       ];
@@ -1403,9 +1391,8 @@
         html += `<td>${person.languages.join('; ')}</td>`;
         html += `<td>${person.relationshipStyle}</td>`;
         html += `<td>${person.mainIntention}</td>`;
-        html += `<td>${person.kids}</td>`;
         html += `<td>${person.datingWithKids}</td>`;
-        html += `<td>${person.conversationStyle.join('; ')}</td>`;
+        html += `<td>${person.intimacy}</td>`;
         html += `<td>${person.eveningVibe}</td>`;
         html += `<td>${person.interests.join('; ')}</td>`;
         html += `<td>${person.musicGenres.join('; ')}</td>`;
