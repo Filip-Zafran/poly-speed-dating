@@ -130,6 +130,19 @@
     /* Parent Sections */
     .relationship-style-section {
       margin-bottom: 3rem;
+      border: 2px solid;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .relationship-style-section[data-rel-idx="0"] {
+      background: linear-gradient(135deg, rgba(0, 100, 200, 0.05), rgba(100, 150, 255, 0.05));
+      border-color: rgba(0, 100, 200, 0.3);
+    }
+
+    .relationship-style-section[data-rel-idx="1"] {
+      background: linear-gradient(135deg, rgba(180, 70, 200, 0.05), rgba(200, 100, 220, 0.05));
+      border-color: rgba(180, 70, 200, 0.3);
     }
 
     .relationship-style-title {
@@ -138,7 +151,7 @@
       color: #1a1a1a;
       margin-bottom: 1.5rem;
       padding-bottom: 0.5rem;
-      border-bottom: 2px solid #e0e0e0;
+      border-bottom: none;
     }
 
     /* Intention Subsections */
