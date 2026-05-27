@@ -232,19 +232,19 @@
 
     .person-item.gender-men {
       border-left-color: #0066cc;
-      background: linear-gradient(135deg, rgba(0,102,204,0.02), rgba(0,102,204,0.01));
+      background: linear-gradient(135deg, rgba(0,102,204,0.12), rgba(0,102,204,0.06));
     }
 
     .person-item.gender-women {
       border-left-color: #cc3333;
-      background: linear-gradient(135deg, rgba(204,51,51,0.02), rgba(204,51,51,0.01));
+      background: linear-gradient(135deg, rgba(204,51,51,0.12), rgba(204,51,51,0.06));
     }
 
     .person-item.gender-non-binary,
     .person-item.gender-agender,
     .person-item.gender-other {
       border-left-color: #ffcc00;
-      background: linear-gradient(135deg, rgba(255,204,0,0.02), rgba(255,204,0,0.01));
+      background: linear-gradient(135deg, rgba(255,204,0,0.12), rgba(255,204,0,0.06));
     }
 
     .person-item-header {
@@ -811,6 +811,14 @@
             return order.indexOf(a) - order.indexOf(b);
           }).forEach(orientation => {
             const people = intentionPeople[orientation];
+            // Sort by gender: Women → Men → Other
+            const sortedPeople = people.sort((a, b) => {
+              const genderOrder = { 'Woman': 0, 'Man': 1 };
+              const aOrder = genderOrder[a.gender] ?? 2;
+              const bOrder = genderOrder[b.gender] ?? 2;
+              return aOrder - bOrder;
+            });
+
             html += `
               <div class="orientation-group">
                 <div class="orientation-title">
@@ -818,7 +826,7 @@
                   <span class="orientation-count">${people.length}</span>
                 </div>
                 <ol class="person-list">
-                  ${people.map((person, idx) => renderPersonItem(person, idx + 1)).join('')}
+                  ${sortedPeople.map((person, idx) => renderPersonItem(person, idx + 1)).join('')}
                 </ol>
               </div>
             `;
