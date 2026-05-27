@@ -456,36 +456,76 @@
 
     .participant-cell {
       position: relative;
-      padding: 0.4rem 0.6rem;
-      border-radius: 4px;
-      color: white;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
       font-weight: 600;
     }
 
     .participant-cell.gender-bg-women {
-      background: #e74c3c;
+      background: rgba(231, 76, 60, 0.15);
     }
 
     .participant-cell.gender-bg-men {
-      background: #3498db;
+      background: rgba(52, 152, 219, 0.15);
     }
 
     .participant-cell.gender-bg-nb {
-      background: #95a5a6;
+      background: rgba(149, 165, 166, 0.15);
     }
 
     .participant-cell.gender-bg-agender {
-      background: #f1c40f;
-      color: #333;
+      background: rgba(241, 196, 15, 0.15);
+    }
+
+    .participant-content {
+      flex: 1;
+    }
+
+    .participant-bezirk {
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 500;
+      white-space: nowrap;
+      min-width: 120px;
+      text-align: right;
+    }
+
+    .attraction-symbol {
+      display: inline-block;
+      padding: 0.15rem 0.35rem;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: white;
+      margin: 0 0.2rem;
+    }
+
+    .attraction-women {
+      background: #e74c3c;
+    }
+
+    .attraction-men {
+      background: #3498db;
+    }
+
+    .attraction-nb {
+      background: #95a5a6;
+    }
+
+    .attraction-anyone {
+      background: #27ae60;
     }
 
     .participant-cell .participant-name {
-      color: inherit;
-      border-bottom-color: rgba(255, 255, 255, 0.5);
+      color: #340c46;
+      border-bottom-color: #009fe3;
     }
 
     .participant-cell .participant-name:hover {
-      color: inherit;
+      color: #009fe3;
     }
 
     .remove-btn {
@@ -834,6 +874,26 @@
       return labels[gender] || { text: '?', class: '' };
     }
 
+    // Get gender symbols for attraction preferences
+    function getAttractionSymbols(preferences) {
+      if (!preferences || preferences.length === 0) return '';
+      const genderMap = {
+        'Women': 'W',
+        'Men': 'M',
+        'Non-binary people': 'NB',
+        'Anyone': 'A'
+      };
+      return preferences.map(pref => {
+        const symbol = genderMap[pref];
+        if (!symbol) return '';
+        if (pref === 'Women') return `<span class="attraction-symbol attraction-women">${symbol}</span>`;
+        if (pref === 'Men') return `<span class="attraction-symbol attraction-men">${symbol}</span>`;
+        if (pref === 'Non-binary people') return `<span class="attraction-symbol attraction-nb">${symbol}</span>`;
+        if (pref === 'Anyone') return `<span class="attraction-symbol attraction-anyone">${symbol}</span>`;
+        return '';
+      }).join('');
+    }
+
     // Create participant info HTML with remove button
     function createParticipantHTML(person, categoryKey, isBackup) {
       const removeId = `remove-${categoryKey}-${person.email.replace(/[@.]/g, '-')}`;
@@ -841,13 +901,14 @@
       const ageRange = person.meetAgeRange ? person.meetAgeRange.join(', ') : 'N/A';
       const bezirk = person.bezirk || 'N/A';
       const age = person.age || 25;
-      const attractedTo = person.meetPreferences ? person.meetPreferences.join(', ') : 'N/A';
+      const attractionSymbols = getAttractionSymbols(person.meetPreferences);
       const genderColorClass = genderLabel.class.replace('gender-label-', 'gender-bg-');
 
       return `
         <div class="participant-cell ${genderColorClass}">
-          <span class="participant-name">
-            <span class="participant-header">${person.name} [${age}] → ${attractedTo}</span>
+          <div class="participant-content">
+            <span class="participant-name">
+              <span class="participant-header">${person.name} [${age}] ${attractionSymbols}</span>
             <div class="participant-info">
               <div class="participant-info-item">
                 <span class="participant-info-label">Email:</span>
@@ -899,6 +960,8 @@
               </div>
             </div>
           </span>
+            </div>
+          <span class="participant-bezirk">${bezirk}</span>
           <button class="remove-btn" id="${removeId}" title="Remove from list">✕</button>
         </div>
       `;
