@@ -56,6 +56,23 @@
       background: linear-gradient(135deg, #4a1a70, #1db8e8);
     }
 
+    /* Relationship style colors */
+    .category-section.poly .section-header {
+      background: linear-gradient(135deg, #7b2cbf, #5a189a);
+    }
+
+    .category-section.poly .section-header:hover {
+      background: linear-gradient(135deg, #9d4edd, #7209b7);
+    }
+
+    .category-section.mono .section-header {
+      background: linear-gradient(135deg, #636e72, #4d5558);
+    }
+
+    .category-section.mono .section-header:hover {
+      background: linear-gradient(135deg, #74869a, #5a6370);
+    }
+
     .header-title {
       display: flex;
       gap: 2rem;
@@ -318,15 +335,15 @@
     <div class="legend">
       <div class="legend-item">
         <div class="legend-color active"></div>
-        <span>Active Participants (5 required from each gender / exception: LGBTQ+ needs 10 participants in total)</span>
+        <span><strong>👥 Active</strong> — 5 needed (♀5 + ♂5) | 🏳️‍🌈 LGBTQ+ needs 10 total</span>
       </div>
       <div class="legend-item">
         <div class="legend-color backup"></div>
-        <span>Backup Reserve (2 optional)</span>
+        <span><strong>🆘 Backup</strong> — 2 reserve spots (optional)</span>
       </div>
       <div class="legend-item">
         <div class="legend-color done"></div>
-        <span>Complete & Ready</span>
+        <span><strong>✓ Complete</strong> — Ready to go!</span>
       </div>
     </div>
 
@@ -414,8 +431,30 @@
     // Build categories
     function buildCategories() {
       const categories = {};
+      const openToBothByIntention = {};
 
+      // First pass: collect "Open to both" participants by intention
       applicants.forEach(person => {
+        if (person.relationshipStyle === 'Open to both') {
+          const int = person.mainIntention;
+          const ori = deriveOrientation(person);
+          if (!openToBothByIntention[int]) {
+            openToBothByIntention[int] = {};
+          }
+          if (!openToBothByIntention[int][ori]) {
+            openToBothByIntention[int][ori] = [];
+          }
+          openToBothByIntention[int][ori].push(person);
+        }
+      });
+
+      // Second pass: build categories and distribute "Open to both"
+      applicants.forEach(person => {
+        // Skip "Open to both" - will be added to both Poly and Mono
+        if (person.relationshipStyle === 'Open to both') {
+          return;
+        }
+
         const rel = person.relationshipStyle;
         const int = person.mainIntention;
         const ori = deriveOrientation(person);
@@ -438,6 +477,34 @@
         } else {
           categories[key].other.push(person);
         }
+      });
+
+      // Third pass: distribute "Open to both" participants to both Poly and Mono
+      ['Polyamorous / ENM', 'Monogamous'].forEach(rel => {
+        Object.keys(openToBothByIntention).forEach(int => {
+          Object.keys(openToBothByIntention[int]).forEach(ori => {
+            const key = `${rel}|${int}|${ori}`;
+            if (!categories[key]) {
+              categories[key] = {
+                rel, int, ori,
+                women: [],
+                men: [],
+                other: []
+              };
+            }
+
+            openToBothByIntention[int][ori].forEach(person => {
+              const gender = getGenderLetter(person.gender);
+              if (gender === 'W') {
+                categories[key].women.push(person);
+              } else if (gender === 'M') {
+                categories[key].men.push(person);
+              } else {
+                categories[key].other.push(person);
+              }
+            });
+          });
+        });
       });
 
       return categories;
@@ -516,7 +583,8 @@
         const missingM = Math.max(0, requiredEach - cat.men.length);
 
         const section = document.createElement('div');
-        section.className = 'category-section collapsed';
+        const relationshipClass = cat.rel.includes('Polyamorous') ? 'poly' : 'mono';
+        section.className = `category-section collapsed ${relationshipClass}`;
 
         const header = document.createElement('div');
         header.className = 'section-header';
