@@ -1287,7 +1287,10 @@
         // Calculate and display total fees - only event 3 (50%) and event 5 (FREE)
         let totalFees = 0;
         const basePrice = 5;
-        allParticipants.forEach(person => {
+        const mainParticipantsArray = isLGBTQ ? allParticipants.slice(0, 8) :
+          [...cat.women.slice(0, 4), ...cat.men.slice(0, 4)];
+
+        mainParticipantsArray.forEach(person => {
           const attended = person.attendedEvents || 0;
           let discountedPayment = basePrice;
           if (attended === 5) {
@@ -1299,8 +1302,24 @@
         });
 
         const totalDiv = document.createElement('div');
-        totalDiv.style.cssText = 'font-size: 0.95rem; color: #340c46; font-weight: 700; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 2px solid #ddd; text-align: right;';
-        totalDiv.innerHTML = `<strong>TOTAL EVENT: €${totalFees.toFixed(1)}</strong>`;
+        totalDiv.style.cssText = 'font-size: 0.95rem; color: #340c46; font-weight: 700; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 2px solid #ddd; display: flex; justify-content: space-between; align-items: center;';
+
+        // Generate payment deadline
+        const now = new Date();
+        const deadline = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
+        const deadlineHours = String(deadline.getHours()).padStart(2, '0');
+        const deadlineMinutes = String(deadline.getMinutes()).padStart(2, '0');
+        const deadlineDate = deadline.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+        // Show deadline for roughly half of the main participants
+        const shouldShowDeadline = Math.random() < 0.5;
+
+        let totalHTML = `<strong>TOTAL EVENT: €${totalFees.toFixed(1)}</strong>`;
+        if (shouldShowDeadline) {
+          totalHTML += `<span style="color: #e50051; font-weight: 600;">⏰ PAYMENT DEADLINE: ${deadlineDate} ${deadlineHours}:${deadlineMinutes}</span>`;
+        }
+
+        totalDiv.innerHTML = totalHTML;
         content.appendChild(totalDiv);
 
         section.appendChild(content);
