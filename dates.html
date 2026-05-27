@@ -78,6 +78,13 @@
       gap: 1rem;
       flex: 1;
       align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-tags {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
       flex-wrap: wrap;
     }
 
@@ -589,10 +596,24 @@
       const categories = buildCategories();
       let categoryList = Object.values(categories);
 
-      // Sort by missing count (ascending - least missing first)
+      // Sort: DONE first, then by missing count (ascending - least missing first)
       categoryList.sort((a, b) => {
         const isLGBTQ_a = a.ori === 'LGBTQ+';
         const isLGBTQ_b = b.ori === 'LGBTQ+';
+        const requiredA = isLGBTQ_a ? 10 : 10;
+        const requiredB = isLGBTQ_b ? 10 : 10;
+
+        const totalA = a.women.length + a.men.length + a.other.length;
+        const totalB = b.women.length + b.men.length + b.other.length;
+
+        const isDoneA = totalA >= requiredA;
+        const isDoneB = totalB >= requiredB;
+
+        // If one is done and the other isn't, done comes first
+        if (isDoneA && !isDoneB) return -1;
+        if (!isDoneA && isDoneB) return 1;
+
+        // Both done or both not done: sort by missing count
         const missingA = calculateMissingCount(a, isLGBTQ_a);
         const missingB = calculateMissingCount(b, isLGBTQ_b);
         return missingA - missingB;
@@ -628,7 +649,10 @@
           ? (isDone ? '✓ DONE' : `Missing: ${missingTotal}`)
           : (isDone ? '✓ DONE' : `Missing: W${missingW}, M${missingM}`);
 
-        // Create tag bubbles
+        // Create tag bubbles container
+        const tagsContainer = document.createElement('div');
+        tagsContainer.className = 'header-tags';
+
         const relTag = document.createElement('span');
         relTag.className = 'category-tag tag-relationship';
         relTag.textContent = cat.rel;
@@ -641,13 +665,15 @@
         oriTag.className = 'category-tag tag-orientation';
         oriTag.textContent = cat.ori;
 
+        tagsContainer.appendChild(relTag);
+        tagsContainer.appendChild(intTag);
+        tagsContainer.appendChild(oriTag);
+
         const statusBadge = document.createElement('span');
         statusBadge.className = `status-badge ${isDone ? 'done' : missingW === 0 && missingM === 0 && !isLGBTQ ? 'pending' : missingTotal === 0 && isLGBTQ ? 'pending' : 'missing'}`;
         statusBadge.textContent = statusText;
 
-        title.appendChild(relTag);
-        title.appendChild(intTag);
-        title.appendChild(oriTag);
+        title.appendChild(tagsContainer);
         title.appendChild(statusBadge);
         header.appendChild(title);
 
