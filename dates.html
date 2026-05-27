@@ -1073,6 +1073,7 @@
       const container = document.getElementById('categories');
       container.innerHTML = '';
 
+      let cardNumber = 1; // Add card counter
       categoryList.forEach(cat => {
         const isLGBTQ = cat.ori === 'LGBTQ+';
         const requiredPeople = isLGBTQ ? 10 : 10; // 10 total for both
@@ -1177,6 +1178,12 @@
           dropdown.style.display = 'none';
         });
 
+        // Add card number at the beginning
+        const cardNumberSpan = document.createElement('span');
+        cardNumberSpan.style.cssText = 'font-size: 0.9rem; color: #999; font-weight: 600; margin-right: 1rem; min-width: 30px;';
+        cardNumberSpan.textContent = `#${cardNumber}`;
+        title.insertBefore(cardNumberSpan, title.firstChild);
+
         title.appendChild(tagsContainer);
         title.appendChild(statusBadgeContainer);
         header.appendChild(title);
@@ -1187,6 +1194,8 @@
         header.appendChild(chevron);
 
         section.appendChild(header);
+
+        cardNumber++; // Increment for next card
 
         const content = document.createElement('div');
         content.className = 'section-content';
