@@ -75,9 +75,40 @@
 
     .header-title {
       display: flex;
-      gap: 2rem;
+      gap: 1rem;
       flex: 1;
       align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .category-tag {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      color: white;
+    }
+
+    .tag-relationship {
+      background: linear-gradient(135deg, #e91e63, #c2185b);
+    }
+
+    .tag-intention {
+      background: linear-gradient(135deg, #2196f3, #1976d2);
+    }
+
+    .tag-orientation {
+      background: linear-gradient(135deg, #ff9800, #e65100);
+    }
+
+    .category-section.poly .tag-relationship {
+      background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+    }
+
+    .category-section.mono .tag-relationship {
+      background: linear-gradient(135deg, #607d8b, #455a64);
     }
 
     .status-badge {
@@ -596,12 +627,28 @@
         const statusText = isLGBTQ
           ? (isDone ? '✓ DONE' : `Missing: ${missingTotal}`)
           : (isDone ? '✓ DONE' : `Missing: W${missingW}, M${missingM}`);
-        title.innerHTML = `
-          <span>${cat.rel} > ${cat.int} > ${cat.ori}</span>
-          <span class="status-badge ${isDone ? 'done' : missingW === 0 && missingM === 0 && !isLGBTQ ? 'pending' : missingTotal === 0 && isLGBTQ ? 'pending' : 'missing'}">
-            ${statusText}
-          </span>
-        `;
+
+        // Create tag bubbles
+        const relTag = document.createElement('span');
+        relTag.className = 'category-tag tag-relationship';
+        relTag.textContent = cat.rel;
+
+        const intTag = document.createElement('span');
+        intTag.className = 'category-tag tag-intention';
+        intTag.textContent = cat.int;
+
+        const oriTag = document.createElement('span');
+        oriTag.className = 'category-tag tag-orientation';
+        oriTag.textContent = cat.ori;
+
+        const statusBadge = document.createElement('span');
+        statusBadge.className = `status-badge ${isDone ? 'done' : missingW === 0 && missingM === 0 && !isLGBTQ ? 'pending' : missingTotal === 0 && isLGBTQ ? 'pending' : 'missing'}`;
+        statusBadge.textContent = statusText;
+
+        title.appendChild(relTag);
+        title.appendChild(intTag);
+        title.appendChild(oriTag);
+        title.appendChild(statusBadge);
         header.appendChild(title);
 
         const chevron = document.createElement('span');
