@@ -103,6 +103,43 @@
       color: #1a1a1a;
     }
 
+    .export-buttons {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .export-btn {
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .export-btn-csv {
+      background: #27ae60;
+      color: white;
+    }
+
+    .export-btn-csv:hover {
+      background: #229954;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+    }
+
+    .export-btn-xls {
+      background: #2980b9;
+      color: white;
+    }
+
+    .export-btn-xls:hover {
+      background: #2471a3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(41, 128, 185, 0.3);
+    }
+
     .dashboard-stats {
       display: flex;
       gap: 2rem;
@@ -581,7 +618,13 @@
     <!-- Main Content -->
     <div class="dashboard-content">
       <div class="dashboard-header">
-        <h1>Blind Duck Dating Dashboard</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 1rem;">
+          <h1 style="margin: 0;">Blind Duck Dating Dashboard</h1>
+          <div class="export-buttons">
+            <button id="exportCSV" class="export-btn export-btn-csv">📥 CSV</button>
+            <button id="exportXLS" class="export-btn export-btn-xls">📥 Excel</button>
+          </div>
+        </div>
         <div class="dashboard-stats">
           <div class="stat-box">
             <span class="stat-label">Total Applicants</span>
@@ -1102,11 +1145,117 @@
       });
     }
 
+    // Export functions
+    function exportToCSV() {
+      const headers = [
+        'Name', 'Email', 'Gender', 'Age', 'Languages',
+        'Relationship Style', 'Main Intention', 'Kids', 'Dating with Kids',
+        'Conversation Style', 'Evening Vibe', 'Interests', 'Music Genres',
+        'Meeting Places', 'Avoids', 'Must-Have', 'Notes', 'Gender Feedback',
+        'Stay in Berlin', 'Referral', 'Event Source', 'Attendance', 'Bio'
+      ];
+
+      const rows = applicants.map(person => [
+        person.name,
+        person.email,
+        person.gender,
+        person.ageGroup,
+        person.languages.join('; '),
+        person.relationshipStyle,
+        person.mainIntention,
+        person.kids,
+        person.datingWithKids,
+        person.conversationStyle.join('; '),
+        person.eveningVibe,
+        person.interests.join('; '),
+        person.musicGenres.join('; '),
+        person.meetingPlaces.join('; '),
+        person.avoid,
+        person.mustHave,
+        person.additionalNotes,
+        person.genderFeedback,
+        person.stayBerlin,
+        person.referral,
+        person.eventSource,
+        person.attendance,
+        person.bio
+      ]);
+
+      const csv = [
+        headers.map(h => `"${h}"`).join(','),
+        ...rows.map(row => row.map(cell => `"${(cell || '').toString().replace(/"/g, '""')}"`).join(','))
+      ].join('\n');
+
+      downloadFile(csv, 'applicants.csv', 'text/csv');
+    }
+
+    function exportToXLS() {
+      const headers = [
+        'Name', 'Email', 'Gender', 'Age', 'Languages',
+        'Relationship Style', 'Main Intention', 'Kids', 'Dating with Kids',
+        'Conversation Style', 'Evening Vibe', 'Interests', 'Music Genres',
+        'Meeting Places', 'Avoids', 'Must-Have', 'Notes', 'Gender Feedback',
+        'Stay in Berlin', 'Referral', 'Event Source', 'Attendance', 'Bio'
+      ];
+
+      let html = '<table><thead><tr>';
+      headers.forEach(h => html += `<th>${h}</th>`);
+      html += '</tr></thead><tbody>';
+
+      applicants.forEach(person => {
+        html += '<tr>';
+        html += `<td>${person.name}</td>`;
+        html += `<td>${person.email}</td>`;
+        html += `<td>${person.gender}</td>`;
+        html += `<td>${person.ageGroup}</td>`;
+        html += `<td>${person.languages.join('; ')}</td>`;
+        html += `<td>${person.relationshipStyle}</td>`;
+        html += `<td>${person.mainIntention}</td>`;
+        html += `<td>${person.kids}</td>`;
+        html += `<td>${person.datingWithKids}</td>`;
+        html += `<td>${person.conversationStyle.join('; ')}</td>`;
+        html += `<td>${person.eveningVibe}</td>`;
+        html += `<td>${person.interests.join('; ')}</td>`;
+        html += `<td>${person.musicGenres.join('; ')}</td>`;
+        html += `<td>${person.meetingPlaces.join('; ')}</td>`;
+        html += `<td>${person.avoid}</td>`;
+        html += `<td>${person.mustHave}</td>`;
+        html += `<td>${person.additionalNotes}</td>`;
+        html += `<td>${person.genderFeedback}</td>`;
+        html += `<td>${person.stayBerlin}</td>`;
+        html += `<td>${person.referral}</td>`;
+        html += `<td>${person.eventSource}</td>`;
+        html += `<td>${person.attendance}</td>`;
+        html += `<td>${person.bio}</td>`;
+        html += '</tr>';
+      });
+
+      html += '</tbody></table>';
+
+      const xlsContent = `<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="UTF-8"></head><body>${html}</body></html>`;
+      downloadFile(xlsContent, 'applicants.xls', 'application/vnd.ms-excel');
+    }
+
+    function downloadFile(content, filename, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
     // Event listeners
     document.getElementById('searchInput').addEventListener('input', renderDashboard);
     document.querySelectorAll('.filter-checkbox input').forEach(checkbox => {
       checkbox.addEventListener('change', renderDashboard);
     });
+
+    document.getElementById('exportCSV').addEventListener('click', exportToCSV);
+    document.getElementById('exportXLS').addEventListener('click', exportToXLS);
 
     // Initialize
     buildFilters();
