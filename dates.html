@@ -129,6 +129,31 @@
       background: linear-gradient(135deg, #e91e63, #9c27b0);
     }
 
+    /* Opacity modifiers based on missing count - lighter for more missing */
+    .category-tag.opacity-1 {
+      opacity: 1;
+    }
+
+    .category-tag.opacity-2 {
+      opacity: 0.9;
+    }
+
+    .category-tag.opacity-3 {
+      opacity: 0.8;
+    }
+
+    .category-tag.opacity-4 {
+      opacity: 0.7;
+    }
+
+    .category-tag.opacity-5 {
+      opacity: 0.6;
+    }
+
+    .category-tag.opacity-6 {
+      opacity: 0.5;
+    }
+
     .status-badge {
       padding: 0.8rem 1.8rem;
       border-radius: 25px;
@@ -624,7 +649,7 @@
     // Calculate missing count for sorting
     function calculateMissingCount(cat, isLGBTQ) {
       if (isLGBTQ) {
-        const totalPeople = cat.women.length + cat.men.length;
+        const totalPeople = cat.women.length + cat.men.length + cat.other.length;
         return Math.max(0, 10 - totalPeople);
       } else {
         const missingW = Math.max(0, 5 - cat.women.length);
@@ -647,6 +672,15 @@
         if (tagValue.includes('LGBTQ')) return 'tag-lgbtq';
       }
       return '';
+    }
+
+    function getOpacityClass(missingCount) {
+      if (missingCount <= 1) return 'opacity-1';
+      if (missingCount === 2) return 'opacity-2';
+      if (missingCount === 3) return 'opacity-3';
+      if (missingCount <= 5) return 'opacity-4';
+      if (missingCount <= 7) return 'opacity-5';
+      return 'opacity-6';
     }
 
     // Track removed participants per category
@@ -749,16 +783,20 @@
         const tagsContainer = document.createElement('div');
         tagsContainer.className = 'header-tags';
 
+        // Calculate missing count for opacity - use total missing for LGBTQ+, max of each gender for straight
+        const opacityMissing = isLGBTQ ? missingTotal : Math.max(missingW, missingM);
+        const opacityClass = getOpacityClass(opacityMissing);
+
         const relTag = document.createElement('span');
-        relTag.className = `category-tag ${getTagColorClass('relationship', cat.rel)}`;
+        relTag.className = `category-tag ${getTagColorClass('relationship', cat.rel)} ${opacityClass}`;
         relTag.textContent = cat.rel;
 
         const intTag = document.createElement('span');
-        intTag.className = `category-tag ${getTagColorClass('intention', cat.int)}`;
+        intTag.className = `category-tag ${getTagColorClass('intention', cat.int)} ${opacityClass}`;
         intTag.textContent = cat.int;
 
         const oriTag = document.createElement('span');
-        oriTag.className = `category-tag ${getTagColorClass('orientation', cat.ori)}`;
+        oriTag.className = `category-tag ${getTagColorClass('orientation', cat.ori)} ${opacityClass}`;
         oriTag.textContent = cat.ori;
 
         tagsContainer.appendChild(relTag);
