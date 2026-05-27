@@ -580,7 +580,8 @@
     .tag-events {
       background: #009fe3;
       color: white;
-      margin-left: 0.8rem;
+      margin-left: 1.2rem;
+      margin-right: 0.5rem;
     }
 
     .tag-discount {
@@ -949,13 +950,13 @@
       const attended = person.attendedEvents || 0;
       const paymentAmount = person.totalPayments || 0;
 
-      // Calculate payment with discount
+      // Calculate payment with discount - only event 3 (50%) and event 5 (FREE)
       let discountedPayment = paymentAmount;
       let discountTag = '';
-      if (attended >= 5) {
+      if (attended === 5) {
         discountedPayment = 0; // FREE
         discountTag = '<span class="tag tag-free">FREE</span>';
-      } else if (attended >= 3) {
+      } else if (attended === 3) {
         discountedPayment = (paymentAmount * 0.5).toFixed(1); // 50% discount
         discountTag = '<span class="tag tag-discount">50%</span>';
       }
@@ -1283,15 +1284,15 @@
 
         content.appendChild(buttonsContainer);
 
-        // Calculate and display total fees
+        // Calculate and display total fees - only event 3 (50%) and event 5 (FREE)
         let totalFees = 0;
         allParticipants.forEach(person => {
           const attended = person.attendedEvents || 0;
           const paymentAmount = person.totalPayments || 0;
           let discountedPayment = paymentAmount;
-          if (attended >= 5) {
+          if (attended === 5) {
             discountedPayment = 0;
-          } else if (attended >= 3) {
+          } else if (attended === 3) {
             discountedPayment = (paymentAmount * 0.5);
           }
           totalFees += discountedPayment;
