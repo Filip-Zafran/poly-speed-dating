@@ -98,24 +98,35 @@
       color: white;
     }
 
-    .tag-relationship {
-      background: linear-gradient(135deg, #e91e63, #c2185b);
-    }
-
-    .tag-intention {
-      background: linear-gradient(135deg, #2196f3, #1976d2);
-    }
-
-    .tag-orientation {
-      background: linear-gradient(135deg, #ff9800, #e65100);
-    }
-
-    .category-section.poly .tag-relationship {
+    /* Relationship Style Colors */
+    .tag-poly {
       background: linear-gradient(135deg, #9c27b0, #7b1fa2);
     }
 
-    .category-section.mono .tag-relationship {
+    .tag-mono {
       background: linear-gradient(135deg, #607d8b, #455a64);
+    }
+
+    /* Main Intention Colors */
+    .tag-casual {
+      background: linear-gradient(135deg, #e91e63, #c2185b);
+    }
+
+    .tag-friends {
+      background: linear-gradient(135deg, #4caf50, #388e3c);
+    }
+
+    .tag-longterm {
+      background: linear-gradient(135deg, #2196f3, #1976d2);
+    }
+
+    /* Orientation Colors */
+    .tag-straight {
+      background: linear-gradient(135deg, #ff9800, #e65100);
+    }
+
+    .tag-lgbtq {
+      background: linear-gradient(135deg, #e91e63, #9c27b0);
     }
 
     .status-badge {
@@ -560,6 +571,22 @@
       }
     }
 
+    // Get tag color class based on value
+    function getTagColorClass(tagType, tagValue) {
+      if (tagType === 'relationship') {
+        if (tagValue.includes('Polyamorous')) return 'tag-poly';
+        if (tagValue.includes('Monogamous')) return 'tag-mono';
+      } else if (tagType === 'intention') {
+        if (tagValue.includes('Casual')) return 'tag-casual';
+        if (tagValue.includes('Friends')) return 'tag-friends';
+        if (tagValue.includes('Long-term')) return 'tag-longterm';
+      } else if (tagType === 'orientation') {
+        if (tagValue.includes('Straight')) return 'tag-straight';
+        if (tagValue.includes('LGBTQ')) return 'tag-lgbtq';
+      }
+      return '';
+    }
+
     // Create participant info HTML
     function createParticipantHTML(person) {
       return `
@@ -654,15 +681,15 @@
         tagsContainer.className = 'header-tags';
 
         const relTag = document.createElement('span');
-        relTag.className = 'category-tag tag-relationship';
+        relTag.className = `category-tag ${getTagColorClass('relationship', cat.rel)}`;
         relTag.textContent = cat.rel;
 
         const intTag = document.createElement('span');
-        intTag.className = 'category-tag tag-intention';
+        intTag.className = `category-tag ${getTagColorClass('intention', cat.int)}`;
         intTag.textContent = cat.int;
 
         const oriTag = document.createElement('span');
-        oriTag.className = 'category-tag tag-orientation';
+        oriTag.className = `category-tag ${getTagColorClass('orientation', cat.ori)}`;
         oriTag.textContent = cat.ori;
 
         tagsContainer.appendChild(relTag);
