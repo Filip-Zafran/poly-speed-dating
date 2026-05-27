@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep *)",
+      "Bash(git status *)",
+      "Bash(sed *)",
+      "Bash(ls *)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(ps *)",
+      "Bash(git show *)",
+      "Bash(lsof *)",
+      "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dashboard_updated.png --window-size=1920x400 http://localhost:8000/dashboard.html)",
+      "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_final.png --window-size=1920x1200 http://localhost:8000/dates.html)",
+      "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_lgbtq.png --window-size=1920x1200 http://localhost:8000/dates.html)",
+      "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_lgbtq_full.png --window-size=1920x2400 http://localhost:8000/dates.html)",
+      "Bash(node -c /home/ficho/Desktop/psd-website/dates.html)",
+      "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_fixed.png --window-size=1920x2400 http://localhost:8000/dates.html)"
+    ]
+  }
+}
