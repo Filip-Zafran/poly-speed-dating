@@ -1091,8 +1091,8 @@
         const title = document.createElement('div');
         title.className = 'header-title';
         const statusText = isLGBTQ
-          ? (isDone ? '✓ DONE' : `Missing: ${missingTotal}`)
-          : (isDone ? '✓ DONE' : `Missing: W${missingW}, M${missingM}`);
+          ? (isDone ? '✓ READY' : `Missing: ${missingTotal}`)
+          : (isDone ? '✓ READY' : `Missing: W${missingW}, M${missingM}`);
 
         // Create tag bubbles container
         const tagsContainer = document.createElement('div');
@@ -1118,12 +1118,57 @@
         tagsContainer.appendChild(intTag);
         tagsContainer.appendChild(oriTag);
 
-        const statusBadge = document.createElement('span');
+        // Create clickable status badge with dropdown
+        const statusBadgeContainer = document.createElement('div');
+        statusBadgeContainer.style.cssText = 'position: relative; display: inline-block;';
+
+        const statusBadge = document.createElement('button');
         statusBadge.className = `status-badge ${isDone ? 'done' : missingW === 0 && missingM === 0 && !isLGBTQ ? 'pending' : missingTotal === 0 && isLGBTQ ? 'pending' : 'missing'}`;
         statusBadge.textContent = statusText;
+        statusBadge.style.cssText = 'cursor: pointer; border: none; padding: inherit; font-size: inherit; background: inherit; color: inherit;';
+
+        // Create dropdown menu
+        const dropdown = document.createElement('div');
+        dropdown.style.cssText = 'position: absolute; top: 100%; right: 0; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 150px; margin-top: 0.5rem; display: none; z-index: 100;';
+
+        const doneOption = document.createElement('button');
+        doneOption.textContent = '✓ DONE';
+        doneOption.style.cssText = 'display: block; width: 100%; padding: 0.8rem 1rem; text-align: left; border: none; background: #20a35b; color: white; cursor: pointer; font-weight: 600; border-radius: 8px 8px 0 0;';
+        doneOption.addEventListener('click', () => {
+          if (confirm('Archive this event?')) {
+            statusBadge.textContent = '✓ DONE';
+            statusBadge.className = 'status-badge done';
+            dropdown.style.display = 'none';
+          }
+        });
+
+        const postponeOption = document.createElement('button');
+        postponeOption.textContent = '⏸ POSTPONE';
+        postponeOption.style.cssText = 'display: block; width: 100%; padding: 0.8rem 1rem; text-align: left; border: none; background: #f39c12; color: white; cursor: pointer; font-weight: 600; border-radius: 0 0 8px 8px;';
+        postponeOption.addEventListener('click', () => {
+          statusBadge.textContent = '⏸ POSTPONED';
+          statusBadge.className = 'status-badge pending';
+          dropdown.style.display = 'none';
+        });
+
+        dropdown.appendChild(doneOption);
+        dropdown.appendChild(postponeOption);
+
+        statusBadge.addEventListener('click', (e) => {
+          e.stopPropagation();
+          dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        });
+
+        statusBadgeContainer.appendChild(statusBadge);
+        statusBadgeContainer.appendChild(dropdown);
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+          dropdown.style.display = 'none';
+        });
 
         title.appendChild(tagsContainer);
-        title.appendChild(statusBadge);
+        title.appendChild(statusBadgeContainer);
         header.appendChild(title);
 
         const chevron = document.createElement('span');
@@ -1309,15 +1354,18 @@
         const deadline = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
         const deadlineHours = String(deadline.getHours()).padStart(2, '0');
         const deadlineMinutes = String(deadline.getMinutes()).padStart(2, '0');
-        const deadlineDate = deadline.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const deadlineDay = String(deadline.getDate()).padStart(2, '0');
+        const deadlineMonth = String(deadline.getMonth() + 1).padStart(2, '0');
+        const deadlineYear = deadline.getFullYear();
 
         // Show deadline for roughly half of the main participants
         const shouldShowDeadline = Math.random() < 0.5;
 
-        let totalHTML = `<strong>TOTAL EVENT: €${totalFees.toFixed(1)}</strong>`;
+        let totalHTML = '';
         if (shouldShowDeadline) {
-          totalHTML += `<span style="color: #e50051; font-weight: 600;">⏰ PAYMENT DEADLINE: ${deadlineDate} ${deadlineHours}:${deadlineMinutes}</span>`;
+          totalHTML = `<span style="color: #e50051; font-weight: 600;">⏰ PAYMENT DEADLINE: ${deadlineHours}:${deadlineMinutes}h, ${deadlineDay}.${deadlineMonth}.${deadlineYear}</span>`;
         }
+        totalHTML += `<strong>TOTAL EVENT: €${totalFees.toFixed(1)}</strong>`;
 
         totalDiv.innerHTML = totalHTML;
         content.appendChild(totalDiv);
