@@ -346,6 +346,33 @@
       line-height: 1.4;
     }
 
+    .gender-label {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: white;
+      margin-right: 0.3rem;
+    }
+
+    .gender-label-women {
+      background: #e74c3c;
+    }
+
+    .gender-label-men {
+      background: #3498db;
+    }
+
+    .gender-label-nb {
+      background: #95a5a6;
+    }
+
+    .gender-label-agender {
+      background: #f1c40f;
+      color: #333;
+    }
+
     .participant-name:hover {
       color: #009fe3;
     }
@@ -411,6 +438,16 @@
 
     .copy-emails-btn.copied {
       background: #27ae60;
+    }
+
+    .location-tag {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
     }
 
     .participant-cell {
@@ -752,21 +789,21 @@
     // Track removed participants per category
     const removedParticipants = {};
 
-    // Get gender symbol
-    function getGenderSymbol(gender) {
-      const symbols = {
-        'Woman': '♀',
-        'Man': '♂',
-        'Non-binary': '⚤',
-        'Agender': '⚪'
+    // Get gender label and color class
+    function getGenderLabel(gender) {
+      const labels = {
+        'Woman': { text: 'W', class: 'gender-label-women' },
+        'Man': { text: 'M', class: 'gender-label-men' },
+        'Non-binary': { text: 'NB', class: 'gender-label-nb' },
+        'Agender': { text: 'A', class: 'gender-label-agender' }
       };
-      return symbols[gender] || '?';
+      return labels[gender] || { text: '?', class: '' };
     }
 
     // Create participant info HTML with remove button
     function createParticipantHTML(person, categoryKey, isBackup) {
       const removeId = `remove-${categoryKey}-${person.email.replace(/[@.]/g, '-')}`;
-      const genderSymbol = getGenderSymbol(person.gender);
+      const genderLabel = getGenderLabel(person.gender);
       const ageRange = person.meetAgeRange ? person.meetAgeRange.join(', ') : 'N/A';
       const bezirk = person.bezirk || 'N/A';
       const age = person.age || 25;
@@ -774,7 +811,7 @@
       return `
         <div class="participant-cell">
           <span class="participant-name">
-            <span class="participant-header">${person.name} ${genderSymbol} ${age} → ${ageRange} • ${bezirk}</span>
+            <span class="participant-header">${person.name} [${age}] <span class="gender-label ${genderLabel.class}">${genderLabel.text}</span> → ${ageRange} • ${bezirk}</span>
             <div class="participant-info">
               <div class="participant-info-item">
                 <span class="participant-info-label">Email:</span>
@@ -1070,17 +1107,9 @@
         info.innerHTML = statusHTML;
         content.appendChild(info);
 
-        // Add preferred location info
-        const topLocations = getMostPopularLocations(mainParticipants);
-        const locationDiv = document.createElement('div');
-        locationDiv.style.cssText = 'font-size: 0.9rem; color: #666; margin-top: 0.8rem; font-weight: 500;';
-        if (topLocations && topLocations.length > 0) {
-          const locationText = topLocations.map(loc => `${loc.place} (${loc.votes})`).join(', ');
-          locationDiv.innerHTML = `<strong>📍 Preferred:</strong> ${locationText}`;
-        } else {
-          locationDiv.innerHTML = '<strong>📍 Preferred:</strong> No preferences';
-        }
-        content.appendChild(locationDiv);
+        // Create a container for copy button and location tag
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.style.cssText = 'display: flex; gap: 1rem; align-items: center; margin-top: 1rem;';
 
         // Add copy emails button (only main 8)
         const copyBtn = document.createElement('button');
@@ -1096,7 +1125,19 @@
             }, 2000);
           });
         });
-        content.appendChild(copyBtn);
+        buttonsContainer.appendChild(copyBtn);
+
+        // Add preferred location tag
+        const topLocations = getMostPopularLocations(mainParticipants);
+        if (topLocations && topLocations.length > 0) {
+          const locationTag = document.createElement('div');
+          locationTag.className = 'location-tag';
+          const locationText = topLocations.map(loc => `${loc.place} (${loc.votes})`).join(', ');
+          locationTag.innerHTML = `📍 ${locationText}`;
+          buttonsContainer.appendChild(locationTag);
+        }
+
+        content.appendChild(buttonsContainer);
 
         section.appendChild(content);
 
