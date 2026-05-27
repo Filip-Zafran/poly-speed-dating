@@ -440,18 +440,52 @@
       background: #27ae60;
     }
 
-    .location-tag {
+    .location-tag-big {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      padding: 0.6rem 1rem;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      white-space: nowrap;
+      padding: 1rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+      margin: 1rem auto 0 auto;
+      display: inline-block;
+      width: fit-content;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
 
     .participant-cell {
       position: relative;
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      color: white;
+      font-weight: 600;
+    }
+
+    .participant-cell.gender-bg-women {
+      background: #e74c3c;
+    }
+
+    .participant-cell.gender-bg-men {
+      background: #3498db;
+    }
+
+    .participant-cell.gender-bg-nb {
+      background: #95a5a6;
+    }
+
+    .participant-cell.gender-bg-agender {
+      background: #f1c40f;
+      color: #333;
+    }
+
+    .participant-cell .participant-name {
+      color: inherit;
+      border-bottom-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .participant-cell .participant-name:hover {
+      color: inherit;
     }
 
     .remove-btn {
@@ -807,11 +841,13 @@
       const ageRange = person.meetAgeRange ? person.meetAgeRange.join(', ') : 'N/A';
       const bezirk = person.bezirk || 'N/A';
       const age = person.age || 25;
+      const attractedTo = person.meetPreferences ? person.meetPreferences.join(', ') : 'N/A';
+      const genderColorClass = genderLabel.class.replace('gender-label-', 'gender-bg-');
 
       return `
-        <div class="participant-cell">
+        <div class="participant-cell ${genderColorClass}">
           <span class="participant-name">
-            <span class="participant-header">${person.name} [${age}] <span class="gender-label ${genderLabel.class}">${genderLabel.text}</span> → ${ageRange} • ${bezirk}</span>
+            <span class="participant-header">${person.name} [${age}] → ${attractedTo}</span>
             <div class="participant-info">
               <div class="participant-info-item">
                 <span class="participant-info-label">Email:</span>
@@ -1107,9 +1143,19 @@
         info.innerHTML = statusHTML;
         content.appendChild(info);
 
-        // Create a container for copy button and location tag
+        // Add preferred location tag (centered, bigger)
+        const topLocations = getMostPopularLocations(mainParticipants);
+        if (topLocations && topLocations.length > 0) {
+          const locationTag = document.createElement('div');
+          locationTag.className = 'location-tag-big';
+          const locationText = topLocations.map(loc => `${loc.place} (${loc.votes})`).join(', ');
+          locationTag.innerHTML = `📍 ${locationText}`;
+          content.appendChild(locationTag);
+        }
+
+        // Create a container for copy button
         const buttonsContainer = document.createElement('div');
-        buttonsContainer.style.cssText = 'display: flex; gap: 1rem; align-items: center; margin-top: 1rem;';
+        buttonsContainer.style.cssText = 'display: flex; gap: 1rem; align-items: center; margin-top: 1rem; justify-content: center;';
 
         // Add copy emails button (only main 8)
         const copyBtn = document.createElement('button');
@@ -1126,16 +1172,6 @@
           });
         });
         buttonsContainer.appendChild(copyBtn);
-
-        // Add preferred location tag
-        const topLocations = getMostPopularLocations(mainParticipants);
-        if (topLocations && topLocations.length > 0) {
-          const locationTag = document.createElement('div');
-          locationTag.className = 'location-tag';
-          const locationText = topLocations.map(loc => `${loc.place} (${loc.votes})`).join(', ');
-          locationTag.innerHTML = `📍 ${locationText}`;
-          buttonsContainer.appendChild(locationTag);
-        }
 
         content.appendChild(buttonsContainer);
 
