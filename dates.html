@@ -580,6 +580,7 @@
     .tag-events {
       background: #009fe3;
       color: white;
+      margin-left: 0.8rem;
     }
 
     .tag-discount {
@@ -1281,6 +1282,25 @@
         buttonsContainer.appendChild(copyBtn);
 
         content.appendChild(buttonsContainer);
+
+        // Calculate and display total fees
+        let totalFees = 0;
+        allParticipants.forEach(person => {
+          const attended = person.attendedEvents || 0;
+          const paymentAmount = person.totalPayments || 0;
+          let discountedPayment = paymentAmount;
+          if (attended >= 5) {
+            discountedPayment = 0;
+          } else if (attended >= 3) {
+            discountedPayment = (paymentAmount * 0.5);
+          }
+          totalFees += discountedPayment;
+        });
+
+        const totalDiv = document.createElement('div');
+        totalDiv.style.cssText = 'font-size: 0.95rem; color: #340c46; font-weight: 700; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 2px solid #ddd; text-align: right;';
+        totalDiv.innerHTML = `<strong>Total Fees: €${totalFees.toFixed(2)}</strong>`;
+        content.appendChild(totalDiv);
 
         section.appendChild(content);
 
