@@ -103,43 +103,6 @@
       color: #1a1a1a;
     }
 
-    .export-buttons {
-      display: flex;
-      gap: 0.8rem;
-    }
-
-    .export-btn {
-      padding: 0.7rem 1.2rem;
-      border: none;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .export-btn-csv {
-      background: #27ae60;
-      color: white;
-    }
-
-    .export-btn-csv:hover {
-      background: #229954;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
-    }
-
-    .export-btn-xls {
-      background: #2980b9;
-      color: white;
-    }
-
-    .export-btn-xls:hover {
-      background: #2471a3;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(41, 128, 185, 0.3);
-    }
-
     .dashboard-stats {
       display: flex;
       gap: 2rem;
@@ -167,19 +130,18 @@
     /* Parent Sections */
     .relationship-style-section {
       margin-bottom: 3rem;
-      border: 2px solid;
       border-radius: 12px;
-      padding: 2rem;
+      padding: 1.5rem;
     }
 
-    .relationship-style-section[data-rel-idx="0"] {
-      background: linear-gradient(135deg, rgba(0, 100, 200, 0.05), rgba(100, 150, 255, 0.05));
-      border-color: rgba(0, 100, 200, 0.3);
+    .relationship-style-section.rel-monogamous {
+      background: linear-gradient(135deg, rgba(100,100,100,0.18), rgba(100,100,100,0.12));
+      border: 2px solid rgba(100,100,100,0.3);
     }
 
-    .relationship-style-section[data-rel-idx="1"] {
-      background: linear-gradient(135deg, rgba(180, 70, 200, 0.05), rgba(200, 100, 220, 0.05));
-      border-color: rgba(180, 70, 200, 0.3);
+    .relationship-style-section.rel-polyamorous {
+      background: linear-gradient(135deg, rgba(155,89,182,0.18), rgba(155,89,182,0.12));
+      border: 2px solid rgba(155,89,182,0.3);
     }
 
     .relationship-style-title {
@@ -188,7 +150,7 @@
       color: #1a1a1a;
       margin-bottom: 1.5rem;
       padding-bottom: 0.5rem;
-      border-bottom: none;
+      border-bottom: 2px solid #e0e0e0;
     }
 
     /* Intention Subsections */
@@ -226,81 +188,6 @@
       margin-left: auto;
     }
 
-    .gender-counts {
-      display: inline-flex;
-      gap: 0.4rem;
-      align-items: center;
-      margin-left: 0.8rem;
-    }
-
-    .gender-count {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      font-size: 0.75rem;
-      font-weight: bold;
-      color: white;
-    }
-
-    .gender-count-women {
-      background: #cc3333;
-    }
-
-    .gender-count-men {
-      background: #0066cc;
-    }
-
-    .gender-count-nb,
-    .gender-count-agender {
-      background: #ffcc00;
-      color: #333;
-    }
-
-    .gender-count-other {
-      background: #888;
-    }
-
-    /* Collapsible Sections */
-    .collapsible-section {
-      margin-bottom: 1.5rem;
-    }
-
-    .collapsible-header {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      user-select: none;
-      transition: all 0.2s ease;
-    }
-
-    .collapsible-header:hover {
-      opacity: 0.8;
-    }
-
-    .chevron {
-      display: inline-block;
-      transition: transform 0.2s ease;
-      font-size: 0.9rem;
-    }
-
-    .collapsible-section.collapsed .chevron {
-      transform: rotate(-90deg);
-    }
-
-    .collapsible-content {
-      display: block;
-      transition: all 0.2s ease;
-      overflow: hidden;
-    }
-
-    .collapsible-section.collapsed .collapsible-content {
-      display: none;
-    }
-
     /* Orientation Groups */
     .orientation-group {
       margin-bottom: 1.5rem;
@@ -328,6 +215,88 @@
       font-size: 0.8rem;
       color: #999;
       margin-left: auto;
+    }
+
+    /* Collapsible Sections */
+    .collapsible-section {
+      margin-bottom: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .collapsible-header {
+      background: #f9f9f9;
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+
+    .collapsible-header:hover {
+      background: #f0f0f0;
+    }
+
+    .chevron {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .collapsible-section.collapsed .chevron {
+      transform: rotate(-90deg);
+    }
+
+    .collapsible-content {
+      display: block;
+      padding: 1rem;
+    }
+
+    .collapsible-section.collapsed .collapsible-content {
+      display: none;
+    }
+
+    /* Gender Count Circles */
+    .gender-counts {
+      display: inline-flex;
+      gap: 0.4rem;
+      margin-left: auto;
+    }
+
+    .gender-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .gender-count-women {
+      background: #e74c3c;
+    }
+
+    .gender-count-men {
+      background: #3498db;
+    }
+
+    .gender-count-nb {
+      background: #f1c40f;
+      color: #333;
+    }
+
+    .gender-count-agender {
+      background: #95a5a6;
+    }
+
+    .gender-count-other {
+      background: #9b59b6;
     }
 
     /* Person List Items */
@@ -360,9 +329,17 @@
       background: linear-gradient(135deg, rgba(0,102,204,0.12), rgba(0,102,204,0.06));
     }
 
+    .person-item.gender-men.expanded {
+      background: linear-gradient(135deg, rgba(0,102,204,0.18), rgba(0,102,204,0.12));
+    }
+
     .person-item.gender-women {
       border-left-color: #cc3333;
       background: linear-gradient(135deg, rgba(204,51,51,0.12), rgba(204,51,51,0.06));
+    }
+
+    .person-item.gender-women.expanded {
+      background: linear-gradient(135deg, rgba(204,51,51,0.18), rgba(204,51,51,0.12));
     }
 
     .person-item.gender-non-binary,
@@ -370,6 +347,12 @@
     .person-item.gender-other {
       border-left-color: #ffcc00;
       background: linear-gradient(135deg, rgba(255,204,0,0.12), rgba(255,204,0,0.06));
+    }
+
+    .person-item.gender-non-binary.expanded,
+    .person-item.gender-agender.expanded,
+    .person-item.gender-other.expanded {
+      background: linear-gradient(135deg, rgba(255,204,0,0.18), rgba(255,204,0,0.12));
     }
 
     .person-item-header {
@@ -403,6 +386,13 @@
       font-weight: 600;
       color: #1a1a1a;
       margin-bottom: 0.2rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .person-name:hover {
+      color: #0066cc;
+      text-decoration: underline;
     }
 
     .person-meta {
@@ -464,22 +454,14 @@
       margin-top: 1.2rem;
       padding-top: 1.2rem;
       border-top: 1px solid #e0e0e0;
-      animation: slideDown 0.2s ease;
     }
 
     .person-item.expanded .person-details {
       display: block;
     }
 
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        max-height: 0;
-      }
-      to {
-        opacity: 1;
-        max-height: 1000px;
-      }
+    .person-card.expanded .person-details {
+      display: block;
     }
 
     .detail-grid {
@@ -618,13 +600,7 @@
     <!-- Main Content -->
     <div class="dashboard-content">
       <div class="dashboard-header">
-        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 1rem;">
-          <h1 style="margin: 0;">Blind Duck Dating Dashboard</h1>
-          <div class="export-buttons">
-            <button id="exportCSV" class="export-btn export-btn-csv">📥 CSV</button>
-            <button id="exportXLS" class="export-btn export-btn-xls">📥 Excel</button>
-          </div>
-        </div>
+        <h1>Blind Duck Dating Dashboard</h1>
         <div class="dashboard-stats">
           <div class="stat-box">
             <span class="stat-label">Total Applicants</span>
@@ -736,6 +712,31 @@
       if (g.includes('non-binary')) return 'NB';
       if (g === 'agender') return 'A';
       return '?';
+    }
+
+    // Count genders in a people array
+    function getGenderCounts(people) {
+      const counts = { W: 0, M: 0, NB: 0, A: 0, Other: 0 };
+      people.forEach(person => {
+        const g = person.gender.toLowerCase();
+        if (g === 'woman') counts.W++;
+        else if (g === 'man') counts.M++;
+        else if (g.includes('non-binary')) counts.NB++;
+        else if (g === 'agender') counts.A++;
+        else counts.Other++;
+      });
+      return counts;
+    }
+
+    // Format gender counts as colored circles
+    function formatGenderCounts(counts) {
+      const circles = [];
+      if (counts.W > 0) circles.push(`<span class="gender-count gender-count-women">W${counts.W}</span>`);
+      if (counts.M > 0) circles.push(`<span class="gender-count gender-count-men">M${counts.M}</span>`);
+      if (counts.NB > 0) circles.push(`<span class="gender-count gender-count-nb">NB${counts.NB}</span>`);
+      if (counts.A > 0) circles.push(`<span class="gender-count gender-count-agender">A${counts.A}</span>`);
+      if (counts.Other > 0) circles.push(`<span class="gender-count gender-count-other">O${counts.Other}</span>`);
+      return circles.length > 0 ? `<span class="gender-counts">${circles.join('')}</span>` : '';
     }
 
     // Build unique filter options
@@ -893,30 +894,6 @@
       });
     }
 
-    // Count genders in a people array
-    function getGenderCounts(people) {
-      const counts = { W: 0, M: 0, NB: 0, A: 0, Other: 0 };
-      people.forEach(person => {
-        const g = person.gender.toLowerCase();
-        if (g === 'woman') counts.W++;
-        else if (g === 'man') counts.M++;
-        else if (g.includes('non-binary')) counts.NB++;
-        else if (g === 'agender') counts.A++;
-        else counts.Other++;
-      });
-      return counts;
-    }
-
-    function getGenderCountsText(counts) {
-      const parts = [];
-      if (counts.W > 0) parts.push(`W${counts.W}`);
-      if (counts.M > 0) parts.push(`M${counts.M}`);
-      if (counts.NB > 0) parts.push(`NB${counts.NB}`);
-      if (counts.A > 0) parts.push(`A${counts.A}`);
-      if (counts.Other > 0) parts.push(`O${counts.Other}`);
-      return parts.length > 0 ? `(${parts.join(', ')})` : '';
-    }
-
     // Render dashboard
     function renderDashboard() {
       const filtered = filterApplicants();
@@ -967,27 +944,30 @@
           });
         });
 
-        html += `<div class="relationship-style-section collapsible-section expanded" data-rel-idx="${relIdx}">
-          <h2 class="relationship-style-title collapsible-header">
+        const relCounts = getGenderCounts(relPeople);
+        const relClass = relationship === 'Monogamous' ? 'rel-monogamous' : 'rel-polyamorous';
+
+        html += `<div class="collapsible-section relationship-style-section expanded ${relClass}" data-rel-idx="${relIdx}">
+          <h2 class="collapsible-header relationship-style-title">
             <span class="chevron">▼</span>
-            ${relationship} ${getGenderCountsText(getGenderCounts(relPeople))}
+            ${relationship} ${formatGenderCounts(relCounts)}
           </h2>
           <div class="collapsible-content">
             <div class="intention-grid">`;
 
         Object.keys(grouped[relationship]).sort().forEach((intention, intIdx) => {
           const intentionPeople = grouped[relationship][intention];
-
-          // Get all people in this intention
           const allIntentionPeople = [];
           Object.values(intentionPeople).forEach(orientations => {
             allIntentionPeople.push(...orientations);
           });
 
-          html += `<div class="intention-subsection collapsible-section expanded" data-rel-idx="${relIdx}" data-int-idx="${intIdx}">
-            <div class="intention-title collapsible-header">
+          const intCounts = getGenderCounts(allIntentionPeople);
+
+          html += `<div class="collapsible-section intention-subsection expanded" data-rel-idx="${relIdx}" data-int-idx="${intIdx}">
+            <div class="collapsible-header intention-title">
               <span class="chevron">▼</span>
-              ${intention} ${getGenderCountsText(getGenderCounts(allIntentionPeople))}
+              ${intention} ${formatGenderCounts(intCounts)}
             </div>
             <div class="collapsible-content">`;
 
@@ -996,8 +976,6 @@
             return order.indexOf(a) - order.indexOf(b);
           }).forEach((orientation, orientIdx) => {
             const people = intentionPeople[orientation];
-
-            // Get gender counts for this orientation
             const orientCounts = getGenderCounts(people);
 
             // Sort by gender: Women → Men → Other
@@ -1009,10 +987,10 @@
             });
 
             html += `
-              <div class="orientation-group collapsible-section expanded" data-rel-idx="${relIdx}" data-int-idx="${intIdx}" data-orient-idx="${orientIdx}">
-                <div class="orientation-title collapsible-header">
+              <div class="collapsible-section orientation-group expanded" data-rel-idx="${relIdx}" data-int-idx="${intIdx}" data-orient-idx="${orientIdx}">
+                <div class="collapsible-header orientation-title">
                   <span class="chevron">▼</span>
-                  ${orientation} ${getGenderCountsText(orientCounts)}
+                  ${orientation} ${formatGenderCounts(orientCounts)}
                 </div>
                 <div class="collapsible-content">
                   <ol class="person-list">
@@ -1145,117 +1123,11 @@
       });
     }
 
-    // Export functions
-    function exportToCSV() {
-      const headers = [
-        'Name', 'Email', 'Gender', 'Age', 'Languages',
-        'Relationship Style', 'Main Intention', 'Kids', 'Dating with Kids',
-        'Conversation Style', 'Evening Vibe', 'Interests', 'Music Genres',
-        'Meeting Places', 'Avoids', 'Must-Have', 'Notes', 'Gender Feedback',
-        'Stay in Berlin', 'Referral', 'Event Source', 'Attendance', 'Bio'
-      ];
-
-      const rows = applicants.map(person => [
-        person.name,
-        person.email,
-        person.gender,
-        person.ageGroup,
-        person.languages.join('; '),
-        person.relationshipStyle,
-        person.mainIntention,
-        person.kids,
-        person.datingWithKids,
-        person.conversationStyle.join('; '),
-        person.eveningVibe,
-        person.interests.join('; '),
-        person.musicGenres.join('; '),
-        person.meetingPlaces.join('; '),
-        person.avoid,
-        person.mustHave,
-        person.additionalNotes,
-        person.genderFeedback,
-        person.stayBerlin,
-        person.referral,
-        person.eventSource,
-        person.attendance,
-        person.bio
-      ]);
-
-      const csv = [
-        headers.map(h => `"${h}"`).join(','),
-        ...rows.map(row => row.map(cell => `"${(cell || '').toString().replace(/"/g, '""')}"`).join(','))
-      ].join('\n');
-
-      downloadFile(csv, 'applicants.csv', 'text/csv');
-    }
-
-    function exportToXLS() {
-      const headers = [
-        'Name', 'Email', 'Gender', 'Age', 'Languages',
-        'Relationship Style', 'Main Intention', 'Kids', 'Dating with Kids',
-        'Conversation Style', 'Evening Vibe', 'Interests', 'Music Genres',
-        'Meeting Places', 'Avoids', 'Must-Have', 'Notes', 'Gender Feedback',
-        'Stay in Berlin', 'Referral', 'Event Source', 'Attendance', 'Bio'
-      ];
-
-      let html = '<table><thead><tr>';
-      headers.forEach(h => html += `<th>${h}</th>`);
-      html += '</tr></thead><tbody>';
-
-      applicants.forEach(person => {
-        html += '<tr>';
-        html += `<td>${person.name}</td>`;
-        html += `<td>${person.email}</td>`;
-        html += `<td>${person.gender}</td>`;
-        html += `<td>${person.ageGroup}</td>`;
-        html += `<td>${person.languages.join('; ')}</td>`;
-        html += `<td>${person.relationshipStyle}</td>`;
-        html += `<td>${person.mainIntention}</td>`;
-        html += `<td>${person.kids}</td>`;
-        html += `<td>${person.datingWithKids}</td>`;
-        html += `<td>${person.conversationStyle.join('; ')}</td>`;
-        html += `<td>${person.eveningVibe}</td>`;
-        html += `<td>${person.interests.join('; ')}</td>`;
-        html += `<td>${person.musicGenres.join('; ')}</td>`;
-        html += `<td>${person.meetingPlaces.join('; ')}</td>`;
-        html += `<td>${person.avoid}</td>`;
-        html += `<td>${person.mustHave}</td>`;
-        html += `<td>${person.additionalNotes}</td>`;
-        html += `<td>${person.genderFeedback}</td>`;
-        html += `<td>${person.stayBerlin}</td>`;
-        html += `<td>${person.referral}</td>`;
-        html += `<td>${person.eventSource}</td>`;
-        html += `<td>${person.attendance}</td>`;
-        html += `<td>${person.bio}</td>`;
-        html += '</tr>';
-      });
-
-      html += '</tbody></table>';
-
-      const xlsContent = `<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="UTF-8"></head><body>${html}</body></html>`;
-      downloadFile(xlsContent, 'applicants.xls', 'application/vnd.ms-excel');
-    }
-
-    function downloadFile(content, filename, mimeType) {
-      const blob = new Blob([content], { type: mimeType });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
-
     // Event listeners
     document.getElementById('searchInput').addEventListener('input', renderDashboard);
     document.querySelectorAll('.filter-checkbox input').forEach(checkbox => {
       checkbox.addEventListener('change', renderDashboard);
     });
-
-    document.getElementById('exportCSV').addEventListener('click', exportToCSV);
-    document.getElementById('exportXLS').addEventListener('click', exportToXLS);
 
     // Initialize
     buildFilters();
