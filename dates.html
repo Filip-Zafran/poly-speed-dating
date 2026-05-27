@@ -341,9 +341,10 @@
     }
 
     .participant-header {
-      display: block;
+      display: inline;
       font-size: 0.95rem;
       line-height: 1.4;
+      white-space: nowrap;
     }
 
     .gender-label {
@@ -485,6 +486,9 @@
     .participant-content {
       flex: 1;
       min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
     }
 
     .participant-bezirk {
@@ -497,20 +501,21 @@
     }
 
     .attraction-container {
-      display: flex;
+      display: inline-flex;
       gap: 0.3rem;
-      flex-wrap: wrap;
-      margin-top: 0.1rem;
-      width: 100%;
+      flex-wrap: nowrap;
+      margin-left: 0.3rem;
+      align-items: center;
     }
 
     .attraction-item {
       display: inline-block;
-      padding: 0.2rem 0.4rem;
+      padding: 0.15rem 0.3rem;
       border-radius: 3px;
       font-weight: 600;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: white;
+      white-space: nowrap;
     }
 
     .attraction-women {
@@ -909,16 +914,11 @@
         <div class="participant-cell ${genderColorClass}">
           <div class="participant-content">
             <span class="participant-name">
-              <span class="participant-header">${person.name} [${age}]</span>
-              ${attractionDisplay}
+              <span class="participant-header">${person.name} [${age}] ${attractionDisplay}</span>
             <div class="participant-info">
               <div class="participant-info-item">
                 <span class="participant-info-label">Email:</span>
                 <span class="participant-info-value">${person.email}</span>
-              </div>
-              <div class="participant-info-item">
-                <span class="participant-info-label">Intention:</span>
-                <span class="participant-info-value">${person.mainIntention}</span>
               </div>
               <div class="participant-info-item">
                 <span class="participant-info-label">Relationship:</span>
