@@ -339,10 +339,22 @@
       margin-top: 1.2rem;
       padding-top: 1.2rem;
       border-top: 1px solid #e0e0e0;
+      animation: slideDown 0.2s ease;
     }
 
-    .person-card.expanded .person-details {
+    .person-item.expanded .person-details {
       display: block;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        max-height: 0;
+      }
+      to {
+        opacity: 1;
+        max-height: 1000px;
+      }
     }
 
     .detail-grid {
@@ -750,6 +762,30 @@
       });
     }
 
+    // Count genders in a people array
+    function getGenderCounts(people) {
+      const counts = { W: 0, M: 0, NB: 0, A: 0, Other: 0 };
+      people.forEach(person => {
+        const g = person.gender.toLowerCase();
+        if (g === 'woman') counts.W++;
+        else if (g === 'man') counts.M++;
+        else if (g.includes('non-binary')) counts.NB++;
+        else if (g === 'agender') counts.A++;
+        else counts.Other++;
+      });
+      return counts;
+    }
+
+    function formatGenderCounts(counts) {
+      const parts = [];
+      if (counts.W > 0) parts.push(`W${counts.W}`);
+      if (counts.M > 0) parts.push(`M${counts.M}`);
+      if (counts.NB > 0) parts.push(`NB${counts.NB}`);
+      if (counts.A > 0) parts.push(`A${counts.A}`);
+      if (counts.Other > 0) parts.push(`O${counts.Other}`);
+      return parts.length > 0 ? `(${parts.join(', ')})` : '';
+    }
+
     // Render dashboard
     function renderDashboard() {
       const filtered = filterApplicants();
@@ -792,18 +828,30 @@
       relationshipOrder.forEach(relationship => {
         if (!grouped[relationship]) return;
 
+        // Get all people in this relationship style
+        const relPeople = [];
+        Object.values(grouped[relationship]).forEach(intentions => {
+          Object.values(intentions).forEach(orientations => {
+            relPeople.push(...orientations);
+          });
+        });
+
         html += `<div class="relationship-style-section">
-          <h2 class="relationship-style-title">${relationship}</h2>
+          <h2 class="relationship-style-title">${relationship} ${formatGenderCounts(getGenderCounts(relPeople))}</h2>
           <div class="intention-grid">`;
 
         Object.keys(grouped[relationship]).sort().forEach(intention => {
           const intentionPeople = grouped[relationship][intention];
-          const totalCount = Object.values(intentionPeople).reduce((sum, arr) => sum + arr.length, 0);
+
+          // Get all people in this intention
+          const allIntentionPeople = [];
+          Object.values(intentionPeople).forEach(orientations => {
+            allIntentionPeople.push(...orientations);
+          });
 
           html += `<div class="intention-subsection">
             <div class="intention-title">
-              ${intention}
-              <span class="intention-count">${totalCount}</span>
+              ${intention} ${formatGenderCounts(getGenderCounts(allIntentionPeople))}
             </div>`;
 
           Object.keys(intentionPeople).sort((a, b) => {
@@ -811,6 +859,10 @@
             return order.indexOf(a) - order.indexOf(b);
           }).forEach(orientation => {
             const people = intentionPeople[orientation];
+
+            // Get gender counts for this orientation
+            const orientCounts = getGenderCounts(people);
+
             // Sort by gender: Women → Men → Other
             const sortedPeople = people.sort((a, b) => {
               const genderOrder = { 'Woman': 0, 'Man': 1 };
@@ -822,8 +874,7 @@
             html += `
               <div class="orientation-group">
                 <div class="orientation-title">
-                  ${orientation}
-                  <span class="orientation-count">${people.length}</span>
+                  ▶ ${orientation} ${formatGenderCounts(orientCounts)}
                 </div>
                 <ol class="person-list">
                   ${sortedPeople.map((person, idx) => renderPersonItem(person, idx + 1)).join('')}
