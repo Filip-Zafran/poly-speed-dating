@@ -15,15 +15,33 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files
-app.use(express.static(__dirname, {
-  setHeaders: (res, path) => {
-    // Cache control for static assets
-    if (path.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg)$/)) {
-      res.set('Cache-Control', 'public, max-age=3600');
+// Middleware to serve .html files when path doesn't have extension
+app.use((req, res, next) => {
+  // Skip API routes
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+
+  // If path has no extension, try .html version
+  if (!path.extname(req.path) && req.path !== '/') {
+    // Check poll-app/public first
+    const pollHtmlPath = path.join(__dirname, 'poll-app', 'public', req.path + '.html');
+    if (fs.existsSync(pollHtmlPath)) {
+      return res.sendFile(pollHtmlPath);
+    }
+
+    // Then check root directory
+    const htmlPath = path.join(__dirname, req.path + '.html');
+    if (fs.existsSync(htmlPath)) {
+      return res.sendFile(htmlPath);
     }
   }
-}));
+
+  next();
+});
+
+// Serve static files
+app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, "poll-app", "public")));
 
 // Initialize poll database
