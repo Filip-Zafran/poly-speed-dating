@@ -6,6 +6,7 @@ import Database from "better-sqlite3";
 import { randomBytes, randomUUID } from "crypto";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
 
 dotenv.config();
 
@@ -13,9 +14,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 app.use(cors());
 app.use(express.json());
-// Serve static files from root directory (main HTML files)
-app.use(express.static(__dirname));
-// Also serve poll-app static files
+
+// Serve static files
+app.use(express.static(__dirname, {
+  setHeaders: (res, path) => {
+    // Cache control for static assets
+    if (path.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg)$/)) {
+      res.set('Cache-Control', 'public, max-age=3600');
+    }
+  }
+}));
 app.use(express.static(path.join(__dirname, "poll-app", "public")));
 
 // Initialize poll database
