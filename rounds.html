@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rounds</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding-bottom: 100px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .page-header {
+      margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
+      color: #340c46;
+      text-align: center;
+    }
+
+    .group-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f0f0f0;
+      gap: 1rem;
+    }
+
+    .group-title {
+      font-weight: 900;
+      color: #340c46;
+      font-size: 1.8rem;
+      flex: 1;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .group-category {
+      color: #666;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: #27ae60;
+      color: white;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      margin-left: 0.5rem;
+    }
+
+    .status-badge.pending {
+      background: #e67e22;
+    }
+
+    .status-badge.missing {
+      background: #e74c3c;
+    }
+
+    .group-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-box {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #340c46;
+    }
+
+    .gender-breakdown {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .gender-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .gender-badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: white;
+    }
+
+    .gender-women {
+      background: #e74c3c;
+    }
+
+    .gender-men {
+      background: #3498db;
+    }
+
+    .gender-nb {
+      background: #95a5a6;
+    }
+
+    .section {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.5px;
+    }
+
+    .content-line {
+      font-size: 0.95rem;
+      color: #340c46;
+      line-height: 1.6;
+    }
+
+    .hobbies-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .hobby-tag {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: #e8f4f8;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #0066ff;
+      font-weight: 500;
+    }
+
+    .meeting-place {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .meeting-place-icon {
+      font-size: 1.2rem;
+    }
+
+    .missing-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      background: #fff3cd;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #856404;
+    }
+
+    .missing-icon {
+      font-size: 1.2rem;
+    }
+
+    .group-assembled {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      background: #27ae60;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: white;
+      font-weight: 600;
+    }
+
+    .voting-options {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .vote-option {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #f0f0f0;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: #340c46;
+      font-weight: 500;
+    }
+
+    .vote-count {
+      font-weight: 700;
+      color: #0066ff;
+    }
+
+    .timer-section {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border-left: 4px solid #e74c3c;
+    }
+
+    .timer-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .timer-display {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #e74c3c;
+    }
+
+    .meeting-details {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .details-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .details-content {
+      font-size: 0.95rem;
+      color: #340c46;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .meeting-info {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.3rem;
+    }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .btn-confirm {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .btn-confirm:hover {
+      background: #229954;
+    }
+
+    .btn-deny {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .btn-deny:hover {
+      background: #c0392b;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #340c46;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .modal-value {
+      font-size: 0.95rem;
+      color: #340c46;
+      padding: 0.8rem;
+      background: #f8f9fa;
+      border-radius: 6px;
+    }
+
+    .feedback-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 0.8rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 0.8rem;
+    }
+
+    .feedback-option:hover {
+      background: #f8f9fa;
+    }
+
+    .feedback-option input[type="radio"] {
+      margin-top: 0.3rem;
+    }
+
+    .feedback-text {
+      flex: 1;
+      font-size: 0.95rem;
+      color: #340c46;
+    }
+
+    .modal-input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .modal-btn {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .modal-btn-primary {
+      background: #0066ff;
+      color: white;
+    }
+
+    .modal-btn-primary:hover {
+      background: #0052cc;
+    }
+
+    .modal-btn-secondary {
+      background: #f0f0f0;
+      color: #340c46;
+    }
+
+    .modal-btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.5rem 0;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      padding: 0.8rem;
+      text-decoration: none;
+      color: #999;
+      font-size: 0.75rem;
+      transition: color 0.2s;
+      flex: 1;
+    }
+
+    .nav-item.active {
+      color: #0066ff;
+    }
+
+    .nav-item:hover {
+      color: #0066ff;
+    }
+
+    .nav-icon {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1>Rounds</h1>
+    </div>
+
+    <!-- Group 1 -->
+    <div class="group-card">
+      <div class="group-header">
+        <div style="flex: 1;">
+          <div class="group-title">Monogamous > Casual > Straight</div>
+        </div>
+        <div class="status-badge">DONE</div>
+      </div>
+
+      <div class="group-stats">
+        <div class="stat-box">
+          <div class="stat-label">Participants</div>
+          <div class="stat-value">8</div>
+          <div class="gender-breakdown">
+            <div class="gender-item">
+              <span class="gender-badge gender-women">W</span>
+              <span>4</span>
+            </div>
+            <div class="gender-item">
+              <span class="gender-badge gender-men">M</span>
+              <span>4</span>
+            </div>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Age Range</div>
+          <div class="stat-value">28-34</div>
+          <div style="color: #666; font-size: 0.85rem; margin-top: 0.5rem;">avg. 31 yrs</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Combined Interests</div>
+        <div class="hobbies-list">
+          <div class="hobby-tag">Hiking</div>
+          <div class="hobby-tag">Music</div>
+          <div class="hobby-tag">Cooking</div>
+          <div class="hobby-tag">Art</div>
+          <div class="hobby-tag">Dancing</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Most Voted Meeting Place</div>
+        <div class="voting-options">
+          <div class="vote-option">Bar <span class="vote-count">(4)</span></div>
+          <div class="vote-option">Park <span class="vote-count">(3)</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="group-assembled">
+          <div class="missing-icon">✓</div>
+          <div>Group is assembled</div>
+        </div>
+      </div>
+
+      <div class="timer-section">
+        <div class="timer-label">Time to confirm</div>
+        <div class="timer-display" data-timer="86400">24:00:00</div>
+      </div>
+
+      <div class="meeting-details">
+        <div class="details-label">Suggested Meeting Place</div>
+        <div class="meeting-info">🦆 Duck Bar, Pondstr. 66, 123456 Berlin</div>
+        <div class="meeting-info">📅 Monday, 19.06.2030</div>
+        <div class="meeting-info">🕖 19:00h</div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-confirm" onclick="openConfirmModal()">Confirm attendance</button>
+        <button class="btn-deny" onclick="openDenyModal()">Deny attendance</button>
+      </div>
+    </div>
+
+    <!-- Group 2 -->
+    <div class="group-card">
+      <div class="group-header">
+        <div style="flex: 1;">
+          <div class="group-title">Monogamous > Friendship > Straight</div>
+        </div>
+        <div class="status-badge pending">PENDING</div>
+      </div>
+
+      <div class="group-stats">
+        <div class="stat-box">
+          <div class="stat-label">Participants</div>
+          <div class="stat-value">8</div>
+          <div class="gender-breakdown">
+            <div class="gender-item">
+              <span class="gender-badge gender-women">W</span>
+              <span>4</span>
+            </div>
+            <div class="gender-item">
+              <span class="gender-badge gender-men">M</span>
+              <span>4</span>
+            </div>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Age Range</div>
+          <div class="stat-value">26-32</div>
+          <div style="color: #666; font-size: 0.85rem; margin-top: 0.5rem;">avg. 29 yrs</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Combined Interests</div>
+        <div class="hobbies-list">
+          <div class="hobby-tag">Board Games</div>
+          <div class="hobby-tag">Coffee</div>
+          <div class="hobby-tag">Books</div>
+          <div class="hobby-tag">Cycling</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Most Voted Meeting Place</div>
+        <div class="voting-options">
+          <div class="vote-option">Boulderhall <span class="vote-count">(5)</span></div>
+          <div class="vote-option">Caffe <span class="vote-count">(3)</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="missing-info">
+          <div class="missing-icon">⚠️</div>
+          <div>Waiting for group confirmation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Attendance Modal -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeConfirmModal()">×</button>
+      <div class="modal-header">Confirm Attendance</div>
+
+      <div class="modal-section">
+        <div class="modal-label">Payment Deadline</div>
+        <div class="modal-value">22.06.2030, 18:00h</div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-label">Payment Details</div>
+        <div class="modal-value">
+          <strong>Bank Transfer</strong><br>
+          Account: Duck Dating Events<br>
+          IBAN: DE89370400440532013000<br>
+          Amount: €15.00<br>
+          Reference: GRP1-062330
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-label">Or Pay with Card</div>
+        <div class="modal-value">
+          <strong>Card Payment Link</strong><br>
+          <a href="#" style="color: #0066ff; text-decoration: none;">Pay now →</a>
+        </div>
+      </div>
+
+      <div class="modal-buttons">
+        <button class="modal-btn modal-btn-secondary" onclick="closeConfirmModal()">Close</button>
+        <button class="modal-btn modal-btn-primary" onclick="confirmPayment()">I've paid</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deny Attendance Modal -->
+  <div id="denyModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeDenyModal()">×</button>
+      <div class="modal-header">Why are you declining?</div>
+
+      <div class="modal-section">
+        <label class="feedback-option">
+          <input type="radio" name="feedback" value="time" onchange="handleFeedback('time')">
+          <div class="feedback-text">Time doesn't work for me</div>
+        </label>
+
+        <label class="feedback-option">
+          <input type="radio" name="feedback" value="group" onchange="handleFeedback('group')">
+          <div class="feedback-text">Group doesn't work for me</div>
+        </label>
+
+        <label class="feedback-option">
+          <input type="radio" name="feedback" value="other" onchange="handleFeedback('other')">
+          <div class="feedback-text">Other</div>
+        </label>
+
+        <input type="text" class="modal-input" id="otherInput" placeholder="Please tell us more..." style="display: none;">
+      </div>
+
+      <div class="modal-buttons">
+        <button class="modal-btn modal-btn-secondary" onclick="closeDenyModal()">Cancel</button>
+        <button class="modal-btn modal-btn-primary" onclick="submitFeedback()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="interests.html" class="nav-item">
+      <div class="nav-icon">❤️</div>
+      <div>Interests</div>
+    </a>
+    <a href="rounds.html" class="nav-item active">
+      <div class="nav-icon">⏱️</div>
+      <div>Rounds</div>
+    </a>
+    <a href="matches.html" class="nav-item">
+      <div class="nav-icon">💬</div>
+      <div>Matches</div>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div>Profile</div>
+    </a>
+    <a href="organiser.html" class="nav-item">
+      <div class="nav-icon">👥</div>
+      <div>Organiser</div>
+    </a>
+  </nav>
+
+  <script>
+    // Timer functionality
+    function updateTimer() {
+      document.querySelectorAll('[data-timer]').forEach(timer => {
+        let seconds = parseInt(timer.dataset.timer);
+        if (seconds > 0) {
+          seconds--;
+          timer.dataset.timer = seconds;
+
+          const hours = Math.floor(seconds / 3600);
+          const minutes = Math.floor((seconds % 3600) / 60);
+          const secs = seconds % 60;
+
+          timer.textContent =
+            String(hours).padStart(2, '0') + ':' +
+            String(minutes).padStart(2, '0') + ':' +
+            String(secs).padStart(2, '0');
+        }
+      });
+    }
+
+    setInterval(updateTimer, 1000);
+
+    // Modal functions
+    function openConfirmModal() {
+      document.getElementById('confirmModal').classList.add('active');
+    }
+
+    function closeConfirmModal() {
+      document.getElementById('confirmModal').classList.remove('active');
+    }
+
+    function openDenyModal() {
+      document.getElementById('denyModal').classList.add('active');
+    }
+
+    function closeDenyModal() {
+      document.getElementById('denyModal').classList.remove('active');
+    }
+
+    function handleFeedback(type) {
+      const otherInput = document.getElementById('otherInput');
+      if (type === 'other') {
+        otherInput.style.display = 'block';
+      } else {
+        otherInput.style.display = 'none';
+      }
+    }
+
+    function confirmPayment() {
+      alert('✓ Payment confirmed! You\'re all set for the event.');
+      closeConfirmModal();
+    }
+
+    function submitFeedback() {
+      const selected = document.querySelector('input[name="feedback"]:checked');
+      if (!selected) {
+        alert('Please select a reason');
+        return;
+      }
+
+      if (selected.value === 'other') {
+        const feedback = document.getElementById('otherInput').value;
+        if (!feedback) {
+          alert('Please provide additional feedback');
+          return;
+        }
+        alert('Thank you for your feedback: ' + feedback);
+      } else {
+        alert('Thank you for letting us know. You\'ve been removed from this group.');
+      }
+      closeDenyModal();
+    }
+  </script>
+</body>
+</html>

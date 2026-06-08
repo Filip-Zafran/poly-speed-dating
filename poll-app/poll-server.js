@@ -275,5 +275,5 @@ app.post('/api/vote/:pollId', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Poll server running on http://localhost:${PORT}`);
-  console.log(`Admin panel: http://localhost:${PORT}/poll-admin.html`);
+  console.log(`Admin panel: http://localhost:${PORT}/poll.html`);
 });
