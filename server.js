@@ -13,6 +13,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 app.use(cors());
 app.use(express.json());
+// Serve static files from root directory (main HTML files)
+app.use(express.static(__dirname));
+// Also serve poll-app static files
 app.use(express.static(path.join(__dirname, "poll-app", "public")));
 
 // Initialize poll database
