@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poll Admin - Create & Manage Scheduling Polls</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📊 Scheduling Poll Manager</h1>
+    <p>Create and manage availability polls for your events</p>
+  </header>
+
+  <div class="container">
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal-overlay is-open">
+      <div class="modal-box">
+        <h2>Admin Access Required</h2>
+        <p>Enter the admin password to manage polls:</p>
+        <div class="form-group">
+          <input type="password" id="adminPasswordInput" placeholder="Admin password" autofocus>
+        </div>
+        <button class="btn btn-primary btn-block" id="submitPasswordBtn">Access Admin Panel</button>
+        <p class="text-muted text-center mt-2" style="font-size: 0.85rem;">The default password is "changeme"</p>
+      </div>
+    </div>
+
+    <!-- Main Content (hidden until authenticated) -->
+    <div id="mainContent" class="hidden">
+      <div class="tabs">
+        <button class="tab-button is-active" data-tab="list-tab">📋 All Polls</button>
+        <button class="tab-button" data-tab="create-tab">➕ Create New Poll</button>
+      </div>
+
+      <!-- List Tab -->
+      <div id="list-tab" class="tab-content is-active">
+        <div class="card">
+          <div class="card-header">
+            <h2>Your Polls</h2>
+            <p>View and manage all scheduling polls</p>
+          </div>
+
+          <div id="pollsList" class="text-center text-muted">
+            <p>Loading polls...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Tab -->
+      <div id="create-tab" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <h2>Create a New Poll</h2>
+            <p>Set up a scheduling poll to find the best date for your event</p>
+          </div>
+
+          <form id="createPollForm">
+            <div class="form-group">
+              <label for="pollTitle">Poll Title *</label>
+              <input type="text" id="pollTitle" placeholder="e.g., PSD June Meetup" required>
+            </div>
+
+            <div class="form-group">
+              <label for="pollDescription">Description (optional)</label>
+              <textarea id="pollDescription" placeholder="Add context about the event..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="eventDuration">Event Duration *</label>
+              <input type="text" id="eventDuration" placeholder="e.g., 2 hours, 3 hours" required>
+            </div>
+
+            <div class="form-group">
+              <label for="expectedParticipants">Expected Number of Participants *</label>
+              <input type="number" id="expectedParticipants" min="1" placeholder="e.g., 20" required>
+            </div>
+
+            <div class="form-group">
+              <label>Date Options *</label>
+              <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 1rem;">Provide 3 suggested dates and times</p>
+
+              <div style="margin-bottom: 1rem;">
+                <label for="date1" style="font-size: 0.9rem; margin-bottom: 0.3rem; display: block;">Option 1</label>
+                <input type="datetime-local" id="date1" required>
+              </div>
+
+              <div style="margin-bottom: 1rem;">
+                <label for="date2" style="font-size: 0.9rem; margin-bottom: 0.3rem; display: block;">Option 2</label>
+                <input type="datetime-local" id="date2" required>
+              </div>
+
+              <div style="margin-bottom: 1rem;">
+                <label for="date3" style="font-size: 0.9rem; margin-bottom: 0.3rem; display: block;">Option 3</label>
+                <input type="datetime-local" id="date3" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="openAccess" checked>
+                <span style="margin-left: 0.5rem;">Allow anyone with the link to vote</span>
+              </label>
+              <p class="text-muted" style="font-size: 0.85rem; margin: 0.5rem 0 0 1.75rem;">
+                Uncheck to manually add specific email addresses
+              </p>
+            </div>
+
+            <div id="emailsSection" class="hidden">
+              <div class="form-group">
+                <label for="inviteEmails">Invite Specific People</label>
+                <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0.75rem;">Type an email and press Enter to add</p>
+                <div class="tag-input-container" id="emailTagsContainer">
+                  <input type="email" id="inviteEmailInput" placeholder="Email address...">
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-block" style="margin-top: 2rem;">Create Poll</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="poll-admin.js"></script>
+</body>
+</html>

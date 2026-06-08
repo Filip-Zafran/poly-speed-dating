@@ -1,0 +1,19 @@
+{
+  "name": "poll-app",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Scheduling poll app (Doodle-like) for coordinating event dates",
+  "scripts": {
+    "start": "node poll-server.js",
+    "dev": "node --watch poll-server.js"
+  },
+  "keywords": ["scheduling", "poll", "doodle"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^9.6.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
+}

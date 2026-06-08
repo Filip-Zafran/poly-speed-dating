@@ -1,0 +1,6 @@
+node_modules/
+polls.db
+.env
+.env.local
+*.log
+.DS_Store

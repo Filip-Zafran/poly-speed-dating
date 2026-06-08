@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote on Scheduling Poll</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📅 When Can You Make It?</h1>
+    <p>Let us know your availability for the upcoming event</p>
+  </header>
+
+  <div class="container">
+    <!-- Loading State -->
+    <div id="loadingState" class="card text-center">
+      <p>Loading poll...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="hidden">
+      <div class="card">
+        <div class="error-message">
+          <strong>Poll not found</strong>
+          <p>The poll you're looking for doesn't exist or has been deleted.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Poll View -->
+    <div id="pollView" class="hidden">
+      <div class="card">
+        <div class="card-header">
+          <h2 id="pollTitle"></h2>
+          <p id="pollDescription"></p>
+        </div>
+
+        <!-- Duration Info -->
+        <div class="poll-stat">
+          <span class="poll-stat-label">⏱️ Duration:</span>
+          <span id="pollDuration"></span>
+        </div>
+
+        <!-- Vote Form -->
+        <form id="voteForm">
+          <h3 style="margin-bottom: 1rem; color: var(--text);">Select Your Availability</h3>
+
+          <div id="dateOptionsContainer"></div>
+
+          <!-- Alternative Date Suggestion -->
+          <details class="form-group" style="border: 1px solid var(--border-light); padding: 1rem; border-radius: 12px; margin-top: 2rem;">
+            <summary style="cursor: pointer; font-weight: 500; user-select: none;">💡 Suggest an Alternative Date</summary>
+            <div style="margin-top: 1rem;">
+              <input type="text" id="altDateInput" placeholder="e.g., June 20 at 7 PM">
+              <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.5rem;">
+                Only visible to event organizers
+              </p>
+            </div>
+          </details>
+
+          <!-- Voter Name -->
+          <div class="form-group" style="margin-top: 2rem;">
+            <label for="voterName">Your Name *</label>
+            <input type="text" id="voterName" placeholder="How should we list you?" required autofocus>
+          </div>
+
+          <button type="submit" class="btn btn-gold btn-block" style="margin-top: 2rem;">Submit Vote</button>
+        </form>
+      </div>
+
+      <!-- Results Section -->
+      <div class="card" style="margin-top: 2rem;">
+        <div class="card-header">
+          <h2>Current Responses</h2>
+        </div>
+
+        <!-- Top Date Progress -->
+        <div id="topDateContainer" style="margin-bottom: 2rem;"></div>
+
+        <!-- All Responses Grid -->
+        <h3 style="margin-bottom: 1rem; margin-top: 2rem; color: var(--text);">Who's voting?</h3>
+        <div id="responsesGrid" class="responses-grid">
+          <p class="text-muted">No responses yet</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success State -->
+    <div id="successState" class="hidden">
+      <div class="card text-center">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+        <h2>Thank You!</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">Your vote has been recorded</p>
+
+        <div id="finalCounts"></div>
+
+        <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 2rem;">
+          Vote Again
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="poll-vote.js"></script>
+</body>
+</html>
