@@ -51,6 +51,15 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, "poll-app", "public")));
 app.use(express.static(__dirname));
 
+// Explicit routes for poll pages
+app.get('/poll.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'poll-app', 'public', 'poll.html'));
+});
+
+app.get('/poll-vote.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'poll-app', 'public', 'poll-vote.html'));
+});
+
 // Initialize poll database
 const db = new Database(path.join(__dirname, "polls.db"));
 db.pragma("journal_mode = WAL");
