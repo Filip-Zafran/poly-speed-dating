@@ -26,15 +26,22 @@ app.use((req, res, next) => {
   if (!path.extname(req.path) && req.path !== '/') {
     // Check poll-app/public first
     const pollHtmlPath = path.join(__dirname, 'poll-app', 'public', req.path + '.html');
-    if (fs.existsSync(pollHtmlPath)) {
+    const pollHtmlPathExists = fs.existsSync(pollHtmlPath);
+
+    if (pollHtmlPathExists) {
       return res.sendFile(pollHtmlPath);
     }
 
     // Then check root directory
     const htmlPath = path.join(__dirname, req.path + '.html');
-    if (fs.existsSync(htmlPath)) {
+    const htmlPathExists = fs.existsSync(htmlPath);
+
+    if (htmlPathExists) {
       return res.sendFile(htmlPath);
     }
+
+    // Log if file not found for debugging
+    console.log(`HTML file not found for ${req.path}. Checked: ${pollHtmlPath}, ${htmlPath}`);
   }
 
   next();
