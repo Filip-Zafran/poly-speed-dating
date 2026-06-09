@@ -9,7 +9,7 @@
 <body>
   <header>
     <h1>📅 When Can You Make It?</h1>
-    <p>Let us know your availability for the upcoming event</p>
+    <p>Help us find the best date for your event</p>
   </header>
 
   <div class="container">
@@ -30,61 +30,58 @@
 
     <!-- Main Poll View -->
     <div id="pollView" class="hidden">
-      <div class="card">
-        <div class="card-header">
-          <h2 id="pollTitle"></h2>
-          <p id="pollDescription"></p>
+      <div class="poll-header">
+        <h2 id="pollTitle"></h2>
+        <p id="pollDescription"></p>
+        <div class="poll-meta">
+          <span>⏱️ <strong id="pollDuration"></strong></span>
         </div>
-
-        <!-- Duration Info -->
-        <div class="poll-stat">
-          <span class="poll-stat-label">⏱️ Duration:</span>
-          <span id="pollDuration"></span>
-        </div>
-
-        <!-- Vote Form -->
-        <form id="voteForm">
-          <h3 style="margin-bottom: 2rem; color: var(--text); text-align: center; font-size: 1.3rem;">Which date works for you?</h3>
-
-          <div id="dateOptionsContainer" style="margin-bottom: 2rem;"></div>
-
-          <!-- Voter Name -->
-          <div class="form-group" style="margin-bottom: 2rem;">
-            <label for="voterName" style="font-weight: 600;">Your Name *</label>
-            <input type="text" id="voterName" placeholder="Enter your name" required autofocus style="padding: 0.85rem 1rem; border-radius: 8px;">
-          </div>
-
-          <button type="submit" class="btn btn-gold btn-block" style="margin-top: 0; padding: 1rem; font-size: 1.1rem; font-weight: 600;">Submit Vote</button>
-        </form>
       </div>
 
-      <!-- Results Section -->
-      <div class="card" style="margin-top: 2rem;">
-        <div class="card-header">
-          <h2>Current Responses</h2>
+      <div class="poll-container">
+        <!-- Left: Voting Form -->
+        <div class="poll-form-section">
+          <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Select your availability</h3>
+
+          <form id="voteForm">
+            <div id="dateOptionsContainer" style="margin-bottom: 2.5rem;"></div>
+
+            <!-- Voter Name -->
+            <div class="form-group" style="margin-bottom: 2rem;">
+              <label for="voterName" style="font-weight: 600; margin-bottom: 0.75rem; display: block;">Your Name *</label>
+              <input type="text" id="voterName" placeholder="Enter your name" required autofocus style="padding: 0.85rem 1rem; border-radius: 8px; width: 100%;">
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-block" style="padding: 1rem; font-size: 1rem; font-weight: 600;">Submit Vote</button>
+          </form>
         </div>
 
-        <!-- Top Date Progress -->
-        <div id="topDateContainer" style="margin-bottom: 2rem;"></div>
+        <!-- Right: Results Summary -->
+        <div class="poll-results-section">
+          <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Vote Summary</h3>
+          <div id="resultsContainer"></div>
+        </div>
+      </div>
 
-        <!-- All Responses Grid -->
-        <h3 style="margin-bottom: 1rem; margin-top: 2rem; color: var(--text);">Who's voting?</h3>
-        <div id="responsesGrid" class="responses-grid">
-          <p class="text-muted">No responses yet</p>
+      <!-- All Responses Section -->
+      <div class="responses-section">
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">👥 Who's voting?</h3>
+        <div id="responsesGrid" class="responses-grid-full">
+          <p class="text-muted">No responses yet. Be the first to vote!</p>
         </div>
       </div>
     </div>
 
     <!-- Success State -->
     <div id="successState" class="hidden">
-      <div class="card text-center">
-        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+      <div class="success-card">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">✅</div>
         <h2>Thank You!</h2>
-        <p style="color: var(--text-light); margin-bottom: 2rem;">Your vote has been recorded</p>
+        <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.05rem;">Your vote has been recorded</p>
 
         <div id="finalCounts"></div>
 
-        <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 2rem;">
+        <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 2rem; padding: 0.85rem 2rem;">
           Vote Again
         </button>
       </div>

@@ -128,17 +128,17 @@ function renderPoll() {
 }
 
 function updateResponses() {
-  // Top date progress bar
-  const topDateContainer = document.getElementById('topDateContainer');
-
   const counts = pollData.counts;
   const dateKeys = ['date1', 'date2', 'date3'];
-  const topCount = Math.max(counts.date1, counts.date2, counts.date3);
-  const topDate = dateKeys.find(key => counts[key] === topCount);
 
-  let topDateStr = '';
-  if (topDate) {
-    const dateObj = new Date(pollData[topDate]);
+  // Create results summary for right panel
+  const resultsContainer = document.getElementById('resultsContainer');
+  let resultsHtml = '';
+
+  dateKeys.forEach(dateKey => {
+    const count = counts[dateKey];
+    const pct = pollData.expected ? Math.min(100, (count / pollData.expected) * 100) : 0;
+    const dateObj = new Date(pollData[dateKey]);
     const formatter = new Intl.DateTimeFormat('en-US', {
       weekday: 'short',
       month: 'short',
@@ -146,47 +146,51 @@ function updateResponses() {
       hour: '2-digit',
       minute: '2-digit'
     });
-    topDateStr = formatter.format(dateObj);
-  }
+    const dateStr = formatter.format(dateObj);
 
-  const pct = Math.min(100, (topCount / pollData.expected) * 100);
-  const barColor = getBarColor(pct);
-
-  topDateContainer.innerHTML = `
-    <div style="margin-bottom: 1rem;">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-        <div>
-          <div style="font-weight: 600; color: var(--text);">Leading Date:</div>
-          <div style="font-size: 0.95rem; color: var(--text-light); margin-top: 0.25rem;">${topDateStr || 'No votes yet'}</div>
+    resultsHtml += `
+      <div class="result-item">
+        <div class="result-date">${dateStr}</div>
+        <div class="result-bar">
+          <div class="result-fill" style="width: ${pct}%;">
+            ${pct > 10 ? `${count}` : ''}
+          </div>
         </div>
-        <div class="progress-count">${topCount} / ${pollData.expected}</div>
+        <div class="result-count"><strong>${count}</strong> out of ${pollData.expected} needed</div>
       </div>
-      <div class="progress-bar">
-        <div class="progress-bar__fill" style="--fill: ${pct}%; --bar-color: ${barColor};"></div>
-      </div>
-      <div class="progress-info" style="font-size: 0.85rem; color: var(--text-light);">
-        ${topCount >= pollData.expected
-          ? '✅ Date confirmed!'
-          : `Need ${pollData.expected - topCount} more vote${pollData.expected - topCount !== 1 ? 's' : ''}`}
-      </div>
+    `;
+  });
+
+  // Add "can't make it" option
+  resultsHtml += `
+    <div class="result-item">
+      <div class="result-date">❌ Can't make it</div>
+      <div style="color: var(--text-light); font-size: 0.9rem;"><strong>${counts.none}</strong> response${counts.none !== 1 ? 's' : ''}</div>
     </div>
   `;
 
+  resultsContainer.innerHTML = resultsHtml;
+
   // Responses grid
-  const responsesGrid = document.getElementById('responsesGrid');
+  const responsesGrid = document.getElementById('responsesGrid-full');
+  if (!responsesGrid) return; // In case element doesn't exist yet
+
   if (pollData.votes_preview.length === 0) {
-    responsesGrid.innerHTML = '<p class="text-muted">No responses yet. Be the first to vote!</p>';
+    document.getElementById('responsesGrid').innerHTML = '<p class="text-muted">No responses yet. Be the first to vote!</p>';
   } else {
-    responsesGrid.innerHTML = pollData.votes_preview
+    const responseCards = pollData.votes_preview
       .map(vote => {
-        const choiceLabel = vote.choice === 'none' ? '❌' : vote.choice.replace('date', '📅');
+        const choiceEmoji = vote.choice === 'none' ? '❌' : '✓';
+        const choiceText = vote.choice === 'none' ? 'Out' : vote.choice.replace('date', 'Date');
         return `
-          <div class="response-pill" title="${vote.choice === 'none' ? 'Can\'t make it' : vote.choice}">
-            <span>${vote.initials}</span>
+          <div class="response-card">
+            <div class="response-initials">${vote.initials}</div>
+            <div class="response-choice">${choiceEmoji}</div>
           </div>
         `;
       })
       .join('');
+    document.getElementById('responsesGrid').innerHTML = responseCards;
   }
 }
 
