@@ -71,7 +71,7 @@ function renderPoll() {
   document.getElementById('pollDescription').textContent = pollData.description || '(No description)';
   document.getElementById('pollDuration').textContent = pollData.duration;
 
-  // Render date options
+  // Render date options as cards
   const container = document.getElementById('dateOptionsContainer');
   container.innerHTML = '';
 
@@ -87,44 +87,52 @@ function renderPoll() {
     });
     const formatted = formatter.format(dateObj);
 
-    const option = document.createElement('div');
-    option.className = 'vote-option';
-    option.innerHTML = `
-      <input type="radio" name="choice" id="${dateKey}" value="${dateKey}">
-      <label class="vote-option-label" for="${dateKey}">
-        <div class="vote-option-date">
-          <div class="vote-option-time">${formatted}</div>
-          <div class="vote-option-info">${dateKey.replace('date', 'Option ')}</div>
-        </div>
+    const card = document.createElement('div');
+    card.className = 'date-card';
+    card.innerHTML = `
+      <input type="radio" name="choice" id="${dateKey}" value="${dateKey}" style="display: none;">
+      <label for="${dateKey}" class="date-card-label">
+        <div class="date-card-time">${formatted}</div>
+        <div class="date-card-option">${dateKey.replace('date', 'Option ')}</div>
       </label>
     `;
-    container.appendChild(option);
+    container.appendChild(card);
 
     document.getElementById(dateKey).addEventListener('change', (e) => {
       selectedChoice = e.target.value;
+      updateCardSelection();
     });
   });
 
   // Add "can't make it" option
-  const noneOption = document.createElement('div');
-  noneOption.className = 'vote-option cannot-make';
-  noneOption.innerHTML = `
-    <input type="radio" name="choice" id="none" value="none">
-    <label class="vote-option-label" for="none">
-      <div class="vote-option-date">
-        <div class="vote-option-time">❌ I Can't Make It</div>
-        <div class="vote-option-info">Can't attend this month</div>
-      </div>
+  const noneCard = document.createElement('div');
+  noneCard.className = 'date-card';
+  noneCard.innerHTML = `
+    <input type="radio" name="choice" id="none" value="none" style="display: none;">
+    <label for="none" class="date-card-label date-card-label-none">
+      <div class="date-card-time">❌ I Can't Make It</div>
+      <div class="date-card-option">Can't attend this month</div>
     </label>
   `;
-  container.appendChild(noneOption);
+  container.appendChild(noneCard);
 
   document.getElementById('none').addEventListener('change', (e) => {
     selectedChoice = e.target.value;
+    updateCardSelection();
   });
 
   // Render responses
   updateResponses();
+}
+
+function updateCardSelection() {
+  document.querySelectorAll('.date-card-label').forEach(label => {
+    label.classList.remove('selected');
+  });
+  const checked = document.querySelector('input[name="choice"]:checked');
+  if (checked) {
+    checked.closest('.date-card').querySelector('.date-card-label').classList.add('selected');
+  }
 }
 
 function updateResponses() {

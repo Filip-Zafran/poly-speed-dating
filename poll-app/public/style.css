@@ -615,6 +615,54 @@ input[type='radio'] {
   border-left: 4px solid var(--poly-magenta);
 }
 
+/* Date Card Selection */
+.date-card {
+  margin-bottom: 1rem;
+}
+
+.date-card-label {
+  display: block;
+  padding: 1.5rem 1.75rem;
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.date-card-label:hover {
+  border-color: var(--poly-blue);
+  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 159, 227, 0.12);
+}
+
+.date-card-label.selected {
+  background: linear-gradient(135deg, #e3f2fd 0%, #e8f1f8 100%);
+  border-color: var(--poly-blue);
+  box-shadow: 0 8px 20px rgba(0, 159, 227, 0.2);
+  border-width: 2px;
+}
+
+.date-card-label-none.selected {
+  background: linear-gradient(135deg, #fce4ec 0%, #f8e8ef 100%);
+  border-color: var(--poly-magenta);
+  box-shadow: 0 8px 20px rgba(229, 0, 81, 0.15);
+}
+
+.date-card-time {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.date-card-option {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
 /* Poll Voting Page Styles */
 .poll-header {
   background: white;
