@@ -15,13 +15,44 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Debug endpoint
+app.get('/debug', (req, res) => {
+  const pollHtmlPath = path.join(__dirname, 'poll-app', 'public', 'poll.html');
+  const exists = fs.existsSync(pollHtmlPath);
+  res.json({
+    __dirname,
+    pollHtmlPath,
+    fileExists: exists,
+    files: fs.existsSync(path.join(__dirname, 'poll-app', 'public')) ?
+      fs.readdirSync(path.join(__dirname, 'poll-app', 'public')) : 'poll-app/public does not exist'
+  });
+});
+
 // Explicit routes for poll pages (BEFORE static middleware so they take priority)
 app.get('/poll.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'poll-app', 'public', 'poll.html'));
+  const filePath = path.join(__dirname, 'poll-app', 'public', 'poll.html');
+  console.log(`[poll.html] Attempting to serve from: ${filePath}`);
+  console.log(`[poll.html] File exists: ${fs.existsSync(filePath)}`);
+
+  if (!fs.existsSync(filePath)) {
+    console.log(`[poll.html] ERROR: File not found!`);
+    return res.status(404).json({ error: 'File not found', path: filePath });
+  }
+
+  res.sendFile(filePath);
 });
 
 app.get('/poll-vote.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'poll-app', 'public', 'poll-vote.html'));
+  const filePath = path.join(__dirname, 'poll-app', 'public', 'poll-vote.html');
+  console.log(`[poll-vote.html] Attempting to serve from: ${filePath}`);
+  console.log(`[poll-vote.html] File exists: ${fs.existsSync(filePath)}`);
+
+  if (!fs.existsSync(filePath)) {
+    console.log(`[poll-vote.html] ERROR: File not found!`);
+    return res.status(404).json({ error: 'File not found', path: filePath });
+  }
+
+  res.sendFile(filePath);
 });
 
 // Middleware to serve .html files when path doesn't have extension
