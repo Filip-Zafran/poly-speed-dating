@@ -591,6 +591,6 @@ app.get("/api/events", async (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+  console.log("✅ [2026-06-10-cbc05ef] Server running on http://localhost:3000");
   console.log("Polling feature available at http://localhost:3000/poll.html");
 });
