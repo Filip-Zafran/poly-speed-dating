@@ -15,6 +15,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Explicit routes for poll pages (BEFORE static middleware so they take priority)
+app.get('/poll.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'poll-app', 'public', 'poll.html'));
+});
+
+app.get('/poll-vote.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'poll-app', 'public', 'poll-vote.html'));
+});
+
 // Middleware to serve .html files when path doesn't have extension
 app.use((req, res, next) => {
   // Skip API routes
@@ -26,22 +35,15 @@ app.use((req, res, next) => {
   if (!path.extname(req.path) && req.path !== '/') {
     // Check poll-app/public first
     const pollHtmlPath = path.join(__dirname, 'poll-app', 'public', req.path + '.html');
-    const pollHtmlPathExists = fs.existsSync(pollHtmlPath);
-
-    if (pollHtmlPathExists) {
+    if (fs.existsSync(pollHtmlPath)) {
       return res.sendFile(pollHtmlPath);
     }
 
     // Then check root directory
     const htmlPath = path.join(__dirname, req.path + '.html');
-    const htmlPathExists = fs.existsSync(htmlPath);
-
-    if (htmlPathExists) {
+    if (fs.existsSync(htmlPath)) {
       return res.sendFile(htmlPath);
     }
-
-    // Log if file not found for debugging
-    console.log(`HTML file not found for ${req.path}. Checked: ${pollHtmlPath}, ${htmlPath}`);
   }
 
   next();
@@ -50,21 +52,6 @@ app.use((req, res, next) => {
 // Serve static files (poll-app first so its style.css takes priority)
 app.use(express.static(path.join(__dirname, "poll-app", "public")));
 app.use(express.static(__dirname));
-
-// Explicit routes for poll pages
-app.get('/poll.html', (req, res) => {
-  const filePath = path.join(__dirname, 'poll-app', 'public', 'poll.html');
-  console.log(`Serving poll.html from: ${filePath}`);
-  console.log(`File exists: ${fs.existsSync(filePath)}`);
-  res.sendFile(filePath);
-});
-
-app.get('/poll-vote.html', (req, res) => {
-  const filePath = path.join(__dirname, 'poll-app', 'public', 'poll-vote.html');
-  console.log(`Serving poll-vote.html from: ${filePath}`);
-  console.log(`File exists: ${fs.existsSync(filePath)}`);
-  res.sendFile(filePath);
-});
 
 // Initialize poll database
 const db = new Database(path.join(__dirname, "polls.db"));
