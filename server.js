@@ -113,17 +113,9 @@ function getVotePreviews(pollId) {
   }));
 }
 
-function requireAdmin(req, res, next) {
-  const pass = req.headers['x-admin-password'];
-  if (pass !== process.env.ADMIN_PASSWORD) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-  next();
-}
-
 // ===== POLL API ROUTES =====
 
-app.get('/api/polls', requireAdmin, (req, res) => {
+app.get('/api/polls', (req, res) => {
   try {
     const polls = db.prepare(`
       SELECT id, title, expected, created_at, admin_token
@@ -147,7 +139,7 @@ app.get('/api/polls', requireAdmin, (req, res) => {
   }
 });
 
-app.post('/api/polls', requireAdmin, (req, res) => {
+app.post('/api/polls', (req, res) => {
   try {
     const {
       title,
@@ -188,7 +180,7 @@ app.post('/api/polls', requireAdmin, (req, res) => {
   }
 });
 
-app.get('/api/polls/:adminToken/detail', requireAdmin, (req, res) => {
+app.get('/api/polls/:adminToken/detail', (req, res) => {
   try {
     const { adminToken } = req.params;
 
@@ -213,7 +205,7 @@ app.get('/api/polls/:adminToken/detail', requireAdmin, (req, res) => {
   }
 });
 
-app.delete('/api/polls/:id', requireAdmin, (req, res) => {
+app.delete('/api/polls/:id', (req, res) => {
   try {
     const { id } = req.params;
 

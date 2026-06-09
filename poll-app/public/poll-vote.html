@@ -44,28 +44,17 @@
 
         <!-- Vote Form -->
         <form id="voteForm">
-          <h3 style="margin-bottom: 1rem; color: var(--text);">Select Your Availability</h3>
+          <h3 style="margin-bottom: 2rem; color: var(--text); text-align: center; font-size: 1.3rem;">Which date works for you?</h3>
 
-          <div id="dateOptionsContainer"></div>
-
-          <!-- Alternative Date Suggestion -->
-          <details class="form-group" style="border: 1px solid var(--border-light); padding: 1rem; border-radius: 12px; margin-top: 2rem;">
-            <summary style="cursor: pointer; font-weight: 500; user-select: none;">💡 Suggest an Alternative Date</summary>
-            <div style="margin-top: 1rem;">
-              <input type="text" id="altDateInput" placeholder="e.g., June 20 at 7 PM">
-              <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.5rem;">
-                Only visible to event organizers
-              </p>
-            </div>
-          </details>
+          <div id="dateOptionsContainer" style="margin-bottom: 2rem;"></div>
 
           <!-- Voter Name -->
-          <div class="form-group" style="margin-top: 2rem;">
-            <label for="voterName">Your Name *</label>
-            <input type="text" id="voterName" placeholder="How should we list you?" required autofocus>
+          <div class="form-group" style="margin-bottom: 2rem;">
+            <label for="voterName" style="font-weight: 600;">Your Name *</label>
+            <input type="text" id="voterName" placeholder="Enter your name" required autofocus style="padding: 0.85rem 1rem; border-radius: 8px;">
           </div>
 
-          <button type="submit" class="btn btn-gold btn-block" style="margin-top: 2rem;">Submit Vote</button>
+          <button type="submit" class="btn btn-gold btn-block" style="margin-top: 0; padding: 1rem; font-size: 1.1rem; font-weight: 600;">Submit Vote</button>
         </form>
       </div>
 

@@ -210,7 +210,6 @@ async function handleVoteSubmit(e) {
     return;
   }
 
-  const altDate = document.getElementById('altDateInput').value.trim();
   const { token } = getUrlParams();
 
   try {
@@ -222,7 +221,6 @@ async function handleVoteSubmit(e) {
       body: JSON.stringify({
         voter_name: voterName,
         choice: selectedChoice,
-        alt_date: altDate,
         voter_token: voterToken
       })
     });

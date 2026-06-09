@@ -1,12 +1,5 @@
 // Admin Panel State
-let adminPassword = null;
 let emailTags = [];
-
-// Password Modal
-const passwordModal = document.getElementById('passwordModal');
-const adminPasswordInput = document.getElementById('adminPasswordInput');
-const submitPasswordBtn = document.getElementById('submitPasswordBtn');
-const mainContent = document.getElementById('mainContent');
 
 // Form Elements
 const createPollForm = document.getElementById('createPollForm');
@@ -21,19 +14,7 @@ const tabContents = document.querySelectorAll('.tab-content');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-  // Check if password is already in sessionStorage
-  const savedPassword = sessionStorage.getItem('adminPassword');
-  if (savedPassword) {
-    adminPassword = savedPassword;
-    passwordModal.classList.remove('is-open');
-    mainContent.classList.remove('hidden');
-    loadPolls();
-  }
-
-  submitPasswordBtn.addEventListener('click', handlePasswordSubmit);
-  adminPasswordInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handlePasswordSubmit();
-  });
+  loadPolls();
 
   createPollForm.addEventListener('submit', handleCreatePoll);
   openAccessCheckbox.addEventListener('change', handleOpenAccessToggle);
@@ -55,20 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-function handlePasswordSubmit() {
-  const password = adminPasswordInput.value.trim();
-  if (!password) {
-    alert('Please enter the admin password');
-    return;
-  }
-
-  adminPassword = password;
-  sessionStorage.setItem('adminPassword', password);
-  passwordModal.classList.remove('is-open');
-  mainContent.classList.remove('hidden');
-  loadPolls();
-}
 
 function switchTab(tabName) {
   tabButtons.forEach(btn => btn.classList.remove('is-active'));
@@ -142,17 +109,7 @@ async function loadPolls() {
   pollsList.innerHTML = '<p>Loading polls...</p>';
 
   try {
-    const response = await fetch('/api/polls', {
-      headers: {
-        'X-Admin-Password': adminPassword
-      }
-    });
-
-    if (response.status === 401) {
-      sessionStorage.removeItem('adminPassword');
-      location.reload();
-      return;
-    }
+    const response = await fetch('/api/polls');
 
     if (!response.ok) {
       throw new Error('Failed to load polls');
@@ -221,11 +178,7 @@ function copyLink(pollId) {
 
 async function viewDetails(adminToken) {
   try {
-    const response = await fetch(`/api/polls/${adminToken}/detail`, {
-      headers: {
-        'X-Admin-Password': adminPassword
-      }
-    });
+    const response = await fetch(`/api/polls/${adminToken}/detail`);
 
     if (!response.ok) {
       throw new Error('Failed to load poll details');
@@ -317,10 +270,7 @@ async function deletePoll(pollId) {
 
   try {
     const response = await fetch(`/api/polls/${pollId}`, {
-      method: 'DELETE',
-      headers: {
-        'X-Admin-Password': adminPassword
-      }
+      method: 'DELETE'
     });
 
     if (!response.ok) {
@@ -360,17 +310,10 @@ async function handleCreatePoll(e) {
     const response = await fetch('/api/polls', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-Admin-Password': adminPassword
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(pollData)
     });
-
-    if (response.status === 401) {
-      sessionStorage.removeItem('adminPassword');
-      location.reload();
-      return;
-    }
 
     if (!response.ok) {
       throw new Error('Failed to create poll');

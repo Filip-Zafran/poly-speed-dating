@@ -13,21 +13,8 @@
   </header>
 
   <div class="container">
-    <!-- Password Modal -->
-    <div id="passwordModal" class="modal-overlay is-open">
-      <div class="modal-box">
-        <h2>Admin Access Required</h2>
-        <p>Enter the admin password to manage polls:</p>
-        <div class="form-group">
-          <input type="password" id="adminPasswordInput" placeholder="Admin password" autofocus>
-        </div>
-        <button class="btn btn-primary btn-block" id="submitPasswordBtn">Access Admin Panel</button>
-        <p class="text-muted text-center mt-2" style="font-size: 0.85rem;">The default password is "changeme"</p>
-      </div>
-    </div>
-
-    <!-- Main Content (hidden until authenticated) -->
-    <div id="mainContent" class="hidden">
+    <!-- Main Content -->
+    <div id="mainContent">
       <div class="tabs">
         <button class="tab-button is-active" data-tab="list-tab">📋 All Polls</button>
         <button class="tab-button" data-tab="create-tab">➕ Create New Poll</button>
