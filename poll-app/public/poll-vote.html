@@ -35,6 +35,7 @@
         <p id="pollDescription"></p>
         <div class="poll-meta">
           <span>⏱️ <strong id="pollDuration"></strong></span>
+          <span id="timerDisplay" style="margin-left: 2rem;"></span>
         </div>
       </div>
 
@@ -52,6 +53,7 @@
               <input type="text" id="voterName" placeholder="Enter your name" required autofocus style="padding: 0.85rem 1rem; border-radius: 8px; width: 100%;">
             </div>
 
+            <input type="hidden" id="selectedChoices" value="">
             <button type="submit" class="btn btn-gold btn-block" style="padding: 1rem; font-size: 1rem; font-weight: 600;">Submit Vote</button>
           </form>
         </div>

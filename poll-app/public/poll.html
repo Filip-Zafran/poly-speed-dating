@@ -50,7 +50,7 @@
 
             <div class="form-group">
               <label for="pollDescription">Description (optional)</label>
-              <textarea id="pollDescription" placeholder="Add context about the event..."></textarea>
+              <textarea id="pollDescription" placeholder="Add context about the event...">Join us for an exciting event! We're looking for the best date that works for everyone.</textarea>
             </div>
 
             <div class="form-group">
@@ -60,7 +60,13 @@
 
             <div class="form-group">
               <label for="expectedParticipants">Expected Number of Participants *</label>
-              <input type="number" id="expectedParticipants" min="1" placeholder="e.g., 20" required>
+              <input type="number" id="expectedParticipants" min="1" placeholder="e.g., 20" value="8" required>
+            </div>
+
+            <div class="form-group">
+              <label for="timerMinutes">Countdown Timer (minutes, optional)</label>
+              <input type="number" id="timerMinutes" min="0" placeholder="e.g., 30 for 30 minutes (1440 = 24h). Leave blank or 0 for no timer" value="1440">
+              <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.5rem;">Set how long the poll stays open. Voters will see a countdown timer.</p>
             </div>
 
             <div class="form-group">

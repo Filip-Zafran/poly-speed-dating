@@ -61,6 +61,7 @@ db.exec(`
     date1       TEXT NOT NULL,
     date2       TEXT NOT NULL,
     date3       TEXT NOT NULL,
+    timer_end   TEXT,
     created_at  TEXT DEFAULT (datetime('now'))
   );
 
@@ -150,16 +151,23 @@ app.post('/api/polls', (req, res) => {
       date1,
       date2,
       date3,
+      timer_minutes = 0,
       invite_emails = []
     } = req.body;
 
     const pollId = randomUUID();
     const adminToken = randomBytes(16).toString('hex');
 
+    let timerEnd = null;
+    if (timer_minutes > 0) {
+      const endTime = new Date(Date.now() + timer_minutes * 60000);
+      timerEnd = endTime.toISOString();
+    }
+
     db.prepare(`
-      INSERT INTO polls (id, admin_token, title, description, duration, expected, open_access, date1, date2, date3)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(pollId, adminToken, title, description, duration, expected, open_access, date1, date2, date3);
+      INSERT INTO polls (id, admin_token, title, description, duration, expected, open_access, date1, date2, date3, timer_end)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(pollId, adminToken, title, description, duration, expected, open_access, date1, date2, date3, timerEnd);
 
     if (!open_access && invite_emails.length > 0) {
       const insertInvite = db.prepare('INSERT INTO invites (poll_id, email) VALUES (?, ?)');
@@ -238,6 +246,7 @@ app.get('/api/vote/:pollId', (req, res) => {
       date2: poll.date2,
       date3: poll.date3,
       expected: poll.expected,
+      timer_end: poll.timer_end,
       counts,
       votes_preview: votesPreviews
     });

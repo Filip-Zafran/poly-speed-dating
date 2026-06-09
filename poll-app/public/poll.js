@@ -288,6 +288,8 @@ async function deletePoll(pollId) {
 async function handleCreatePoll(e) {
   e.preventDefault();
 
+  const timerMinutes = parseInt(document.getElementById('timerMinutes').value) || 0;
+
   const pollData = {
     title: document.getElementById('pollTitle').value,
     description: document.getElementById('pollDescription').value,
@@ -297,6 +299,7 @@ async function handleCreatePoll(e) {
     date1: document.getElementById('date1').value + ':00',
     date2: document.getElementById('date2').value + ':00',
     date3: document.getElementById('date3').value + ':00',
+    timer_minutes: timerMinutes,
     invite_emails: emailTags
   };
 
