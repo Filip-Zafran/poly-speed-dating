@@ -53,11 +53,17 @@ app.use(express.static(__dirname));
 
 // Explicit routes for poll pages
 app.get('/poll.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'poll-app', 'public', 'poll.html'));
+  const filePath = path.join(__dirname, 'poll-app', 'public', 'poll.html');
+  console.log(`Serving poll.html from: ${filePath}`);
+  console.log(`File exists: ${fs.existsSync(filePath)}`);
+  res.sendFile(filePath);
 });
 
 app.get('/poll-vote.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'poll-app', 'public', 'poll-vote.html'));
+  const filePath = path.join(__dirname, 'poll-app', 'public', 'poll-vote.html');
+  console.log(`Serving poll-vote.html from: ${filePath}`);
+  console.log(`File exists: ${fs.existsSync(filePath)}`);
+  res.sendFile(filePath);
 });
 
 // Initialize poll database
