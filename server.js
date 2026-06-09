@@ -40,9 +40,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files
-app.use(express.static(__dirname));
+// Serve static files (poll-app first so its style.css takes priority)
 app.use(express.static(path.join(__dirname, "poll-app", "public")));
+app.use(express.static(__dirname));
 
 // Initialize poll database
 const db = new Database(path.join(__dirname, "polls.db"));
