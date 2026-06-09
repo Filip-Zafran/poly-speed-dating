@@ -15,6 +15,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Simple test route
+app.get('/test', (req, res) => {
+  res.json({ message: 'Test route works!', time: new Date().toISOString() });
+});
+
 // Debug endpoint
 app.get('/debug', (req, res) => {
   const pollHtmlPath = path.join(__dirname, 'poll-app', 'public', 'poll.html');
