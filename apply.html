@@ -6,8 +6,6 @@
   <title>Apply — Poly Speed Dating Berlin</title>
 
   <link rel="stylesheet" href="style.css" />
-  <script src="components/header.js"></script>
-  <script src="components/footer.js"></script>
 
   <style>
     .apply-page {
@@ -541,7 +539,24 @@
   </style>
 </head>
 <body>
-  <custom-header></custom-header>
+  <header class="site-header">
+  <div class="header-container">
+    <a href="index.html" class="logo">
+      <img src="images/PSD-logo.png" alt="PSD Logo">
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link" data-page="index.html">Home</a>
+      <a href="calendar.html" class="nav-link" data-page="calendar.html">Calendar</a>
+      <a href="identity.html" class="nav-link" data-page="identity.html">Identity</a>
+      <a href="polyfest.html" class="nav-link" data-page="polyfest.html">PolyFest</a>
+      <a href="faq.html" class="nav-link" data-page="faq.html">FAQ</a>
+      <a href="merch.html" class="nav-link" data-page="merch.html">Poly Merch <span id="cart-count"></span></a>
+      <a href="contact.html" class="nav-link" data-page="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
 
   <main class="apply-page">
     <section class="apply-shell">
@@ -1113,11 +1128,27 @@
     </section>
   </main>
 
-  <custom-footer></custom-footer>
+  <footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-links">
+      <a href="images/PSD - CoC & Schedule.pdf" class="footer-link" target="_blank" rel="noopener">
+        📄 PSD CoC & schedule
+      </a>
+      <a href="privacy.html" class="footer-link">Privacy</a>
+      <a href="imprint.html" class="footer-link">Imprint</a>
+    </div>
+
+    <div class="copyright">
+      © PSD / Powered by Ficho (fž) <span id="year"></span>
+    </div>
+  </div>
+</footer>
+
 
   <script>
     window.PSD_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzW_g6fA8g0Cp2Vn_U1vIILIQIQH0Hkcgw2dGSTpdu0gKXMnOVQYzQkJzHCPC1NuC3XLw/exec";
   </script>
   <script src="js/apply-form.js"></script>
+  <script src="components/site-navigation.js"></script>
 </body>
 </html>

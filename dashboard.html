@@ -1411,6 +1411,7 @@
 
       html += '</tbody></table>';
 
+  <script src="components/site-navigation.js"></script>
       const xlsContent = `<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="UTF-8"></head><body>${html}</body></html>`;
       downloadFile(xlsContent, 'applicants.xls', 'application/vnd.ms-excel');
     }
@@ -1440,5 +1441,6 @@
     buildFilters();
     renderDashboard();
   </script>
+  <script src="components/site-navigation.js"></script>
 </body>
 </html>
