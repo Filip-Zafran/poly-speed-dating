@@ -7,6 +7,7 @@ import { randomBytes, randomUUID } from "crypto";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import sharp from "sharp";
 
 dotenv.config();
 
@@ -18,6 +19,85 @@ app.use(express.json());
 // Simple test route
 app.get('/test', (req, res) => {
   res.json({ message: 'Test route works!', time: new Date().toISOString() });
+});
+
+// Countdown image generator for email embeds
+app.get('/countdown', async (req, res) => {
+  try {
+    const { deadline } = req.query;
+
+    // Validation
+    if (!deadline) {
+      return res.status(400).json({ error: 'deadline parameter required (ISO 8601 format)' });
+    }
+
+    const deadlineDate = new Date(deadline);
+    if (isNaN(deadlineDate.getTime())) {
+      return res.status(400).json({ error: 'Invalid deadline format. Use ISO 8601: 2026-06-11T15:00:00Z' });
+    }
+
+    // Prevent abuse - don't allow deadlines more than 2 years away
+    const maxFutureDate = new Date();
+    maxFutureDate.setFullYear(maxFutureDate.getFullYear() + 2);
+    if (deadlineDate > maxFutureDate) {
+      return res.status(400).json({ error: 'Deadline too far in the future' });
+    }
+
+    // Calculate remaining time
+    const now = new Date();
+    const remaining = deadlineDate - now;
+
+    let timeText;
+    let textColor = '#000000'; // Black for normal text
+
+    if (remaining <= 0) {
+      timeText = 'Registration closed';
+      textColor = '#8B0000'; // Dark red for closed
+    } else {
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+      if (days > 0) {
+        timeText = `${days}d ${hours}h ${minutes}m remaining`;
+      } else if (hours > 0) {
+        timeText = `${hours}h ${minutes}m remaining`;
+      } else {
+        timeText = `${minutes}m remaining`;
+      }
+    }
+
+    // Create SVG with Duck Dating branding (yellow #FFD84D)
+    const svg = `
+      <svg width="600" height="120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <style>
+            text { font-family: Arial, sans-serif; }
+          </style>
+        </defs>
+        <!-- Background with border and rounded corners -->
+        <rect width="600" height="120" fill="#FFD84D" stroke="#000000" stroke-width="4" rx="15" ry="15"/>
+        <!-- Main countdown text -->
+        <text x="300" y="65" font-size="52" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="${textColor}">
+          ${timeText}
+        </text>
+      </svg>
+    `;
+
+    // Convert SVG to PNG using sharp
+    const buffer = await sharp(Buffer.from(svg))
+      .png()
+      .toBuffer();
+
+    res.set('Content-Type', 'image/png');
+    res.set('Cache-Control', 'no-cache, max-age=60'); // Cache for 1 minute
+    res.set('Content-Disposition', 'inline; filename="countdown.png"');
+    res.send(buffer);
+  } catch (error) {
+    console.error('Countdown image error:', error);
+    res.status(500).json({ error: 'Failed to generate countdown image' });
+  }
 });
 
 // Debug endpoint
