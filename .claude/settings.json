@@ -15,7 +15,10 @@
       "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_lgbtq.png --window-size=1920x1200 http://localhost:8000/dates.html)",
       "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_lgbtq_full.png --window-size=1920x2400 http://localhost:8000/dates.html)",
       "Bash(node -c /home/ficho/Desktop/psd-website/dates.html)",
-      "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_fixed.png --window-size=1920x2400 http://localhost:8000/dates.html)"
+      "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_fixed.png --window-size=1920x2400 http://localhost:8000/dates.html)",
+      "Bash(curl -s http://localhost:4322/interests)",
+      "Bash(curl -s http://localhost:4322/organiser)",
+      "Bash(curl -s http://localhost:4322/apply)"
     ]
   }
 }
