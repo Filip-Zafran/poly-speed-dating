@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import VoteInterface from '@/components/VoteInterface.svelte';
+
+const title = 'Vote on Scheduling Poll';
+const description = 'Help us find the best date for your event';
+---
+
+<Layout {title} {description}>
+  <VoteInterface client:load />
+</Layout>

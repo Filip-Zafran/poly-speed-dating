@@ -1,0 +1,52 @@
+---
+import '@/styles/brand-tokens.css';
+import '@/styles/global.css';
+import Header from '@/components/Header.svelte';
+import Footer from '@/components/Footer.svelte';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Poly Speed Dating', description = 'Meaningful connections in a polyamorous, consent-first, friendly space.' } = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <Header client:load />
+    <main class="psd-main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  body {
+    font-family: var(--psd-font-sans);
+    background: radial-gradient(
+      circle at 25% 25%,
+      var(--psd-cream) 0%,
+      #f5f3f0 50%,
+      #ede9e4 100%
+    );
+    color: var(--psd-text);
+    line-height: var(--psd-leading-normal);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  .psd-main {
+    flex: 1;
+  }
+</style>

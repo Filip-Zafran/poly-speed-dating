@@ -1,0 +1,182 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+const title = 'Poly Speed Dating Berlin';
+const description = 'Meaningful connections in a polyamorous, consent-first, friendly space.';
+---
+
+<Layout {title} {description}>
+  <div class="container linktree-page">
+    <section class="linktree-card">
+      <div class="linktree-top">
+        <img src="/images/PSD-logo.png" alt="PSD Logo" class="linktree-logo" />
+
+        <p class="linktree-intro">
+          Meaningful connections in a polyamorous, consent-first, friendly space.
+        </p>
+        <p style="font-size: 1.1em; color: var(--psd-text-light); margin-top: 0.5rem;">📍 Berlin</p>
+
+        <p class="linktree-text">
+          Poly Speed Dating (PSD) is a community event that brings polyamorous, enm and poly-curious people together,
+          in-person. It's part of the <a href="https://www.duckdatingapps.com/" target="_blank" rel="noopener noreferrer"
+            style="color: #e50051; font-weight: 700;">Duck Dating Apps Project</a>. This format creates space for
+          meaningful conversations and potential matches in an atmosphere of warmth, respect, and inclusivity.
+        </p>
+      </div>
+
+      <section class="linktree-links">
+        <div class="linktree-link linktree-link--highlight">
+          <span class="linktree-link__title">Next Poly Speed Dating event</span>
+          <span style="font-size: 1.6em; font-weight: 900;">Wednesday 03.06.2026</span>
+          <span style="font-size: 0.9em; color: var(--psd-text-light);">Deadline to apply: 22.05.2026</span>
+          <a href="https://www.youtube.com/watch?v=ekwBtrL89LY" target="_blank" rel="noopener noreferrer"
+            style="color: #1e40af; text-decoration: none; font-weight: 600; font-size: 0.95em;">Check the video</a>
+          <a href="/apply" class="btn btn-apply">Apply now</a>
+        </div>
+
+        <a href="https://www.instagram.com/polyfest_berlin/" target="_blank" rel="noopener noreferrer"
+          class="linktree-link" style="background: linear-gradient(135deg, #f8a5d3, #f5b3db);">
+          <span class="linktree-link__title">📸 Instagram — PolyFest</span>
+          <span class="linktree-link__meta">@polyfest_berlin</span>
+        </a>
+
+        <a href="https://t.me/polyspeeddatingberlin" target="_blank" rel="noopener noreferrer" class="linktree-link"
+          style="background: linear-gradient(135deg, #67d5e8, #9ae8f0);">
+          <span class="linktree-link__title">💬 Telegram group</span>
+          <span class="linktree-link__meta">t.me/polyspeeddatingberlin</span>
+        </a>
+
+        <a href="https://www.youtube.com/@DuckDatingApps" target="_blank" rel="noopener noreferrer" class="linktree-link"
+          style="background: linear-gradient(135deg, #ff6b6b, #ff5252);">
+          <span class="linktree-link__title">🎥 YouTube - Duck Dating</span>
+          <span class="linktree-link__meta">@DuckDatingApps</span>
+        </a>
+
+        <a href="/contact" class="linktree-link" style="background: linear-gradient(135deg, #6ee7b7, #a7f3d0);">
+          <span class="linktree-link__title">✉️ Contact</span>
+          <span class="linktree-link__meta">Get in touch</span>
+        </a>
+      </section>
+
+      <div class="linktree-footer-note">
+        <p>Real conversations. Clear boundaries. Warm community vibe.</p>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--psd-spacing-8) var(--psd-spacing-4);
+  }
+
+  .linktree-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: var(--psd-spacing-8) var(--psd-spacing-4);
+  }
+
+  .linktree-card {
+    background: var(--psd-bg);
+    border-radius: var(--psd-radius-2xl);
+    padding: var(--psd-spacing-8);
+    box-shadow: var(--psd-shadow-lg);
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .linktree-top {
+    text-align: center;
+    margin-bottom: var(--psd-spacing-8);
+  }
+
+  .linktree-logo {
+    max-width: 150px;
+    margin-bottom: var(--psd-spacing-4);
+  }
+
+  .linktree-intro {
+    font-size: var(--psd-text-lg);
+    font-weight: var(--psd-font-weight-bold);
+    color: var(--psd-secondary);
+    margin: var(--psd-spacing-4) 0;
+  }
+
+  .linktree-text {
+    color: var(--psd-text);
+    line-height: var(--psd-leading-relaxed);
+    font-size: var(--psd-text-sm);
+  }
+
+  .linktree-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--psd-spacing-4);
+    margin-bottom: var(--psd-spacing-8);
+  }
+
+  .linktree-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--psd-spacing-6);
+    border-radius: var(--psd-radius-xl);
+    text-decoration: none;
+    color: var(--psd-text);
+    transition: transform var(--psd-transition-base), box-shadow var(--psd-transition-base);
+    cursor: pointer;
+  }
+
+  .linktree-link:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--psd-shadow-lg);
+  }
+
+  .linktree-link--highlight {
+    background: linear-gradient(135deg, #e0f2fe, #bfdbfe);
+    gap: var(--psd-spacing-2);
+  }
+
+  .linktree-link__title {
+    font-weight: var(--psd-font-weight-semibold);
+    font-size: var(--psd-text-base);
+  }
+
+  .linktree-link__meta {
+    font-size: var(--psd-text-sm);
+    opacity: 0.8;
+  }
+
+  .btn-apply {
+    background: linear-gradient(135deg, #0066ff, #0099ff);
+    color: var(--psd-text-inverse);
+    padding: var(--psd-spacing-3) var(--psd-spacing-6);
+    border-radius: var(--psd-radius-full);
+    text-decoration: none;
+    font-weight: var(--psd-font-weight-semibold);
+    margin-top: var(--psd-spacing-3);
+    display: inline-block;
+    transition: all var(--psd-transition-base);
+  }
+
+  .btn-apply:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+  }
+
+  .linktree-footer-note {
+    text-align: center;
+    color: var(--psd-text-light);
+    font-size: var(--psd-text-sm);
+    padding-top: var(--psd-spacing-6);
+    border-top: 1px solid var(--psd-border);
+  }
+
+  .linktree-footer-note p {
+    margin: 0;
+  }
+</style>
