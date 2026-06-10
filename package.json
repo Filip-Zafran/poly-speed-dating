@@ -6,7 +6,7 @@
   "main": "dist/server.mjs",
   "scripts": {
     "dev": "astro dev",
-    "start": "node ./src/dist/server.mjs",
+    "start": "node ./dist/server.mjs",
     "build": "astro build",
     "preview": "astro preview"
   },
