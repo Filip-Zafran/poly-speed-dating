@@ -2,18 +2,92 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Organiser - PSD">
+<Layout title="Organiser Interface - PSD">
   <div class="container">
     <h1>Organiser Interface</h1>
     <p>Tools and dashboard for event organizers.</p>
-    <!-- Content to be migrated from organiser.html -->
+
+    <div class="organiser-grid">
+      <div class="organiser-card">
+        <h3>📊 Applicants</h3>
+        <p>Manage and review event applications</p>
+        <a href="/dashboard" class="btn btn-secondary">View Applicants</a>
+      </div>
+
+      <div class="organiser-card">
+        <h3>📅 Events</h3>
+        <p>Create and manage event dates</p>
+        <a href="/dates" class="btn btn-secondary">Manage Events</a>
+      </div>
+
+      <div class="organiser-card">
+        <h3>🔗 Connectors</h3>
+        <p>Set up and configure connectors</p>
+        <a href="/connectors" class="btn btn-secondary">Manage Connectors</a>
+      </div>
+
+      <div class="organiser-card">
+        <h3>📋 Polling</h3>
+        <p>Create scheduling polls and surveys</p>
+        <a href="/poll" class="btn btn-secondary">Create Poll</a>
+      </div>
+    </div>
   </div>
 </Layout>
 
 <style>
   .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 2rem 1rem;
+  }
+
+  .organiser-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .organiser-card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .organiser-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .organiser-card p {
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .btn:hover {
+    background: #e0e0e0;
+  }
+
+  .btn-secondary {
+    background: #e8f4f8;
+    color: #0066ff;
+    border-color: #0066ff;
   }
 </style>

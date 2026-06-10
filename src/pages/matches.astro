@@ -2,18 +2,58 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Matches - PSD">
+<Layout title="My Matches - PSD">
   <div class="container">
     <h1>My Matches</h1>
-    <p>View your match results from past events.</p>
-    <!-- Content to be migrated from matches.html -->
+    <p>View your mutual matches from events.</p>
+
+    <div class="matches-list">
+      <div class="empty-state">
+        <p>No matches yet. Participate in events to find your matches!</p>
+        <a href="/calendar" class="btn btn-primary">Browse Events</a>
+      </div>
+    </div>
   </div>
 </Layout>
 
 <style>
   .container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 2rem 1rem;
+  }
+
+  .matches-list {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    background: #f5f5f5;
+    border-radius: 12px;
+  }
+
+  .empty-state p {
+    margin-bottom: 1rem;
+    color: #666;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #0066ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .btn:hover {
+    background: #0052cc;
   }
 </style>
