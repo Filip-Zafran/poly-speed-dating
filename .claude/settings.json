@@ -24,7 +24,10 @@
       "Bash(curl -i http://localhost:4323/contact)",
       "Bash(curl -s http://localhost:4323/poll)",
       "Bash(curl -s http://localhost:4324/poll)",
-      "Bash(curl -s \"http://localhost:4324/poll-vote?token=test-poll-123\")"
+      "Bash(curl -s \"http://localhost:4324/poll-vote?token=test-poll-123\")",
+      "Bash(curl -s http://localhost:4324/dashboard)",
+      "Bash(curl -s http://localhost:4324/dates)",
+      "Bash(curl -s http://localhost:4324/connectors)"
     ]
   }
 }

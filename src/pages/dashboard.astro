@@ -1,27 +1,30 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import DashboardAdmin from '../components/DashboardAdmin.svelte';
+import Header from '../components/Header.svelte';
+import Footer from '../components/Footer.svelte';
 ---
 
-<Layout title="Page Title - PSD">
-  <div class="container">
-    <h1>Page Heading</h1>
-    <p>Page description and content to be migrated from HTML</p>
-    
-    <div class="content-section">
-      <!-- Content from original HTML file goes here -->
-      <p>This page structure is ready for detailed content migration.</p>
-    </div>
-  </div>
-</Layout>
-
-<style>
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
-
-  .content-section {
-    margin-top: 2rem;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - PSD</title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      :global(body) {
+        margin: 0;
+        padding: 0;
+      }
+      :global(main) {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <Header client:load />
+    <DashboardAdmin client:load />
+    <Footer />
+  </body>
+</html>
