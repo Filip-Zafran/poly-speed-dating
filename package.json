@@ -3,31 +3,23 @@
   "version": "1.0.0",
   "type": "module",
   "description": "--- title: Mystery Mode Madness 🌫️ colorFrom: gray colorTo: purple emoji: 🐳 sdk: static pinned: false tags:   - ---",
-  "main": "dist/server.mjs",
+  "main": "server.js",
   "scripts": {
-    "dev": "astro dev",
-    "start": "node ./dist/server.mjs",
-    "build": "astro build",
-    "preview": "astro preview"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@astrojs/node": "^10.1.4",
-    "@astrojs/svelte": "^8.0.1",
-    "astro": "^6.0.5",
     "axios": "^1.16.1",
     "better-sqlite3": "^11.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "js-yaml": "^4.2.0",
     "jsdom": "^29.1.1",
     "playwright": "^1.60.0",
     "puppeteer": "^25.1.0",
-    "sharp": "^0.33.5",
-    "svelte": "^5.56.3",
-    "typescript": "^5.9.3"
+    "sharp": "^0.33.0"
   }
 }

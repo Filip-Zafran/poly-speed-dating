@@ -1,44 +1,5 @@
-# Astro
-dist/
-.astro/
-
-# Node
-node_modules/
-npm-debug.log*
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# Editor
 .vscode/
-.idea/
-*.swp
-*.swo
-*~
 .DS_Store
-
-# Build outputs
-*.tsbuildinfo
-
-# Logs
-logs/
-*.log
-
-# Database
-polls.db*
-*.db-shm
-*.db-wal
-
-# OS
-Thumbs.db
-.DS_Store
-
-# Test coverage
-coverage/
-.nyc_output/
+node_modules/
+dist/
+build/
