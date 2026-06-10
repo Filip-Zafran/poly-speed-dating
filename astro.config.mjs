@@ -3,6 +3,7 @@ import node from '@astrojs/node';
 import svelte from '@astrojs/svelte';
 
 export default defineConfig({
+  outDir: './dist',
   integrations: [svelte()],
   adapter: node({
     mode: 'standalone',
