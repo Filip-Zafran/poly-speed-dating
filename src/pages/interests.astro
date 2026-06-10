@@ -2,103 +2,118 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="My Interests - PSD">
+<Layout title="Interests - PSD">
   <div class="container">
-    <h1>My Interests</h1>
-    <p>Select your interests and preferences for events.</p>
-    
-    <div class="interests-form">
-      <fieldset class="form-group">
-        <legend>What interests you?</legend>
-        <label class="checkbox">
-          <input type="checkbox" name="interests" value="speed-dating" />
-          Speed Dating Events
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="interests" value="workshops" />
-          Workshops & Learning
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="interests" value="socializing" />
-          Social Meetups
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="interests" value="community" />
-          Community Building
-        </label>
-      </fieldset>
+    <div class="page-header">
+      <h1>Interests</h1>
+    </div>
 
-      <fieldset class="form-group">
-        <legend>Relationship styles</legend>
-        <label class="checkbox">
-          <input type="checkbox" name="styles" value="poly" />
-          Polyamory
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="styles" value="enm" />
-          Ethical Non-Monogamy
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="styles" value="open" />
-          Open Relationships
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="styles" value="monogamous" />
-          Monogamous
-        </label>
-      </fieldset>
-
-      <button type="submit" class="btn btn-primary">Save Interests</button>
+    <div class="placeholder">
+      <div class="placeholder-icon">❤️</div>
+      <div class="placeholder-text">Your interests and preferences will appear here</div>
     </div>
   </div>
+
+  <nav class="bottom-nav">
+    <a href="/interests" class="nav-item active">
+      <div class="nav-icon">❤️</div>
+      <div>Interests</div>
+    </a>
+    <a href="/rounds" class="nav-item">
+      <div class="nav-icon">⏱️</div>
+      <div>Rounds</div>
+    </a>
+    <a href="/matches" class="nav-item">
+      <div class="nav-icon">💬</div>
+      <div>Matches</div>
+    </a>
+    <a href="/profile" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div>Profile</div>
+    </a>
+    <a href="/organiser" class="nav-item">
+      <div class="nav-icon">👥</div>
+      <div>Organiser</div>
+    </a>
+  </nav>
 </Layout>
 
 <style>
   .container {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 6rem;
   }
 
-  .form-group {
+  .page-header {
     margin-bottom: 2rem;
-    border: none;
-    padding: 0;
+    text-align: center;
   }
 
-  legend {
-    font-weight: 700;
-    font-size: 1.1rem;
+  .page-header h1 {
+    font-size: 1.8rem;
+    color: #340c46;
+    margin: 0;
+  }
+
+  .placeholder {
+    background: white;
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .placeholder-icon {
+    font-size: 4rem;
     margin-bottom: 1rem;
-    display: block;
   }
 
-  .checkbox {
+  .placeholder-text {
+    color: #999;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e0e0e0;
     display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-    cursor: pointer;
-    font-weight: 500;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.8rem;
+    text-decoration: none;
+    color: #999;
+    font-size: 0.75rem;
+    transition: color 0.2s;
+    flex: 1;
   }
 
-  .checkbox input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+  .nav-item.active {
+    color: #0066ff;
   }
 
-  .btn {
-    padding: 0.75rem 1.5rem;
-    background: #0066ff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
+  .nav-item:hover {
+    color: #0066ff;
   }
 
-  .btn:hover {
-    background: #0052cc;
+  .nav-icon {
+    font-size: 1.5rem;
   }
 </style>
