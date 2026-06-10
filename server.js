@@ -165,9 +165,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files (root first for full style.css, then poll-app for poll-specific overrides)
-app.use(express.static(__dirname));
+// Serve static files (poll-app first to override root CSS, then root as fallback)
 app.use(express.static(path.join(__dirname, "poll-app", "public")));
+app.use(express.static(__dirname));
 
 // Initialize poll database
 const db = new Database(path.join(__dirname, "polls.db"));
