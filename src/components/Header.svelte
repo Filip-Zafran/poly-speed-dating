@@ -14,7 +14,9 @@
 
 <header>
   <div class="header-content">
-    <a href="/" class="logo">PSD</a>
+    <a href="/" class="logo">
+      <img src="/images/PSD-logo.png" alt="PSD Logo" class="logo-img" />
+    </a>
     <nav class="nav-desktop">
       {#each navItems as item}
         <a href={item.href}>{item.label}</a>
@@ -40,68 +42,88 @@
 
 <style>
   header {
-    background-color: var(--psd-primary);
-    border-bottom: 2px solid var(--psd-primary-dark);
+    background: linear-gradient(135deg, #0066ff 0%, #6633cc 50%, #ff1493 100%);
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: var(--psd-space-md);
+    width: 100%;
+    padding: 1rem 2rem;
   }
 
   .logo {
-    font-size: var(--psd-font-size-2xl);
-    font-weight: var(--psd-font-weight-bold);
-    color: var(--psd-fg);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 60px;
+  }
+
+  .logo-img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+  }
+
+  .logo:hover .logo-img {
+    transform: scale(1.05);
   }
 
   .nav-desktop {
     display: flex;
-    gap: var(--psd-space-lg);
+    gap: 2rem;
     align-items: center;
   }
 
   .nav-desktop a {
-    color: var(--psd-fg);
+    color: white;
     text-decoration: none;
-    font-weight: var(--psd-font-weight-medium);
-    transition: opacity 0.2s;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
+    text-transform: capitalize;
   }
 
   .nav-desktop a:hover {
     opacity: 0.8;
+    text-decoration: underline;
   }
 
   .menu-toggle {
     display: none;
     background: none;
     border: none;
-    font-size: var(--psd-font-size-xl);
+    font-size: 1.5rem;
     cursor: pointer;
-    color: var(--psd-fg);
+    color: white;
   }
 
   .nav-mobile {
     display: none;
     flex-direction: column;
-    gap: var(--psd-space-sm);
-    padding: var(--psd-space-md);
-    background-color: var(--psd-primary-light);
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.1);
   }
 
   .nav-mobile a {
-    color: var(--psd-fg);
+    color: white;
     text-decoration: none;
-    padding: var(--psd-space-sm);
+    padding: 0.75rem;
     display: block;
+    font-weight: 500;
+  }
+
+  .nav-mobile a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
   }
 
   @media (max-width: 768px) {
