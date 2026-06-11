@@ -615,11 +615,10 @@ import Layout from '../layouts/Layout.astro';
   function markToday() {
     const today = new Date();
     const day = today.getDate();
-    const monthName = today.toLocaleDateString('en-US', { month: 'long' });
-    const year = today.getFullYear();
+    const monthShort = today.toLocaleDateString('en-US', { month: 'short' }).toLowerCase();
 
-    // Find the calendar section for the current month
-    const calendarSection = document.querySelector(`#pf-${monthName.toLowerCase()}-calendar`);
+    // Find the calendar section for the current month (using short month name)
+    const calendarSection = document.querySelector(`#pf-${monthShort}-calendar`);
 
     if (calendarSection) {
       // Find all cells in this calendar
@@ -627,8 +626,11 @@ import Layout from '../layouts/Layout.astro';
 
       cells.forEach(cell => {
         const numElement = cell.querySelector('.pf-cal__num');
-        if (numElement && parseInt(numElement.textContent) === day) {
-          cell.classList.add('pf-cal__cell--today');
+        if (numElement) {
+          const cellDay = parseInt(numElement.textContent);
+          if (cellDay === day) {
+            cell.classList.add('pf-cal__cell--today');
+          }
         }
       });
     }
