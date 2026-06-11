@@ -17,10 +17,11 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <section class="linktree-links">
-        <div class="linktree-link linktree-link--highlight" style="display: flex; flex-direction: column; align-items: center; padding: 2rem; gap: 1rem; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); border-radius: 16px;">
+        <div class="linktree-link linktree-link--highlight linktree-link--postponed" style="display: flex; flex-direction: column; align-items: center; padding: 2rem; gap: 1rem; background: linear-gradient(135deg, #e0f2fe, #bfdbfe); border-radius: 16px; position: relative;">
+          <span class="postponed-banner">POSTPONED</span>
           <span class="linktree-link__title">Next Poly Speed Dating event</span>
           <span style="font-size: 1.6em; font-weight: 900;">Wednesday 03.06.2026</span>
-          <span style="font-size: 0.9em; color: #1e40af;">Deadline to apply: 22.05.2026</span>
+          <span style="font-size: 0.9em; color: #1e40af;">Deadline: free to apply and we will notify you about the next event</span>
           <a href="https://www.youtube.com/watch?v=ekwBtrL89LY" target="_blank" rel="noopener noreferrer" style="color: #1e40af; text-decoration: none; font-weight: 600; font-size: 0.95em;">Check the video</a>
           <a href="/apply" class="btn" style="background: linear-gradient(135deg, #0066ff, #0099ff); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1em; margin-top: 0.5rem; box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3); transition: transform 0.2s, box-shadow 0.2s;">Apply now</a>
         </div>
@@ -186,5 +187,20 @@ import Layout from '../layouts/Layout.astro';
 
   .linktree-footer-note p {
     margin: 0;
+  }
+
+  .postponed-banner {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: linear-gradient(135deg, #ff6b6b, #ff5252);
+    color: white;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transform: rotate(45deg);
+    box-shadow: 0 4px 12px rgba(255, 82, 82, 0.3);
+    z-index: 10;
+    letter-spacing: 1px;
   }
 </style>
