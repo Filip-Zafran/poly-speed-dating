@@ -61,79 +61,6 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
 
-    <!-- MAY CALENDAR -->
-    <section class="pf-cal" id="pf-may-calendar">
-      <div class="pf-cal__head">
-        <h2>May 2026</h2>
-      </div>
-
-      <div class="pf-cal__grid" role="grid" aria-label="May calendar">
-        <div class="pf-cal__dow">Mon</div><div class="pf-cal__dow">Tue</div><div class="pf-cal__dow">Wed</div>
-        <div class="pf-cal__dow">Thu</div><div class="pf-cal__dow">Fri</div><div class="pf-cal__dow">Sat</div><div class="pf-cal__dow">Sun</div>
-
-        <!-- May 1 is Friday -->
-        <div class="pf-cal__cell--blank"></div>
-        <div class="pf-cal__cell--blank"></div>
-        <div class="pf-cal__cell--blank"></div>
-        <div class="pf-cal__cell--blank"></div>
-
-        <div class="pf-cal__cell"><span class="pf-cal__num">1</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">2</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">3</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">4</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">5</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">6</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">7</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">8</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">9</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">10</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">11</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">12</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">13</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">14</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">15</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">16</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">17</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">18</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">19</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">20</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">21</span></div>
-
-        <button class="pf-cal__cell pf-cal__cell--event pf-cal__cell--deadline"
-                type="button"
-                onclick="window.open('/apply', '_blank')"
-                aria-label="22.5 Poly Speed Dating Deadline">
-          <span class="pf-cal__num">22</span>
-          <span class="pf-cal__badge pf-cal__badge--deadline">PSD</span>
-          <span class="pf-cal__label">Poly Speed Dating - Deadline</span>
-        </button>
-
-        <div class="pf-cal__cell"><span class="pf-cal__num">23</span></div>
-
-        <details class="pf-cal__cell pf-cal__cell--approval" open>
-          <summary class="pf-cal__summary">
-            <span class="pf-cal__num">24</span>
-          </summary>
-          <span class="pf-cal__label">Poly Speed Dating<br />Approval responses</span>
-        </details>
-        <div class="pf-cal__cell"><span class="pf-cal__num">25</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">26</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">27</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">28</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">29</span></div>
-        <div class="pf-cal__cell"><span class="pf-cal__num">30</span></div>
-
-        <button class="pf-cal__cell pf-cal__cell--event pf-cal__cell--blind-duck"
-                type="button"
-                onclick="window.open('https://www.duckdatingapps.com/event.html?slug=blind-duck-dating-registry-deadline-april-2026', '_blank')"
-                aria-label="31.5 Blind Duck Dating third deadline">
-          <span class="pf-cal__num">31</span>
-          <span class="pf-cal__badge pf-cal__badge--deadline">BDD</span>
-          <span class="pf-cal__label">Blind Duck Dating – 3rd deadline</span>
-        </button>
-      </div>
-    </section>
-
     <!-- JUNE CALENDAR -->
     <section class="pf-cal" id="pf-jun-calendar">
       <div class="pf-cal__head">
@@ -150,8 +77,8 @@ import Layout from '../layouts/Layout.astro';
         <button class="pf-cal__cell pf-cal__cell--event"
                 type="button"
                 onclick="window.open('/apply', '_blank')"
-                aria-label="3.6 Poly Speed Dating Event 19:00-22:00">
-          <span class="pf-cal__num">3</span>
+                aria-label="3.6 Poly Speed Dating Event 19:00-22:00 Postponed">
+          <span class="pf-cal__num">3 <span class="pf-postponed-text">- postponed</span></span>
           <span class="pf-cal__badge">PSD</span>
           <span class="pf-cal__label">Poly Speed Dating - Event<br />19:00 - 22:00h</span>
         </button>
@@ -637,4 +564,80 @@ import Layout from '../layouts/Layout.astro';
       display: block;
     }
   }
+
+  .pf-cal__badge--postponed {
+    position: absolute !important;
+    bottom: 6px !important;
+    left: 6px !important;
+    background-color: #ff9500 !important;
+    color: white !important;
+    font-weight: 700 !important;
+    padding: 0px 2px !important;
+    border-radius: 1px !important;
+    transform: rotate(-45deg) !important;
+    font-size: 0.45rem !important;
+    z-index: 100 !important;
+    box-shadow: none !important;
+    display: inline-block !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    line-height: 0.9 !important;
+    height: auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+  }
+
+  .pf-cal__cell--event {
+    position: relative;
+  }
+
+  .pf-postponed-text {
+    color: #ff9999;
+    font-weight: 500;
+    font-size: 0.7em;
+    font-style: italic;
+  }
+
+  .pf-cal__cell--today {
+    border: 2px solid #0066ff !important;
+    background-color: rgba(0, 102, 255, 0.15) !important;
+    box-shadow: inset 0 0 0 2px #0066ff !important;
+  }
+
+  .pf-cal__cell--today .pf-cal__num {
+    font-weight: bold !important;
+    color: #0066ff !important;
+  }
 </style>
+
+<script>
+  // Mark today's date on the calendar
+  function markToday() {
+    const today = new Date();
+    const day = today.getDate();
+    const monthName = today.toLocaleDateString('en-US', { month: 'long' });
+    const year = today.getFullYear();
+
+    // Find the calendar section for the current month
+    const calendarSection = document.querySelector(`#pf-${monthName.toLowerCase()}-calendar`);
+
+    if (calendarSection) {
+      // Find all cells in this calendar
+      const cells = calendarSection.querySelectorAll('.pf-cal__cell');
+
+      cells.forEach(cell => {
+        const numElement = cell.querySelector('.pf-cal__num');
+        if (numElement && parseInt(numElement.textContent) === day) {
+          cell.classList.add('pf-cal__cell--today');
+        }
+      });
+    }
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', markToday);
+  } else {
+    markToday();
+  }
+</script>
