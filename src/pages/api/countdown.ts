@@ -1,37 +1,22 @@
-import type { APIRoute } from 'astro';
 import sharp from 'sharp';
+import type { APIRoute } from 'astro';
 
-function formatTimeRemaining(milliseconds: number): string {
-  if (milliseconds <= 0) return 'Poll closed';
-
-  const seconds = Math.floor(milliseconds / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-
-  if (days > 0) return `${days}d ${hours % 24}h ${minutes % 60}m`;
-  if (hours > 0) return `${hours}h ${minutes % 60}m`;
-  if (minutes > 0) return `${minutes}m ${seconds % 60}s`;
-  return `${seconds}s`;
-}
-
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async ({ url }) => {
   try {
-    const url = new URL(request.url);
     const deadline = url.searchParams.get('deadline');
 
     if (!deadline) {
-      return new Response(JSON.stringify({ error: 'deadline parameter required' }), {
+      return new Response(JSON.stringify({ error: 'deadline parameter required (ISO 8601 format)' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' }
       });
     }
 
     const deadlineDate = new Date(deadline);
     if (isNaN(deadlineDate.getTime())) {
-      return new Response(JSON.stringify({ error: 'Invalid deadline format' }), {
+      return new Response(JSON.stringify({ error: 'Invalid deadline format. Use ISO 8601: 2026-06-11T15:00:00Z' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' }
       });
     }
 
@@ -40,19 +25,32 @@ export const GET: APIRoute = async ({ request }) => {
     if (deadlineDate > maxFutureDate) {
       return new Response(JSON.stringify({ error: 'Deadline too far in the future' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' }
       });
     }
 
     const now = new Date();
     const remaining = deadlineDate.getTime() - now.getTime();
 
-    let timeText = formatTimeRemaining(remaining) + ' remaining';
+    let timeText: string;
     let textColor = '#000000';
 
     if (remaining <= 0) {
       timeText = 'Registration closed';
-      textColor = '#c41e3a';
+      textColor = '#8B0000';
+    } else {
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+      if (days > 0) {
+        timeText = `${days}d ${hours}h ${minutes}m remaining`;
+      } else if (hours > 0) {
+        timeText = `${hours}h ${minutes}m remaining`;
+      } else {
+        timeText = `${minutes}m remaining`;
+      }
     }
 
     const svg = `
@@ -69,21 +67,21 @@ export const GET: APIRoute = async ({ request }) => {
       </svg>
     `;
 
-    const buffer = await sharp(Buffer.from(svg)).png().toBuffer();
+    const buffer = await sharp(Buffer.from(svg))
+      .png()
+      .toBuffer();
 
     return new Response(buffer, {
-      status: 200,
       headers: {
         'Content-Type': 'image/png',
-        'Cache-Control': 'no-cache, max-age=60',
-        'Content-Disposition': 'inline; filename="countdown.png"',
-      },
+        'Cache-Control': 'no-cache, max-age=60'
+      }
     });
   } catch (error) {
     console.error('Countdown image error:', error);
     return new Response(JSON.stringify({ error: 'Failed to generate countdown image' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' }
     });
   }
 };

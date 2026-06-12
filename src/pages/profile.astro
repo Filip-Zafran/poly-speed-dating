@@ -1,0 +1,297 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Your Profile - PSD">
+  <div class="container">
+    <div class="profile-header">
+      <h1>Your Profile</h1>
+      <button class="edit-btn">✏️ Edit</button>
+    </div>
+
+    <div class="profile-card">
+      <div class="avatar">Fi</div>
+      <div class="profile-name">Ficho</div>
+      <div class="profile-pronouns">He/Him</div>
+      <div class="profile-gender">Man</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-label">TELEGRAM</div>
+      <div class="info-content">FichoZee</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-label">ATTRACTED TO</div>
+      <div class="info-content">Woman</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-label">ABOUT</div>
+      <div class="info-content">Dad by day, Poly by night</div>
+    </div>
+
+    <div class="info-card">
+      <div class="questionnaire-section">
+        <div class="checkmark">✓</div>
+        <div class="questionnaire-text">
+          <div class="info-label">QUESTIONNAIRE</div>
+          <div class="questionnaire-title">Completed</div>
+          <div class="questionnaire-desc">Thanks! Your answers help us match you better.</div>
+          <button class="edit-answers-btn">✏️ Edit answers</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-label">EVENT CODE</div>
+      <div class="questionnaire-title">Got an access code from an event organizer?</div>
+      <div class="event-code-section">
+        <input type="text" class="event-code-input" placeholder="Enter your event code" />
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="/interests" class="nav-item">
+      <div class="nav-icon">❤️</div>
+      <div>Interests</div>
+    </a>
+    <a href="/rounds" class="nav-item">
+      <div class="nav-icon">⏱️</div>
+      <div>Rounds</div>
+    </a>
+    <a href="/matches" class="nav-item">
+      <div class="nav-icon">💬</div>
+      <div>Matches</div>
+    </a>
+    <a href="/profile" class="nav-item active">
+      <div class="nav-icon">👤</div>
+      <div>Profile</div>
+    </a>
+    <a href="/organiser" class="nav-item">
+      <div class="nav-icon">👥</div>
+      <div>Organiser</div>
+    </a>
+  </nav>
+</Layout>
+
+<style>
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem 1rem 6rem;
+  }
+
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .profile-header h1 {
+    font-size: 1.8rem;
+    color: #340c46;
+    margin: 0;
+  }
+
+  .edit-btn {
+    background: linear-gradient(135deg, #0066ff, #0099ff);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .edit-btn:hover {
+    opacity: 0.9;
+  }
+
+  .profile-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #0066ff, #0099ff);
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+    font-weight: bold;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #340c46;
+    margin-bottom: 0.3rem;
+  }
+
+  .profile-pronouns {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-gender {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: #f0f0f0;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .info-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #999;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  .info-content {
+    font-size: 1rem;
+    color: #340c46;
+  }
+
+  .info-content a {
+    color: #0066ff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .info-content a:hover {
+    text-decoration: underline;
+  }
+
+  .questionnaire-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .checkmark {
+    color: #27ae60;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .questionnaire-text {
+    flex: 1;
+  }
+
+  .questionnaire-title {
+    font-weight: 600;
+    color: #340c46;
+    margin-bottom: 0.3rem;
+  }
+
+  .questionnaire-desc {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+  }
+
+  .edit-answers-btn {
+    color: #340c46;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .edit-answers-btn:hover {
+    background: #f0f0f0;
+  }
+
+  .event-code-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .event-code-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #999;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.8rem;
+    text-decoration: none;
+    color: #999;
+    font-size: 0.75rem;
+    transition: color 0.2s;
+    flex: 1;
+  }
+
+  .nav-item.active {
+    color: #0066ff;
+  }
+
+  .nav-item:hover {
+    color: #0066ff;
+  }
+
+  .nav-icon {
+    font-size: 1.5rem;
+  }
+</style>

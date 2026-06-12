@@ -1,432 +1,297 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with this Astro + Svelte 5 project.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-**PSD (Polyamorous Speed Dating)** is a full-stack web application for organizing dating events. Features include:
-- Event discovery (from Google, Ticketmaster, Meetup, Eventim)
-- Scheduling polls (Doodle-like functionality) with real-time countdown timers
-- Admin dashboards for managing participants
-- Responsive UI with Svelte 5 components
+**PSD Website** (Duck Dating Apps) is a full-stack Node.js application for coordinating relationship/dating events. It features:
+- Static HTML pages for event information and registration (dashboard, dates, apply, connectors, etc.)
+- Express.js backend with REST API routes
+- Embedded poll system (Doodle-like) for scheduling coordination
+- Dynamic countdown image generation for email embeds
+- SQLite database for persistence
 
 ## Tech Stack
 
-- **Framework**: Astro with Node.js adapter (`@astrojs/node`)
-- **UI Components**: Svelte 5 (with TypeScript, strict mode)
-- **Database**: SQLite with WAL mode (`better-sqlite3`)
-- **Styling**: CSS with custom properties (CSS variables)
-- **Build Tool**: Astro (file-based routing, server-side rendering)
-- **API**: Astro API routes (`/api/*`)
-- **Static Assets**: Playwright for event scraping, Sharp for image generation
+- **Runtime**: Node.js (ES modules)
+- **Framework**: Astro 4.x with Svelte 5 integration
+- **UI Framework**: Svelte 5 (for interactive components)
+- **Database**: better-sqlite3 (SQLite with WAL mode)
+- **Package Manager**: pnpm
+- **TypeScript**: Strict mode throughout
 
-## Running the Application
+## Getting Started
+
+### Installation
+
+```bash
+pnpm install
+```
 
 ### Development
 
 ```bash
-# Install dependencies
-npm install
-
-# Start dev server (http://localhost:3000)
-npm run dev
-
-# Or build and run production server
-npm run build
-npm start
+pnpm run dev          # Start Astro dev server (http://localhost:3000)
+pnpm run build        # Build for production
+pnpm run preview      # Preview production build
 ```
 
-### Build & Deploy
+### API & Database
 
-```bash
-# Build for production (creates dist/ directory)
-npm run build
+The application uses Astro API routes for backend functionality:
+- Poll management endpoints: `src/pages/api/polls/`
+- Vote handling: `src/pages/api/vote/`
+- Countdown image generation: `src/pages/api/countdown.ts`
 
-# Run production server
-node ./dist/server.mjs
-
-# Preview built app locally
-npm run preview
-```
+Database operations use better-sqlite3 with WAL mode (see `src/lib/db.ts`)
 
 ## Project Structure
 
 ```
 src/
-├── pages/                       # File-based routes (Astro pages + API routes)
-│   ├── index.astro             # GET /
-│   ├── poll.astro              # GET /poll (admin poll creation)
-│   ├── poll-vote.astro         # GET /poll-vote (voter interface)
-│   ├── dashboard.astro         # GET /dashboard
-│   ├── apply.astro             # GET /apply
-│   ├── calendar.astro          # GET /calendar
-│   ├── dates.astro             # GET /dates
-│   ├── contact.astro           # GET /contact
-│   └── api/                     # API routes
+├── pages/                           # File-based routing (one .astro per route)
+│   ├── index.astro                 # Home (/)
+│   ├── calendar.astro              # Calendar
+│   ├── identity.astro              # Identity
+│   ├── polyfest.astro              # Polyfest event
+│   ├── faq.astro                   # FAQ
+│   ├── merch.astro                 # Merchandise shop
+│   ├── contact.astro               # Contact page
+│   ├── apply.astro                 # Application form
+│   ├── dashboard.astro             # Applicant dashboard
+│   ├── dates.astro                 # Event coordination
+│   ├── connectors.astro            # Connector management
+│   ├── interests.astro             # User interests
+│   ├── matches.astro               # Match results
+│   ├── profile.astro               # User profile
+│   ├── rounds.astro                # Event rounds
+│   ├── organiser.astro             # Organizer tools
+│   ├── order.astro                 # Merch ordering
+│   ├── privacy.astro               # Privacy policy
+│   ├── imprint.astro               # Legal imprint
+│   ├── test-connectors.astro       # Testing page
+│   ├── poll.astro                  # Poll creation/admin
+│   ├── poll-vote.astro             # Poll voting
+│   └── api/                        # API routes
+│       ├── countdown.ts            # GET /api/countdown (countdown images)
 │       ├── polls/
-│       │   ├── index.ts        # POST /api/polls, GET /api/polls
-│       │   ├── [id].ts         # DELETE /api/polls/:id
-│       │   └── [adminToken]/
-│       │       └── detail.ts   # GET /api/polls/:adminToken/detail
-│       ├── vote/
-│       │   └── [pollId].ts     # POST /api/vote/:pollId, GET /api/vote/:pollId
-│       ├── events.ts           # GET /api/events?keyword=<search>
-│       └── countdown.ts        # GET /api/countdown?deadline=<ISO8601>
+│       │   ├── index.ts            # GET/POST /api/polls
+│       │   ├── [id].ts             # DELETE /api/polls/:id
+│       │   └── [id]/detail.ts      # GET /api/polls/:id/detail
+│       └── vote/
+│           └── [pollId].ts         # GET/POST /api/vote/:pollId
 │
 ├── layouts/
-│   └── Layout.astro            # Base shell (header, footer, styles)
+│   └── Layout.astro                # Shared page template
 │
-├── components/
-│   ├── Header.svelte           # Navigation (client:load)
-│   ├── Footer.svelte           # Footer
-│   ├── PollForm.svelte         # Poll creation form (client:load)
-│   ├── VoteInterface.svelte    # Full voting UI (client:load)
-│   └── [other components]
+├── components/                      # Svelte components (interactive UI)
+│   ├── Header.svelte               # Navigation header
+│   ├── Footer.svelte               # Footer
+│   └── [other components TBD]      # Interactive components as needed
+│
+├── data/                           # YAML data files (extracted content)
+│   ├── config.yaml                 # Site configuration
+│   ├── navigation.yaml             # Navigation structure
+│   └── [other data files TBD]
 │
 ├── styles/
-│   ├── brand-tokens.css        # CSS custom properties (--psd-*)
-│   └── global.css              # Global styles & utilities
+│   └── brand-tokens.css            # CSS custom properties (--psd-* prefix)
 │
 ├── lib/
-│   ├── db.ts                   # Database initialization & helpers
-│   ├── types.ts                # TypeScript interfaces
-│   └── events.ts               # Event scraping functions (TODO)
+│   ├── db.ts                       # Database initialization & helpers
+│   └── [utility files TBD]
 │
-├── data/
-│   └── [YAML data files]       # Extracted content (optional)
-│
-└── public/                      # Static assets (auto-served)
-    └── images/
+└── types/
+    └── index.ts                    # Shared TypeScript types
 
-astro.config.mjs                # Astro configuration
-tsconfig.json                   # TypeScript strict mode
-package.json                    # Dependencies & scripts
+public/
+├── images/                         # Static images
+├── style.css                       # Main stylesheet (legacy)
+└── [other assets]                  # Fonts, etc.
+
+polls.db                            # SQLite database (auto-created)
+polls.db-shm                        # WAL mode shm file
+polls.db-wal                        # WAL mode wal file
+astro.config.mjs                    # Astro configuration
+tsconfig.json                       # TypeScript strict mode config
+package.json                        # pnpm dependencies & scripts
 ```
 
-## Key URLs & Routes
+## Key Architecture Patterns
 
-| Route | File | Purpose |
-|-------|------|---------|
-| `/` | `src/pages/index.astro` | Landing page |
-| `/poll` | `src/pages/poll.astro` | Admin: create & manage polls |
-| `/poll-vote` | `src/pages/poll-vote.astro` | Voter: vote on poll dates |
-| `/dashboard` | `src/pages/dashboard.astro` | Admin dashboard |
-| `/apply` | `src/pages/apply.astro` | Application form |
-| `/calendar` | `src/pages/calendar.astro` | Calendar view |
-| `/dates` | `src/pages/dates.astro` | Event dates organization |
-| `/contact` | `src/pages/contact.astro` | Contact page |
+### 1. File-Based Routing
 
-## API Routes
+Astro uses file-based routing from `src/pages/`:
+- `src/pages/index.astro` → `/`
+- `src/pages/calendar.astro` → `/calendar`
+- `src/pages/api/polls/index.ts` → `/api/polls`
+- `src/pages/api/polls/[id].ts` → `/api/polls/:id`
 
-All API routes are in `src/pages/api/` and automatically mounted at `/api/*`.
+Each page is an Astro component (`.astro`); interactive UI uses Svelte components (`.svelte`).
 
-### Polls API
+### 2. Hydration Strategy
 
-```
-POST   /api/polls                      # Create poll
-GET    /api/polls                      # List polls
-GET    /api/polls/:adminToken/detail   # Get poll details (admin)
-DELETE /api/polls/:id                  # Delete poll
-```
+Components use minimal, purposeful hydration:
 
-**POST /api/polls** Payload:
-```json
-{
-  "title": "string",
-  "description": "string",
-  "duration": "string",
-  "expected": "number",
-  "open_access": "boolean",
-  "date1": "ISO8601",
-  "date2": "ISO8601",
-  "date3": "ISO8601",
-  "timer_minutes": "number (optional)",
-  "invite_emails": ["email@example.com"]
-}
-```
-
-### Voting API
-
-```
-GET  /api/vote/:pollId      # Fetch poll (with counts & previews)
-POST /api/vote/:pollId      # Submit vote(s)
-```
-
-**POST /api/vote/:pollId** Payload:
-```json
-{
-  "voter_name": "string",
-  "choice": "date1|date2|date3|none",
-  "voter_token": "string",
-  "alt_date": "string (optional)"
-}
-```
-
-Multi-select support: POST multiple times for multiple dates, or send "none" to override.
-
-### Events API
-
-```
-GET /api/events?keyword=<search>     # Search for events in Berlin
-```
-
-Returns array of Event objects (Google, Ticketmaster, Eventim fallback chain).
-
-### Countdown Image Generator
-
-```
-GET /api/countdown?deadline=<ISO8601>   # Generate PNG countdown image
-```
-
-Returns PNG image showing time remaining. For email embeds:
-```html
-<img src="https://poly-speed-dating.onrender.com/countdown?deadline=2026-06-11T15:00:00Z">
-```
-
-## Database Schema
-
-SQLite database (`polls.db`) with WAL journaling:
-
-```sql
-polls (
-  id TEXT PRIMARY KEY,
-  admin_token TEXT UNIQUE NOT NULL,
-  title TEXT NOT NULL,
-  description TEXT,
-  duration TEXT,
-  expected INTEGER DEFAULT 0,
-  open_access INTEGER DEFAULT 1,
-  date1 TEXT NOT NULL,
-  date2 TEXT NOT NULL,
-  date3 TEXT NOT NULL,
-  timer_end TEXT,           -- ISO8601 timestamp (when countdown expires)
-  created_at TEXT DEFAULT (datetime('now'))
-);
-
-invites (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  poll_id TEXT REFERENCES polls(id) ON DELETE CASCADE,
-  email TEXT
-);
-
-votes (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  poll_id TEXT REFERENCES polls(id) ON DELETE CASCADE,
-  voter_name TEXT NOT NULL,
-  choice TEXT NOT NULL,     -- 'date1', 'date2', 'date3', or 'none'
-  alt_date TEXT,
-  voter_token TEXT,
-  submitted_at TEXT DEFAULT (datetime('now')),
-  UNIQUE(poll_id, voter_token)
-);
-```
-
-## Component Hydration Strategy
-
-Svelte components use Astro hydration directives:
-
-- **`client:load`** — Immediately interactive (forms, navigation)
-  - `<Header />` (client:load)
-  - `<PollForm />` (client:load)
-  - `<VoteInterface />` (client:load)
-
-- **`client:visible`** — Hydrate when scrolled into view (galleries, results)
-  - Use sparingly for heavier components
-
-- **No directive** — Render as static HTML (headers, footers, cards)
-  - `<Footer />` (static)
-  - Layout shells
-
-## Styling System
-
-### Brand Tokens (`src/styles/brand-tokens.css`)
-
-All colors, spacing, typography defined as CSS custom properties:
-
-```css
-/* Colors */
---psd-blue: #009fe3;
---psd-magenta: #e50051;
---psd-gold: #fcbf00;
---psd-purple: #340c46;
-
-/* Semantic */
---psd-primary: var(--psd-blue);
---psd-accent: var(--psd-gold);
---psd-bg: #ffffff;
---psd-text: #2b004d;
-
-/* Spacing (scale: 4px unit) */
---psd-spacing-2: 0.5rem;
---psd-spacing-4: 1rem;
---psd-spacing-6: 1.5rem;
---psd-spacing-8: 2rem;
-
-/* Typography */
---psd-font-sans: Inter, -apple-system, ...;
---psd-text-base: 1rem;
---psd-text-lg: 1.125rem;
---psd-font-weight-bold: 700;
-
-/* Border Radius */
---psd-radius-md: 0.5rem;
---psd-radius-xl: 1rem;
---psd-radius-2xl: 1.5rem;
-
-/* Shadows */
---psd-shadow-md: 0 4px 6px -1px rgba(...);
---psd-shadow-lg: 0 10px 15px -3px rgba(...);
-```
-
-### Component Styles
-
-Svelte components use scoped `<style>` blocks (auto-scoped by Svelte):
-
-```svelte
-<style>
-  .button {
-    background: var(--psd-primary);
-    padding: var(--psd-spacing-4) var(--psd-spacing-6);
-    border-radius: var(--psd-radius-md);
-    transition: all var(--psd-transition-base);
-  }
-
-  .button:hover {
-    background: var(--psd-primary-dark);
-    transform: translateY(-2px);
-  }
-</style>
-```
-
-## Development Tips
-
-### Adding a New Page
-
-1. Create `src/pages/my-page.astro`
-2. Import Layout: `import Layout from '@/layouts/Layout.astro'`
-3. Wrap content in `<Layout>` component
-4. Auto-mounted at `/my-page`
-
-### Adding a New API Route
-
-1. Create `src/pages/api/my-route.ts`
-2. Export `APIRoute` functions: `export const GET: APIRoute` or `export const POST: APIRoute`
-3. Return `new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } })`
-4. Auto-mounted at `/api/my-route`
-
-### Creating a Svelte Component
-
-```svelte
-<script lang="ts">
-  interface Props {
-    title: string;
-    disabled?: boolean;
-  }
-
-  let { title, disabled = false }: Props = $props();
-</script>
-
-<button {disabled}>{title}</button>
-
-<style>
-  button {
-    padding: var(--psd-spacing-4);
-    background: var(--psd-primary);
-  }
-</style>
-```
-
-Import and use with hydration:
 ```astro
-import MyButton from '@/components/MyButton.svelte';
-
-<MyButton client:load title="Click me" />
+<Header client:load />      <!-- Immediately interactive -->
+<PollForm client:visible /> <!-- Interactive when visible -->
+<Card />                    <!-- Static HTML only -->
 ```
+
+No directive = rendered to HTML at build time (no JavaScript overhead).
+
+### 3. CSS Architecture
+
+- **Token System**: `src/styles/brand-tokens.css` defines all design values (`--psd-primary`, `--psd-fg`, `--psd-space-md`, etc.)
+- **Component Styles**: Svelte components use scoped CSS; reference tokens via CSS custom properties
+- **Global Styles**: `Layout.astro` includes global reset and token definitions
+- **Legacy Support**: `public/style.css` preserved for existing styles; gradual migration to tokens
+
+### 4. Database & API Routes
+
+- **Database**: `src/lib/db.ts` exports `getDatabase()` and helper functions; initializes WAL mode
+- **API Routes**: Astro API routes in `src/pages/api/` handle all backend logic
+- **No Express**: Astro replaces Express for all routing; better-sqlite3 works directly
+
+**Poll System**:
+- **Tables**: `polls`, `invites`, `votes` (same schema as Express version)
+- **Endpoints**: Migrated from Express routes to Astro API routes
+  - `GET /api/polls` → `src/pages/api/polls/index.ts`
+  - `POST /api/vote/:pollId` → `src/pages/api/vote/[pollId].ts`
+  - etc.
+
+### 5. Component Design
+
+- **One Responsibility**: Each Svelte component does one thing well
+- **Typed Props**: Use TypeScript interfaces for all component props
+- **No Business Logic**: Components receive data via props; load data in `.astro` parents
+- **Reusable**: Extract repeated markup into components (cards, forms, lists)
+
+## Development Workflow
+
+### Making Changes
+
+1. **Pages**: Create `.astro` files in `src/pages/`; Astro dev server auto-reloads
+2. **Components**: Create `.svelte` files in `src/components/`; hydration added per component
+3. **Styles**: Update `src/styles/brand-tokens.css` for design changes; use CSS custom properties in component styles
+4. **API Routes**: Add TypeScript files to `src/pages/api/`; endpoints are created automatically
+5. **Data**: Extract hardcoded content to YAML in `src/data/` and load at build time
 
 ### Database Operations
 
-```ts
-import { initDb, getDb } from '@/lib/db';
-
-// In API routes (server-side only)
-const db = getDb();
-
-// Prepared statements
-const polls = db.prepare('SELECT * FROM polls WHERE id = ?').all(pollId);
-db.prepare('INSERT INTO polls (...) VALUES (...)').run(...);
-
-// Always use parameterized queries
+The SQLite database uses WAL mode for better concurrency:
+```typescript
+const db = getDatabase(); // From src/lib/db.ts
+db.pragma("journal_mode = WAL");
 ```
 
-### Environment Variables
+This creates `polls.db-shm` and `polls.db-wal` files—don't delete these; they're part of WAL mode.
 
-Create `.env` file with:
+**Migrations**: To modify the database schema, edit the `db.exec()` call in `src/lib/db.ts`. For existing databases, create a migration script or drop the database to recreate with new schema.
+
+## Common Tasks
+
+### Add a New Page
+
+1. Create `src/pages/your-page.astro`
+2. Import `Layout` from `src/layouts/Layout.astro`
+3. Wrap content in `<Layout title="...">` component
+4. Access at `/your-page` automatically
+
+Example:
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="My Page">
+  <h1>Welcome</h1>
+</Layout>
 ```
-TICKETMASTER_API_KEY=your_key
-MEETUP_API_KEY=your_key
-EVENTIM_API_KEY=your_key
-LUMA_API_KEY=your_key
-GOOGLE_API_KEY=your_key
-OPENAI_API_KEY=your_key
+
+### Add an Interactive Component
+
+1. Create `src/components/MyComponent.svelte` with TypeScript props
+2. In your `.astro` page, import and use with hydration directive:
+
+```astro
+---
+import MyComponent from '../components/MyComponent.svelte';
+---
+
+<Layout title="...">
+  <MyComponent client:load />
+</Layout>
 ```
 
-Load in API routes with `process.env.TICKETMASTER_API_KEY`.
+### Modify API Routes
 
-## What Changed From Express.js
+All API routes are in `src/pages/api/`:
+- File-based routing applies (e.g., `[id].ts` becomes `:id` in the URL)
+- Use `APIRoute` type from `astro` for proper typing
+- Import database helpers from `src/lib/db.ts`
 
-| Old (Express) | New (Astro) |
-|---------------|-------------|
-| `server.js` with routes | `src/pages/` with file-based routing |
-| HTML templates | Layout.astro + components |
-| Vanilla JS | Svelte 5 components |
-| Manual static serving | Astro public/ + CSS tokens |
-| `app.get('/api/...')` | `src/pages/api/route.ts` |
-| Build step required | No build step for dev; `npm run build` for production |
+Example GET route:
+```typescript
+import { getDatabase } from '../../lib/db';
+import type { APIRoute } from 'astro';
 
-### Preserved
+export const GET: APIRoute = async ({ params }) => {
+  const db = getDatabase();
+  // ... handle request ...
+  return new Response(JSON.stringify(data), {
+    headers: { 'Content-Type': 'application/json' }
+  });
+};
+```
 
-✅ SQLite database (same schema, same queries)  
-✅ All API endpoints (`/api/polls`, `/api/vote`, `/api/events`, `/api/countdown`)  
-✅ Event scraping (Playwright) — moved to `src/lib/events.ts`  
-✅ Countdown timer feature  
-✅ All routes and URLs (same paths)  
+## Known Issues & Quirks
 
-### To Complete
+1. **Legacy CSS**: `public/style.css` coexists with new token system; gradual migration to CSS variables recommended
+2. **Admin Password**: `ADMIN_PASSWORD` env var is referenced but may not be fully integrated
+3. **Poll Database**: Located at root level (`polls.db`); ensure write permissions
+4. **Database Initialization**: Schema in `src/lib/db.ts` only applies on first run; migrations needed for schema changes
 
-⏳ **Event scraping functions** — migrate `fetchGoogleEvents()`, `fetchTicketmasterEvents()`, etc. from original `server.js` to `src/lib/events.ts`  
-⏳ **Dashboard page** — implement admin dashboard component  
-⏳ **Apply form** — implement application form component  
-⏳ **Secondary pages** — populate calendar.astro, dates.astro, contact.astro  
+## Migration Notes from Express
 
-## TypeScript
+The original Express server used:
+- Static HTML files in the root directory (now moved to `src/pages/`)
+- `server.js` with Express middleware (now replaced with Astro routing)
+- `poll-app/` as a separate server (poll routes migrated to Astro API routes)
 
-Strict mode enforced in `tsconfig.json`:
-- `strictNullChecks: true`
-- `strict: true` (from Astro preset)
+Express functionality preserved:
+- Poll database operations (now in `src/lib/db.ts`)
+- REST API endpoints (now in `src/pages/api/`)
+- Countdown image generation (now in `src/pages/api/countdown.ts`)
+- Static file serving (now handled by Astro's `public/` directory)
 
-All components and API routes must be typed. Use `@/lib/types.ts` for shared types.
+## Deployment Notes
 
-## Deployment
+- Build with `pnpm run build` to create production artifacts
+- Server entry point: The built Astro site (static or with server-side rendering)
+- PORT defaults to 3000; can be set via env var
+- Ensure `polls.db` and WAL files (`polls.db-shm`, `polls.db-wal`) are writable
+- DATABASE_PATH env var can override the default database location
 
-### On Render (as Web Service)
-
-1. Build: `npm run build` → creates `dist/` with compiled app
-2. Start: `node ./dist/server.mjs` (configured in `start` script)
-3. Render runs `npm install` (with dependencies) then `npm start`
-
-### Local Production Preview
+## Testing the Application
 
 ```bash
-npm run build
-npm run preview
-# Opens http://localhost:3000
+# Development
+pnpm run dev          # Starts on http://localhost:3000
+
+# In another terminal, test key routes
+curl http://localhost:3000/api/polls
+curl http://localhost:3000/api/countdown?deadline=2026-06-11T15:00:00Z
+
+# Manual testing
+# - Visit http://localhost:3000 (home page)
+# - Check http://localhost:3000/calendar, /identity, /polyfest
+# - Try application form at http://localhost:3000/apply
+# - Test poll at http://localhost:3000/poll
 ```
 
-## Notes for Future Work
+## References
 
-- **Event scraping**: Migrate Playwright functions from `server.js` to `src/lib/events.ts` and call from `/api/events`
-- **Dashboard**: Create rich admin dashboard component with filtering, export
-- **Forms**: Add validation library (optional)
-- **Testing**: No tests yet; add vitest or playwright tests as needed
-- **Database migrations**: Still using auto-create on startup; consider migration system for scale
-
+- `PROJECT_AGENDA.md` — High-level project goals and feature priorities
+- `CONNECTORS_HELP.md` — Documentation for connector functionality

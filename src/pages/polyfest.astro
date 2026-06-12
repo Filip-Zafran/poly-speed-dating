@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Poly Fest Berlin - PSD">
+  <div class="container">
+    <div class="date-badge">22 NOV 2025</div>
+    <h1>Poly Fest Berlin</h1>
+
+    <img src="/images/polyfest.png" alt="Poly Fest Berlin promo banner" class="festival-banner" />
+
+    <div class="opening">
+      <p style="font-size: 2rem; font-weight: bold;">HAPPY INTERNATIONAL POLYAMORY DAY EVERYONE!</p>
+    </div>
+
+    <section class="fest-intro">
+      <p>Thank you everyone for joining our first ever Poly Festival! ♾️🤍</p>
+      <p>
+        Now that it's over, we all need a bit of time to get back to reality. We've received really nice feedback and positive impressions. More communication coming soon regarding photos, mailing list, feedback form, and lost & found.
+      </p>
+      <p>Follow our Instagram for frequent updates!</p>
+    </section>
+
+    <section class="subscribe">
+      <h2>Join our Mailing List</h2>
+      <p>Be the first to know about future PolyFest events and community gatherings.</p>
+      <form action="https://formspree.io/f/xblbvagz" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+        <label class="checkbox">
+          <input type="checkbox" required />
+          I agree to receive emails from PolyFest
+        </label>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </section>
+
+    <section class="gallery">
+      <h2>PolyFest 2025 Photos</h2>
+      <p>Gallery content to be added</p>
+    </section>
+
+    <div class="buttons-row">
+      <a href="https://www.instagram.com/polyfest_berlin" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        📷 PolyFest Instagram
+      </a>
+      <a href="/images/code-of-conduct.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        📄 Code of Conduct
+      </a>
+    </div>
+
+    <section class="schedule">
+      <h2>PolyFest 2025 Schedule</h2>
+      <p>Event schedule with workshops and activities to be filled in</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .date-badge {
+    display: inline-block;
+    background: #0066ff;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .festival-banner {
+    width: 100%;
+    border-radius: 12px;
+    margin: 2rem 0;
+  }
+
+  .opening {
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .buttons-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    background: #0066ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-secondary {
+    background: #f0f0f0;
+    color: #333;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+</style>

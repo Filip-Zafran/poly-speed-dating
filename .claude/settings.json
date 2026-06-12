@@ -15,7 +15,22 @@
       "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_lgbtq.png --window-size=1920x1200 http://localhost:8000/dates.html)",
       "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_lgbtq_full.png --window-size=1920x2400 http://localhost:8000/dates.html)",
       "Bash(node -c /home/ficho/Desktop/psd-website/dates.html)",
-      "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_fixed.png --window-size=1920x2400 http://localhost:8000/dates.html)"
+      "Bash(google-chrome --headless --disable-gpu --screenshot=/tmp/dates_fixed.png --window-size=1920x2400 http://localhost:8000/dates.html)",
+      "Bash(curl -s http://localhost:4322/interests)",
+      "Bash(curl -s http://localhost:4322/organiser)",
+      "Bash(curl -s http://localhost:4322/apply)",
+      "Bash(curl -s http://localhost:4322/contact)",
+      "Bash(curl -s http://localhost:4323/contact)",
+      "Bash(curl -i http://localhost:4323/contact)",
+      "Bash(curl -s http://localhost:4323/poll)",
+      "Bash(curl -s http://localhost:4324/poll)",
+      "Bash(curl -s \"http://localhost:4324/poll-vote?token=test-poll-123\")",
+      "Bash(curl -s http://localhost:4324/dashboard)",
+      "Bash(curl -s http://localhost:4324/dates)",
+      "Bash(curl -s http://localhost:4324/connectors)"
+    ],
+    "additionalDirectories": [
+      "/home/ficho/Desktop/Duck-Playground"
     ]
   }
 }

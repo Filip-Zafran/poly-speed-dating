@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Event Rounds - PSD">
+  <div class="container">
+    <h1>Event Rounds</h1>
+    <p>Information about event round structure and timing.</p>
+
+    <div class="rounds-content">
+      <section class="round-info">
+        <h2>Round Structure</h2>
+        <p>Our speed dating events consist of multiple timed rounds where participants rotate through partners.</p>
+        
+        <div class="round-cards">
+          <div class="round-card">
+            <h3>Round 1</h3>
+            <p><strong>Duration:</strong> 5 minutes</p>
+            <p>Meet your first partner and get to know each other</p>
+          </div>
+
+          <div class="round-card">
+            <h3>Round 2</h3>
+            <p><strong>Duration:</strong> 5 minutes</p>
+            <p>Move to your next partner and repeat</p>
+          </div>
+
+          <div class="round-card">
+            <h3>Round 3</h3>
+            <p><strong>Duration:</strong> 5 minutes</p>
+            <p>Continue meeting new people</p>
+          </div>
+
+          <div class="round-card">
+            <h3>Round 4-5</h3>
+            <p><strong>Duration:</strong> 5 minutes each</p>
+            <p>Complete final rounds and take notes</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="breaks-info">
+        <h2>Breaks Between Rounds</h2>
+        <p>Between each round, there's a short break to catch your breath and take notes on your conversation.</p>
+        <ul>
+          <li>Write down names and key details</li>
+          <li>Indicate who you'd like to see again</li>
+          <li>Prepare for next round</li>
+        </ul>
+      </section>
+
+      <section class="matching-info">
+        <h2>After All Rounds</h2>
+        <p>After completing all rounds, submit your preferences indicating which participants you'd like to connect with.</p>
+        <p>We only share contact information when there's mutual interest!</p>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .rounds-content {
+    margin-top: 2rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .round-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .round-card {
+    background: white;
+    border: 2px solid #0066ff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .round-card h3 {
+    margin-top: 0;
+    color: #0066ff;
+  }
+
+  .round-card p {
+    margin: 0.5rem 0;
+    color: #666;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  ul li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #666;
+  }
+
+  ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #27ae60;
+    font-weight: bold;
+  }
+</style>

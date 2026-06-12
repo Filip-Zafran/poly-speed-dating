@@ -2,24 +2,33 @@
   "name": "psd-website",
   "version": "1.0.0",
   "type": "module",
-  "description": "--- title: Mystery Mode Madness 🌫️ colorFrom: gray colorTo: purple emoji: 🐳 sdk: static pinned: false tags:   - ---",
+  "description": "PSD Website - Dating event coordination with Astro & Svelte",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.16.1",
-    "better-sqlite3": "^11.0.0",
+    "astro": "^5.18.2",
+    "axios": "^1.17.0",
+    "better-sqlite3": "^11.10.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "js-yaml": "^4.2.0",
     "jsdom": "^29.1.1",
     "playwright": "^1.60.0",
     "puppeteer": "^25.1.0",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.5",
+    "svelte": "^5.56.3"
+  },
+  "devDependencies": {
+    "@astrojs/svelte": "^8.1.2",
+    "typescript": "^5.9.3"
   }
 }

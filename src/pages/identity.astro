@@ -1,0 +1,447 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Identity & Matching | Duck Dating Apps">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          IDENTITY & MATCHING
+        </div>
+
+        <h1 class="hero-title">
+          Respectful matching
+          <span class="highlight-pink">without defining people</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          We want to create an experience that feels
+          <span class="scribble-highlight">inclusive, thoughtful, and respectful</span>
+          for everyone.
+        </p>
+
+        <p class="hero-text">
+          Gender identity, attraction, and self-expression are complex. Our goal is not to box anyone in,
+          but to build a practical matching system that helps people connect as accurately and respectfully
+          as possible.
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <div class="genderbread-card">
+          <img
+            src="/images/ginger.png"
+            alt="Genderbread Person model illustration"
+            class="genderbread-image"
+          />
+          <div class="card-label">
+            A framework,<br />
+            not a definition.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN EXPLANATION -->
+  <section class="explanation">
+    <div class="explanation-card">
+      <h2>How we think about identity on Duck Dating Apps</h2>
+
+      <div class="explanation-text">
+        <p>
+          We aim to create an inclusive and respectful experience for everyone. We understand that gender identity and attraction are complex, and while we strive to accommodate as many identities and preferences as possible, we recognize that our current options may not perfectly reflect everyone's experience.
+        </p>
+
+        <p>
+          Our structure is inspired by the Genderbread Person model.
+          <a
+            href="https://www.genderbread.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="highlight-link"
+          >
+            Check the website for more details
+          </a>.
+        </p>
+
+        <p>
+          This framework helps us organize matching in a practical way, but it is not meant to define or limit anyone's identity.
+        </p>
+
+        <p>
+          To approach this thoughtfully, we've consulted many friends from both heteronormative and queer communities to get feedback on this topic. Interestingly, we've received differing and sometimes opposing feedback.
+        </p>
+
+        <p>
+          On one hand, we want to avoid placing anyone in an "Other" category, as this can feel diminishing or exclusionary. On the other hand, we also want to avoid labeling people as "Cis" or "Trans" in a way that could imply they are not simply men or women.
+        </p>
+
+        <p>
+          Our intention is never to categorize or define identities, but purely to create the most accurate and respectful matching experience possible.
+        </p>
+
+        <p>
+          If something feels missing, unclear, or could be improved, we genuinely welcome your feedback and suggestions. We are continuously learning and refining this process to better serve all participants.
+        </p>
+
+        <p class="thank-you">
+          Thank you for your understanding and support 💛
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE CARDS -->
+  <section class="three-cards">
+    <div class="card-grid">
+      <div class="info-card card-pink">
+        <h3>1. We are trying to be practical</h3>
+        <p>
+          Matching needs some structure. We use a framework so people can actually be grouped and matched in a useful way.
+        </p>
+      </div>
+
+      <div class="info-card card-green">
+        <h3>2. We know no framework is perfect</h3>
+        <p>
+          We understand that identity and attraction are nuanced and deeply personal. Our options may not fully reflect every lived experience.
+        </p>
+      </div>
+
+      <div class="info-card card-yellow">
+        <h3>3. We are open to feedback</h3>
+        <p>
+          We are learning as we go. If something feels off, missing, or could be phrased better, we truly want to hear it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-card">
+      <h2>Help us improve this</h2>
+
+      <p>
+        We'd rather keep refining than pretend we've already solved it perfectly.
+        If you have thoughts, feedback, or suggestions, we'd love to hear from you.
+      </p>
+
+      <div class="cta-buttons">
+        <a href="/contact" class="btn btn-pink">
+          Send feedback
+        </a>
+        <a href="/#" class="btn btn-yellow">
+          Explore events
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background: #f4efe8;
+    padding: 3rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transform: rotate(-3deg);
+  }
+
+  .badge-dot {
+    display: inline-block;
+    width: 0.625rem;
+    height: 0.625rem;
+    background: #ec4899;
+    border-radius: 999px;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  .highlight-pink {
+    display: block;
+    color: #ff5b92;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    max-width: 32rem;
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .scribble-highlight {
+    position: relative;
+    display: inline;
+    font-weight: 900;
+  }
+
+  .scribble-highlight::after {
+    content: "";
+    position: absolute;
+    left: -0.15em;
+    right: -0.15em;
+    bottom: 0.08em;
+    height: 0.45em;
+    background: rgba(255, 211, 110, 0.75);
+    z-index: -1;
+    border-radius: 999px;
+    transform: rotate(-1.5deg);
+  }
+
+  .hero-text {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.7);
+    max-width: 32rem;
+    line-height: 1.6;
+  }
+
+  .hero-right {
+    position: relative;
+  }
+
+  .genderbread-card {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 2rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    position: relative;
+  }
+
+  .genderbread-image {
+    width: 100%;
+    height: auto;
+    border-radius: 1.5rem;
+    background: white;
+    display: block;
+  }
+
+  .card-label {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    background: #2f2f2f;
+    color: white;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    font-weight: 900;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: rotate(3deg);
+    text-align: center;
+  }
+
+  .explanation {
+    padding: 3rem 1.5rem;
+  }
+
+  .explanation-card {
+    max-width: 56rem;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  }
+
+  .explanation-card h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #2f2f2f;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .explanation-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .explanation-text p {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.75);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .highlight-link {
+    font-weight: 700;
+    color: #ff5b92;
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+    transition: color 0.2s;
+  }
+
+  .highlight-link:hover {
+    color: #2f2f2f;
+  }
+
+  .thank-you {
+    font-weight: 600;
+    color: #2f2f2f;
+  }
+
+  .three-cards {
+    padding: 3.5rem 1.5rem;
+  }
+
+  .card-grid {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .info-card {
+    border-radius: 1.75rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .info-card h3 {
+    font-size: 1.25rem;
+    font-weight: 900;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .info-card p {
+    color: rgba(0, 0, 0, 0.7);
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .card-pink {
+    background: #ffd8e7;
+  }
+
+  .card-green {
+    background: #d7f0cb;
+  }
+
+  .card-yellow {
+    background: #f9df9b;
+  }
+
+  .cta {
+    padding: 3rem 1.5rem;
+  }
+
+  .cta-card {
+    max-width: 56rem;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  }
+
+  .cta-card h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #2f2f2f;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .cta-card p {
+    font-size: 1.125rem;
+    color: rgba(0, 0, 0, 0.7);
+    max-width: 32rem;
+    margin: 0 auto 2rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  @media (min-width: 640px) {
+    .cta-buttons {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  .btn {
+    display: inline-block;
+    font-weight: 900;
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-pink {
+    background: #ff5b92;
+    color: white;
+  }
+
+  .btn-yellow {
+    background: #ffd36e;
+    color: #2f2f2f;
+  }
+</style>

@@ -1,103 +1,142 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  let isMenuOpen = $state(false);
 
-  let isMenuOpen = false;
-
-  function toggleMenu() {
-    isMenuOpen = !isMenuOpen;
-  }
-
-  onMount(() => {
-    const closeMenu = () => {
-      isMenuOpen = false;
-    };
-
-    document.addEventListener('click', closeMenu);
-    return () => document.removeEventListener('click', closeMenu);
-  });
+  const navItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Calendar', href: '/calendar' },
+    { label: 'Identity', href: '/identity' },
+    { label: 'Polyfest', href: '/polyfest' },
+    { label: 'FAQ', href: '/faq' },
+    { label: 'Merch', href: '/merch' },
+    { label: 'Contact', href: '/contact' }
+  ];
 </script>
 
-<header class="header">
-  <div class="container">
-    <div class="header-content">
-      <a href="/" class="logo">
-        <span>🦆</span> Poly Speed Dating
-      </a>
-      <nav class="nav">
-        <a href="/">Home</a>
-        <a href="/calendar">Calendar</a>
-        <a href="/apply">Apply</a>
-        <a href="/poll">Polls</a>
-        <a href="/contact">Contact</a>
-      </nav>
-    </div>
+<header>
+  <div class="header-content">
+    <a href="/" class="logo">
+      <img src="/images/PSD-logo.png" alt="PSD Logo" class="logo-img" />
+    </a>
+    <nav class="nav-desktop">
+      {#each navItems as item}
+        <a href={item.href}>{item.label}</a>
+      {/each}
+    </nav>
+    <button
+      class="menu-toggle"
+      on:click={() => isMenuOpen = !isMenuOpen}
+      aria-label="Toggle menu"
+    >
+      ☰
+    </button>
   </div>
+
+  {#if isMenuOpen}
+    <nav class="nav-mobile">
+      {#each navItems as item}
+        <a href={item.href} on:click={() => isMenuOpen = false}>{item.label}</a>
+      {/each}
+    </nav>
+  {/if}
 </header>
 
 <style>
-  .header {
-    background: linear-gradient(
-      90deg,
-      var(--psd-blue) 0%,
-      var(--psd-secondary) 50%,
-      var(--psd-purple) 100%
-    );
-    color: var(--psd-text-inverse);
-    padding: var(--psd-spacing-6) 0;
-    box-shadow: var(--psd-shadow-md);
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--psd-spacing-6);
+  header {
+    background: linear-gradient(135deg, #0066ff 0%, #6633cc 50%, #ff1493 100%);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    padding: 1rem 2rem;
   }
 
   .logo {
-    font-size: var(--psd-text-2xl);
-    font-weight: var(--psd-font-weight-bold);
-    color: var(--psd-text-inverse);
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: var(--psd-spacing-2);
+    gap: 0.5rem;
+    height: 60px;
   }
 
-  .logo:hover {
-    color: var(--psd-accent);
+  .logo-img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.2s ease;
   }
 
-  .nav {
+  .logo:hover .logo-img {
+    transform: scale(1.05);
+  }
+
+  .nav-desktop {
     display: flex;
-    gap: var(--psd-spacing-6);
+    gap: 2rem;
+    align-items: center;
   }
 
-  .nav a {
-    color: var(--psd-text-inverse);
-    font-weight: var(--psd-font-weight-medium);
-    transition: color var(--psd-transition-base);
+  .nav-desktop a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
+    text-transform: capitalize;
   }
 
-  .nav a:hover {
-    color: var(--psd-accent);
+  .nav-desktop a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+  }
+
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-mobile a {
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem;
+    display: block;
+    font-weight: 500;
+  }
+
+  .nav-mobile a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
   }
 
   @media (max-width: 768px) {
-    .header-content {
-      flex-direction: column;
-      gap: var(--psd-spacing-4);
+    .nav-desktop {
+      display: none;
     }
 
-    .nav {
-      flex-direction: column;
-      gap: var(--psd-spacing-3);
-      text-align: center;
+    .menu-toggle {
+      display: block;
+    }
+
+    .nav-mobile {
+      display: flex;
     }
   }
 </style>

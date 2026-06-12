@@ -2,71 +2,52 @@
   const currentYear = new Date().getFullYear();
 </script>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>Poly Speed Dating</h4>
-        <p>Meaningful connections in a polyamorous, consent-first, friendly space.</p>
-      </div>
-
-      <div class="footer-section">
-        <h4>Links</h4>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/apply">Apply</a></li>
-          <li><a href="/calendar">Calendar</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Follow Us</h4>
-        <ul>
-          <li><a href="https://instagram.com/polyfest_berlin" target="_blank">Instagram</a></li>
-          <li><a href="https://telegram.me/polyspeeddatingberlin" target="_blank">Telegram</a></li>
-          <li><a href="https://youtube.com/@DuckDatingApps" target="_blank">YouTube</a></li>
-        </ul>
-      </div>
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>PSD</h3>
+      <p>Dating event coordination made simple.</p>
     </div>
-
-    <hr class="divider" />
-
-    <div class="footer-bottom">
-      <p>&copy; {currentYear} Poly Speed Dating. All rights reserved.</p>
-      <p>Real conversations. Clear boundaries. Warm community vibe.</p>
+    <div class="footer-section">
+      <h3>Links</h3>
+      <ul>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/imprint">Imprint</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
     </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; {currentYear} PSD. All rights reserved.</p>
   </div>
 </footer>
 
 <style>
-  .footer {
-    background: var(--psd-bg-dark);
-    color: var(--psd-text-inverse);
-    padding: var(--psd-spacing-12) 0 var(--psd-spacing-8);
-    margin-top: auto;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--psd-spacing-6);
+  footer {
+    background-color: var(--psd-fg);
+    color: var(--psd-bg);
+    margin-top: 2rem;
+    padding: var(--psd-space-2xl) var(--psd-space-md);
   }
 
   .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--psd-spacing-8);
-    margin-bottom: var(--psd-spacing-8);
+    gap: var(--psd-space-2xl);
+    margin-bottom: var(--psd-space-2xl);
   }
 
-  .footer-section h4 {
+  .footer-section h3 {
     margin-top: 0;
-    color: var(--psd-accent);
+    margin-bottom: var(--psd-space-md);
+    font-size: var(--psd-font-size-lg);
   }
 
   .footer-section p {
-    color: var(--psd-text-light);
+    margin: 0;
+    color: rgba(240, 240, 240, 0.8);
   }
 
   .footer-section ul {
@@ -76,30 +57,30 @@
   }
 
   .footer-section li {
-    margin: var(--psd-spacing-2) 0;
+    margin-bottom: var(--psd-space-sm);
   }
 
   .footer-section a {
-    color: var(--psd-text-inverse);
-    transition: color var(--psd-transition-base);
+    color: var(--psd-bg);
+    text-decoration: none;
+    transition: opacity 0.2s;
   }
 
   .footer-section a:hover {
-    color: var(--psd-accent);
-  }
-
-  .divider {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin: var(--psd-spacing-8) 0;
+    opacity: 0.8;
   }
 
   .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: var(--psd-space-lg);
+    border-top: 1px solid rgba(240, 240, 240, 0.2);
     text-align: center;
-    color: var(--psd-text-light);
+    font-size: var(--psd-font-size-sm);
+    color: rgba(240, 240, 240, 0.6);
   }
 
   .footer-bottom p {
-    margin: var(--psd-spacing-2) 0;
+    margin: 0;
   }
 </style>

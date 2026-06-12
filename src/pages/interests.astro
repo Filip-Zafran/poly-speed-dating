@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Interests - PSD">
+  <div class="container">
+    <div class="page-header">
+      <h1>Interests</h1>
+    </div>
+
+    <div class="placeholder">
+      <div class="placeholder-icon">❤️</div>
+      <div class="placeholder-text">Your interests and preferences will appear here</div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="/interests" class="nav-item active">
+      <div class="nav-icon">❤️</div>
+      <div>Interests</div>
+    </a>
+    <a href="/rounds" class="nav-item">
+      <div class="nav-icon">⏱️</div>
+      <div>Rounds</div>
+    </a>
+    <a href="/matches" class="nav-item">
+      <div class="nav-icon">💬</div>
+      <div>Matches</div>
+    </a>
+    <a href="/profile" class="nav-item">
+      <div class="nav-icon">👤</div>
+      <div>Profile</div>
+    </a>
+    <a href="/organiser" class="nav-item">
+      <div class="nav-icon">👥</div>
+      <div>Organiser</div>
+    </a>
+  </nav>
+</Layout>
+
+<style>
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem 1rem 6rem;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 1.8rem;
+    color: #340c46;
+    margin: 0;
+  }
+
+  .placeholder {
+    background: white;
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .placeholder-text {
+    color: #999;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.8rem;
+    text-decoration: none;
+    color: #999;
+    font-size: 0.75rem;
+    transition: color 0.2s;
+    flex: 1;
+  }
+
+  .nav-item.active {
+    color: #0066ff;
+  }
+
+  .nav-item:hover {
+    color: #0066ff;
+  }
+
+  .nav-icon {
+    font-size: 1.5rem;
+  }
+</style>

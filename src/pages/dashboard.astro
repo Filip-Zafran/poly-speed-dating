@@ -1,20 +1,30 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-
-const title = 'Dashboard';
+import DashboardAdmin from '../components/DashboardAdmin.svelte';
+import Header from '../components/Header.svelte';
+import Footer from '../components/Footer.svelte';
 ---
 
-<Layout {title}>
-  <div class="container">
-    <h1>Dashboard</h1>
-    <p>Page content coming soon...</p>
-  </div>
-</Layout>
-
-<style>
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - PSD</title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      :global(body) {
+        margin: 0;
+        padding: 0;
+      }
+      :global(main) {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <Header client:load />
+    <DashboardAdmin client:load />
+    <Footer />
+  </body>
+</html>

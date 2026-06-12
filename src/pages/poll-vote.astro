@@ -1,11 +1,10 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import VoteInterface from '@/components/VoteInterface.svelte';
+import Layout from '../layouts/Layout.astro';
+import PollVoting from '../components/PollVoting.svelte';
 
-const title = 'Vote on Scheduling Poll';
-const description = 'Help us find the best date for your event';
+const pollId = Astro.url.searchParams.get('token') || '';
 ---
 
-<Layout {title} {description}>
-  <VoteInterface client:load />
+<Layout title="Vote on Poll - PSD">
+  <PollVoting client:load pollId={pollId} />
 </Layout>

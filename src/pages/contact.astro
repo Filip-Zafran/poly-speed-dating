@@ -1,20 +1,16 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-
-const title = 'Contact';
+import Layout from '../layouts/Layout.astro';
+import ContactPage from '../components/ContactPage.svelte';
 ---
 
-<Layout {title}>
-  <div class="container">
-    <h1>Contact</h1>
-    <p>Page content coming soon...</p>
-  </div>
+<Layout title="Contact - Poly Speed Dating (PSD)">
+  <ContactPage client:load />
 </Layout>
 
 <style>
-  .container {
-    max-width: 900px;
+  :global(.container) {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 2rem 1rem;
   }
 </style>

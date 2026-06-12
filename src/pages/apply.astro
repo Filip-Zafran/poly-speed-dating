@@ -1,20 +1,18 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-
-const title = 'Apply to Poly Speed Dating';
+import Layout from '../layouts/Layout.astro';
+import ApplyForm from '../components/ApplyForm.svelte';
 ---
 
-<Layout {title}>
-  <div class="container">
-    <h1>Apply</h1>
-    <p>Application form coming soon...</p>
+<Layout title="Apply — Poly Speed Dating Berlin - PSD">
+  <div class="apply-page">
+    <ApplyForm client:load />
   </div>
 </Layout>
 
 <style>
-  .container {
-    max-width: 600px;
+  .apply-page {
+    max-width: 980px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 2rem 1rem 4rem;
   }
 </style>
