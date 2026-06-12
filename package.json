@@ -28,7 +28,7 @@
     "svelte": "^5.56.3"
   },
   "devDependencies": {
-    "@astrojs/svelte": "^8.1.2",
+    "@astrojs/svelte": "^7.0.0",
     "typescript": "^5.9.3"
   }
 }
