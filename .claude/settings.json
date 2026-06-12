@@ -27,10 +27,13 @@
       "Bash(curl -s \"http://localhost:4324/poll-vote?token=test-poll-123\")",
       "Bash(curl -s http://localhost:4324/dashboard)",
       "Bash(curl -s http://localhost:4324/dates)",
-      "Bash(curl -s http://localhost:4324/connectors)"
+      "Bash(curl -s http://localhost:4324/connectors)",
+      "Bash(pnpm install *)",
+      "Bash(rm /home/ficho/Desktop/psd-website/src/pages/api/polls/[id].ts && git add -A && git commit -m \"Remove unused poll deletion endpoint *)"
     ],
     "additionalDirectories": [
-      "/home/ficho/Desktop/Duck-Playground"
+      "/home/ficho/Desktop/Duck-Playground",
+      "/home/ficho/Desktop/psd-website/src/pages/api/polls"
     ]
   }
 }
