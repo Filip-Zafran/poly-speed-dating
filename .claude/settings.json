@@ -28,6 +28,9 @@
       "Bash(curl -s http://localhost:4324/dashboard)",
       "Bash(curl -s http://localhost:4324/dates)",
       "Bash(curl -s http://localhost:4324/connectors)"
+    ],
+    "additionalDirectories": [
+      "/home/ficho/Desktop/Duck-Playground"
     ]
   }
 }
