@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 
+export const prerender = false;
+
 const API_URL = import.meta.env.DUCK_PLAYGROUND_API || 'http://localhost:3001';
 
 export const GET: APIRoute = async () => {
