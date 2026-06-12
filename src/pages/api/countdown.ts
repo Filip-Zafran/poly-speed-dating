@@ -1,6 +1,8 @@
 import sharp from 'sharp';
 import type { APIRoute } from 'astro';
 
+export const prerender = false;
+
 export const GET: APIRoute = async ({ url }) => {
   try {
     const deadline = url.searchParams.get('deadline');

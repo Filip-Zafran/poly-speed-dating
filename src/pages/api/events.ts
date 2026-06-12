@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import type { Event } from '@/lib/types';
 
+export const prerender = false;
+
 // TODO: Migrate event fetching functions from original server.js
 // For now, return a stub response
 // Functions to implement:
