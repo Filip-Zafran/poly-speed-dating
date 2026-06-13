@@ -1,4 +1,6 @@
 <script lang="ts">
+  const API_BASE = import.meta.env.PUBLIC_DUCK_PLAYGROUND_API || 'http://localhost:3001';
+
   let emailTags: string[] = [];
   let openAccess = true;
 
@@ -45,7 +47,7 @@
     }
 
     try {
-      const response = await fetch('/api/polls', {
+      const response = await fetch(`${API_BASE}/api/polls`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte';
 
+  const API_BASE = import.meta.env.PUBLIC_DUCK_PLAYGROUND_API || 'http://localhost:3001';
+
   export let pollId = '';
 
   let poll = null;
@@ -20,7 +22,7 @@
     }
 
     try {
-      const response = await fetch(`/api/vote/${pollId}`);
+      const response = await fetch(`${API_BASE}/api/vote/${pollId}`);
       if (!response.ok) {
         error = 'Poll not found';
         loading = false;
