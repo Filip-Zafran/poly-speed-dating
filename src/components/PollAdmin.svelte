@@ -10,8 +10,11 @@
     title: '',
     description: '',
     date1: '',
+    time1: '',
     date2: '',
+    time2: '',
     date3: '',
+    time3: '',
     expected: '',
     openAccess: false,
     timerMinutes: '',
@@ -63,8 +66,11 @@
           title: formData.title,
           description: formData.description || undefined,
           date1: formData.date1,
+          time1: formData.time1 || undefined,
           date2: formData.date2,
+          time2: formData.time2 || undefined,
           date3: formData.date3,
+          time3: formData.time3 || undefined,
           expected: formData.expected ? parseInt(formData.expected) : undefined,
           open_access: formData.openAccess,
           timer_minutes: formData.timerMinutes ? parseInt(formData.timerMinutes) : 0,
@@ -87,8 +93,11 @@
         title: '',
         description: '',
         date1: '',
+        time1: '',
         date2: '',
+        time2: '',
         date3: '',
+        time3: '',
         expected: '',
         openAccess: false,
         timerMinutes: '',
@@ -106,15 +115,27 @@
     }
   }
 
-  function getDateLabel(dateStr) {
+  function getDateLabel(dateStr, timeStr = '') {
     if (!dateStr) return 'TBD';
     try {
       const date = new Date(dateStr);
-      return date.toLocaleDateString('en-US', {
+      const dateLabel = date.toLocaleDateString('en-US', {
         weekday: 'short',
         month: 'short',
         day: 'numeric'
       });
+
+      if (timeStr) {
+        const [hours, minutes] = timeStr.split(':');
+        const time = new Date(0, 0, 0, parseInt(hours), parseInt(minutes));
+        const timeLabel = time.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        });
+        return `${dateLabel} at ${timeLabel}`;
+      }
+      return dateLabel;
     } catch {
       return dateStr;
     }
@@ -175,38 +196,71 @@
           ></textarea>
         </div>
 
-        <div class="dates-grid">
-          <div class="form-group">
-            <label for="date1">Date Option 1 *</label>
-            <input
-              id="date1"
-              type="date"
-              bind:value={formData.date1}
-              required
-              disabled={formSubmitting}
-            />
+        <div class="dates-times-grid">
+          <div class="date-time-pair">
+            <div class="form-group">
+              <label for="date1">Date Option 1 *</label>
+              <input
+                id="date1"
+                type="date"
+                bind:value={formData.date1}
+                required
+                disabled={formSubmitting}
+              />
+            </div>
+            <div class="form-group">
+              <label for="time1">Time (optional)</label>
+              <input
+                id="time1"
+                type="time"
+                bind:value={formData.time1}
+                disabled={formSubmitting}
+              />
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="date2">Date Option 2 *</label>
-            <input
-              id="date2"
-              type="date"
-              bind:value={formData.date2}
-              required
-              disabled={formSubmitting}
-            />
+          <div class="date-time-pair">
+            <div class="form-group">
+              <label for="date2">Date Option 2 *</label>
+              <input
+                id="date2"
+                type="date"
+                bind:value={formData.date2}
+                required
+                disabled={formSubmitting}
+              />
+            </div>
+            <div class="form-group">
+              <label for="time2">Time (optional)</label>
+              <input
+                id="time2"
+                type="time"
+                bind:value={formData.time2}
+                disabled={formSubmitting}
+              />
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="date3">Date Option 3 *</label>
-            <input
-              id="date3"
-              type="date"
-              bind:value={formData.date3}
-              required
-              disabled={formSubmitting}
-            />
+          <div class="date-time-pair">
+            <div class="form-group">
+              <label for="date3">Date Option 3 *</label>
+              <input
+                id="date3"
+                type="date"
+                bind:value={formData.date3}
+                required
+                disabled={formSubmitting}
+              />
+            </div>
+            <div class="form-group">
+              <label for="time3">Time (optional)</label>
+              <input
+                id="time3"
+                type="time"
+                bind:value={formData.time3}
+                disabled={formSubmitting}
+              />
+            </div>
           </div>
         </div>
 
@@ -290,7 +344,7 @@
           <div class="poll-card">
             <h3>{poll.title}</h3>
             <div class="poll-meta">
-              <p>📅 {getDateLabel(poll.date1)} | {getDateLabel(poll.date2)} | {getDateLabel(poll.date3)}</p>
+              <p>📅 {getDateLabel(poll.date1, poll.time1)} | {getDateLabel(poll.date2, poll.time2)} | {getDateLabel(poll.date3, poll.time3)}</p>
               <p>🗳️ {poll.vote_count || 0} votes</p>
               {#if poll.expected}
                 <p>👥 Expected: {poll.expected}</p>
@@ -439,6 +493,18 @@
     outline: none;
     border-color: var(--psd-primary, #340c46);
     box-shadow: 0 0 0 3px rgba(52, 12, 70, 0.1);
+  }
+
+  .dates-times-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .date-time-pair {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0.75rem;
   }
 
   .dates-grid {

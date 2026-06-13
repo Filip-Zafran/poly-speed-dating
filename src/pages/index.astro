@@ -97,6 +97,35 @@ import Layout from '../layouts/Layout.astro';
         </p>
       </div>
     </section>
+
+    <!-- Navigation Links -->
+    <section class="navigation-section">
+      <h2>Internal Pages</h2>
+      <div class="nav-grid">
+        <a href="/apply" class="nav-link nav-link--active">Apply</a>
+        <a href="/calendar" class="nav-link nav-link--active">Calendar</a>
+        <a href="/contact" class="nav-link nav-link--active">Contact</a>
+        <a href="/dashboard" class="nav-link nav-link--active">Dashboard</a>
+        <a href="/dates" class="nav-link nav-link--active">Dates</a>
+        <a href="/faq" class="nav-link nav-link--active">FAQ</a>
+        <a href="/identity" class="nav-link nav-link--active">Identity</a>
+        <a href="/imprint" class="nav-link nav-link--active">Imprint</a>
+        <a href="/interests" class="nav-link nav-link--active">Interests</a>
+        <a href="/matches" class="nav-link nav-link--active">Matches</a>
+        <a href="/merch" class="nav-link nav-link--active">Merch</a>
+        <a href="/order" class="nav-link nav-link--active">Order</a>
+        <a href="/organiser" class="nav-link nav-link--active">Organiser</a>
+        <a href="/poll" class="nav-link nav-link--active">Poll</a>
+        <a href="/poll-vote" class="nav-link nav-link--active">Poll Vote</a>
+        <a href="/polyfest" class="nav-link nav-link--active">Polyfest</a>
+        <a href="/privacy" class="nav-link nav-link--active">Privacy</a>
+        <a href="/profile" class="nav-link nav-link--active">Profile</a>
+        <a href="/rounds" class="nav-link nav-link--active">Rounds</a>
+        <a href="/connectors" class="nav-link nav-link--active">Connectors</a>
+        <a href="/test-connectors" class="nav-link nav-link--active">Test Connectors</a>
+        <a href="/test-simple" class="nav-link nav-link--active">Test Simple</a>
+      </div>
+    </section>
   </main>
 </Layout>
 
@@ -202,5 +231,61 @@ import Layout from '../layouts/Layout.astro';
     box-shadow: 0 4px 12px rgba(255, 82, 82, 0.3);
     z-index: 10;
     letter-spacing: 1px;
+  }
+
+  .navigation-section {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+  }
+
+  .navigation-section h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.5em;
+  }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    color: white;
+  }
+
+  .nav-link--active {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+  }
+
+  .nav-link--active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+  }
+
+  .nav-link--placeholder {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    opacity: 0.8;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+  }
+
+  .nav-link--placeholder:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+    opacity: 1;
   }
 </style>
