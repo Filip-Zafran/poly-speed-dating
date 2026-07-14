@@ -6,24 +6,189 @@
   <title>Poly Speed Dating Berlin</title>
 
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Header and Navigation */
+    header {
+      background: linear-gradient(90deg, #0052cc 0%, #6600cc 50%, #ff0080 100%);
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 70px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .logo-container:hover {
+      opacity: 0.8;
+    }
+
+    .logo {
+      width: 55px;
+      height: 55px;
+      background-color: transparent;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 6px;
+      padding: 0.5rem;
+    }
+
+    .hamburger span {
+      width: 28px;
+      height: 3px;
+      background-color: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(10px, 10px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    @media (min-width: 769px) {
+      .hamburger {
+        display: none;
+      }
+    }
+
+    nav {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 0;
+      background: linear-gradient(180deg, #0052cc 0%, #ff0080 100%);
+      width: 100%;
+      max-width: 300px;
+      flex-direction: column;
+      padding: 1rem 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      border-radius: 0 0 12px 0;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    nav.active {
+      display: flex;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-left: 4px solid transparent;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-left-color: #ff0080;
+      padding-left: 1.75rem;
+    }
+
+    @media (min-width: 769px) {
+      nav {
+        display: flex !important;
+        position: static;
+        background: none;
+        width: auto;
+        max-width: none;
+        padding: 0;
+        gap: 1.2rem;
+        box-shadow: none;
+        border-radius: 0;
+        animation: none;
+        flex-direction: row;
+        align-items: center;
+        height: 70px;
+      }
+
+      nav a {
+        padding: 0.5rem 0;
+        border: none;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s ease;
+        font-weight: 600;
+        font-size: 0.9rem;
+        white-space: nowrap;
+      }
+
+      nav a:hover {
+        background-color: transparent;
+        border-bottom-color: #ff0080;
+        border-left: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <header class="site-header">
-  <div class="header-container">
-    <a href="index.html" class="logo">
-      <img src="images/PSD-logo.png" alt="PSD Logo">
+  <header>
+    <a href="index.html" class="logo-container" id="logo-link">
+      <div class="logo">
+        <img src="images/PSD-logo.png" alt="PSD Logo">
+      </div>
     </a>
-
-    <nav class="nav-links">
-      <a href="index.html" class="nav-link" data-page="index.html">Home</a>
-      <a href="identity.html" class="nav-link" data-page="identity.html">Identity</a>
-      <a href="polyfest.html" class="nav-link" data-page="polyfest.html">PolyFest</a>
-      <a href="faq.html" class="nav-link" data-page="faq.html">FAQ</a>
-      <a href="contact.html" class="nav-link" data-page="contact.html">Contact</a>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Home</a>
+      <a href="identity.html">Identity</a>
+      <a href="polyfest.html">PolyFest 2026</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
     </nav>
-  </div>
-</header>
+  </header>
 
 
   <main class="linktree-page">
@@ -138,5 +303,38 @@
 </footer>
 
   <script src="components/site-navigation.js"></script>
+  <script>
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('header')) {
+        nav.classList.remove('active');
+        hamburger.classList.remove('active');
+      }
+    });
+
+    // Logo click to home - close menu if open
+    const logoLink = document.getElementById('logo-link');
+    logoLink.addEventListener('click', () => {
+      nav.classList.remove('active');
+      hamburger.classList.remove('active');
+    });
+  </script>
 </body>
 </html>

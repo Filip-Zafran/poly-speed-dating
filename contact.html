@@ -445,7 +445,7 @@
           </div>
 
           <div class="ws-item">
-            <a class="ws-link is-active" href="#" data-contact="instagram-polyfest">
+            <a class="ws-link" href="#" data-contact="instagram-polyfest">
               <span class="ws-title">📷 PolyFest</span>
               <span class="ws-meta-mini">@polyfest_berlin</span>
             </a>
@@ -461,7 +461,7 @@
           <div class="ws-item">
             <a class="ws-link" href="#" data-contact="telegram">
               <span class="ws-title">Telegram Group</span>
-              <span class="ws-meta-mini">Coming soon</span>
+              <span class="ws-meta-mini">t.me/polyspeeddatingberlin</span>
             </a>
           </div>
         </aside>
@@ -490,7 +490,7 @@
     <!-- =======================
          SUBSCRIBE (own section)
     ======================== -->
-    <section class="subscribe-section">
+    <section class="subscribe-section" id="mailing-list">
       <h2 class="pf-opening">Stay in the Loop</h2>
 
       <div class="workshops-wrap">
@@ -693,17 +693,20 @@
       'instagram-polyfest': {
         title: '📷 PolyFest',
         body: 'Follow us for event updates, community vibes, and behind-the-scenes content.',
-        cta: 'https://www.instagram.com/polyfest_berlin/'
+        cta: 'https://www.instagram.com/polyfest_berlin/',
+        target: '_blank'
       },
       'instagram-duck': {
         title: '📷 Duck Dating Apps',
         body: 'Check out our blind dating events and community updates.',
-        cta: 'https://www.instagram.com/duck.dating.apps/'
+        cta: 'https://www.instagram.com/duck.dating.apps/',
+        target: '_blank'
       },
       telegram: {
         title: 'Telegram Group',
-        body: 'Community chat coming soon.',
-        cta: '#'
+        body: 'Join our community chat for updates and discussions.',
+        cta: 'https://t.me/polyspeeddatingberlin',
+        target: '_blank'
       }
     };
 
@@ -783,6 +786,13 @@
             const ctaEl = document.getElementById(ctaId);
             if (ctaEl) {
               ctaEl.href = item.cta;
+              if (item.target) {
+                ctaEl.setAttribute('target', item.target);
+                ctaEl.setAttribute('rel', 'noopener noreferrer');
+              } else {
+                ctaEl.removeAttribute('target');
+                ctaEl.removeAttribute('rel');
+              }
             }
           }
 

@@ -487,6 +487,110 @@
             font-size: 0.9rem;
         }
 
+        /* Workshops/Sidebar Switcher Styles */
+        .workshops-wrap {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        .workshops-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .workshops-sidebar h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        .ws-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ws-link {
+            display: block;
+            padding: 1rem;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            border-left: 4px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .ws-link:hover {
+            background-color: #e5e7eb;
+            border-left-color: #0052ff;
+        }
+
+        .ws-link.is-active {
+            background-color: #0052ff;
+            color: white;
+            border-left-color: #ff0080;
+        }
+
+        .ws-title {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .ws-meta-mini {
+            display: block;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .ws-detail {
+            background-color: white;
+            border-radius: 8px;
+            padding: 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .ws-detail-inner {
+            padding: 2rem;
+        }
+
+        .ws-detail h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #0052ff;
+        }
+
+        .ws-detail p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Team Details */
+        .team-avatar-round {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .team-detail {
+            text-align: center;
+        }
+
+        .team-role {
+            color: #999;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
         /* Roadmap Section */
         .roadmap-container {
             background-color: white;
@@ -578,6 +682,15 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
+            }
+
+            .workshops-wrap {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .ws-detail-inner {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -769,35 +882,55 @@
         <div class="section">
             <h2>About Us</h2>
 
-            <div>
-                <h3 style="color: #0052ff; margin-top: 1.5rem;">About the Community</h3>
-                <h4 style="color: #666; font-weight: 500; margin-bottom: 1rem;">Who We Are</h4>
-                <p>
-                    PolyFest Berlin is built by and for the polyamorous community. We believe in celebrating
-                    relationship diversity, fostering authentic connections, and creating spaces where everyone
-                    can be their true selves. Our founders and moderators are deeply invested in making PolyFest
-                    a welcoming, inclusive celebration for all.
-                </p>
-            </div>
+            <div class="workshops-wrap" style="margin-top: 1.5rem;">
+                <aside class="workshops-sidebar">
+                    <h2>Team</h2>
 
-            <h3 style="margin-top: 2rem;">Team</h3>
-            <div class="team-grid">
-                <div class="team-member">
-                    <h4>Ficho</h4>
-                    <p>Founder / Moderator</p>
-                </div>
-                <div class="team-member">
-                    <h4>Sarah</h4>
-                    <p>Founder / Moderator</p>
-                </div>
+                    <div class="ws-item">
+                        <a class="ws-link is-active" href="#" data-team="team">
+                            <span class="ws-title">Team</span>
+                            <span class="ws-meta-mini">PolyFest Community</span>
+                        </a>
+                    </div>
+
+                    <div class="ws-item">
+                        <a class="ws-link" href="#" data-team="ficho">
+                            <span class="ws-title">Filip "Ficho" Zafran</span>
+                            <span class="ws-meta-mini">Event Manager & Workshop Facilitator</span>
+                        </a>
+                    </div>
+
+                    <div class="ws-item">
+                        <a class="ws-link" href="#" data-team="sarah">
+                            <span class="ws-title">Sarah</span>
+                            <span class="ws-meta-mini">Relationship Coach & Workshop Facilitator</span>
+                        </a>
+                    </div>
+                </aside>
+
+                <section class="ws-detail">
+                    <div class="ws-detail-inner team-detail">
+                        <img
+                            id="polyfestTeamImg"
+                            src="images/polyfest-small.png"
+                            alt="Team member"
+                            class="team-avatar-round"
+                        />
+                        <h3 id="polyfestTeamName">Team</h3>
+                        <p id="polyfestTeamRole" class="team-role">PolyFest Community</p>
+                        <p id="polyfestTeamBio">
+                            PolyFest Berlin is built by a passionate community dedicated to creating safe, inclusive spaces for connection and celebration. Our team brings together diverse expertise, perspectives, and a shared commitment to fostering understanding, support, and connection within the polyamorous and ethical non-monogamy communities.
+                        </p>
+                    </div>
+                </section>
             </div>
         </div>
 
         <!-- Stay in the Loop -->
-        <div class="banner-section">
+        <a href="contact.html#mailing-list" class="banner-section" style="text-decoration: none; display: block; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(0, 0, 0, 0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(0, 0, 0, 0.15)';">
             <h2>Stay in the Loop</h2>
             <p style="color: rgba(255, 255, 255, 0.85); margin-top: 1rem;">Join our mailing list to stay updated with PolyFest news</p>
-        </div>
+        </a>
 
         <!-- Archive Section -->
         <div class="section">
@@ -869,6 +1002,64 @@
                 // Add active class to clicked item and corresponding content
                 item.classList.add('is-active');
                 document.querySelector(`.position-detail-content[data-position="${positionId}"]`).classList.add('is-active');
+            });
+        });
+
+        // Team Switcher Data
+        const POLYFEST_TEAM = {
+            team: {
+                name: 'Team',
+                role: 'PolyFest Community',
+                bio: 'PolyFest Berlin is built by a passionate community dedicated to creating safe, inclusive spaces for connection and celebration. Our team brings together diverse expertise, perspectives, and a shared commitment to fostering understanding, support, and connection within the polyamorous and ethical non-monogamy communities. We work together to make PolyFest an unforgettable celebration of relationship diversity and authentic human connection.',
+                img: 'images/polyfest-small.png'
+            },
+            ficho: {
+                name: 'Ficho',
+                role: 'Event Manager & Workshop Facilitator',
+                bio: 'Opening up four years ago with his primary partner, Ficho (he/him) quickly became poly at heart and deeply passionate about creating spaces that celebrate connection, communication, and openness — from events like Poly Speed Dating, KiezBurn, and Poly Fest to Emotional Intelligence workshops and other community.',
+                img: 'images/presenters/ficho.jpg'
+            },
+            sarah: {
+                name: 'Sarah',
+                role: 'Relationship Coach & Workshop Facilitator',
+                bio: 'Sarah (she/they) started exploring non-monogamy 10 years ago when she lived in Brooklyn and stumbled upon polyamorous Burners at a festival outside of NYC. She immediately felt like this was the answer to all of her relationship problems. Of course it wasn\'t. But it also kind of was. Since then she has made a lot of mistakes and has been talking about them in her newsletter: monogamish as well as on Instagram under the account monogamish_me. She is also a systemic coach for individuals and couples, helping them relate more honestly and in a way that truly serves them, their values, and their goals. In her free time, she dances, does yoga, and most recently took a stab at comedy improv and loves it!',
+                img: 'images/presenters/sarah.jpeg'
+            }
+        };
+
+        // Team Switcher
+        document.querySelectorAll('[data-team]').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+
+                const key = link.dataset.team;
+                const item = POLYFEST_TEAM[key];
+                if (!item) return;
+
+                // Update team details
+                const nameEl = document.getElementById('polyfestTeamName');
+                if (nameEl) nameEl.textContent = item.name;
+
+                const roleEl = document.getElementById('polyfestTeamRole');
+                if (roleEl) roleEl.textContent = item.role;
+
+                const bioEl = document.getElementById('polyfestTeamBio');
+                if (bioEl) bioEl.textContent = item.bio;
+
+                const imgEl = document.getElementById('polyfestTeamImg');
+                if (imgEl) {
+                    imgEl.src = item.img;
+                    imgEl.alt = item.name;
+                }
+
+                // Update active state
+                const sidebar = link.closest('.workshops-sidebar');
+                if (sidebar) {
+                    sidebar.querySelectorAll('.ws-link').forEach(a =>
+                        a.classList.remove('is-active')
+                    );
+                }
+                link.classList.add('is-active');
             });
         });
     </script>
