@@ -688,24 +688,28 @@
       email: {
         title: 'Email',
         body: 'Write us any time - we usually reply within a few days.',
-        cta: 'mailto:polyspeeddating@gmail.com'
+        cta: 'mailto:polyspeeddating@gmail.com',
+        ctaText: 'polyspeeddating@gmail.com'
       },
       'instagram-polyfest': {
         title: '📷 PolyFest',
         body: 'Follow us for event updates, community vibes, and behind-the-scenes content.',
         cta: 'https://www.instagram.com/polyfest_berlin/',
+        ctaText: '@polyfest_berlin',
         target: '_blank'
       },
       'instagram-duck': {
         title: '📷 Duck Dating Apps',
         body: 'Check out our blind dating events and community updates.',
         cta: 'https://www.instagram.com/duck.dating.apps/',
+        ctaText: '@duck.dating.apps',
         target: '_blank'
       },
       telegram: {
         title: 'Telegram Group',
         body: 'Join our community chat for updates and discussions.',
         cta: 'https://t.me/polyspeeddatingberlin',
+        ctaText: 't.me/polyspeeddatingberlin',
         target: '_blank'
       }
     };
@@ -786,6 +790,9 @@
             const ctaEl = document.getElementById(ctaId);
             if (ctaEl) {
               ctaEl.href = item.cta;
+              if (item.ctaText) {
+                ctaEl.textContent = item.ctaText;
+              }
               if (item.target) {
                 ctaEl.setAttribute('target', item.target);
                 ctaEl.setAttribute('rel', 'noopener noreferrer');
