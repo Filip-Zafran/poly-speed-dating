@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - Poly Speed Dating (PSD)</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Header and Navigation */
+    header {
+      background: linear-gradient(90deg, #0052cc 0%, #6600cc 50%, #ff0080 100%);
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 70px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .logo-container:hover {
+      opacity: 0.8;
+    }
+
+    .logo {
+      width: 55px;
+      height: 55px;
+      background-color: transparent;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 6px;
+      padding: 0.5rem;
+    }
+
+    .hamburger span {
+      width: 28px;
+      height: 3px;
+      background-color: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(10px, 10px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    @media (min-width: 769px) {
+      .hamburger {
+        display: none;
+      }
+    }
+
+    nav {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 0;
+      background: linear-gradient(180deg, #0052cc 0%, #ff0080 100%);
+      width: 100%;
+      max-width: 300px;
+      flex-direction: column;
+      padding: 1rem 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      border-radius: 0 0 12px 0;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    nav.active {
+      display: flex;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-left: 4px solid transparent;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-left-color: #ff0080;
+      padding-left: 1.75rem;
+    }
+
+    @media (min-width: 769px) {
+      nav {
+        display: flex !important;
+        position: static;
+        background: none;
+        width: auto;
+        max-width: none;
+        padding: 0;
+        gap: 1.2rem;
+        box-shadow: none;
+        border-radius: 0;
+        animation: none;
+        flex-direction: row;
+        align-items: center;
+        height: 70px;
+      }
+
+      nav a {
+        padding: 0.5rem 0;
+        border: none;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s ease;
+        font-weight: 600;
+        font-size: 0.9rem;
+        white-space: nowrap;
+      }
+
+      nav a:hover {
+        background-color: transparent;
+        border-bottom-color: #ff0080;
+        border-left: none;
+      }
+    }
+
+    /* Contact/Workshops Layout */
+    .pf-opening {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .workshops-wrap {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .workshops-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .workshops-sidebar h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      margin-top: 0;
+    }
+
+    .ws-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ws-link {
+      display: block;
+      padding: 1rem;
+      background-color: #f3f4f6;
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      border-left: 4px solid transparent;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .ws-link:hover {
+      background-color: #e5e7eb;
+      border-left-color: var(--poly-magenta);
+    }
+
+    .ws-link.is-active {
+      background-color: var(--poly-blue);
+      color: white;
+      border-left-color: var(--poly-magenta);
+    }
+
+    .ws-title {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .ws-meta-mini {
+      display: block;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .ws-tip {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    .ws-detail {
+      background-color: white;
+      border-radius: 8px;
+      padding: 0;
+    }
+
+    .ws-detail-inner {
+      padding: 2rem;
+    }
+
+    .ws-detail h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .ws-detail p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .pf-link-btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(90deg, var(--poly-blue), var(--poly-magenta));
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .pf-link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Subscribe Form */
+    .subscribe-section {
+      margin-top: 3rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"] {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    .form-group input[type="text"]:focus,
+    .form-group input[type="email"]:focus {
+      outline: none;
+      border-color: var(--poly-blue);
+      box-shadow: 0 0 0 3px rgba(0, 159, 227, 0.1);
+    }
+
+    .form-group fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .form-group legend {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      padding: 0;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    .checkbox input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--poly-blue);
+    }
+
+    .checkbox label {
+      cursor: pointer;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      background-color: var(--poly-blue);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--poly-blue), var(--poly-magenta));
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .section-divider {
+      margin: 3rem 0;
+      border: none;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* Team Details */
+    .team-avatar-round {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .team-detail {
+      text-align: center;
+    }
+
+    .team-role {
+      color: #999;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .workshops-wrap {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .ws-detail-inner {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo-container" id="logo-link">
+      <div class="logo">
+        <img src="images/PSD-logo.png" alt="PSD Logo">
+      </div>
+    </a>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Home</a>
+      <a href="identity.html">Identity</a>
+      <a href="polyfest.html">PolyFest 2026</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Contact PSD</h1>
+
+    <!-- =======================
+         CONTACT US
+    ======================== -->
+    <section class="contact-us">
+      <h2 class="pf-opening">Contact Us</h2>
+
+      <div class="workshops-wrap">
+        <aside class="workshops-sidebar">
+          <h2>Channels</h2>
+
+          <div class="ws-item">
+            <a class="ws-link is-active" href="#" data-contact="email">
+              <span class="ws-title">Email</span>
+              <span class="ws-meta-mini">Best for questions</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link is-active" href="#" data-contact="instagram-polyfest">
+              <span class="ws-title">📷 PolyFest</span>
+              <span class="ws-meta-mini">@polyfest_berlin</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-contact="instagram-duck">
+              <span class="ws-title">📷 Duck Dating Apps</span>
+              <span class="ws-meta-mini">@duck.dating.apps</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-contact="telegram">
+              <span class="ws-title">Telegram Group</span>
+              <span class="ws-meta-mini">Coming soon</span>
+            </a>
+          </div>
+        </aside>
+
+        <section class="ws-detail">
+          <div class="ws-detail-inner">
+            <h3 id="contactTitle">Email</h3>
+            <p id="contactBody">
+              Write us any time - we usually reply within a few days.
+            </p>
+
+            <a
+              id="contactCta"
+              class="pf-link-btn"
+              href="mailto:polyspeeddating@gmail.com"
+            >
+              polyspeeddating@gmail.com
+            </a>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- =======================
+         SUBSCRIBE (own section)
+    ======================== -->
+    <section class="subscribe-section">
+      <h2 class="pf-opening">Stay in the Loop</h2>
+
+      <div class="workshops-wrap">
+        <aside class="workshops-sidebar">
+          <h2>Mailing List</h2>
+          <p class="ws-tip">
+            No spam. Only events. Ever.
+          </p>
+        </aside>
+
+        <section class="ws-detail">
+          <div class="ws-detail-inner">
+            <p>
+              We are SUPER-DUPER careful with your data and only send updates
+              about PSD events.
+            </p>
+
+            <form action="https://formspree.io/f/xnnoewka" method="POST">
+              <div class="form-group">
+                <label>Name</label>
+                <input name="name" type="text" required />
+              </div>
+
+              <div class="form-group">
+                <label>Email</label>
+                <input name="email" type="email" required />
+              </div>
+
+              <fieldset class="form-group">
+                <legend>Interests</legend>
+                <label class="checkbox">
+                  <input type="checkbox" name="interests" value="IRL" checked />
+                  IRL Events
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="interests" value="Online" checked />
+                  Online Events
+                </label>
+              </fieldset>
+
+              <label class="checkbox" style="margin-bottom:1rem;">
+                <input type="checkbox" required />
+                I agree to receive emails from PSD and can unsubscribe anytime.
+              </label>
+
+              <button type="submit" class="btn btn-primary">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- =======================
+         OUR VENUES
+    ======================== -->
+    <section class="venues">
+      <h2 class="pf-opening">Our Venues</h2>
+
+      <div class="workshops-wrap">
+        <aside class="workshops-sidebar">
+          <h2>Locations</h2>
+
+          <div class="ws-item">
+            <a class="ws-link is-active" href="#" data-venue="lovelite">
+              <span class="ws-title">LoveLite Bar</span>
+              <span class="ws-meta-mini">10245 Berlin</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-venue="trashtelier">
+              <span class="ws-title">Trashtelier</span>
+              <span class="ws-meta-mini">12435 Berlin</span>
+            </a>
+          </div>
+        </aside>
+
+        <section class="ws-detail">
+          <div class="ws-detail-inner">
+            <h3 id="venueTitle">LoveLite Bar</h3>
+            <p id="venueBody">Simplonstraße 38, 10245 Berlin</p>
+
+            <a
+              id="venueCta"
+              class="pf-link-btn"
+              href="https://lovelit-hauke.jimdofree.com"
+              target="_blank"
+            >
+              Visit website
+            </a>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- =======================
+         OUR TEAM
+    ======================== -->
+    <section class="team">
+      <h2 class="pf-opening">Our Team</h2>
+
+      <div class="workshops-wrap">
+        <aside class="workshops-sidebar">
+          <h2>Team</h2>
+
+          <div class="ws-item">
+            <a class="ws-link is-active" href="#" data-team="team">
+              <span class="ws-title">Team</span>
+              <span class="ws-meta-mini">Our PSD Family</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-team="ficho">
+              <span class="ws-title">Filip "Ficho" Zafran</span>
+              <span class="ws-meta-mini">Founder / Moderator</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-team="akela">
+              <span class="ws-title">Akela</span>
+              <span class="ws-meta-mini">Founder / Dev / Moderator</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-team="dro">
+              <span class="ws-title">Olya</span>
+              <span class="ws-meta-mini">Founder / Moderator</span>
+            </a>
+          </div>
+
+          <div class="ws-item">
+            <a class="ws-link" href="#" data-team="jay">
+              <span class="ws-title">Jay M.</span>
+              <span class="ws-meta-mini">Orga</span>
+            </a>
+          </div>
+        </aside>
+
+        <section class="ws-detail">
+          <div class="ws-detail-inner team-detail">
+
+            <img
+              id="teamImg"
+              src="images/presenters/ficho.jpg"
+              alt="Team member"
+              class="team-avatar-round"
+            />
+
+            <h3 id="teamName">Ficho</h3>
+            <p id="teamRole" class="team-role">moderator, organiser</p>
+
+            <p id="teamBio">
+              Opening up four years ago with his primary partner, Ficho (he/him)
+              quickly became poly at heart and deeply passionate about creating spaces
+              that celebrate connection, communication, and openness.
+            </p>
+
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="images/PSD - CoC & Schedule.pdf" class="footer-link" target="_blank" rel="noopener">
+          📄 PSD CoC & schedule
+        </a>
+        <a href="privacy.html" class="footer-link">Privacy</a>
+        <a href="imprint.html" class="footer-link">Imprint</a>
+      </div>
+
+      <div class="copyright">
+        © PSD / Powered by Ficho (fž) <span id="year"></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =======================
+       SWITCHER SCRIPT
+  ======================== -->
+  <script>
+    const CONTACT = {
+      email: {
+        title: 'Email',
+        body: 'Write us any time - we usually reply within a few days.',
+        cta: 'mailto:polyspeeddating@gmail.com'
+      },
+      'instagram-polyfest': {
+        title: '📷 PolyFest',
+        body: 'Follow us for event updates, community vibes, and behind-the-scenes content.',
+        cta: 'https://www.instagram.com/polyfest_berlin/'
+      },
+      'instagram-duck': {
+        title: '📷 Duck Dating Apps',
+        body: 'Check out our blind dating events and community updates.',
+        cta: 'https://www.instagram.com/duck.dating.apps/'
+      },
+      telegram: {
+        title: 'Telegram Group',
+        body: 'Community chat coming soon.',
+        cta: '#'
+      }
+    };
+
+    const VENUES = {
+      lovelite: {
+        title: 'LoveLite Bar',
+        body: 'Simplonstraße 38, 10245 Berlin',
+        cta: 'https://lovelit-hauke.jimdofree.com'
+      },
+      trashtelier: {
+        title: 'Trashtelier',
+        body: 'Herkomerstraße 4, 12435 Berlin',
+        cta: 'https://www.trashtelier.de/'
+      }
+    };
+
+    const TEAM = {
+      team: {
+        name: 'Team',
+        role: 'Our PSD Family',
+        bio: 'Poly Speed Dating Berlin is built by a passionate community dedicated to creating safe, inclusive spaces for connection. Our team brings together diverse expertise, perspectives, and a shared commitment to celebrating relationship diversity and authentic human connection. Together, we work to foster understanding, support, and community within the polyamorous and ethical non-monogamy spaces.',
+        img: 'images/PSD-logo.png'
+      },
+      ficho: {
+        name: 'Ficho',
+        role: 'Founder / Moderator',
+        bio: 'Ficho (he/him) opened up four years ago with his primary partner and quickly became poly at heart. He is deeply passionate about creating spaces that celebrate connection, communication, and openness through events like Poly Speed Dating, KiezBurn, and Poly Fest.',
+        img: 'images/presenters/ficho.jpg'
+      },
+      akela: {
+        name: 'Akela',
+        role: 'Founder / Developer / Moderator',
+        bio: 'Akela (she/her) is the main developer and founder behind Poly Speed Dating software. She is a community facilitator passionate about authentic connection, consent culture, and helping people meet face-to-face in playful, pressure-free ways. Akela works as a moderator and developer alongside Jay to facilitate Poly Speed Dating events, creating safe and engaging spaces for people to connect meaningfully.',
+        img: 'images/presenters/akela.png'
+      },
+      dro: {
+        name: 'Olya',
+        role: 'Founder / Moderator',
+        bio: 'Olya brings valuable expertise and perspective to the team as a founder and moderator.',
+        img: 'https://via.placeholder.com/300?text=Olya'
+      },
+      jay: {
+        name: 'Jay M.',
+        role: 'moderator, organiser',
+        bio: 'Jay (he/him) is a community facilitator passionate about authentic connection, consent culture, and helping people meet face-to-face in playful, pressure-free ways.',
+        img: 'images/presenters/jay.jpg'
+      }
+    };
+
+    function bindSwitcher(selector, data, titleId, bodyId, ctaId) {
+      document.querySelectorAll(selector).forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+
+          const key =
+            link.dataset.contact ||
+            link.dataset.venue ||
+            link.dataset.team;
+
+          const item = data[key];
+          if (!item) return;
+
+          // Title / Name
+          const titleEl = document.getElementById(titleId);
+          if (titleEl && (item.title || item.name)) {
+            titleEl.textContent = item.title || item.name;
+          }
+
+          // Body / Bio
+          const bodyEl = document.getElementById(bodyId);
+          if (bodyEl && (item.body || item.bio)) {
+            bodyEl.textContent = item.body || item.bio;
+          }
+
+          // CTA (Contact / Venue only)
+          if (ctaId && item.cta) {
+            const ctaEl = document.getElementById(ctaId);
+            if (ctaEl) {
+              ctaEl.href = item.cta;
+            }
+          }
+
+          // === TEAM-ONLY EXTENSIONS ===
+
+          // Team image (optional)
+          if (item.img) {
+            const imgEl = document.getElementById('teamImg');
+            if (imgEl) {
+              imgEl.src = item.img;
+              imgEl.alt = item.name || 'Team member';
+            }
+          }
+
+          // Team role (optional)
+          if (item.role) {
+            const roleEl = document.getElementById('teamRole');
+            if (roleEl) {
+              roleEl.textContent = item.role;
+            }
+          }
+
+          // === ACTIVE STATE ===
+          const group = link.closest('.workshops-sidebar');
+          if (group) {
+            group.querySelectorAll('.ws-link').forEach(a =>
+              a.classList.remove('is-active')
+            );
+          }
+
+          link.classList.add('is-active');
+        });
+      });
+    }
+
+    bindSwitcher('[data-contact]', CONTACT, 'contactTitle', 'contactBody', 'contactCta');
+    bindSwitcher('[data-venue]', VENUES, 'venueTitle', 'venueBody', 'venueCta');
+    bindSwitcher('[data-team]', TEAM, 'teamName', 'teamBio');
+
+    // Set year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('header')) {
+        nav.classList.remove('active');
+        hamburger.classList.remove('active');
+      }
+    });
+
+    // Logo click to home - close menu if open
+    const logoLink = document.getElementById('logo-link');
+    logoLink.addEventListener('click', () => {
+      nav.classList.remove('active');
+      hamburger.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

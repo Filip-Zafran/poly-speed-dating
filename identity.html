@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity & Matching | Duck Dating Apps</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #0052cc 0%, #6600cc 50%, #ff0080 100%);
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-container:hover {
+            opacity: 0.8;
+        }
+
+        .logo {
+            width: 55px;
+            height: 55px;
+            background-color: transparent;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            right: 0;
+            background: linear-gradient(180deg, #0052cc 0%, #ff0080 100%);
+            width: 100%;
+            max-width: 300px;
+            flex-direction: column;
+            padding: 1rem 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            border-radius: 0 0 12px 0;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav.active {
+            display: flex;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-left: 4px solid transparent;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left-color: #ff0080;
+            padding-left: 1.75rem;
+        }
+
+        @media (min-width: 769px) {
+            nav {
+                display: flex !important;
+                position: static;
+                background: none;
+                width: auto;
+                max-width: none;
+                padding: 0;
+                gap: 1.2rem;
+                box-shadow: none;
+                border-radius: 0;
+                animation: none;
+                flex-direction: row;
+                align-items: center;
+                height: 70px;
+            }
+
+            nav a {
+                padding: 0.5rem 0;
+                border: none;
+                border-bottom: 3px solid transparent;
+                transition: all 0.2s ease;
+                font-weight: 600;
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+
+            nav a:hover {
+                background-color: transparent;
+                border-bottom-color: #ff0080;
+                border-left: none;
+            }
+        }
+
+        /* Hero Section */
+        .identity-hero {
+            background: linear-gradient(135deg, #2a1b4d 0%, #3d2068 100%);
+            color: white;
+            padding: 4rem 1.5rem;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .identity-hero .label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .identity-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .identity-hero p {
+            font-size: 1.05rem;
+            max-width: 800px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .hero-image-container {
+            margin-top: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ginger-illustration {
+            max-width: 280px;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ginger-illustration {
+                max-width: 200px;
+            }
+        }
+
+        /* Genderbread Section */
+        .genderbread-section {
+            background-color: white;
+            padding: 4rem 1.5rem;
+        }
+
+        .genderbread-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .genderbread-title {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: #2a1b4d;
+            font-weight: 700;
+        }
+
+        .genderbread-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .genderbread-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto 2rem;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .genderbread-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+        }
+
+        .genderbread-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .legend-item {
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #0052ff;
+        }
+
+        .legend-item h4 {
+            margin-bottom: 0.5rem;
+            color: #2a1b4d;
+            font-size: 0.95rem;
+        }
+
+        .legend-item p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0.3rem 0;
+        }
+
+        /* Framework Section */
+        .framework-section {
+            background: linear-gradient(135deg, #e8f4ff 0%, #f0e8ff 100%);
+            padding: 3rem 1.5rem;
+        }
+
+        .framework-banner {
+            background: linear-gradient(90deg, #00a8e8 0%, #005a9c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .framework-banner h2 {
+            font-size: 1.8rem;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .framework-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .framework-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #2a1b4d;
+            font-weight: 700;
+        }
+
+        .framework-content p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .framework-content a {
+            color: #0052ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .framework-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Principles Section */
+        .principles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .principle {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .principle h3 {
+            font-size: 1.1rem;
+            color: #2a1b4d;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .principle p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Help Section */
+        .help-section {
+            background-color: #fff5f8;
+            padding: 3rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .help-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .help-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #2a1b4d;
+            font-weight: 700;
+        }
+
+        .help-content p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #0052ff 0%, #ff0080 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 82, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #0052ff;
+            border: 2px solid #0052ff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-tagline {
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .attribution {
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .attribution a {
+            color: #0052ff;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .identity-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .genderbread-title {
+                font-size: 1.6rem;
+            }
+
+            .framework-content h2,
+            .help-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo-container" id="logo-link">
+            <div class="logo">
+                <img src="images/PSD-logo.png" alt="PSD Logo">
+            </div>
+        </a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Home</a>
+            <a href="identity.html">Identity</a>
+            <a href="polyfest.html">PolyFest 2026</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="identity-hero">
+        <div class="label">Identity & Matching</div>
+        <h1>Respectful matching without defining people</h1>
+        <p>
+            We want to create an experience that feels inclusive, thoughtful, and respectful for everyone.
+            Gender identity, attraction, and self-expression are complex. Our goal is not to box anyone in,
+            but to build a practical matching system that helps people connect as accurately and respectfully as possible.
+        </p>
+    </section>
+
+    <!-- Genderbread Section -->
+    <section class="genderbread-section" id="genderbread">
+        <div class="genderbread-container">
+            <h2 class="genderbread-title">The Genderbread Person</h2>
+            <p class="genderbread-subtitle">v4 — its pronounced METRO-sexual</p>
+
+            <div class="genderbread-image">
+                <img src="images/ginger.png" alt="The Genderbread Person Illustration">
+            </div>
+
+            <div class="genderbread-legend">
+                <div class="legend-item">
+                    <h4>🧠 Gender Identity</h4>
+                    <p>Woman-ness</p>
+                    <p>Man-ness</p>
+                </div>
+                <div class="legend-item">
+                    <h4>🚶 Gender Expression</h4>
+                    <p>Femininity</p>
+                    <p>Masculinity</p>
+                </div>
+                <div class="legend-item">
+                    <h4>⚧ Anatomical Sex</h4>
+                    <p>Female</p>
+                    <p>Male</p>
+                </div>
+                <div class="legend-item">
+                    <h4>❤️ Sexual Attraction</h4>
+                    <p>Women a/o Feminine a/o Female People</p>
+                    <p>Men a/o Masculine a/o Male People</p>
+                </div>
+                <div class="legend-item">
+                    <h4>💕 Romantic Attraction</h4>
+                    <p>Women a/o Feminine a/o Female People</p>
+                    <p>Men a/o Masculine a/o Male People</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem; font-style: italic; color: #666;">
+                Identity ≠ Expression ≠ Sex<br>
+                Gender ≠ Sexual Orientation
+            </p>
+        </div>
+    </section>
+
+    <!-- Framework Section -->
+    <section class="framework-section">
+        <div class="framework-banner">
+            <h2>A framework, not a definition.</h2>
+            <p style="margin-top: 1rem; font-size: 1rem;">How we think about identity on Duck Dating Apps</p>
+        </div>
+
+        <div class="framework-content">
+            <p>
+                We aim to create an inclusive and respectful experience for everyone. We understand that gender
+                identity and attraction are complex, and while we strive to accommodate as many identities and
+                preferences as possible, we recognize that our current options may not perfectly reflect everyone's experience.
+            </p>
+
+            <p>
+                Our structure is inspired by the <strong>Genderbread Person model</strong>.
+                <a href="https://www.genderbread.org/" target="_blank">Check the website for more details</a>.
+            </p>
+
+            <p>
+                This framework helps us organize matching in a practical way, but it is not meant to define or
+                limit anyone's identity.
+            </p>
+
+            <p>
+                To approach this thoughtfully, we've consulted many friends from both heteronormative and queer
+                communities to get feedback on this topic. Interestingly, we've received differing and sometimes
+                opposing feedback.
+            </p>
+
+            <p>
+                On one hand, we want to avoid placing anyone in an "Other" category, as this can feel diminishing
+                or exclusionary. On the other hand, we also want to avoid labeling people as "Cis" or "Trans" in a
+                way that could imply they are not simply men or women.
+            </p>
+
+            <p>
+                Our intention is never to categorize or define identities, but purely to create the most accurate
+                and respectful matching experience possible.
+            </p>
+
+            <p>
+                If something feels missing, unclear, or could be improved, we genuinely welcome your feedback and
+                suggestions. We are continuously learning and refining this process to better serve all participants.
+            </p>
+
+            <p style="margin-top: 2rem; font-style: italic;">
+                Thank you for your understanding and support 💛
+            </p>
+
+            <!-- Principles -->
+            <div class="principles">
+                <div class="principle">
+                    <h3>1. We are trying to be practical</h3>
+                    <p>
+                        Matching needs some structure. We use a framework so people can actually be grouped and
+                        matched in a useful way.
+                    </p>
+                </div>
+                <div class="principle">
+                    <h3>2. We know no framework is perfect</h3>
+                    <p>
+                        We understand that identity and attraction are nuanced and deeply personal. Our options may
+                        not fully reflect every lived experience.
+                    </p>
+                </div>
+                <div class="principle">
+                    <h3>3. We are open to feedback</h3>
+                    <p>
+                        We are learning as we go. If something feels off, missing, or could be phrased better,
+                        we truly want to hear it.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Section -->
+    <section class="help-section" id="help">
+        <div class="help-content">
+            <h2>Help us improve this</h2>
+            <p>
+                We'd rather keep refining than pretend we've already solved it perfectly. If you have thoughts,
+                feedback, or suggestions, we'd love to hear from you.
+            </p>
+            <div class="button-group">
+                <a href="#" class="btn btn-primary">Send feedback</a>
+                <a href="index.html" class="btn btn-secondary">Explore events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attribution -->
+    <section style="background-color: white; padding: 2rem 1.5rem; text-align: center; border-top: 1px solid #eee;">
+        <p style="color: #666; font-size: 0.85rem;">
+            Genderbread Person Version 4 created and uncopyrighted 2017 by Sam Killermann
+            <a href="https://www.genderbread.org/" style="color: #0052ff; text-decoration: none;">
+                For a bigger bite, read more at www.genderbread.org
+            </a>
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PSD</h3>
+                <p class="footer-tagline">Dating event coordination made simple.</p>
+                <a href="#">Privacy</a>
+                <a href="#">Imprint</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Links</h3>
+                <a href="#">Instagram</a>
+                <a href="#">Telegram</a>
+                <a href="#">YouTube</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 PSD. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header')) {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Logo click closes menu if open
+        const logoLink = document.getElementById('logo-link');
+        logoLink.addEventListener('click', () => {
+            nav.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
+
+        // Smooth scrolling for same-page links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

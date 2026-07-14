@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Poly Speed Dating</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5ede0 0%, #ede5dc 100%);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #0052cc 0%, #6600cc 50%, #ff0080 100%);
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-container:hover {
+            opacity: 0.8;
+        }
+
+        .logo {
+            width: 55px;
+            height: 55px;
+            background-color: transparent;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            right: 0;
+            background: linear-gradient(180deg, #0052cc 0%, #ff0080 100%);
+            width: 100%;
+            max-width: 300px;
+            flex-direction: column;
+            padding: 1rem 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            border-radius: 0 0 12px 0;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav.active {
+            display: flex;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-left: 4px solid transparent;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left-color: #ff0080;
+            padding-left: 1.75rem;
+        }
+
+        nav a.active {
+            background-color: rgba(255, 0, 128, 0.2);
+            border-left-color: #ff0080;
+        }
+
+        @media (min-width: 769px) {
+            nav {
+                display: flex !important;
+                position: static;
+                background: none;
+                width: auto;
+                max-width: none;
+                padding: 0;
+                gap: 1.2rem;
+                box-shadow: none;
+                border-radius: 0;
+                animation: none;
+                flex-direction: row;
+                align-items: center;
+                height: 70px;
+            }
+
+            nav a {
+                padding: 0.5rem 0;
+                border: none;
+                border-bottom: 3px solid transparent;
+                transition: all 0.2s ease;
+                font-weight: 600;
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+
+            nav a:hover {
+                background-color: transparent;
+                border-bottom-color: #ff0080;
+                border-left: none;
+            }
+
+            nav a.active {
+                border-bottom-color: #ff0080;
+                background: none;
+            }
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .faq-page-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 1000;
+            color: #340c46;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .faq-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-section details {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+        }
+
+        .faq-section details:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .faq-section details[open] {
+            background: #f8f5ff;
+            border-color: #009fe3;
+        }
+
+        .faq-section summary {
+            font-weight: 800;
+            cursor: pointer;
+            color: #340c46;
+            font-size: 1.1rem;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+        }
+
+        .faq-section summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-section summary::before {
+            content: "▶";
+            display: inline-block;
+            transition: transform 0.2s ease;
+            font-size: 0.85rem;
+            color: #009fe3;
+        }
+
+        .faq-section details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-section details p,
+        .faq-section details ul,
+        .faq-section details ol {
+            margin-top: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .faq-section details li {
+            margin-bottom: 0.75rem;
+            margin-left: 1.5rem;
+        }
+
+        .faq-section h3 {
+            font-weight: 800;
+            color: #340c46;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-section strong {
+            color: #340c46;
+            font-weight: 700;
+        }
+
+        .faq-subsection {
+            background: #f8f5ff;
+            border-left: 4px solid #009fe3;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .faq-subsection h4 {
+            font-weight: 800;
+            color: #340c46;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-note {
+            background: rgba(229, 0, 81, 0.08);
+            border-left: 4px solid #e50051;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .faq-download {
+            display: inline-block;
+            background: #009fe3;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .faq-download:hover {
+            background: #0088c9;
+            transform: translateY(-2px);
+        }
+
+        .faq-section-group {
+            margin-bottom: 3rem;
+        }
+
+        .faq-section-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #340c46;
+            margin: 2.5rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #009fe3;
+        }
+
+        @media (max-width: 768px) {
+            .faq-container {
+                padding: 1rem;
+            }
+
+            .faq-page-title {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .faq-section summary {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo-container">
+            <div class="logo">
+                <img src="images/PSD-logo.png" alt="PSD Logo">
+            </div>
+        </a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Home</a>
+            <a href="identity.html">Identity</a>
+            <a href="polyfest.html">PolyFest 2026</a>
+            <a href="faq.html" class="active">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="faq-container">
+        <h1 class="faq-page-title">Frequently Asked Questions</h1>
+
+        <!-- Referral Program Section -->
+        <div class="faq-section-group">
+            <h2 class="pf-opening">Referral Program</h2>
+
+            <div class="faq-section">
+                <details>
+                    <summary>Learn how our referral program works</summary>
+                    <p>Know someone who'd be a great fit for Poly Speed Dating? Invite them to apply and both the community and you can benefit.</p>
+
+                    <div class="faq-subsection">
+                        <h4>How it works</h4>
+                        <ol>
+                            <li>
+                                <strong>Your referred person gets accepted, but you don't</strong>
+                                <p>You receive a guaranteed seat for the next PSD event (regular ticket price still applies).</p>
+                            </li>
+                            <li>
+                                <strong>Both you and your referred person get accepted for the same event</strong>
+                                <p>You receive a €5 discount on your ticket for that event.</p>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="faq-subsection">
+                        <h4>Important Notes</h4>
+                        <ul>
+                            <li>The referred person must be a new applicant who mentions your name when applying.</li>
+                            <li>Referral rewards apply only once per referred person.</li>
+                            <li>Guaranteed seats are valid for the next regular PSD edition only.</li>
+                            <li>Discounts cannot be combined with other promotions unless stated otherwise.</li>
+                            <li>We reserve the right to decline misuse or fake referrals.</li>
+                        </ul>
+                    </div>
+
+                    <div class="faq-subsection">
+                        <h4>Why we do this</h4>
+                        <p>PSD grows best through trusted recommendations. Great people often know other great people.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Event & Process Section -->
+        <div class="faq-section-group">
+            <h2 class="pf-opening">Event & Application</h2>
+
+            <div class="faq-section">
+                <details>
+                    <summary>How does the PSD event work?</summary>
+                    <p>Our speed dating events consist of an intro-round and some ice-breakers. After you meet the candidates, each puts in the software who they wish to get to know better.</p>
+
+                    <p>Then you get <strong>5x timed rounds (5 minutes each)</strong> where you'll meet different people in a structured way. There are breaks between rounds to take notes and catch your breath.</p>
+
+                    <p>After all rounds, you'll submit an opt-in form indicating who you'd like to stay in touch with. <strong>We only share matches when there's mutual interest!</strong></p>
+                </details>
+            </div>
+
+            <div class="faq-section">
+                <details>
+                    <summary>Application process (dates & info)</summary>
+                    <ol>
+                        <li>Check our <a href="index.html" style="color: #009fe3; font-weight: 700;">Apply page</a> for upcoming dates</li>
+                        <li>Submit the Google Form</li>
+                        <li>Wait for confirmation email (usually within 1 week)</li>
+                        <li>Arrive prepared (phone charged for check-in, open mind ready)</li>
+                    </ol>
+                    <div class="faq-note">
+                        <strong>Space is limited</strong> so we recommend applying early.
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Software & Matching Section -->
+        <div class="faq-section-group">
+            <h2 class="pf-opening">Software & Matching</h2>
+
+            <div class="faq-section">
+                <details>
+                    <summary>How does our software work?</summary>
+                    <div class="faq-subsection">
+                        <h4>Custom-built matching system</h4>
+                        <ol>
+                            <li><strong>Check-in via QR code</strong> → Fast and easy entry</li>
+                            <li><strong>Automated round assignments</strong> → Everyone meets efficiently</li>
+                            <li><strong>Private opt-in matching</strong> → You choose who interests you</li>
+                            <li><strong>Mutual matches receive contact/social info via email</strong> → Only when there's a match!</li>
+                        </ol>
+                    </div>
+                    <div class="faq-subsection">
+                        <h4>Save My Interests</h4>
+                        <p>First you submit/save your interests; people you deem interesting.</p>
+                        <p style="margin-top: 0.75rem; font-size: 0.95rem; color: #666;"><em>These are NOT your final matches — you can change that after Round 2.</em></p>
+                        <p style="margin-top: 0.75rem;">Our software will take into account: <strong>your preferences, other preferences, gender and sexualities of all participants. Romantic interests take preference over social interests.</strong></p>
+                        <p style="margin-top: 0.75rem; color: #e50051; font-weight: 700;">After everyone submits, the software will spit out 5 bands of people that would best match you and everyone else's interests.</p>
+                    </div>
+                    <a href="#" class="faq-download">↓ Download the presentation</a>
+                </details>
+            </div>
+        </div>
+
+        <!-- Quick Questions Section -->
+        <div class="faq-section-group">
+            <h2 class="pf-opening">Can I...</h2>
+
+            <div class="faq-section">
+                <details>
+                    <summary>Quick questions about attending</summary>
+                    <ul>
+                        <li><strong>Arrive late?</strong> We accommodate late arrivals within first 30 mins when possible</li>
+                        <li><strong>Bring a friend?</strong> Yes, if they register separately</li>
+                        <li><strong>Skip a round?</strong> Yes, just let organizers know</li>
+                        <li><strong>Change pronouns on my badge?</strong> Absolutely, anytime!</li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+
+        <!-- Work in Progress -->
+        <div style="text-align: center; margin: 4rem 0 2rem; padding: 2rem; background: #f8f5ff; border-radius: 12px;">
+            <p style="font-style: italic; color: #666; font-size: 1.05rem;">
+                💡 <strong>Work in progress</strong> — We're collecting more questions. Have a question? <a href="contact.html" style="color: #009fe3; font-weight: 700;">Contact us!</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <div>
+                    <h3 style="color: white; font-weight: 800; margin-bottom: 1rem;">PSD</h3>
+                    <p style="opacity: 0.9; font-size: 0.95rem;">Dating event coordination made simple.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; font-weight: 800; margin-bottom: 1rem;">Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="faq.html" class="footer-link">FAQ</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                        <li><a href="#" class="footer-link">Privacy</a></li>
+                        <li><a href="#" class="footer-link">Imprint</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1.5rem; text-align: center;">
+                <p class="copyright">© 2026 PSD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header')) {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
