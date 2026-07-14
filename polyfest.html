@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyFest 2026 | Duck Dating Apps</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5ede0 0%, #ede5dc 100%);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #0052cc 0%, #6600cc 50%, #ff0080 100%);
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-container:hover {
+            opacity: 0.8;
+        }
+
+        .logo {
+            width: 55px;
+            height: 55px;
+            background-color: transparent;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            right: 0;
+            background: linear-gradient(180deg, #0052cc 0%, #ff0080 100%);
+            width: 100%;
+            max-width: 300px;
+            flex-direction: column;
+            padding: 1rem 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            border-radius: 0 0 12px 0;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav.active {
+            display: flex;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-left: 4px solid transparent;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left-color: #ff0080;
+            padding-left: 1.75rem;
+        }
+
+        @media (min-width: 769px) {
+            nav {
+                display: flex !important;
+                position: static;
+                background: none;
+                width: auto;
+                max-width: none;
+                padding: 0;
+                gap: 1.2rem;
+                box-shadow: none;
+                border-radius: 0;
+                animation: none;
+                flex-direction: row;
+                align-items: center;
+                height: 70px;
+            }
+
+            nav a {
+                padding: 0.5rem 0;
+                border: none;
+                border-bottom: 3px solid transparent;
+                transition: all 0.2s ease;
+                font-weight: 600;
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+
+            nav a:hover {
+                background-color: transparent;
+                border-bottom-color: #ff0080;
+                border-left: none;
+            }
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Date Badge */
+        .date-badge {
+            background: linear-gradient(90deg, #0052ff 0%, #0052ff 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero Image */
+        .hero-image-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        /* Section Cards */
+        .section {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner-section {
+            background: linear-gradient(135deg, #4c2281 0%, #7c3aed 100%);
+            color: #fbbf24;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .banner-section h2 {
+            color: #fbbf24;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Position Cards */
+        .positions-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .position-card {
+            border: 0.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .position-card:hover {
+            border-color: #0052ff;
+            box-shadow: 0 8px 16px rgba(0, 82, 255, 0.15);
+        }
+
+        .position-card.featured {
+            background: linear-gradient(135deg, #0052ff 0%, #0052ff 100%);
+            color: white;
+            border: none;
+        }
+
+        .position-card.featured h3 {
+            color: white;
+        }
+
+        .position-card.featured p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .position-card p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .badge-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .badge-critical {
+            background-color: #ef4444;
+        }
+
+        .badge-urgent {
+            background-color: #f97316;
+        }
+
+        /* Positions Layout */
+        .positions-wrap {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .positions-sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+            background: #fff;
+            border: 0.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .position-item {
+            padding: 0.75rem 0.9rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 0.5px solid transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .position-item:hover {
+            background: #f8f7fb;
+            border-color: #0052ff;
+        }
+
+        .position-item.is-active {
+            background: #0052ff;
+            color: white;
+            border-color: #0052ff;
+            box-shadow: 0 4px 12px rgba(0, 82, 255, 0.2);
+        }
+
+        .position-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .position-meta {
+            font-size: 0.8rem;
+            opacity: 0.75;
+            line-height: 1.3;
+        }
+
+        .position-item.is-active .position-meta {
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .position-detail {
+            background: #fff;
+            border: 0.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .position-detail-content {
+            display: none;
+        }
+
+        .position-detail-content.is-active {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(2px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .position-detail-content h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.8rem;
+            color: #0052ff;
+        }
+
+        .position-detail-content .badge-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .position-detail-content p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .positions-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .positions-sidebar {
+                position: static;
+                max-height: none;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 0.75rem;
+            }
+
+            .position-item {
+                margin-bottom: 0;
+            }
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background-color: #f3f4f6;
+            border-left: 4px solid #0052ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .disclaimer p {
+            color: #2d3748;
+            line-height: 1.8;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .team-member {
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .team-member h4 {
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-member p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Roadmap Section */
+        .roadmap-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .roadmap-image {
+            width: 100%;
+            max-width: 100%;
+            margin: 1.5rem 0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .roadmap-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-tagline {
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            text-align: center;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            main {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo-container">
+            <div class="logo">
+                <img src="images/PSD-logo.png" alt="PSD Logo">
+            </div>
+        </a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Home</a>
+            <a href="identity.html">Identity</a>
+            <a href="polyfest.html">PolyFest 2026</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Date Badge -->
+        <div class="date-badge">Sat, 21 NOV 2026</div>
+
+        <!-- Title -->
+        <h1>Poly Fest Berlin 2026</h1>
+
+        <!-- Hero Image Placeholder -->
+        <div class="hero-image-container">
+            <img src="images/PolyFest2026_banner.png" alt="PolyFest Berlin 2026">
+        </div>
+
+        <!-- Applications Banner -->
+        <div class="banner-section">
+            <h2>Open Applications for Realisers</h2>
+        </div>
+
+        <!-- Positions Section -->
+        <div class="section">
+            <h2>Positions</h2>
+            <div class="positions-wrap">
+                <!-- Positions Sidebar -->
+                <div class="positions-sidebar">
+                    <div class="position-item is-active" data-position="venue-manager">
+                        <div class="position-title">Venue Manager</div>
+                        <div class="position-meta">In charge of everything venue-related</div>
+                        <div class="badge-group">
+                            <span class="badge badge-critical">CRITICAL</span>
+                            <span class="badge badge-urgent">URGENT</span>
+                        </div>
+                    </div>
+
+                    <div class="position-item" data-position="workshops">
+                        <div class="position-title">Workshops</div>
+                        <div class="position-meta">Curate educational and engaging experiences</div>
+                    </div>
+
+                    <div class="position-item" data-position="design">
+                        <div class="position-title">Design</div>
+                        <div class="position-meta">Shape the visual identity of PolyFest</div>
+                    </div>
+
+                    <div class="position-item" data-position="sponsors">
+                        <div class="position-title">Sponsors</div>
+                        <div class="position-meta">Build partnerships and secure support</div>
+                    </div>
+
+                    <div class="position-item" data-position="volunteers">
+                        <div class="position-title">Volunteers Coordinator</div>
+                        <div class="position-meta">Build and support our volunteer community</div>
+                    </div>
+
+                    <div class="position-item" data-position="social-media">
+                        <div class="position-title">Social Media Manager</div>
+                        <div class="position-meta">Build our online community presence</div>
+                    </div>
+                </div>
+
+                <!-- Position Details Panel -->
+                <div class="position-detail">
+                    <!-- Venue Manager -->
+                    <div class="position-detail-content is-active" data-position="venue-manager">
+                        <h3>Venue Manager</h3>
+                        <div class="badge-group">
+                            <span class="badge badge-critical">CRITICAL</span>
+                            <span class="badge badge-urgent">URGENT</span>
+                        </div>
+                        <p>In charge of everything venue-related</p>
+                        <p>
+                            As our Venue Manager, you'll be the driving force overseeing all aspects of our physical space for PolyFest 2026. You'll scout and secure the ideal venue across Berlin, negotiate contracts, manage all logistics including capacity planning, accessibility requirements, and technical needs (sound, lighting, WiFi, furniture, catering). You'll oversee setup and breakdown, coordinate with all teams on venue needs, ensure the space embodies our values of inclusivity and community, and manage the day-of venue operations. This role is critical to the event's success and requires strong leadership, communication skills, negotiation experience, and a deep understanding of what makes a space welcoming for the polyamorous community.
+                        </p>
+                    </div>
+
+                    <!-- Workshops -->
+                    <div class="position-detail-content" data-position="workshops">
+                        <h3>Workshops</h3>
+                        <p>Curate educational and engaging experiences</p>
+                        <p>
+                            As the Workshops coordinator, you'll be responsible for curating and organizing engaging educational experiences for PolyFest 2026. You'll work with facilitators and presenters to develop workshops that are inclusive, informative, and aligned with our community values. From initial concept development through execution, you'll manage scheduling, logistics, material preparation, and ensure every workshop creates a welcoming and safe learning environment.
+                        </p>
+                        <p>
+                            This role requires creativity, organizational skills, excellent communication abilities, and a passion for community education. You should have experience coordinating events or educational programs and understand the needs of diverse learners in our polyamorous community.
+                        </p>
+                    </div>
+
+                    <!-- Design -->
+                    <div class="position-detail-content" data-position="design">
+                        <h3>Design</h3>
+                        <p>Shape the visual identity of PolyFest</p>
+                        <p>
+                            As our Design lead, you'll be responsible for shaping the visual identity of PolyFest 2026. You'll work on branding, graphic design, web design, and overall aesthetic direction to ensure consistency across all touchpoints. From the main event materials to promotional content, you'll create designs that reflect our community values and make PolyFest visually distinctive and memorable.
+                        </p>
+                        <p>
+                            This role requires strong design skills, knowledge of current design trends, and the ability to work collaboratively with other teams. You should be comfortable with design tools and software, and have experience creating cohesive visual systems.
+                        </p>
+                    </div>
+
+                    <!-- Sponsors -->
+                    <div class="position-detail-content" data-position="sponsors">
+                        <h3>Sponsors</h3>
+                        <p>Build partnerships and secure support</p>
+                        <p>
+                            As our Sponsorship lead, you'll be responsible for identifying potential sponsors, developing partnership proposals, and building mutually beneficial relationships with organizations aligned with PolyFest values. You'll manage sponsor agreements, coordinate sponsorship activation, and ensure sponsors receive value from their investment.
+                        </p>
+                        <p>
+                            This role requires strong networking skills, business acumen, excellent communication abilities, and experience in business development or sponsorship management. You should be comfortable with sales processes and have a genuine passion for supporting our community event.
+                        </p>
+                    </div>
+
+                    <!-- Volunteers Coordinator -->
+                    <div class="position-detail-content" data-position="volunteers">
+                        <h3>Volunteers Coordinator</h3>
+                        <p>Build and support our volunteer community</p>
+                        <p>
+                            As the Volunteers Coordinator, you'll be responsible for recruiting, organizing, and supporting our volunteer community for PolyFest 2026. You'll handle volunteer applications, create role descriptions, organize training, schedule shifts, and ensure volunteers feel appreciated and supported throughout the event. You'll also manage volunteer logistics and communication.
+                        </p>
+                        <p>
+                            This role requires strong organizational skills, excellent people management abilities, enthusiasm for community engagement, and experience working with volunteers. You should be able to inspire and motivate people, resolve conflicts, and create a positive volunteer experience.
+                        </p>
+                    </div>
+
+                    <!-- Social Media Manager -->
+                    <div class="position-detail-content" data-position="social-media">
+                        <h3>Social Media Manager</h3>
+                        <p>Build our online community presence</p>
+                        <p>
+                            As our Social Media Manager, you'll be responsible for building and maintaining PolyFest's online community presence across all social platforms. You'll create engaging content, manage community interactions, coordinate social campaigns, and track analytics to measure impact. You'll be the voice of PolyFest in the digital space.
+                        </p>
+                        <p>
+                            This role requires excellent written communication skills, creativity, understanding of social media algorithms and trends, and experience managing social platforms. You should be able to create engaging content, build community, respond to feedback, and work with other teams to amplify their messages.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+            <p>
+                <strong>Disclaimer:</strong> These are rough role descriptions that would need to be filled. Each
+                position can be discussed and adapted to match the skills, capacities, and interests of the applicants.
+                We believe in flexible, collaborative teamwork and are open to shaping roles that work best for PolyFest
+                and our team members.
+            </p>
+        </div>
+
+        <!-- Roadmap Section -->
+        <div class="roadmap-container">
+            <h2>PolyFest International 2026 - Roadmap</h2>
+            <p style="color: #666; margin: 1rem 0;">📅 Event Date: <strong style="color: #ef4444;">21 Nov 2026 (Saturday)</strong></p>
+            <div class="roadmap-image">
+                <img src="images/PolyFest-Roadmap.png" alt="PolyFest 2026 Roadmap">
+            </div>
+        </div>
+
+        <!-- Connect With Us Section -->
+        <div class="banner-section">
+            <h2>Connect With Us</h2>
+        </div>
+
+        <!-- About Us Section -->
+        <div class="section">
+            <h2>About Us</h2>
+
+            <div>
+                <h3 style="color: #0052ff; margin-top: 1.5rem;">About the Community</h3>
+                <h4 style="color: #666; font-weight: 500; margin-bottom: 1rem;">Who We Are</h4>
+                <p>
+                    PolyFest Berlin is built by and for the polyamorous community. We believe in celebrating
+                    relationship diversity, fostering authentic connections, and creating spaces where everyone
+                    can be their true selves. Our founders and moderators are deeply invested in making PolyFest
+                    a welcoming, inclusive celebration for all.
+                </p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Team</h3>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h4>Ficho</h4>
+                    <p>Founder / Moderator</p>
+                </div>
+                <div class="team-member">
+                    <h4>Sarah</h4>
+                    <p>Founder / Moderator</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stay in the Loop -->
+        <div class="banner-section">
+            <h2>Stay in the Loop</h2>
+            <p style="color: rgba(255, 255, 255, 0.85); margin-top: 1rem;">Join our mailing list to stay updated with PolyFest news</p>
+        </div>
+
+        <!-- Archive Section -->
+        <div class="section">
+            <h2>Archive</h2>
+            <h3>Past Events</h3>
+            <p>Look back at previous years</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PSD</h3>
+                <p class="footer-tagline">Dating event coordination made simple.</p>
+                <a href="#">Privacy</a>
+                <a href="#">Imprint</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Links</h3>
+                <a href="#">Home</a>
+                <a href="#">Identity</a>
+                <a href="#">PolyFest 2026</a>
+                <a href="#">FAQ</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 PSD. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header')) {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Position Switcher
+        document.querySelectorAll('.position-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const positionId = item.getAttribute('data-position');
+
+                // Remove active class from all items and contents
+                document.querySelectorAll('.position-item').forEach(i => i.classList.remove('is-active'));
+                document.querySelectorAll('.position-detail-content').forEach(c => c.classList.remove('is-active'));
+
+                // Add active class to clicked item and corresponding content
+                item.classList.add('is-active');
+                document.querySelector(`.position-detail-content[data-position="${positionId}"]`).classList.add('is-active');
+            });
+        });
+    </script>
+</body>
+</html>
