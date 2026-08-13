@@ -264,6 +264,86 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* PolyFest mailing list — mirrors the contact-page form */
+        .polyfest-signup {
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .polyfest-signup__title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .polyfest-signup .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .polyfest-signup .form-group > label:not(.checkbox) {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .polyfest-signup .form-group input[type="text"],
+        .polyfest-signup .form-group input[type="email"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .polyfest-signup .form-group input[type="text"]:focus,
+        .polyfest-signup .form-group input[type="email"]:focus {
+            outline: none;
+            border-color: #0052ff;
+            box-shadow: 0 0 0 3px rgba(0, 159, 227, 0.1);
+        }
+
+        .polyfest-signup fieldset.form-group {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .polyfest-signup .form-group legend {
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .polyfest-signup .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        .polyfest-signup .checkbox input {
+            width: 18px;
+            height: 18px;
+            accent-color: #0052ff;
+        }
+
+        .polyfest-signup__button {
+            padding: 0.8rem 1.5rem;
+            color: #fff;
+            background: linear-gradient(90deg, #0052ff, #ff0080);
+            border: 0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .polyfest-signup__button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
         /* Position Cards */
         .positions-grid {
             display: grid;
@@ -692,6 +772,7 @@
             .ws-detail-inner {
                 padding: 1.5rem;
             }
+
         }
     </style>
 </head>
@@ -770,8 +851,8 @@
                     </div>
 
                     <div class="position-item" data-position="other">
-                        <div class="position-title">Other: New Ideas</div>
-                        <div class="position-meta">What you want to do</div>
+                        <div class="position-title">What do you want to do?</div>
+                        <div class="position-meta">Other ideas & roles</div>
                     </div>
                 </div>
 
@@ -837,13 +918,15 @@
 
                     <!-- Other -->
                     <div class="position-detail-content" data-position="other">
-                        <h3>Other: New Ideas / What You Want to Do</h3>
+                        <h3>What do you want to do?</h3>
                         <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: #666; line-height: 1.7;">
                             <li>Do you have a skill or passion that could help PolyFest?</li>
                             <li>Interested in creating a new role or combination of roles?</li>
                             <li>Let us know your ideas and how you'd like to contribute!</li>
                             <li>We're open to flexible, collaborative teamwork</li>
                         </ul>
+                        <h4 style="color: #1a1a1a; font-size: 1.1rem; margin: 1.5rem 0 0.5rem 0;">Is this position paid?</h4>
+                        <p style="color: #666; line-height: 1.7; margin-bottom: 1rem;">TBD - We still haven't worked out revenue, costs etc, but we do want to compensate those putting the most energy in to make this happen.</p>
                     </div>
                 </div>
             </div>
@@ -935,11 +1018,60 @@
             </div>
         </div>
 
-        <!-- Stay in the Loop -->
-        <a href="contact.html#mailing-list" class="banner-section" style="text-decoration: none; display: block; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(0, 0, 0, 0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(0, 0, 0, 0.15)';">
-            <h2>Stay in the Loop</h2>
-            <p style="color: rgba(255, 255, 255, 0.85); margin-top: 1rem;">Join our mailing list to stay updated with PolyFest news</p>
-        </a>
+        <!-- PolyFest Mailing List -->
+        <section class="polyfest-signup" id="mailing-list" aria-labelledby="polyfest-signup-title">
+            <h2 class="polyfest-signup__title" id="polyfest-signup-title">Stay in the PolyFest Loop</h2>
+
+            <div class="workshops-wrap">
+                <aside class="workshops-sidebar">
+                    <h2>PolyFest Mailing List</h2>
+                    <p>Festival news, no spam.</p>
+                </aside>
+
+                <section class="ws-detail">
+                    <div class="ws-detail-inner">
+                        <p>Get PolyFest programme announcements, workshop news, ticket updates, and ways to get involved.</p>
+
+                        <form action="https://formspree.io/f/xblbvagz" method="POST">
+                            <div class="form-group">
+                                <label for="polyfest-name">Name</label>
+                                <input id="polyfest-name" name="name" type="text" autocomplete="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="polyfest-email">Email</label>
+                                <input id="polyfest-email" name="email" type="email" autocomplete="email" required>
+                            </div>
+
+                            <fieldset class="form-group">
+                                <legend>PolyFest interests</legend>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="interests" value="Programme and workshops" checked>
+                                    Programme &amp; workshops
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="interests" value="Tickets and festival news" checked>
+                                    Tickets &amp; festival news
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="interests" value="Volunteering and participation">
+                                    Volunteering &amp; participation
+                                </label>
+                            </fieldset>
+
+                            <input type="hidden" name="_subject" value="PolyFest mailing list signup">
+
+                            <label class="checkbox" style="margin-bottom: 1rem;">
+                                <input type="checkbox" name="consent" value="agreed" required>
+                                I agree to receive PolyFest emails from PSD and can unsubscribe anytime.
+                            </label>
+
+                            <button type="submit" class="polyfest-signup__button">Subscribe</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </section>
 
         <!-- Archive Section -->
         <div class="section">
