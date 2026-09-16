@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyMerch | Poly Speed Dating</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .shop-page { max-width: 1180px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .shop-hero { text-align: center; margin-bottom: 2rem; }
+    .shop-hero h1 { margin-bottom: .4rem; }
+    .shop-tools { display: flex; gap: 1rem; align-items: center; justify-content: space-between; margin: 2rem 0; flex-wrap: wrap; }
+    .shop-search { flex: 1 1 280px; padding: .9rem 1rem; border: 2px solid #ddd; border-radius: 999px; font: inherit; }
+    .cart-toggle, .shop-button { border: 0; border-radius: 999px; padding: .85rem 1.2rem; font: inherit; font-weight: 700; cursor: pointer; background: var(--poly-magenta); color: white; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    .product-card { background: white; border-radius: 16px; padding: 1rem; box-shadow: 0 4px 18px rgba(43,0,77,.1); display: flex; flex-direction: column; gap: .75rem; }
+    .product-card img { width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 12px; background: #fafafa; cursor: zoom-in; }
+    .product-card h2 { font-size: 1.15rem; margin: 0; }
+    .product-price { font-weight: 800; color: var(--poly-magenta); }
+    .product-card select { width: 100%; padding: .65rem; border: 1px solid #ccc; border-radius: 8px; font: inherit; }
+    .cart { margin-top: 3rem; background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 18px rgba(43,0,77,.1); }
+    .cart h2 { margin-top: 0; }
+    .cart-line { display: flex; justify-content: space-between; gap: 1rem; padding: .7rem 0; border-bottom: 1px solid #eee; }
+    .cart-line button { border: 0; background: none; color: var(--poly-magenta); cursor: pointer; }
+    .checkout { display: grid; gap: .75rem; max-width: 520px; margin-top: 1.5rem; }
+    .checkout input, .checkout textarea { padding: .75rem; border: 1px solid #ccc; border-radius: 8px; font: inherit; }
+    .empty-state { text-align: center; grid-column: 1 / -1; padding: 2rem; }
+    @media (max-width: 600px) { .shop-page { padding-inline: 1rem; } .cart-line { flex-direction: column; gap: .2rem; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-container" id="logo-link"><div class="logo"><img src="images/PSD-logo.png" alt="PSD Logo"></div></a>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    <nav id="nav"><a href="index.html">Home</a><a href="identity.html">Identity</a><a href="polyfest.html">PolyFest 2026</a><a href="polymerch.html">PolyMerch</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></nav>
+  </header>
+  <main class="shop-page">
+    <section class="shop-hero"><h1>PolyMerch</h1><p>Wear and share a little more love, openness, and connection.</p></section>
+    <div class="shop-tools"><input id="search" class="shop-search" type="search" placeholder="Search merch…" aria-label="Search merchandise"><button class="cart-toggle" type="button" onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">Cart (<span id="cart-count">0</span>)</button></div>
+    <section id="products" class="product-grid" aria-live="polite"></section>
+    <section id="cart" class="cart"><h2>Your cart</h2><div id="cart-items"><p>Your cart is empty.</p></div><p><strong>Total: <span id="cart-total">€0.00</span></strong></p>
+      <form id="checkout" class="checkout"><input id="customer-name" required placeholder="Your name"><input id="customer-email" type="email" required placeholder="Your email"><textarea id="customer-note" rows="3" placeholder="Delivery notes or questions"></textarea><button class="shop-button" type="submit">Order by email</button></form>
+      <p id="checkout-message" role="status"></p>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="footer-container"><div class="footer-links"><a href="privacy.html" class="footer-link">Privacy</a><a href="imprint.html" class="footer-link">Imprint</a></div><div class="copyright">© PSD / Powered by Ficho <span id="year"></span></div></div></footer>
+  <script src="components/site-navigation.js"></script>
+  <script>
+    const products = [
+      ['shirt1.png','Poly Speed Dating Shirt 1','shirt'], ['shirt2.png','Poly Speed Dating Shirt 2','shirt'], ['shirt3.png','Poly Speed Dating Shirt 3','shirt'], ['shirt4.png','Poly Speed Dating Shirt 4','shirt'],
+      ['sticker1.png','Poly Sticker 1','sticker'], ['sticker2.png','Poly Sticker 2','sticker'], ['sticker3.png','Poly Sticker 3','sticker'], ['sticker4.png','Poly Sticker 4','sticker'], ['sticker5.png','Poly Sticker 5','sticker']
+    ].map(([image,name,type]) => ({image,name,type,price:type==='sticker'?3:null}));
+    let cart = JSON.parse(localStorage.getItem('polymerch-cart') || '[]');
+    const euro = value => value === null ? 'Coming soon' : `€${value.toFixed(2)}`;
+    function renderProducts() { const q=document.getElementById('search').value.toLowerCase(); const shown=products.filter(p=>p.name.toLowerCase().includes(q)); document.getElementById('products').innerHTML=shown.length?shown.map((p,i)=>`<article class="product-card"><img src="images/merch/${p.image}" alt="${p.name}"><h2>${p.name}</h2><div class="product-price">${euro(p.price)}</div>${p.type==='shirt'?'<select aria-label="Shirt size"><option>Size: S</option><option>Size: M</option><option>Size: L</option><option>Size: XL</option></select><select aria-label="Shirt color"><option>Color: Black</option><option>Color: White</option></select>':''}<button class="shop-button" ${p.price===null?'disabled':''} onclick="addToCart(${products.indexOf(p)}, this)">${p.price===null?'Coming soon':'Add to cart'}</button></article>`).join(''):'<p class="empty-state">No merchandise found.</p>'; }
+    function addToCart(i,button) { const p=products[i]; const card=button.closest('.product-card'); const size=card.querySelector('[aria-label="Shirt size"]')?.value||''; const color=card.querySelector('[aria-label="Shirt color"]')?.value||''; const key=`${i}-${size}-${color}`; const item=cart.find(x=>x.key===key); item?item.qty++:cart.push({key,i,size,color,qty:1}); save(); renderCart(); button.textContent='Added'; setTimeout(()=>button.textContent='Add to cart',900); }
+    function save(){localStorage.setItem('polymerch-cart',JSON.stringify(cart));}
+    function renderCart(){let total=0,count=0; document.getElementById('cart-items').innerHTML=cart.length?cart.map((x,n)=>{const p=products[x.i]; total+=p.price*x.qty; count+=x.qty; return `<div class="cart-line"><span>${p.name}${x.size?' · '+x.size:''}${x.color?' · '+x.color:''} × ${x.qty}</span><span>€${(p.price*x.qty).toFixed(2)} <button type="button" onclick="removeItem(${n})">Remove</button></span></div>`}).join(''):'<p>Your cart is empty.</p>'; document.getElementById('cart-total').textContent=`€${total.toFixed(2)}`; document.getElementById('cart-count').textContent=count;}
+    function removeItem(n){cart.splice(n,1);save();renderCart();}
+    document.getElementById('search').addEventListener('input',renderProducts); document.getElementById('checkout').addEventListener('submit',e=>{e.preventDefault(); if(!cart.length){document.getElementById('checkout-message').textContent='Please add an item before ordering.';return;} const lines=cart.map(x=>`${products[x.i].name}${x.size?' - '+x.size:''}${x.color?' - '+x.color:''} x${x.qty}`).join('%0D%0A'); const subject=encodeURIComponent('PolyMerch order'); const body=`Name: ${encodeURIComponent(document.getElementById('customer-name').value)}%0AEmail: ${encodeURIComponent(document.getElementById('customer-email').value)}%0AItems:%0A${lines}%0ANotes: ${encodeURIComponent(document.getElementById('customer-note').value)}`; window.location.href=`mailto:merch@automate-mate.com?subject=${subject}&body=${body}`;}); renderProducts();renderCart();
+  </script>
+</body>
+</html>
