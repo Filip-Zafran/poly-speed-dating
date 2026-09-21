@@ -260,8 +260,48 @@
 
         .banner-section h2 {
             color: #fbbf24;
-            font-size: 2rem;
+            font-size: 2.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .application-link {
+            display: block;
+            background: linear-gradient(135deg, #0052ff 0%, #6600cc 100%);
+            color: white;
+            padding: 1.25rem 1.5rem;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 1.35rem;
+            font-weight: 700;
+            text-decoration: none;
+            margin: 2rem 0 1.5rem;
+            box-shadow: 0 6px 14px rgba(0, 82, 255, 0.22);
+        }
+
+        .application-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0, 82, 255, 0.3);
+        }
+
+        .application-deadline {
+            color: #ef4444;
+            font-size: 1.35rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .past-workshops-heading {
+            font-size: 2.2rem;
+            text-align: center;
+            margin: 2.5rem 0 1rem;
+        }
+
+        .past-workshops-link {
+            display: block;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
         }
 
         /* PolyFest mailing list — mirrors the contact-page form */
@@ -671,29 +711,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Roadmap Section */
-        .roadmap-container {
-            background-color: white;
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .roadmap-image {
-            width: 100%;
-            max-width: 100%;
-            margin: 1.5rem 0;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .roadmap-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
         /* Footer */
         footer {
             background-color: #1a1a1a;
@@ -809,166 +826,22 @@
 
         <!-- Hero Image Placeholder -->
         <div class="hero-image-container">
-            <img src="images/PolyFest2026_banner.png" alt="PolyFest Berlin 2026">
+            <img src="images/PolyFest2026_EmailHeader.png" alt="PolyFest Berlin 2026">
         </div>
 
-        <!-- Applications Banner -->
+        <!-- Workshop Applications Announcement -->
         <div class="banner-section">
-            <h2>Open Applications for Realisers</h2>
+            <h2>Applications for Workshops</h2>
         </div>
 
-        <!-- Positions Section -->
         <div class="section">
-            <h2>Positions</h2>
-            <div class="positions-wrap">
-                <!-- Positions Sidebar -->
-                <div class="positions-sidebar">
-                    <div class="position-item is-active" data-position="venue-manager">
-                        <div class="position-title">Venue Manager</div>
-                        <div class="position-meta">Everything venue-related</div>
-                        <div class="badge-group">
-                            <span class="badge badge-critical">CRITICAL</span>
-                        </div>
-                    </div>
-
-                    <div class="position-item" data-position="design-social">
-                        <div class="position-title">Design & Social Media</div>
-                        <div class="position-meta">Visual identity & online presence</div>
-                    </div>
-
-                    <div class="position-item" data-position="marketing">
-                        <div class="position-title">Marketing & Sponsors</div>
-                        <div class="position-meta">Partnerships & brand awareness</div>
-                    </div>
-
-                    <div class="position-item" data-position="volunteers">
-                        <div class="position-title">Volunteers Coordinator</div>
-                        <div class="position-meta">Build volunteer community</div>
-                    </div>
-
-                    <div class="position-item" data-position="communication">
-                        <div class="position-title">Communication</div>
-                        <div class="position-meta">Internal & external messaging</div>
-                    </div>
-
-                    <div class="position-item" data-position="other">
-                        <div class="position-title">What do you want to do?</div>
-                        <div class="position-meta">Other ideas & roles</div>
-                    </div>
-                </div>
-
-                <!-- Position Details Panel -->
-                <div class="position-detail">
-                    <!-- Venue Manager -->
-                    <div class="position-detail-content is-active" data-position="venue-manager">
-                        <h3>Venue Manager</h3>
-                        <div class="badge-group">
-                            <span class="badge badge-critical">CRITICAL</span>
-                        </div>
-                        <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: #666; line-height: 1.7;">
-                            <li>Scout and secure the ideal venue across Berlin</li>
-                            <li>Manage logistics: capacity, accessibility, technical needs (sound, lighting, WiFi)</li>
-                            <li>Oversee setup, breakdown, and day-of operations</li>
-                            <li>Ensure the space reflects our values of inclusivity and community</li>
-                        </ul>
-                    </div>
-
-                    <!-- Design & Social Media -->
-                    <div class="position-detail-content" data-position="design-social">
-                        <h3>Design & Social Media Manager</h3>
-                        <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: #666; line-height: 1.7;">
-                            <li>Shape visual identity: branding, graphics, promotional materials</li>
-                            <li>Create engaging content for social platforms (Instagram, etc.)</li>
-                            <li>Build and manage online community presence</li>
-                            <li>Ensure consistency across all design and digital touchpoints</li>
-                        </ul>
-                    </div>
-
-                    <!-- Marketing & Sponsors -->
-                    <div class="position-detail-content" data-position="marketing">
-                        <h3>Marketing & Sponsors</h3>
-                        <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: #666; line-height: 1.7;">
-                            <li>Identify and build partnerships with aligned sponsors</li>
-                            <li>Develop sponsorship proposals and agreements</li>
-                            <li>Coordinate marketing campaigns and brand awareness</li>
-                            <li>Ensure sponsors receive value from their investment</li>
-                        </ul>
-                    </div>
-
-                    <!-- Volunteers Coordinator -->
-                    <div class="position-detail-content" data-position="volunteers">
-                        <h3>Volunteers Coordinator</h3>
-                        <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: #666; line-height: 1.7;">
-                            <li>Recruit and organize volunteer community</li>
-                            <li>Handle applications, training, and shift scheduling</li>
-                            <li>Ensure volunteers feel appreciated and supported</li>
-                            <li>Manage volunteer logistics and communication</li>
-                        </ul>
-                    </div>
-
-                    <!-- Communication -->
-                    <div class="position-detail-content" data-position="communication">
-                        <h3>Communication</h3>
-                        <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: #666; line-height: 1.7;">
-                            <li>Manage internal team communication and coordination</li>
-                            <li>Handle external messaging to community and attendees</li>
-                            <li>Create and distribute newsletters and updates</li>
-                            <li>Ensure consistent messaging across all channels</li>
-                        </ul>
-                    </div>
-
-                    <!-- Other -->
-                    <div class="position-detail-content" data-position="other">
-                        <h3>What do you want to do?</h3>
-                        <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: #666; line-height: 1.7;">
-                            <li>Do you have a skill or passion that could help PolyFest?</li>
-                            <li>Interested in creating a new role or combination of roles?</li>
-                            <li>Let us know your ideas and how you'd like to contribute!</li>
-                            <li>We're open to flexible, collaborative teamwork</li>
-                        </ul>
-                        <h4 style="color: #1a1a1a; font-size: 1.1rem; margin: 1.5rem 0 0.5rem 0;">Is this position paid?</h4>
-                        <p style="color: #666; line-height: 1.7; margin-bottom: 1rem;">TBD - We still haven't worked out revenue, costs etc, but we do want to compensate those putting the most energy in to make this happen.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Deadline -->
-        <div class="disclaimer" style="border-left-color: #ef4444; background-color: #fef2f2;">
-            <p>
-                <strong style="color: #ef4444;">⏰ Deadline to Apply:</strong> <strong>31 July 2026</strong>
-            </p>
-        </div>
-
-        <!-- How to Apply Section -->
-        <div class="section">
-            <h2>How to Apply?</h2>
-            <p style="color: #666; margin-bottom: 1.5rem;">We'd love to hear from you! Apply for any role by sending us:</p>
-            <ul style="padding-left: 1.5rem; color: #666; line-height: 1.8; margin-bottom: 1.5rem;">
-                <li><strong>A few short motivation sentences</strong> — Tell us why you're interested and what excites you about PolyFest</li>
-                <li><strong>Your CV or LinkedIn profile (optional)</strong> — Help us understand your background and experience</li>
-            </ul>
-            <p style="color: #666; margin-bottom: 1.5rem;">Send everything to: <strong>polyfestberlin@gmail.com</strong></p>
-            <p style="color: #999; font-size: 0.95rem;">We'll review applications and get back to you with next steps. Questions? Reach out anytime!</p>
-        </div>
-
-        <!-- Disclaimer -->
-        <div class="disclaimer">
-            <p>
-                <strong>Note:</strong> These are rough role descriptions that would need to be filled. Each
-                position can be discussed and adapted to match the skills, capacities, and interests of the applicants.
-                We believe in flexible, collaborative teamwork and are open to shaping roles that work best for PolyFest
-                and our team members.
-            </p>
-        </div>
-
-        <!-- Roadmap Section -->
-        <div class="roadmap-container">
-            <h2>PolyFest International 2026 - Roadmap</h2>
-            <p style="color: #666; margin: 1rem 0;">📅 Event Date: <strong style="color: #ef4444;">21 Nov 2026 (Saturday)</strong></p>
-            <div class="roadmap-image">
-                <img src="images/PolyFest-Roadmap.png" alt="PolyFest 2026 Roadmap">
-            </div>
+            <p style="color: #666; margin-bottom: 1.5rem;">Hello everyone!</p>
+            <p style="color: #666; margin-bottom: 1.5rem;">We are yet again celebrating International Polyamory day and are happy to announce that we are opening <strong>Applications for Workshops</strong> for the 2nd edition of Polyfest.</p>
+            <p style="color: #666; margin-bottom: 1.5rem;">The event will be held on 21 Nov in a new and much bigger venue in Kreuzkoeln: <a href="https://workish.berlin/" target="_blank" rel="noopener noreferrer">Workish</a></p>
+            <a class="application-link" href="https://forms.gle/sLQ8pBGR2PB4F3VR7" target="_blank" rel="noopener noreferrer">Apply for a Workshop or Activity →</a>
+            <p class="application-deadline">Deadline: 10.10.2026</p>
+            <h2 class="past-workshops-heading">Last year's workshops</h2>
+            <p><a class="past-workshops-link" href="https://filip-zafran.github.io/psd2025/polyfest.html" target="_blank" rel="noopener noreferrer">Checkout the Workshops from last year</a></p>
         </div>
 
         <!-- About Us Section -->
