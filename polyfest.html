@@ -709,6 +709,23 @@
             display: block;
         }
 
+        .team-group-image {
+            width: 100%;
+            margin: 0 auto 1.5rem;
+        }
+
+        .team-group-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .team-group-image[hidden],
+        .team-avatar-round[hidden] {
+            display: none;
+        }
+
         .team-detail {
             text-align: center;
         }
@@ -910,11 +927,16 @@
 
                 <section class="ws-detail">
                     <div class="ws-detail-inner team-detail">
+                        <picture id="polyfestTeamGroup" class="team-group-image">
+                            <source media="(min-width: 769px)" srcset="images/designs2026/Team-horisontal.jpg">
+                            <img src="images/designs2026/Team-vertical.jpg" alt="The PolyFest 2026 team">
+                        </picture>
                         <img
                             id="polyfestTeamImg"
-                            src="images/polyfest-small.png"
+                            src="images/designs2026/Ficho.jpg"
                             alt="Team member"
                             class="team-avatar-round"
+                            hidden
                         />
                         <h3 id="polyfestTeamName">Team</h3>
                         <p id="polyfestTeamRole" class="team-role">PolyFest Community</p>
@@ -1064,19 +1086,19 @@
                 name: 'Team',
                 role: 'PolyFest Community',
                 bio: 'PolyFest Berlin is built by a passionate community dedicated to creating safe, inclusive spaces for connection and celebration. Our team brings together diverse expertise, perspectives, and a shared commitment to fostering understanding, support, and connection within the polyamorous and ethical non-monogamy communities. We work together to make PolyFest an unforgettable celebration of relationship diversity and authentic human connection.',
-                img: 'images/polyfest-small.png'
+                groupImage: true
             },
             ficho: {
                 name: 'Ficho',
                 role: 'Event Manager & Workshop Facilitator',
                 bio: 'Opening up four years ago with his primary partner, Ficho (he/him) quickly became poly at heart and deeply passionate about creating spaces that celebrate connection, communication, and openness — from events like Poly Speed Dating, KiezBurn, and Poly Fest to Emotional Intelligence workshops and other community.',
-                img: 'images/presenters/ficho.jpg'
+                img: 'images/designs2026/Ficho.jpg'
             },
             sarah: {
                 name: 'Sarah',
                 role: 'Relationship Coach & Workshop Facilitator',
                 bio: 'Sarah (she/they) started exploring non-monogamy 10 years ago when she lived in Brooklyn and stumbled upon polyamorous Burners at a festival outside of NYC. She immediately felt like this was the answer to all of her relationship problems. Of course it wasn\'t. But it also kind of was. Since then she has made a lot of mistakes and has been talking about them in her newsletter: monogamish as well as on Instagram under the account monogamish_me. She is also a systemic coach for individuals and couples, helping them relate more honestly and in a way that truly serves them, their values, and their goals. In her free time, she dances, does yoga, and most recently took a stab at comedy improv and loves it!',
-                img: 'images/presenters/sarah.jpeg'
+                img: 'images/designs2026/Sarah.jpg'
             },
             sydney: {
                 name: 'Sydney',
@@ -1088,7 +1110,7 @@
 • Grounded in mutual respect, clear boundaries, and safer health practices
 
 Excited to be on the venue management and site planning team, and to share ideas in workshops.`,
-                img: 'images/organisators/sydney.jpg'
+                img: 'images/designs2026/Syd.jpg'
             },
             mariana: {
                 name: 'Mariana Cerejo',
@@ -1096,7 +1118,7 @@ Excited to be on the venue management and site planning team, and to share ideas
                 bio: `Mariana Cerejo is a multidisciplinary artist living between Sintra, Portugal and Berlin, Germany. Her work explores alternative ways of living through design, with a particular interest in relationships, intimacy, community and the social structures that shape everyday life.
 
 With a background in design and years of experience exploring and researching polyamory and relationship anarchy, Mariana creates objects and participatory projects that question the established ways of living and relating, and invite people to imagine and build alternatives. She is the creator of The Relationship Design Games — tools for communication, reflection and collective decision-making.`,
-                img: 'images/organisators/mariana.jpg'
+                img: 'images/designs2026/Mariana.jpg'
             },
             maria: {
                 name: 'Maria',
@@ -1106,7 +1128,7 @@ With a background in design and years of experience exploring and researching po
 Needless to say, she would choose this path all over again, as it has made her grow tremendously as a human, and has taken her relationships to a whole different level of love, intimacy and connection.
 
 Equipped with a background in Law and International Relations, Maria has vast experience in organizing and moderating discussion formats of all kinds, particularly in intercultural environments. She is excited to join this year’s Polyfest Team as Workshop and Programme Coordinator, facilitating reflective and insightful discussions on all things poly.`,
-                img: 'images/organisators/maria.jpg'
+                img: 'images/designs2026/Maria.jpg'
             }
         };
 
@@ -1130,8 +1152,11 @@ Equipped with a background in Law and International Relations, Maria has vast ex
                 if (bioEl) bioEl.textContent = item.bio;
 
                 const imgEl = document.getElementById('polyfestTeamImg');
+                const groupImgEl = document.getElementById('polyfestTeamGroup');
+                if (groupImgEl) groupImgEl.hidden = !item.groupImage;
                 if (imgEl) {
-                    imgEl.src = item.img;
+                    imgEl.hidden = Boolean(item.groupImage);
+                    if (item.img) imgEl.src = item.img;
                     imgEl.alt = item.name;
                 }
 
