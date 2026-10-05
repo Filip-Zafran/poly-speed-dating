@@ -197,6 +197,55 @@
             margin-bottom: 2rem;
         }
 
+        .polyfest-opportunities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 0 0 2rem;
+        }
+
+        .polyfest-opportunity {
+            padding: 1.5rem;
+            border-radius: 18px;
+            color: #fff;
+            box-shadow: 0 10px 24px rgba(52, 12, 70, 0.18);
+        }
+
+        .polyfest-opportunity--tickets {
+            background: linear-gradient(135deg, #0052cc, #6600cc);
+        }
+
+        .polyfest-opportunity--volunteer {
+            background: linear-gradient(135deg, #e50051, #ff7a00);
+        }
+
+        .polyfest-opportunity h2 {
+            color: inherit;
+            font-size: 1.35rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .polyfest-opportunity p {
+            margin-bottom: 1rem;
+        }
+
+        .polyfest-opportunity a {
+            display: inline-block;
+            color: #2b004d;
+            background: #fff;
+            padding: 0.7rem 1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .polyfest-opportunity a:hover,
+        .polyfest-opportunity a:focus-visible {
+            background: #fff3c4;
+            outline: 3px solid rgba(255, 255, 255, 0.55);
+            outline-offset: 2px;
+        }
+
         /* Hero Image */
         .hero-image-container {
             width: 100%;
@@ -858,6 +907,19 @@
         <div class="hero-image-container">
             <img src="images/PolyFest2026_EmailHeader.png" alt="PolyFest Berlin 2026">
         </div>
+
+        <section class="polyfest-opportunities" aria-label="PolyFest tickets and volunteering">
+            <article class="polyfest-opportunity polyfest-opportunity--tickets">
+                <h2>Buy Early Bird Tickets</h2>
+                <p>Get your ticket for PolyFest Berlin 2026.</p>
+                <a href="https://www.eventbrite.com/e/poly-fest-berlin-tickets-2002421413351" target="_blank" rel="noopener noreferrer">Get tickets →</a>
+            </article>
+            <article class="polyfest-opportunity polyfest-opportunity--volunteer">
+                <h2>Apply to Volunteer</h2>
+                <p>Volunteer spots are first come, first served.</p>
+                <a href="https://docs.google.com/forms/d/1QYyDRucutjE2bgrFIq4ZMozqWQWvVFuE9VL0V4iQb48/edit" target="_blank" rel="noopener noreferrer">Apply to volunteer →</a>
+            </article>
+        </section>
 
         <!-- Workshop Applications Announcement -->
         <div class="banner-section">
