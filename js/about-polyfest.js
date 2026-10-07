@@ -15,13 +15,17 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     {
       name: 'Ficho',
-      role: 'Event Manager & Workshop Facilitator',
-      bio: 'Opening up four years ago with his primary partner, Ficho (he/him) quickly became poly at heart and deeply passionate about creating spaces that celebrate connection, communication, and openness, from events like Poly Speed Dating, KiezBurn, and Poly Fest to Emotional Intelligence workshops and other community.',
+      role: 'Co-Founder & Workshop Facilitator',
+      bio: `Ficho (he/him) discovered polyamory about four years ago, when he and his long-term partner decided to open up their relationship. What started the new begining in their lives, whic turned 180 degrees.
+
+This alos has led him to organize and facilitate community events such as Poly Speed Dating, KiezBurn and Poly Fest, as well as workshops around Emotional Intelligence and interpersonal connection. As a 'big hater' on DatingApps, he organises with his partner-in-crime DuckDatingApps.com - a connection platform that defies the Tinderisation of the dating world.
+
+With a background in event production, community building and facilitation, Ficho loves bringing people together and turning ideas into experiences. As Co-Founder and Workshop Facilitator of Poly Fest, he hopes to create an open, welcoming space for curiosity, honest conversations and personal/relationships growth of all participants.`,
       img: 'images/presenters/ficho.jpg'
     },
     {
       name: 'Sarah',
-      role: 'Relationship Coach & Workshop Facilitator',
+      role: 'Co-founder & Relationship coach',
       bio: 'Sarah (she/they) started exploring non-monogamy 10 years ago when she lived in Brooklyn and stumbled upong polyamorous Burners at a festival outside of NYC. She immediately felt like this was the answer to all of her relationship problems. Of course it wasnt. But it also kind of was. Since then she has made a lot of mistakes and has been talking about them in her newsletter: monogamish as well as on Instagram under the account monogamish_me. She is also a systemic coach for individuals and couples, helping them relate more honestly and in a way that truly serves them, their values, and their goals. In her free time, she dances, does yoga, and most recently took a stab at comedy improv and loves it!',
       img: 'images/presenters/sarah.jpeg'
     },
