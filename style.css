@@ -814,6 +814,92 @@ img.placeholder {
   color: rgba(43, 0, 77, 0.88);
 }
 
+.linktree-instagram-feature {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 5vw, 38px);
+  margin: 0 0 28px;
+  padding: clamp(22px, 5vw, 34px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 26px;
+  background: linear-gradient(120deg, #743ad5 0%, #d62d87 58%, #f6a23c 100%);
+  box-shadow: 0 14px 30px rgba(160, 48, 138, 0.2);
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.linktree-instagram-feature:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(160, 48, 138, 0.28);
+}
+
+.linktree-instagram-art {
+  position: relative;
+  display: grid;
+  flex: 0 0 clamp(86px, 18vw, 126px);
+  width: clamp(86px, 18vw, 126px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 18px rgba(255, 255, 255, 0.24), 0 10px 24px rgba(70, 13, 94, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.linktree-instagram-art img {
+  display: block;
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(67, 0, 57, 0.2));
+}
+
+.linktree-instagram-sparkle {
+  position: absolute;
+  top: -13px;
+  right: -7px;
+  color: #ffe8a5;
+  font-size: 2.3rem;
+  text-shadow: 0 2px 12px rgba(72, 0, 82, 0.25);
+}
+
+.linktree-instagram-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.linktree-instagram-heading {
+  font-size: clamp(1.65rem, 5vw, 2.55rem);
+  font-weight: 950;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-shadow: 0 2px 12px rgba(69, 0, 73, 0.2);
+}
+
+.linktree-instagram-handle {
+  margin-top: 8px;
+  font-size: 1.15rem;
+  font-weight: 850;
+}
+
+.linktree-instagram-cta {
+  margin-top: 10px;
+  font-size: 0.94rem;
+  font-weight: 650;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.linktree-instagram-feature:focus-visible {
+  outline: 4px solid var(--poly-blue);
+  outline-offset: 4px;
+}
+
 .linktree-links {
   display: flex;
   flex-direction: column;
@@ -915,6 +1001,24 @@ img.placeholder {
   .linktree-link {
     padding: 16px 18px;
     border-radius: 28px;
+  }
+
+  .linktree-instagram-feature {
+    gap: 18px;
+    padding: 20px 16px;
+    border-radius: 22px;
+  }
+
+  .linktree-instagram-art {
+    flex-basis: 78px;
+    width: 78px;
+    border-radius: 20px;
+  }
+
+  .linktree-instagram-sparkle {
+    top: -11px;
+    right: -7px;
+    font-size: 1.9rem;
   }
 
   .linktree-link__title {

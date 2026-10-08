@@ -481,6 +481,10 @@
             >
               polyspeeddating@gmail.com
             </a>
+            <p id="contactInstagram" style="margin: 1rem 0 0;">
+              or write us on
+              <a href="https://www.instagram.com/polyfest_berlin/" target="_blank" rel="noopener noreferrer">IG</a>.
+            </p>
           </div>
         </section>
       </div>
@@ -773,6 +777,11 @@
 
           const item = data[key];
           if (!item) return;
+
+          const instagramPrompt = document.getElementById('contactInstagram');
+          if (instagramPrompt && selector.includes('data-contact')) {
+            instagramPrompt.hidden = key !== 'email';
+          }
 
           // Title / Name
           const titleEl = document.getElementById(titleId);
